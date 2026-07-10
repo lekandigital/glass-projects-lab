@@ -1,0 +1,9 @@
+{
+  "name": "glasslab-7-aero-stylesheet",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/upstream/$1"
+    }
+  ]
+}

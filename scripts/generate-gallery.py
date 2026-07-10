@@ -1,80 +1,87 @@
 import os
-import csv
 import json
 
-REPORTS_DIR = "/Users/lekan/Dev/glass-projects-lab/reports"
-GALLERY_DIR = "/Users/lekan/Dev/glass-projects-lab/gallery"
-STATE_FILE = os.path.join(REPORTS_DIR, "deployment-state.json")
+def main():
+    deployments_file = "reports/aero-import/vercel-deployments.tsv"
+    if not os.path.exists(deployments_file):
+        print("No deployments file found.")
+        return
 
-def generate_gallery():
-    os.makedirs(GALLERY_DIR, exist_ok=True)
-    
-    with open(os.path.join(REPORTS_DIR, 'project-candidates.tsv'), 'r') as f:
-        reader = csv.DictReader(f, delimiter='\t')
-        candidates = {row['project_name']: row for row in reader}
+    with open(deployments_file, "r") as f:
+        lines = f.readlines()
         
-    try:
-        with open(STATE_FILE, 'r') as f:
-            state = json.load(f)
-    except:
-        state = {}
-        
-    html = """
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Glass Projects Lab Gallery</title>
-        <style>
-            body { font-family: system-ui, sans-serif; background: #0f172a; color: #f1f5f9; padding: 2rem; margin: 0; }
-            h1 { text-align: center; color: #38bdf8; }
-            .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-            .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(10px); }
-            .card h3 { margin-top: 0; color: #e2e8f0; }
-            .card p { font-size: 0.9rem; color: #cbd5e1; margin: 0.5rem 0; }
-            .card a { color: #38bdf8; text-decoration: none; display: inline-block; margin-top: 0.5rem; }
-            .card a:hover { text-decoration: underline; }
-            .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
-            .badge-verified { background: #166534; color: #bbf7d0; }
-            .badge-failed { background: #991b1b; color: #fecaca; }
-            .badge-pending { background: #854d0e; color: #fef08a; }
-        </style>
-    </head>
-    <body>
-        <h1>Glass Projects Lab Gallery</h1>
-        <div class="grid">
-    """
-    
-    for project_name, p_state in state.items():
-        cand = candidates.get(project_name, {})
-        framework = cand.get('framework', 'unknown')
-        archive = cand.get('archive_name', 'unknown')
-        url = p_state.get('verify_url') or p_state.get('prod_url', '#')
-        
-        status = p_state.get('verification', 'pending')
-        badge_class = 'badge-pending'
-        if 'verified' in status: badge_class = 'badge-verified'
-        elif 'failed' in status or 'broken' in status or '404' in status: badge_class = 'badge-failed'
-        
+    if len(lines) <= 1:
+        return
+
+    projects = []
+    for line in lines[1:]:
+        parts = line.strip().split("\t")
+        if len(parts) >= 5:
+            projects.append({
+                "id": parts[0],
+                "vercel_project": parts[1],
+                "deployment_id": parts[2],
+                "created_at": parts[3],
+                "prod_url": parts[4]
+            })
+
+    # Read recipes
+    catalog = []
+    for p in projects:
+        recipe_path = f"recipes/{p['id']}.json"
+        if os.path.exists(recipe_path):
+            with open(recipe_path, "r") as rf:
+                recipe = json.load(rf)
+                catalog.append({
+                    "id": p["id"],
+                    "source": recipe.get("source_tier", "unknown"),
+                    "url": p["prod_url"]
+                })
+
+    # Generate Gallery HTML
+    html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glass Projects Lab Gallery</title>
+<style>
+body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 2rem; background: #000; color: #fff; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; }
+.card { background: #111; border: 1px solid #333; padding: 1rem; border-radius: 8px; }
+.card a { color: #00ff00; text-decoration: none; }
+.card a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<h1>Glass Projects Lab Gallery</h1>
+<p>Live demonstrations of the preserved glass UI library.</p>
+<div class="grid">
+"""
+    for item in catalog:
+        if item["url"] == "blocked-vercel-limit":
+            demo_link = f'<span>Vercel Deploy Blocked (Quota)</span>'
+        else:
+            demo_link = f'<a href="{item["url"]}" target="_blank">View Live Demo</a>'
+            
         html += f"""
-            <div class="card">
-                <span class="badge {badge_class}">{status}</span>
-                <h3>{project_name}</h3>
-                <p><strong>Archive:</strong> {archive}</p>
-                <p><strong>Framework:</strong> {framework}</p>
-                <a href="{url}" target="_blank">View Deployment</a>
-            </div>
-        """
-        
+<div class="card">
+  <h2>{item["id"]}</h2>
+  <p>Source: {item["source"]}</p>
+  {demo_link}<br>
+  <a href="https://github.com/lekandigital/glass-projects-lab/tree/main/deployments/{item["id"]}">View Source</a>
+</div>
+"""
     html += """
-        </div>
-    </body>
-    </html>
-    """
-    
-    with open(os.path.join(GALLERY_DIR, 'index.html'), 'w') as f:
+</div>
+</body>
+</html>
+"""
+    os.makedirs("gallery", exist_ok=True)
+    with open("gallery/index.html", "w") as f:
         f.write(html)
         
-if __name__ == '__main__':
-    generate_gallery()
+    print("Gallery generated at gallery/index.html")
+
+if __name__ == "__main__":
+    main()
