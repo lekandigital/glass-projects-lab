@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Apple shadow watchface</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .clock {
+            /* general clock vars */
+            --black: #000;
+            --white: #fff;
+            --hour-hand-color: var(--black);
+            --hour-hand-degrees: 0deg;
+            --minute-hand-color: var(--black);
+            --minute-hand-degrees: 0deg;
+            --second-hand-color: var(--white);
+            --second-hand-degrees: 0deg;
+            /* conic gradient vars */
+            --start: 0deg;
+            --end: 0deg;
+            position: relative;
+            min-width: 320px;
+            width: 100vw;
+            height: 100svh;
+            min-height: 320px;
+            /*border-radius: 50%;*/
+            margin: auto;
+            /*border: 7px solid #000;*/
+            background: conic-gradient(
+                    from var(--start),
+                    rgba(255, 255, 255, 1) 2deg,
+                    rgba(0, 0, 0, 0.5) var(--end),
+                    rgba(255, 255, 255, 1) 2deg,
+                    rgba(0, 0, 0, 0.7)
+            );
+            overflow: clip;
+        }
+
+        /* clock hands */
+        .hand {
+            position: absolute;
+            left: 50%;
+            bottom: 50%;
+            height: 45%;
+            width: 2px;
+            margin-left: -2px;
+            background: var(--second-hand-color);
+            border-radius: 6px;
+            transform-origin: bottom center;
+            transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+        }
+
+        .hour-hand {
+            height: 35%;
+            border-radius: 40px;
+            background-color: var(--hour-hand-color);
+            transform: rotate(var(--hour-hand-degrees));
+            z-index: 1;
+        }
+
+        .minute-hand {
+            height: 50%;
+            background: var(--minute-hand-color);
+            transform: rotate(var(--minute-hand-degrees));
+            z-index: 1;
+        }
+
+        .second-hand {
+            transform: rotate(var(--second-hand-degrees));
+            will-change: transform;
+        }
+
+    </style>
+</head>
+<body>
+<div class="clock" id="clock">
+    <div class="hand hour-hand"></div>
+    <div class="hand minute-hand"></div>
+    <div class="hand second-hand"></div>
+</div>
+<script>(() => {
+    const clock = document.getElementById("clock");
+    if (!clock) return;
+
+    // Feature detection for the Temporal API
+    const hasTemporal = typeof Temporal !== "undefined";
+
+    /**
+     * Gets the current time using the Temporal API if available}}
+     */
+    const getCurrentTime = () => {
+        if (hasTemporal) {
+            const now = Temporal.Now.plainTimeISO();
+            return {
+                hour: now.hour,
+                minute: now.minute,
+                second: now.second
+            };
+        } else {
+            const now = new Date();
+            return {
+                hour: now.getHours(),
+                minute: now.getMinutes(),
+                second: now.getSeconds()
+            };
+        }
+    };
+
+    /**
+     * Calculates the rotation angles for the clock hands.
+     * @param {{hour: number, minute: number, second: number}} currentTime
+     * @returns {{secondsAngle: number, minsAngle: number, hourAngle: number}}
+     */
+    const calculateHandAngles = (currentTime) => {
+        const {hour, minute, second} = currentTime;
+
+        const secondsAngle = second * 6; // 360 / 60 = 6
+        const minsAngle = minute * 6 + second * 0.1; // 360 / 60 = 6, plus 0.1 for each second
+        const hourAngle = (hour % 12) * 30 + minute * 0.5; // 360 / 12 = 30, plus 0.5 for each minute
+
+        return {secondsAngle, minsAngle, hourAngle};
+    };
+
+    /**
+     * Sets the CSS custom properties for the clock hands' rotation.
+     * @param {{secondsAngle: number, minsAngle: number, hourAngle: number}} angles
+     */
+    const setClockHands = ({secondsAngle, minsAngle, hourAngle}) => {
+        clock.style.setProperty("--second-hand-degrees", `${secondsAngle}deg`);
+        clock.style.setProperty("--minute-hand-degrees", `${minsAngle}deg`);
+        clock.style.setProperty("--hour-hand-degrees", `${hourAngle}deg`);
+    };
+
+    /**
+     * Sets the conic gradient based on the minute and hour hand angles.
+     * @param {number} minsAngle
+     * @param {number} hourAngle
+     */
+    const setConicGradient = (minsAngle, hourAngle) => {
+        const [startPosition, endPosition] =
+            minsAngle > hourAngle
+                ? [hourAngle, minsAngle - hourAngle]
+                : [minsAngle, hourAngle - minsAngle];
+        clock.style.setProperty("--start", `${startPosition}deg`);
+        clock.style.setProperty("--end", `${endPosition}deg`);
+    };
+
+    /**
+     * The main animation loop to update the clock.
+     */
+    const updateClock = () => {
+        const currentTime = getCurrentTime();
+        const angles = calculateHandAngles(currentTime);
+
+        setClockHands(angles);
+        setConicGradient(angles.minsAngle, angles.hourAngle);
+
+        requestAnimationFrame(updateClock);
+    };
+
+    // Start the clock animation
+    requestAnimationFrame(updateClock);
+})();
+</script>
+</body>
+</html>

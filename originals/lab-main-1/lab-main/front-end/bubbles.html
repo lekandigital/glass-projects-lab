@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bubbles</title>
+
+    <style>
+        .mza-app {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            background: radial-gradient(
+                    135% 120% at 18% 10%,
+                    #ffeaf3 0%,
+                    rgba(255, 234, 243, 0) 55%
+            ),
+            radial-gradient(
+                    120% 120% at 88% 86%,
+                    #ffe4ec 0%,
+                    rgba(255, 228, 236, 0) 60%
+            ),
+            linear-gradient(180deg, #ffecf4 0%, #ffe2cf 60%, #ffd9c0 100%);
+            touch-action: none;
+            user-select: none;
+        }
+
+        #mza-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: default;
+        }
+
+        .mza-ui {
+            position: absolute;
+            left: 16px;
+            top: 16px;
+            display: grid;
+            gap: 8px;
+            font: 500 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+            Arial, sans-serif;
+            color: #3f2130;
+            pointer-events: none;
+        }
+
+        .mza-ui-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .mza-ui button {
+            pointer-events: auto;
+            appearance: none;
+            border: 0;
+            padding: 8px 10px;
+            border-radius: 12px;
+            background: radial-gradient(
+                    120% 120% at 30% 20%,
+                    rgba(255, 255, 255, 0.7) 0%,
+                    rgba(255, 255, 255, 0.12) 40%,
+                    rgba(255, 255, 255, 0) 68%
+            ),
+            linear-gradient(
+                    180deg,
+                    rgba(255, 205, 230, 0.65) 0%,
+                    rgba(255, 225, 190, 0.55) 100%
+            );
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45),
+            0 6px 18px rgba(120, 80, 100, 0.28);
+            color: #3f2130;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            transform: translateZ(0);
+            transition: transform 120ms ease, box-shadow 150ms ease, filter 150ms ease;
+            backdrop-filter: blur(6px) saturate(140%);
+        }
+
+        .mza-ui button:active {
+            transform: translateY(1px) scale(0.98);
+        }
+
+        .mza-tip {
+            padding: 6px 10px;
+            border-radius: 12px;
+            background: linear-gradient(
+                    180deg,
+                    rgba(255, 235, 245, 0.16),
+                    rgba(255, 235, 245, 0.06)
+            );
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+        }
+
+    </style>
+</head>
+<body>
+<div class="mza-app">
+    <canvas aria-label="Interactive bubbles" id="mza-canvas"></canvas>
+    <div class="mza-ui">
+        <div class="mza-ui-row">
+            <button id="mza-add">+5</button>
+            <button id="mza-rem">−5</button>
+            <button id="mza-reset">Reset</button>
+        </div>
+        <div class="mza-ui-row">
+            <span class="mza-tip">Move to repel. Hold to attract. Click a bubble to pop.</span>
+        </div>
+    </div>
+</div>
+
+<script>
+    const cv = document.getElementById("mza-canvas");
+    const ctx = cv.getContext("2d", {alpha: true});
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+    let W = 1,
+        H = 1,
+        DPR = 1,
+        RS = 0.95,
+        READY = false;
+
+    const bg = document.createElement("canvas");
+    const bgc = bg.getContext("2d");
+
+    function nz(n) {
+        return Math.max(1, Math.floor(n));
+    }
+
+    function bgReady() {
+        return bg.width > 0 && bg.height > 0;
+    }
+
+    function drawBackground() {
+        bg.width = nz(W * DPR * RS);
+        bg.height = nz(H * DPR * RS);
+        bgc.setTransform(DPR * RS, 0, 0, DPR * RS, 0, 0);
+        bgc.clearRect(0, 0, W, H);
+        const base = bgc.createLinearGradient(0, 0, 0, H);
+        base.addColorStop(0, "#ffeaf3");
+        base.addColorStop(0.6, "#ffe2cf");
+        base.addColorStop(1, "#ffd9c0");
+        bgc.fillStyle = base;
+        bgc.fillRect(0, 0, W, H);
+        const g1 = bgc.createRadialGradient(
+            W * 0.22,
+            H * 0.12,
+            10,
+            W * 0.22,
+            H * 0.12,
+            Math.max(W, H) * 0.9
+        );
+        g1.addColorStop(0, "rgba(255,168,205,0.24)");
+        g1.addColorStop(1, "rgba(255,168,205,0)");
+        bgc.fillStyle = g1;
+        bgc.fillRect(0, 0, W, H);
+        const g2 = bgc.createRadialGradient(
+            W * 0.85,
+            H * 0.88,
+            10,
+            W * 0.85,
+            H * 0.88,
+            Math.max(W, H) * 0.8
+        );
+        g2.addColorStop(0, "rgba(255,205,160,0.20)");
+        g2.addColorStop(1, "rgba(255,205,160,0)");
+        bgc.fillStyle = g2;
+        bgc.fillRect(0, 0, W, H);
+        for (let i = 0; i < 18; i++) {
+            const x = Math.random() * W,
+                y = Math.random() * H;
+            const r = Math.random() * 120 + 60;
+            const b = bgc.createRadialGradient(x, y, 0, x, y, r);
+            b.addColorStop(0, "rgba(255,245,235,0.10)");
+            b.addColorStop(1, "rgba(255,245,235,0)");
+            bgc.fillStyle = b;
+            bgc.beginPath();
+            bgc.arc(x, y, r, 0, Math.PI * 2);
+            bgc.fill();
+        }
+    }
+
+    function resize() {
+        DPR = Math.min(1.5, window.devicePixelRatio || 1);
+        W = nz(window.innerWidth);
+        H = nz(window.innerHeight);
+        cv.width = nz(W * DPR * RS);
+        cv.height = nz(H * DPR * RS);
+        cv.style.width = W + "px";
+        cv.style.height = H + "px";
+        ctx.setTransform(DPR * RS, 0, 0, DPR * RS, 0, 0);
+        drawBackground();
+        READY = W > 0 && H > 0 && bgReady();
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+
+    function rnd(a, b) {
+        return a + Math.random() * (b - a);
+    }
+
+    function clamp(v, a, b) {
+        return v < a ? a : v > b ? b : v;
+    }
+
+    const pointer = {
+        x: 0.5,
+        y: 0.5,
+        px: 0.5,
+        py: 0.5,
+        vx: 0,
+        vy: 0,
+        down: false,
+        inside: false
+    };
+    cv.addEventListener("pointermove", (e) => {
+        const r = cv.getBoundingClientRect();
+        pointer.px = pointer.x;
+        pointer.py = pointer.y;
+        pointer.x = e.clientX - r.left;
+        pointer.y = e.clientY - r.top;
+        pointer.vx = pointer.x - pointer.px;
+        pointer.vy = pointer.y - pointer.py;
+        pointer.inside = true;
+    });
+    cv.addEventListener("pointerleave", () => {
+        pointer.inside = false;
+        cv.style.cursor = "default";
+    });
+    cv.addEventListener("pointerdown", (e) => {
+        pointer.down = true;
+        popAt(e);
+    });
+    cv.addEventListener("pointerup", () => (pointer.down = false));
+    cv.addEventListener("click", popAt);
+
+    function hslToRgb(h, s, l) {
+        h = ((h % 360) + 360) % 360;
+        s = clamp(s, 0, 1);
+        l = clamp(l, 0, 1);
+        const c = (1 - Math.abs(2 * l - 1)) * s;
+        const hp = h / 60;
+        const x = c * (1 - Math.abs((hp % 2) - 1));
+        let r = 0,
+            g = 0,
+            b = 0;
+        if (hp < 1) {
+            r = c;
+            g = x;
+        } else if (hp < 2) {
+            r = x;
+            g = c;
+        } else if (hp < 3) {
+            g = c;
+            b = x;
+        } else if (hp < 4) {
+            g = x;
+            b = c;
+        } else if (hp < 5) {
+            r = x;
+            b = c;
+        } else {
+            r = c;
+            b = x;
+        }
+        const m = l - c / 2;
+        return [(r + m) * 255, (g + m) * 255, (b + m) * 255];
+    }
+
+    function makeNoise(size, alpha) {
+        const n = document.createElement("canvas");
+        n.width = n.height = size;
+        const c = n.getContext("2d");
+        const id = c.createImageData(size, size);
+        const data = id.data;
+        for (let i = 0; i < data.length; i += 4) {
+            const v = Math.random() * 255;
+            data[i] = v;
+            data[i + 1] = v;
+            data[i + 2] = v;
+            data[i + 3] = alpha;
+        }
+        c.putImageData(id, 0, 0);
+        return n;
+    }
+
+    function makeFilmTexture(size, seed) {
+        const s = document.createElement("canvas");
+        s.width = s.height = size;
+        const c = s.getContext("2d");
+        const id = c.createImageData(size, size);
+        const d = id.data;
+        const cx = size * 0.5,
+            cy = size * 0.5,
+            R = size * 0.48;
+        const f1 = 16 + (seed % 7),
+            f2 = 6 + ((seed * 3) % 5),
+            p1 = seed * 1.31,
+            p2 = seed * 2.07;
+        for (let y = 0; y < size; y++) {
+            for (let x = 0; x < size; x++) {
+                const dx = x - cx,
+                    dy = y - cy;
+                const rr = Math.sqrt(dx * dx + dy * dy);
+                const idx = (y * size + x) * 4;
+                if (rr > R) {
+                    d[idx + 3] = 0;
+                    continue;
+                }
+                const ang = Math.atan2(dy, dx);
+                const nr = rr / R;
+                const v1 = Math.sin(nr * f1 + ang * f2 + p1);
+                const v2 = Math.sin(nr * (f1 * 0.5) - ang * (f2 * 1.7) + p2);
+                const t = 0.5 + 0.5 * (0.6 * v1 + 0.4 * v2);
+                const hue =
+                    (18 + 200 * (t - 0.5) + 80 * Math.sin(ang * 3 + seed) + 360) % 360;
+                const sat = 0.98;
+                const lum = 0.6 + 0.14 * Math.cos(nr * 8 + ang * 2);
+                const rgb = hslToRgb(hue, sat, lum);
+                d[idx] = rgb[0];
+                d[idx + 1] = rgb[1];
+                d[idx + 2] = rgb[2];
+                d[idx + 3] = 72;
+            }
+        }
+        c.putImageData(id, 0, 0);
+        return s;
+    }
+
+    function makeRimSprite(size) {
+        const s = document.createElement("canvas");
+        s.width = s.height = size;
+        const c = s.getContext("2d");
+        const cx = size * 0.5,
+            cy = size * 0.5,
+            R = size * 0.48;
+        c.save();
+        c.beginPath();
+        c.arc(cx, cy, R, 0, Math.PI * 2);
+        c.clip();
+        const fill = c.createRadialGradient(cx, cy, R * 0.02, cx, cy, R);
+        fill.addColorStop(0.0, "rgba(255,255,255,0.05)");
+        fill.addColorStop(0.65, "rgba(255,235,215,0.03)");
+        fill.addColorStop(0.9, "rgba(255,255,255,0.012)");
+        fill.addColorStop(1.0, "rgba(255,255,255,0)");
+        c.fillStyle = fill;
+        c.fillRect(cx - R, cy - R, R * 2, R * 2);
+        const rim = c.createRadialGradient(cx, cy, R * 0.84, cx, cy, R);
+        rim.addColorStop(0.0, "rgba(0,0,0,0)");
+        rim.addColorStop(0.94, "rgba(255,255,255,0.95)");
+        rim.addColorStop(1.0, "rgba(255,255,255,0)");
+        c.globalCompositeOperation = "lighter";
+        c.fillStyle = rim;
+        c.fillRect(cx - R, cy - R, R * 2, R * 2);
+        const ir = c.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+        ir.addColorStop(0.0, "rgba(255,150,180,0.6)");
+        ir.addColorStop(0.25, "rgba(255,210,140,0.6)");
+        ir.addColorStop(0.5, "rgba(140,240,210,0.6)");
+        ir.addColorStop(0.75, "rgba(140,170,255,0.6)");
+        ir.addColorStop(1.0, "rgba(255,140,255,0.6)");
+        c.strokeStyle = ir;
+        c.lineWidth = Math.max(0.35, size * (0.0032 + 0.001 * Math.random()));
+        c.beginPath();
+        c.arc(cx, cy, R * 0.982, 0, Math.PI * 2);
+        c.stroke();
+        c.globalCompositeOperation = "source-over";
+        c.globalAlpha = 0.08;
+        c.drawImage(makeNoise(size, 18), 0, 0);
+        c.globalAlpha = 1;
+        c.restore();
+        return s;
+    }
+
+    function makeShadowSprite() {
+        const s = document.createElement("canvas");
+        s.width = 256;
+        s.height = 256;
+        const c = s.getContext("2d");
+        const g = c.createRadialGradient(128, 128, 10, 128, 128, 120);
+        g.addColorStop(0, "rgba(0,0,0,0.42)");
+        g.addColorStop(1, "rgba(0,0,0,0)");
+        c.fillStyle = g;
+        c.beginPath();
+        c.arc(128, 128, 120, 0, Math.PI * 2);
+        c.fill();
+        return s;
+    }
+
+    const SPRITE_SIZE = 512;
+    const FILM_VARIANTS = 12;
+    const filmSprites = Array.from({length: FILM_VARIANTS}, (_, i) =>
+        makeFilmTexture(SPRITE_SIZE, 2.7 * (i + 1))
+    );
+    const rimSprite = makeRimSprite(SPRITE_SIZE);
+    const shadowSprite = makeShadowSprite();
+
+    let hovered = null;
+
+    class Bubble {
+        constructor() {
+            this.r = rnd(16, 74);
+            this.x = rnd(this.r, W - this.r);
+            this.y = rnd(this.r, H - this.r);
+            this.vx = rnd(-0.42, 0.42);
+            this.vy = rnd(-0.85, -0.15) * (64 / (this.r + 1));
+            this.ax = 0;
+            this.ay = 0;
+            this.rot = rnd(0, Math.PI * 2);
+            this.rotV = rnd(-0.034, 0.034);
+            this.alpha = rnd(0.78, 1);
+            this.alive = true;
+            this.popFade = 0;
+            this.filmIndex = Math.floor(rnd(0, FILM_VARIANTS));
+            this.filmAlpha = rnd(0.28, 0.42);
+            this.filmSpeed = rnd(-0.7, 0.7);
+            this.refract = rnd(1.05, 1.11);
+            this.fringe = rnd(0.75, 1.4);
+            this.hlX = rnd(-0.34, -0.16);
+            this.hlY = rnd(-0.36, -0.16);
+            this.hlPow = rnd(0.95, 1.4);
+            this.seed1 = rnd(0, 1000);
+            this.seed2 = rnd(0, 1000);
+            this.wobbleAmp = rnd(0.012, 0.03);
+            this.wobbleFreq = rnd(0.6, 1.4);
+            this.tintHue = rnd(8, 330);
+            this.tintSat = rnd(0.18, 0.38);
+            this.tintStr = rnd(0.22, 0.38);
+            this.sx = 1;
+            this.sy = 1;
+            this.sxt = 1;
+            this.syt = 1;
+            this.svx = 0;
+            this.svy = 0;
+        }
+
+        squish(axis, pen, vn) {
+            const pDepth = clamp(pen / Math.max(10, this.r), 0, 0.6);
+            const pVel = clamp(Math.abs(vn) * 0.02, 0, 0.4);
+            const p = clamp(pDepth + pVel, 0.05, 0.55);
+            const sMin = 0.6,
+                sMax = 1.5;
+            const base = clamp(1 - p, sMin, sMax);
+            const comp = clamp(1 / base, sMin, sMax);
+            if (axis === "x") {
+                this.sxt = base;
+                this.syt = comp;
+                this.svx -= Math.sign(vn) * p * 0.6;
+                this.svy += p * 0.6;
+            } else {
+                this.sxt = comp;
+                this.syt = base;
+                this.svy -= Math.sign(vn) * p * 0.6;
+                this.svx += p * 0.6;
+            }
+        }
+
+        step(dt) {
+            const t = performance.now() * 0.001;
+            const buoy = -0.028 * (64 / (this.r + 1));
+            const flowX =
+                Math.sin(this.x * 0.002 + t * 0.9 + this.seed1) * 0.06 +
+                Math.cos(this.y * 0.0013 - t * 0.6 + this.seed2) * 0.035;
+            const flowY =
+                Math.cos(this.y * 0.002 - t * 0.7 + this.seed2) * 0.04 +
+                Math.sin(this.x * 0.0017 + t * 0.8 + this.seed1) * 0.03;
+            const driftX = Math.sin((this.y + t * 90) * 0.002) * 0.035;
+            const driftY = Math.cos((this.x + t * 80) * 0.002) * 0.014;
+            this.ax = flowX + driftX;
+            this.ay = buoy + flowY + driftY;
+
+            if (pointer.inside) {
+                const dx = this.x - pointer.x;
+                const dy = this.y - pointer.y;
+                const d = Math.hypot(dx, dy) || 1;
+                const dir = pointer.down ? -1 : 1;
+                const k = (pointer.down ? 6000 : 4200) * (this.r / 48);
+                const f = (dir * k) / Math.pow(d, 1.4);
+                this.ax += (dx / d) * f;
+                this.ay += (dy / d) * f;
+                const sweep = clamp(0.18 * (1 / d) * (this.r / 48), -0.08, 0.08);
+                this.vx += pointer.vx * sweep;
+                this.vy += pointer.vy * sweep;
+            }
+
+            this.vx += this.ax * dt;
+            this.vy += this.ay * dt;
+            const drag = 0.996;
+            this.vx *= drag;
+            this.vy *= drag;
+            this.x += this.vx * dt * 60;
+            this.y += this.vy * dt * 60;
+
+            if (this.x < this.r) {
+                const pen = this.r - this.x,
+                    vn = this.vx;
+                this.x = this.r;
+                this.vx = Math.abs(vn) * 0.82;
+                this.vy += Math.sign(this.vy) * 0.04;
+                this.rotV += (Math.random() - 0.5) * 0.02;
+                this.squish("x", pen, vn);
+            }
+            if (this.x > W - this.r) {
+                const pen = this.x - (W - this.r),
+                    vn = this.vx;
+                this.x = W - this.r;
+                this.vx = -Math.abs(vn) * 0.82;
+                this.vy += Math.sign(this.vy) * 0.04;
+                this.rotV += (Math.random() - 0.5) * 0.02;
+                this.squish("x", pen, vn);
+            }
+            if (this.y < this.r) {
+                const pen = this.r - this.y,
+                    vn = this.vy;
+                this.y = this.r;
+                this.vy = Math.abs(vn) * 0.78;
+                this.vx += Math.sign(this.vx) * 0.04;
+                this.rotV += (Math.random() - 0.5) * 0.02;
+                this.squish("y", pen, vn);
+            }
+            if (this.y > H - this.r) {
+                const pen = this.y - (H - this.r),
+                    vn = this.vy;
+                this.y = H - this.r;
+                this.vy = -Math.abs(vn) * 0.78;
+                this.vx += Math.sign(this.vx) * 0.04;
+                this.rotV += (Math.random() - 0.5) * 0.02;
+                this.squish("y", pen, vn);
+            }
+
+            const kS = 0.34,
+                dS = 0.16;
+            const axs = (this.sxt - this.sx) * kS - this.svx * dS;
+            const ays = (this.syt - this.sy) * kS - this.svy * dS;
+            this.svx += axs * dt * 60;
+            this.svy += ays * dt * 60;
+            this.sx += this.svx * dt * 60;
+            this.sy += this.svy * dt * 60;
+            const sMin = 0.6,
+                sMax = 1.5;
+            this.sx = clamp(this.sx, sMin, sMax);
+            this.sy = clamp(this.sy, sMin, sMax);
+            this.sxt += (1 - this.sxt) * 0.045;
+            this.syt += (1 - this.syt) * 0.045;
+
+            this.rot += this.rotV * dt * 60;
+
+            if (!this.alive) {
+                this.popFade += dt * 2;
+                if (this.popFade >= 1) this.respawn(false);
+            }
+        }
+
+        drawShadow(a, rNow) {
+            const s = rNow * 1.05;
+            ctx.save();
+            ctx.globalAlpha = 0.12 * a;
+            ctx.drawImage(
+                shadowSprite,
+                0,
+                0,
+                256,
+                256,
+                this.x - s * 0.5 + rNow * 0.1,
+                this.y + rNow * 0.5,
+                s,
+                s * 0.38
+            );
+            ctx.restore();
+        }
+
+        draw(isHover) {
+            const a = this.alpha * (this.alive ? 1 : 1 - this.popFade);
+            if (a <= 0) return;
+            const t = performance.now() * 0.001;
+            const rNow =
+                this.r *
+                (1 + this.wobbleAmp * Math.sin(t * this.wobbleFreq + this.seed1));
+            const rx = Math.max(0.1, rNow * this.sx);
+            const ry = Math.max(0.1, rNow * this.sy);
+            this.drawShadow(a, rNow);
+
+            ctx.save();
+            ctx.beginPath();
+            ctx.ellipse(this.x, this.y, rx, ry, 0, 0, Math.PI * 2);
+            ctx.clip();
+
+            if (bgReady()) {
+                const refr = this.refract;
+                const ox = Math.cos(this.rot * 0.6) * rNow * 0.06;
+                const oy = Math.sin(this.rot * 0.6) * rNow * 0.06;
+                const sx = (this.x - rNow * refr + ox) * DPR * RS;
+                const sy = (this.y - rNow * refr + oy) * DPR * RS;
+                const sw = rNow * 2 * refr * DPR * RS;
+                const sh = rNow * 2 * refr * DPR * RS;
+
+                ctx.globalAlpha = a * 0.74;
+                ctx.drawImage(
+                    bg,
+                    sx,
+                    sy,
+                    sw,
+                    sh,
+                    this.x - rx,
+                    this.y - ry,
+                    rx * 2,
+                    ry * 2
+                );
+
+                ctx.globalCompositeOperation = "multiply";
+                const edge = ctx.createRadialGradient(
+                    this.x,
+                    this.y,
+                    Math.min(rx, ry) * 0.18,
+                    this.x,
+                    this.y,
+                    Math.max(rx, ry) * 1.03
+                );
+                edge.addColorStop(0, "rgba(0,0,0,0)");
+                edge.addColorStop(1, "rgba(0,0,0,0.14)");
+                ctx.fillStyle = edge;
+                ctx.fillRect(this.x - rx, this.y - ry, rx * 2, ry * 2);
+
+                ctx.globalCompositeOperation = "screen";
+                const tintRgb = hslToRgb(this.tintHue, this.tintSat, 0.56);
+                ctx.globalAlpha = a * this.tintStr * (isHover ? 1.05 : 1);
+                const tg = ctx.createRadialGradient(
+                    this.x - rx * 0.25,
+                    this.y - ry * 0.25,
+                    1,
+                    this.x,
+                    this.y,
+                    Math.max(rx, ry) * 1.06
+                );
+                tg.addColorStop(0, `rgba(${tintRgb[0]},${tintRgb[1]},${tintRgb[2]},0.9)`);
+                tg.addColorStop(1, "rgba(255,255,255,0)");
+                ctx.fillStyle = tg;
+                ctx.beginPath();
+                ctx.ellipse(this.x, this.y, rx, ry, 0, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.globalAlpha = a * 0.22 * this.fringe;
+                ctx.drawImage(
+                    bg,
+                    sx + 1.0,
+                    sy,
+                    sw,
+                    sh,
+                    this.x - rx,
+                    this.y - ry,
+                    rx * 2,
+                    ry * 2
+                );
+                ctx.globalAlpha = a * 0.22 * this.fringe;
+                ctx.drawImage(
+                    bg,
+                    sx,
+                    sy + 1.0,
+                    sw,
+                    sh,
+                    this.x - rx,
+                    this.y - ry,
+                    rx * 2,
+                    ry * 2
+                );
+            }
+
+            ctx.globalCompositeOperation = "lighter";
+            ctx.globalAlpha = a;
+            ctx.drawImage(
+                rimSprite,
+                0,
+                0,
+                SPRITE_SIZE,
+                SPRITE_SIZE,
+                this.x - rx,
+                this.y - ry,
+                rx * 2,
+                ry * 2
+            );
+
+            ctx.globalAlpha = a * this.filmAlpha;
+            ctx.drawImage(
+                filmSprites[this.filmIndex],
+                0,
+                0,
+                SPRITE_SIZE,
+                SPRITE_SIZE,
+                this.x - rx,
+                this.y - ry,
+                rx * 2,
+                ry * 2
+            );
+
+            const sheenR = Math.max(rx, ry) * 0.96;
+            const sheen = ctx.createRadialGradient(
+                this.x + rx * this.hlX,
+                this.y + ry * this.hlY,
+                1,
+                this.x + rx * this.hlX,
+                this.y + ry * this.hlY,
+                sheenR
+            );
+            sheen.addColorStop(0, `rgba(255,255,255,${0.23 * this.hlPow})`);
+            sheen.addColorStop(1, "rgba(255,255,255,0)");
+            ctx.globalCompositeOperation = "lighter";
+            ctx.fillStyle = sheen;
+            ctx.beginPath();
+            ctx.ellipse(this.x, this.y, rx, ry, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            const sp = ctx.createRadialGradient(
+                this.x - rx * 0.15,
+                this.y - ry * 0.18,
+                1,
+                this.x - rx * 0.15,
+                this.y - ry * 0.18,
+                Math.max(rx, ry) * 0.22
+            );
+            sp.addColorStop(0, "rgba(255,255,255,0.9)");
+            sp.addColorStop(0.5, "rgba(255,255,255,0.25)");
+            sp.addColorStop(1, "rgba(255,255,255,0)");
+            ctx.globalAlpha = a * 0.35;
+            ctx.fillStyle = sp;
+            ctx.beginPath();
+            ctx.ellipse(this.x, this.y, rx, ry, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        hit(px, py) {
+            const dx = this.x - px;
+            const dy = this.y - py;
+            const rx = Math.max(1, this.r * Math.abs(this.sx));
+            const ry = Math.max(1, this.r * Math.abs(this.sy));
+            return (dx * dx) / (rx * rx) + (dy * dy) / (ry * ry) <= 1;
+        }
+
+        pop() {
+            if (!this.alive) return;
+            this.alive = false;
+            this.popFade = 0;
+            for (let i = 0; i < 3; i++) {
+                const child = new Bubble();
+                child.r = clamp(this.r * rnd(0.28, 0.42), 10, 28);
+                child.x = this.x + rnd(-this.r * 0.2, this.r * 0.2);
+                child.y = this.y + rnd(-this.r * 0.2, this.r * 0.2);
+                const ang = rnd(0, Math.PI * 2);
+                const sp = rnd(0.6, 1.8);
+                child.vx = Math.cos(ang) * sp + this.vx * 0.3;
+                child.vy = Math.sin(ang) * sp + this.vy * 0.3;
+                child.alpha = rnd(0.78, 0.98);
+                child.sx = 0.92;
+                child.sy = 1.08;
+                child.sxt = 1;
+                child.syt = 1;
+                bubbles.push(child);
+            }
+        }
+
+        respawn(spawnBottom) {
+            this.r = rnd(16, 74);
+            const safeW = Math.max(this.r, W - this.r);
+            const safeH = Math.max(this.r, H - this.r);
+            this.x = rnd(this.r, safeW);
+            this.y = spawnBottom
+                ? rnd(H - this.r * 0.6, Math.max(this.r, H - this.r))
+                : rnd(this.r, safeH);
+            this.vx = rnd(-0.42, 0.42);
+            this.vy = rnd(-0.85, -0.15) * (64 / (this.r + 1));
+            this.rot = rnd(0, Math.PI * 2);
+            this.rotV = rnd(-0.034, 0.034);
+            this.alpha = rnd(0.78, 1);
+            this.alive = true;
+            this.popFade = 0;
+            this.filmIndex = Math.floor(rnd(0, FILM_VARIANTS));
+            this.filmAlpha = rnd(0.28, 0.42);
+            this.filmSpeed = rnd(-0.7, 0.7);
+            this.refract = rnd(1.05, 1.11);
+            this.fringe = rnd(0.75, 1.4);
+            this.hlX = rnd(-0.34, -0.16);
+            this.hlY = rnd(-0.36, -0.16);
+            this.hlPow = rnd(0.95, 1.4);
+            this.seed1 = rnd(0, 1000);
+            this.seed2 = rnd(0, 1000);
+            this.wobbleAmp = rnd(0.012, 0.03);
+            this.wobbleFreq = rnd(0.6, 1.4);
+            this.tintHue = rnd(8, 330);
+            this.tintSat = rnd(0.18, 0.38);
+            this.tintStr = rnd(0.22, 0.38);
+            this.sx = 1;
+            this.sy = 1;
+            this.sxt = 1;
+            this.syt = 1;
+            this.svx = 0;
+            this.svy = 0;
+        }
+    }
+
+    const bubbles = [];
+
+    function seed(n) {
+        for (let i = 0; i < n; i++) bubbles.push(new Bubble());
+    }
+
+    seed(40);
+
+    function popAt(e) {
+        const r = cv.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        for (let i = bubbles.length - 1; i >= 0; i--) {
+            if (bubbles[i].hit(x, y)) {
+                bubbles[i].pop();
+                break;
+            }
+        }
+    }
+
+    let last = performance.now();
+    let fpsEMA = 60;
+
+    function tune(dt) {
+        const fps = 1 / dt;
+        fpsEMA = fpsEMA * 0.9 + fps * 0.1;
+        if (fpsEMA < 40 && RS > 0.75) {
+            RS = Math.max(0.75, RS - 0.05);
+            resize();
+        }
+        if (fpsEMA > 75 && RS < 1.0) {
+            RS = Math.min(1.0, RS + 0.05);
+            resize();
+        }
+    }
+
+    function computeHover() {
+        if (!pointer.inside) {
+            hovered = null;
+            cv.style.cursor = "default";
+            return;
+        }
+        hovered = null;
+        for (let i = bubbles.length - 1; i >= 0; i--) {
+            if (bubbles[i].hit(pointer.x, pointer.y)) {
+                hovered = bubbles[i];
+                break;
+            }
+        }
+        cv.style.cursor = hovered ? "pointer" : "default";
+    }
+
+    function frame(t) {
+        const dt = Math.min(0.033, (t - last) / 1000);
+        last = t;
+        if (!READY) {
+            requestAnimationFrame(frame);
+            return;
+        }
+        tune(dt);
+        ctx.clearRect(0, 0, W, H);
+        if (bgReady()) ctx.drawImage(bg, 0, 0, bg.width, bg.height, 0, 0, W, H);
+
+        for (let i = 0; i < bubbles.length; i++) bubbles[i].step(dt);
+        bubbles.sort((a, b) => a.r - b.r);
+
+        computeHover();
+
+        for (let i = 0; i < bubbles.length; i++)
+            bubbles[i].draw(bubbles[i] === hovered);
+
+        requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+
+    document.getElementById("mza-add").addEventListener("click", () => {
+        for (let i = 0; i < 5; i++) bubbles.push(new Bubble());
+    });
+    document.getElementById("mza-rem").addEventListener("click", () => {
+        bubbles.splice(Math.max(0, bubbles.length - 5), 5);
+    });
+    document.getElementById("mza-reset").addEventListener("click", () => {
+        bubbles.length = 0;
+        seed(40);
+    });
+
+</script>
+</body>
+</html>

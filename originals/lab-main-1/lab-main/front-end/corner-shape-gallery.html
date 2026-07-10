@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Corner-Shape Gallery</title>
+
+    <style>
+        @import url(https://fonts.bunny.net/css?family=jura:300,500);
+        @layer base, demo;
+
+        @layer demo {
+            body::after {
+                content: "";
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: repeating-linear-gradient(
+                        transparent,
+                        transparent 1px,
+                        light-dark(rgba(54 65 83 / .15), rgba(214 211 209 / .1)) 0 3px
+                );
+
+                background-size: auto 100%;
+                pointer-events: none;
+                z-index: -1;
+            }
+
+            /* bevel */
+            :has(#shape-bevel:checked) {
+                .wrapper {
+                    --corner-type: bevel;
+                    --corner-type-center: bevel;
+                    --scale-center: .97;
+                }
+            }
+
+            /* scoop */
+            :has(#shape-scoop:checked) {
+                .wrapper {
+                    --corner-type: scoop;
+                    --corner-type-center: round;
+                    --scale-center: .97;
+                }
+            }
+
+            /* notch */
+            :has(#shape-notch:checked) {
+                .wrapper {
+                    --corner-type: notch;
+                    --corner-type-center: square;
+                    --scale-center: .97;
+                }
+            }
+
+            /* round */
+            :has(#shape-round:checked) {
+                .wrapper {
+                    --corner-type: scoop;
+                    --corner-type-center: round;
+                    --corner-type-outer: round;
+                    --scale-center: .97;
+                }
+            }
+
+            /* squirlce */
+            /*
+          :has(#shape-squircle:checked){
+            .wrapper{
+              --corner-type: scoop;
+              --corner-type-center: squircle;
+                    --corner-type-outer: squircle;
+              --scale-center: .97;
+                    --border-radius: 50% 50% 50% 50%/50% 50% 25% 50%;
+            }
+          }
+            */
+            .wrapper {
+                --min-col: 200px;
+                --max-col: 400px;
+                --gap: .5rem;
+
+                --border-radius: 50%;
+                --corner-type: notch;
+                --corner-type-center: square;
+                --corner-type-outer: square;
+                --scale-center: .94; /* the center item needs to be slighly smaller to balance the gaps */
+
+
+                display: grid;
+                grid-template-columns: repeat(
+        auto-fit,
+        minmax(clamp(var(--min-col), 25%, var(--max-col)), 1fr)
+      );
+                gap: var(--gap);
+
+                &:has(:hover) > :not(:hover) > * {
+                    opacity: 0.5;
+                    z-index: -1;
+                    filter: grayscale(1);
+                }
+
+                & > .group {
+                    display: grid;
+                    gap: var(--gap);
+                    grid-template-columns: repeat(4, 1fr);
+                    grid-template-areas:
+        'tl-start tl-start tr-start tr-start'
+        'tl-stop m m tr-stop'
+        'bl-start bl-start br-start br-start'
+        'bl-end bl-end br-end br-end';
+
+                    &:has(:hover) > :not(:hover) {
+                        opacity: 0.5;
+                        z-index: -1;
+                        filter: grayscale(1);
+                    }
+
+
+                    & > * {
+                        aspect-ratio: var(--aspect-ratio, 1);
+                        @supports (corner-shape: notch) {
+                            border-radius: var(--border-radius);
+                            corner-shape: var(--corner-shape);
+                        }
+
+                        scale: var(--scale, 1);
+                        grid-area: var(--grid-area);
+                        grid-row-end: var(--grid-row-end);
+
+                        /* top left */
+
+                        &:nth-child(1) {
+                            --grid-area: tl-start;
+                            --grid-row-end: tl-stop;
+                            --corner-shape: var(--corner-type-outer) var(--corner-type-outer) var(--corner-type) var(--corner-type-outer);
+                        }
+
+                        /* top right */
+
+                        &:nth-child(2) {
+                            --grid-area: tr-start;
+                            --grid-row-end: tr-stop;
+                            --corner-shape: var(--corner-type-outer) var(--corner-type-outer) var(--corner-type-outer) var(--corner-type);
+                        }
+
+                        /* middle  */
+
+                        &:nth-child(3) {
+                            --grid-area: m;
+                            --grid-row-end: bl-start;
+                            --corner-shape: var(--corner-type-center);
+                            --scale: var(--scale-center);
+                            z-index: 1;
+                        }
+
+                        /* bottom left */
+
+                        &:nth-child(4) {
+                            --grid-area: bl-start;
+                            --grid-row-end: bl-stop;
+                            --corner-shape: var(--corner-type-outer) var(--corner-type) var(--corner-type-outer) var(--corner-type-outer);
+                        }
+
+                        /* bottom right */
+
+                        &:nth-child(5) {
+                            --grid-area: br-start;
+                            --grid-row-end: br-stop;
+                            --corner-shape: var(--corner-type) var(--corner-type-outer) var(--corner-type-outer) var(--corner-type-outer);
+                        }
+
+
+                        transition: scale, box-shadow, filter, corner-shape;
+                        transition-duration: 150ms;
+                        transition-timing-function: ease-in-out;
+                        overflow: hidden;
+                        border: 1px solid var(--clr-lines);
+                        box-shadow: 0 0 0 var(--shadow-distance, 0) light-dark(rgba(0 0 0 / .25), rgba(111 111 111 / 0.75));
+
+                        & > img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+
+                        &:hover {
+                            --shadow-distance: 1em;
+                            /* whilst normally it is not recommended to use |important, due to the added specificity of the selectors this seemed the simplest way to achieve the desired effect */
+                            --scale: 1.5 !important;
+                            --corner-shape: square !important;
+
+                            transition-duration: 1500ms;
+                            transition-timing-function: linear(
+                                    0,
+                                    0.202 2.8%,
+                                    1.157 9.2%,
+                                    1.372 12.8%,
+                                    1.337 15.2%,
+                                    0.962 22%,
+                                    0.861 26%,
+                                    1.052 39.2%,
+                                    0.981 52.4%,
+                                    1
+                            );
+                        }
+                    }
+                }
+            }
+        }
+
+        /* general styling not relevant for this demo */
+        @layer base {
+            * {
+                box-sizing: border-box;
+            }
+
+            :root {
+                color-scheme: light dark;
+                --bg-dark: rgb(24, 24, 27);
+                --bg-light: rgb(248, 244, 238);
+                --txt-light: rgb(10, 10, 10);
+                --txt-dark: rgb(245, 245, 245);
+            );
+                --line-light: rgba(0 0 0 / .2);
+                --line-dark: rgba(255 255 255 / .5);
+
+                --clr-bg: light-dark(var(--bg-light), var(--bg-dark));
+                --clr-txt: light-dark(var(--txt-light), var(--txt-dark));
+                --clr-lines: light-dark(var(--line-light), var(--line-dark));
+            }
+
+            body {
+                background-color: var(--clr-bg);
+                color: var(--clr-txt);
+                min-height: 100svh;
+                margin: 0;
+                padding: 2rem;
+                font-family: "Jura", sans-serif;
+                font-size: 1rem;
+                line-height: 1.5;
+                display: grid;
+                place-content: center;
+
+                gap: 1rem;
+
+                & > * {
+                    /*outline: 1px dashed red;*/
+                }
+            }
+
+            h1 {
+                margin: 0;
+                font-size: 1.2rem;
+            }
+
+            .note {
+                font-size: 0.7rem;
+            }
+
+            .msg-supports {
+                font-size: 0.8rem;
+                @supports (corner-shape: notch) {
+                    display: none;
+                }
+            }
+
+            .controls {
+                display: flex;
+                gap: 1rem;
+                font-size: .7rem;
+            }
+
+            .controls > label {
+                display: flex;
+                align-items: center;
+                gap: 0.25rem;
+                transition: color 150ms ease-in-out;
+
+                &:hover {
+                    color: dodgerblue;
+                }
+            }
+        }
+
+    </style>
+</head>
+<body>
+<hgroup>
+    <h1><code>corner-shape</code> gallery</h1>
+    <p class="msg-supports">Sorry, your browser doesn't support the <code>corner-shape</code> property</p>
+</hgroup>
+
+<main class="wrapper">
+
+    <section class="group">
+        <div><img alt="" height="100" src="https://picsum.photos/id/687/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/39/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/30/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/312/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/145/300/300" width="100"></div>
+    </section>
+
+    <section class="group">
+        <div><img alt="" height="100" src="https://picsum.photos/id/160/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/250/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/96/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/535/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/403/300/300" width="100"></div>
+    </section>
+
+    <section class="group">
+        <div><img alt="" height="100" src="https://picsum.photos/id/533/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/442/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/429/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/357/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/637/300/300" width="100"></div>
+    </section>
+
+    <section class="group">
+        <div><img alt="" height="100" src="https://picsum.photos/id/23/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/24/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/31/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/113/300/300" width="100"></div>
+        <div><img alt="" height="100" src="https://picsum.photos/id/139/300/300" width="100"></div>
+    </section>
+
+</main>
+
+<div class="controls">
+    <label for="shape-scoop">
+        <input id="shape-scoop" name="shape" type="radio">
+        Scoop
+    </label>
+    <label for="shape-bevel">
+        <input checked id="shape-bevel" name="shape" type="radio">
+        Bevel
+    </label>
+    <label for="shape-notch">
+        <input id="shape-notch" name="shape" type="radio">
+        Notch
+    </label>
+    <label for="shape-round">
+        <input id="shape-round" name="shape" type="radio">
+        Round
+    </label>
+
+    <label for="shape-squircle">
+        <input id="shape-squircle" name="shape" type="radio">
+        Squircle
+    </label>
+
+</div>
+</body>
+</html>

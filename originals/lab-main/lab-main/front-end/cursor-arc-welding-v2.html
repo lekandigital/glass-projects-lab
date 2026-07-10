@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursor Arc Welding - V2</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: #0b0f14;
+        }
+
+        wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: crosshair;
+        }
+
+        .hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font: 12px/1.3 system-ui, Segoe UI, Roboto, Arial;
+            color: #cfe8ff;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 8px 10px;
+            border-radius: 8px;
+        }
+
+        code {
+            color: #9cf;
+        }
+    </style>
+</head>
+<body>
+<wrap>
+    <canvas id="fx"></canvas>
+    <div class="hud">
+        API: <code>const weld = new ArcWeldEffect(canvas[, options])</code><br/>
+        Méthodes: <code>start()</code> · <code>stop()</code> · <code>destroy()</code> · <code>setOptions()</code>
+    </div>
+</wrap>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById("fx");
+        const weld = new ArcWeldEffect(canvas, {
+            baseIntensity: 0.08,
+            speedGain: 1.0,
+            clickBoost: 1.6,
+            glowRadius: 90,
+            sparkCount: 500,
+            color: [0.81, 0.93, 1.0],
+            noiseSeed: 4025
+        });
+        weld.start();
+        // quick smoke tests
+        window.addEventListener("blur", () => weld.setOptions({
+            baseIntensity: 0.02
+        }));
+        window.addEventListener("focus", () =>
+            weld.setOptions({
+                baseIntensity: 0.08
+            })
+        );
+        window.addEventListener("resize", () => {
+            /* handled internally by ResizeObserver */
+        });
+    })
+</script>
+
+<script>
+    /* =========================
+   Input unifié (mouse/touch/pen)
+   ========================= */
+    class InputController {
+        constructor(element, {preventScroll = true} = {}) {
+            this.el = element;
+            this.preventScroll = !!preventScroll;
+            if (this.preventScroll) this.el.style.touchAction = "none";
+
+            this.x = 0;
+            this.y = 0;
+            this.y2 = 0;
+            this.px = 0;
+            this.py = 0;
+            this.py2 = 0;
+            this.speed = 0;
+            this.down = false;
+            this.inside = false;
+            this.moving = false;
+
+            this._moveTO = null;
+            this._pid = null; // pointerId capturé (touch/pen)
+            this._bindPointer();
+        }
+
+        _relate(e) {
+            const r = this.el.getBoundingClientRect();
+            const cx = e.clientX,
+                cy = e.clientY;
+            return {
+                x: cx - r.left,
+                y: cy - r.top,
+                y2: r.bottom - cy,
+                inside: cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom
+            };
+        }
+
+        _updateMove(p) {
+            const dx = p.x - this.x,
+                dy = p.y - this.y;
+            this.px = this.x;
+            this.py = this.y;
+            this.py2 = this.y2;
+            this.x = p.x;
+            this.y = p.y;
+            this.y2 = p.y2;
+            this.speed = Math.hypot(dx, dy);
+            this.inside = p.inside;
+            this.moving = true;
+            clearTimeout(this._moveTO);
+            this._moveTO = setTimeout(() => {
+                this.moving = false;
+            }, 50);
+        }
+
+        _bindPointer() {
+            const el = this.el;
+
+            this._pEnter = () => {
+                this.inside = true;
+            };
+            this._pLeave = () => {
+                this.inside = false;
+                if (!this.down) this._pid = null;
+            };
+
+            this._pDown = (e) => {
+                if (e.pointerType !== "mouse") e.preventDefault();
+                this.down = true;
+                this._pid = e.pointerId; // capture pour touch/pen
+                el.setPointerCapture(this._pid);
+                this._updateMove(this._relate(e));
+            };
+
+            this._pMove = (e) => {
+                // Si capture active, ignorer les autres pointeurs
+                if (this._pid != null && e.pointerId !== this._pid) return;
+                // Sinon, accepter les moves en hover (mouse)
+                this._updateMove(this._relate(e));
+            };
+
+            const end = (e) => {
+                if (this._pid != null && e.pointerId !== this._pid) return;
+                try {
+                    el.releasePointerCapture(this._pid);
+                } catch (_) {
+                }
+                this._pid = null;
+                this.down = false;
+                this._updateMove(this._relate(e));
+            };
+
+            this._pUp = end;
+            this._pCancel = end;
+            this._pOut = (e) => {
+                if (this._pid != null && e.pointerId !== this._pid) return;
+                this.inside = false;
+            };
+
+            el.addEventListener("pointerenter", this._pEnter, {passive: true});
+            el.addEventListener("pointerleave", this._pLeave, {passive: true});
+            el.addEventListener("pointerdown", this._pDown, {passive: false});
+            el.addEventListener("pointermove", this._pMove, {passive: true});
+            el.addEventListener("pointerup", this._pUp, {passive: true});
+            el.addEventListener("pointercancel", this._pCancel, {passive: true});
+            el.addEventListener("pointerout", this._pOut, {passive: true});
+        }
+
+        destroy() {
+            clearTimeout(this._moveTO);
+        }
+    }
+
+    /* =========================
+       ArcWeldEffect
+       ========================= */
+    class ArcWeldEffect {
+        constructor(target, options = {}) {
+            this.opts = {
+                baseIntensity: 0.08,
+                speedGain: 0.9,
+                clickBoost: 1.2,
+                glowRadius: 80,
+                sparkCount: 400,
+                glowColor: [0.85, 0.95, 1.0],
+                sparkColorA: [1.0, 0.9, 0.2],
+                sparkColorB: [1.0, 0.45, 0.0],
+                noiseSeed: 1337,
+                opacity: 1.0,
+                // flashes aléatoires long-clic
+                flickerThresholdMs: 300,
+                flickerPhaseMs: 50,
+                // raccourcissement des traits en fin de vie
+                tailShortenStart: 0.6,
+                tailMinFactor: 0.25,
+                // fade-out halo hors wrapper
+                glowFadeOutMs: 350,
+                // touch
+                preventScrollOnTouch: true,
+                ...options
+            };
+
+            this._externalCanvas = false;
+            if (target instanceof HTMLCanvasElement) {
+                this.canvas = target;
+                this._externalCanvas = true;
+            } else {
+                this.canvas = document.createElement("canvas");
+                (target || document.body).appendChild(this.canvas);
+            }
+
+            // Entrées unifiées
+            this.input = new InputController(this.canvas, {
+                preventScroll: this.opts.preventScrollOnTouch
+            });
+
+            this._running = false;
+            this._raf = null;
+            this._lastT = 0;
+            this._flashT = 0; // courte fenêtre d’éclat
+            this._spawnCarry = 0;
+
+            // long press → bursts aléatoires
+            this._clickT = 0;
+            this._burstT = 0;
+            this._burstNext = 0;
+
+            // halo fade
+            this._glowFade = 1;
+
+            this.gl = this.canvas.getContext("webgl", {
+                premultipliedAlpha: false,
+                alpha: true,
+                antialias: false,
+                depth: false,
+                stencil: false
+            });
+
+            this._resize = this._resize.bind(this);
+            this._resizeObserver = new ResizeObserver(this._resize);
+            this._resizeObserver.observe(this.canvas);
+            window.addEventListener("resize", this._resize, {passive: true});
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) this.input.speed = 0;
+            });
+
+            this._resize();
+            this._inited = false;
+
+            // hook edges down/up
+            let prevDown = false;
+            this._checkInputEdge = () => {
+                if (this.input.down && !prevDown) {
+                    this._flashT = 0.08;
+                    this._clickT = 0;
+                    this._burstT = 0;
+                    this._burstNext = 0;
+                }
+                if (!this.input.down && prevDown) {
+                    this._clickT = 0;
+                    this._burstT = 0;
+                    this._burstNext = 0;
+                }
+                prevDown = this.input.down;
+            };
+        }
+
+        start() {
+            if (this._running) return this;
+            if (!this._inited) {
+                if (this.gl) this._initGL();
+                else this._init2D();
+                this._inited = true;
+            }
+            this._running = true;
+            this._lastT = performance.now();
+            const loop = (t) => {
+                if (!this._running) return;
+                const dt = Math.min(0.05, Math.max(0, (t - this._lastT) / 1000));
+                this._lastT = t;
+                this._checkInputEdge();
+                this._update(dt);
+                this._draw(t / 1000);
+                this._raf = requestAnimationFrame(loop);
+            };
+            this._raf = requestAnimationFrame(loop);
+            return this;
+        }
+
+        stop() {
+            this._running = false;
+            if (this._raf) cancelAnimationFrame(this._raf);
+            this._raf = null;
+            return this;
+        }
+
+        destroy() {
+            this.stop();
+            this._resizeObserver?.disconnect();
+            window.removeEventListener("resize", this._resize);
+            this.input?.destroy();
+            if (this.gl) {
+                const gl = this.gl;
+                if (this._bufLines) gl.deleteBuffer(this._bufLines);
+                if (this._bufFSQ) gl.deleteBuffer(this._bufFSQ);
+                if (this._progGlow) gl.deleteProgram(this._progGlow);
+                if (this._progLines) gl.deleteProgram(this._progLines);
+            }
+            if (!this._externalCanvas && this.canvas.parentNode)
+                this.canvas.parentNode.removeChild(this.canvas);
+            return null;
+        }
+
+        setOptions(partial) {
+            Object.assign(this.opts, partial || {});
+            if (this.gl && this._inited) this._syncUniformsStatic();
+            return this;
+        }
+
+        setGlowColor(rgb) {
+            this.opts.glowColor = rgb;
+            if (this.gl && this._inited) this._syncUniformsStatic();
+            return this;
+        }
+
+        setSparkColors(a, b) {
+            this.opts.sparkColorA = a;
+            this.opts.sparkColorB = b;
+            return this;
+        }
+
+        _resize() {
+            const dpr = Math.max(1, Math.min(2.5, window.devicePixelRatio || 1));
+            this._dpr = dpr;
+            const rect = this.canvas.getBoundingClientRect();
+            const w = Math.max(2, Math.floor(rect.width * dpr));
+            const h = Math.max(2, Math.floor(rect.height * dpr));
+            if (this.canvas.width !== w || this.canvas.height !== h) {
+                this.canvas.width = w;
+                this.canvas.height = h;
+                if (this.gl && this._inited) {
+                    this.gl.viewport(0, 0, w, h);
+                    this._syncUniformsStatic();
+                }
+            }
+        }
+
+        _intensity(dt) {
+            // fade du halo hors wrapper
+            if (this.input.inside) this._glowFade = 1;
+            else {
+                const fadeDur = Math.max(1e-3, (this.opts.glowFadeOutMs || 350) / 1000);
+                this._glowFade = Math.max(0, this._glowFade - dt / fadeDur);
+            }
+
+            const speed = (this.input.speed * (this._dpr || 1)) / Math.max(1e-3, dt * 60);
+            const base = this.opts.baseIntensity,
+                sGain = this.opts.speedGain,
+                cBoost = this.input.down ? this.opts.clickBoost : 0;
+            const dynamic = base + sGain * (speed / 40);
+            let I = Math.min(2.5, dynamic + cBoost);
+            if (this._flashT > 0) I += 1.5;
+            I *= this._glowFade;
+            return I;
+        }
+
+        _initGL() {
+            const gl = this.gl;
+            gl.enable(gl.BLEND);
+            gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+            // Glow
+            this._progGlow = this._createProgram(
+                `attribute vec2 aXY; void main(){ gl_Position=vec4(aXY,0.0,1.0); }`,
+                `precision mediump float;
+       uniform vec2 uCursor,uResolution; uniform float uRadius,uIntensity,uTime,uSeed,uOpacity;
+       uniform vec3 uColor;
+       float hash(vec2 p){ p=vec2(dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3))); return fract(sin(p.x+p.y)*43758.5453); }
+       void main(){
+         vec2 uv=gl_FragCoord.xy;
+         float d=distance(uv,uCursor);
+         float g=exp(-(d*d)/(2.0*uRadius*uRadius));
+         float n=hash(uv*(0.035+0.015*uIntensity)+uSeed+floor(uTime*60.0));
+         float flick=0.85+0.3*(n-0.5);
+         float a=g*uIntensity*0.9*flick*uOpacity;
+         gl_FragColor=vec4(uColor,a);
+       }`
+            );
+            this._locG = {
+                aXY: gl.getAttribLocation(this._progGlow, "aXY"),
+                uCursor: gl.getUniformLocation(this._progGlow, "uCursor"),
+                uResolution: gl.getUniformLocation(this._progGlow, "uResolution"),
+                uRadius: gl.getUniformLocation(this._progGlow, "uRadius"),
+                uIntensity: gl.getUniformLocation(this._progGlow, "uIntensity"),
+                uTime: gl.getUniformLocation(this._progGlow, "uTime"),
+                uSeed: gl.getUniformLocation(this._progGlow, "uSeed"),
+                uColor: gl.getUniformLocation(this._progGlow, "uColor"),
+                uOpacity: gl.getUniformLocation(this._progGlow, "uOpacity")
+            };
+
+            // Lines
+            this._progLines = this._createProgram(
+                `attribute vec2 aPos; attribute vec3 aCol; attribute float aLife;
+       uniform vec2 uResolution; varying vec3 vCol; varying float vLife;
+       void main(){ vec2 z=(aPos/uResolution)*2.0-1.0; z.y=-z.y; gl_Position=vec4(z,0.0,1.0); vCol=aCol; vLife=aLife; }`,
+                `precision mediump float; varying vec3 vCol; varying float vLife;
+       uniform float uOpacity; void main(){ gl_FragColor=vec4(vCol,(0.2+0.8*vLife)*uOpacity); }`
+            );
+            this._locL = {
+                aPos: gl.getAttribLocation(this._progLines, "aPos"),
+                aCol: gl.getAttribLocation(this._progLines, "aCol"),
+                aLife: gl.getAttribLocation(this._progLines, "aLife"),
+                uOpacity: gl.getUniformLocation(this._progLines, "uOpacity"),
+                uResolution: gl.getUniformLocation(this._progLines, "uResolution")
+            };
+
+            // FS triangle
+            this._bufFSQ = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this._bufFSQ);
+            gl.bufferData(
+                gl.ARRAY_BUFFER,
+                new Float32Array([-1, -1, 3, -1, -1, 3]),
+                gl.STATIC_DRAW
+            );
+
+            // Particles
+            this._max = Math.max(32, this.opts.sparkCount | 0);
+            // x,y,vx,vy,life,ttl,size,len,colMix
+            this._particles = new Float32Array(this._max * 9);
+            for (let i = 0; i < this._max; i++) {
+                this._particles[i * 9 + 4] = 0;
+                this._particles[i * 9 + 5] = 0;
+            }
+
+            // Line buffer
+            this._bufLines = gl.createBuffer();
+            this._linesData = new Float32Array(this._max * 2 * 6);
+            gl.bindBuffer(gl.ARRAY_BUFFER, this._bufLines);
+            gl.bufferData(gl.ARRAY_BUFFER, this._linesData.byteLength, gl.DYNAMIC_DRAW);
+
+            this._syncUniformsStatic();
+        }
+
+        _syncUniformsStatic() {
+            if (!this.gl) return;
+            const gl = this.gl,
+                w = this.canvas.width,
+                h = this.canvas.height;
+            gl.useProgram(this._progGlow);
+            gl.uniform2f(this._locG.uResolution, w, h);
+            gl.uniform1f(this._locG.uSeed, this.opts.noiseSeed);
+            gl.uniform3fv(this._locG.uColor, new Float32Array(this.opts.glowColor));
+            gl.useProgram(this._progLines);
+            gl.uniform2f(this._locL.uResolution, w, h);
+        }
+
+        _createProgram(vsSrc, fsSrc) {
+            const gl = this.gl;
+            const vs = gl.createShader(gl.VERTEX_SHADER);
+            gl.shaderSource(vs, vsSrc);
+            gl.compileShader(vs);
+            if (!gl.getShaderParameter(vs, gl.COMPILE_STATUS))
+                throw new Error(gl.getShaderInfoLog(vs));
+            const fs = gl.createShader(gl.FRAGMENT_SHADER);
+            gl.shaderSource(fs, fsSrc);
+            gl.compileShader(fs);
+            if (!gl.getShaderParameter(fs, gl.COMPILE_STATUS))
+                throw new Error(gl.getShaderInfoLog(fs));
+            const prog = gl.createProgram();
+            gl.attachShader(prog, vs);
+            gl.attachShader(prog, fs);
+            gl.linkProgram(prog);
+            if (!gl.getProgramParameter(prog, gl.LINK_STATUS))
+                throw new Error(gl.getProgramInfoLog(prog));
+            gl.deleteShader(vs);
+            gl.deleteShader(fs);
+            return prog;
+        }
+
+        _spawn(dt, intensity) {
+            if (!this.input.down && this._flashT <= 0) return;
+            if (this.input.moving) return; // étincelles uniquement à l’arrêt
+            const baseRate = 120;
+            const want = baseRate * intensity * dt + this._spawnCarry;
+            let n = Math.floor(want);
+            this._spawnCarry = want - n;
+            for (let i = 0; i < this._max && n > 0; i++) {
+                const off = i * 9;
+                if (this._particles[off + 4] <= 0) {
+                    const ang = Math.random() * 0.6 - 0.3 + (Math.random() < 0.5 ? 0 : Math.PI);
+                    const spd = 120 + 1240 * Math.random() * Math.max(0.5, intensity);
+                    const vx = Math.cos(ang) * spd,
+                        vy = Math.sin(ang) * spd - 60 * Math.random();
+                    this._particles[off] = this.input.x * (this._dpr || 1);
+                    this._particles[off + 1] = this.input.y * (this._dpr || 1);
+                    this._particles[off + 2] = vx;
+                    this._particles[off + 3] = vy;
+                    this._particles[off + 4] = 1;
+                    const len = 26 + Math.random() * 124;
+                    this._particles[off + 5] = 0.05 + (len / 180) * 0.45; // TTL ~ longueur
+                    this._particles[off + 6] = 1 + Math.random() * 2;
+                    this._particles[off + 7] = len;
+                    this._particles[off + 8] = Math.random();
+                    n--;
+                }
+            }
+        }
+
+        _easeOutCubic(p) {
+            return 1 - Math.pow(1 - p, 3);
+        }
+
+        _saturate(x) {
+            return Math.max(0, Math.min(1, x));
+        }
+
+        _smoothstep(t) {
+            return t * t * (3 - 2 * t);
+        }
+
+        _update(dt) {
+            if (this._flashT > 0) this._flashT = Math.max(0, this._flashT - dt);
+            const I = this._intensity(dt);
+
+            // Long clic → flashs aléatoires
+            if (this.input.down) this._clickT += dt;
+            else {
+                this._clickT = 0;
+                this._burstT = 0;
+                this._burstNext = 0;
+            }
+            const th = (this.opts.flickerThresholdMs || 300) / 1000;
+            if (this._clickT > th) {
+                const phase = Math.max(0.02, (this.opts.flickerPhaseMs || 50) / 1000);
+                this._burstT += dt;
+                if (this._burstNext <= 0) this._burstNext = (2 + 4 * Math.random()) * phase;
+                if (this._burstT >= this._burstNext) {
+                    this._burstT = 0;
+                    this._burstNext = (2 + 4 * Math.random()) * phase;
+                    if (Math.random() < 0.5) this._flashT = 0.04 + 0.08 * Math.random();
+                }
+            }
+
+            if (this.gl) {
+                const air = 0.995;
+                for (let i = 0; i < this._max; i++) {
+                    const off = i * 9;
+                    let life = this._particles[off + 4];
+                    if (life > 0) {
+                        let x = this._particles[off],
+                            y = this._particles[off + 1];
+                        let vx = this._particles[off + 2],
+                            vy = this._particles[off + 3];
+                        const pAge = 1 - life,
+                            e = this._easeOutCubic(pAge);
+                        const baseScale = 1.6 + (0.25 - 1.6) * e,
+                            speedScale = baseScale * 3.0;
+                        x += vx * dt * speedScale;
+                        y += vy * dt * speedScale;
+                        vx *= air;
+                        vy *= air;
+                        const ttl = this._particles[off + 5];
+                        life = Math.max(0, life - dt / ttl);
+                        this._particles[off] = x;
+                        this._particles[off + 1] = y;
+                        this._particles[off + 2] = vx;
+                        this._particles[off + 3] = vy;
+                        this._particles[off + 4] = life;
+                    }
+                }
+                this._spawn(dt, I);
+
+                // Build lignes
+                let idx = 0;
+                const cA = this.opts.sparkColorA,
+                    cB = this.opts.sparkColorB;
+                for (let i = 0; i < this._max; i++) {
+                    const off = i * 9,
+                        life = this._particles[off + 4];
+                    if (life > 0) {
+                        const x = this._particles[off],
+                            y = this._particles[off + 1];
+                        const vx = this._particles[off + 2],
+                            vy = this._particles[off + 3];
+                        const baseL = this._particles[off + 7];
+                        const vlen = Math.max(1e-3, Math.hypot(vx, vy));
+                        const stretch = 1.0 + Math.min(2.0, vlen / 200.0);
+                        const age = 1.0 - life,
+                            t0 = this.opts.tailShortenStart || 0.6;
+                        const tEnd = this._saturate((age - t0) / (1 - t0));
+                        const shorten =
+                            1.0 - (1.0 - (this.opts.tailMinFactor || 0.25)) * this._smoothstep(tEnd);
+                        const L = baseL * stretch * shorten;
+                        const dx = (vx / vlen) * L,
+                            dy = (vy / vlen) * L;
+                        const t = this._particles[off + 8];
+                        const r = cA[0] * (1 - t) + cB[0] * t,
+                            g = cA[1] * (1 - t) + cB[1] * t,
+                            b = cA[2] * (1 - t) + cB[2] * t;
+                        this._linesData[idx++] = x;
+                        this._linesData[idx++] = y;
+                        this._linesData[idx++] = r;
+                        this._linesData[idx++] = g;
+                        this._linesData[idx++] = b;
+                        this._linesData[idx++] = life;
+                        this._linesData[idx++] = x + dx;
+                        this._linesData[idx++] = y + dy;
+                        this._linesData[idx++] = r;
+                        this._linesData[idx++] = g;
+                        this._linesData[idx++] = b;
+                        this._linesData[idx++] = life * 0.6;
+                    }
+                }
+                this._lineVertCount = idx / 6;
+                const gl = this.gl;
+                gl.bindBuffer(gl.ARRAY_BUFFER, this._bufLines);
+                gl.bufferSubData(gl.ARRAY_BUFFER, 0, this._linesData.subarray(0, idx));
+            } else {
+                // canvas 2D fallback
+                if (!this._sparks2d) {
+                    const max = Math.min(80, this.opts.sparkCount | 0);
+                    this._sparks2d = new Array(max)
+                        .fill(0)
+                        .map(() => ({
+                            x: 0,
+                            y: 0,
+                            vx: 0,
+                            vy: 0,
+                            life: 0,
+                            ttl: 0,
+                            len: 10,
+                            colMix: 0.5
+                        }));
+                }
+                for (const p of this._sparks2d) {
+                    if (p.life > 0) {
+                        const e = this._easeOutCubic(1 - p.life);
+                        const baseScale = 1.6 + (0.25 - 1.6) * e,
+                            speedScale = baseScale * 3.0;
+                        p.x += p.vx * dt * speedScale;
+                        p.y += p.vy * dt * speedScale;
+                        p.vx *= 0.995;
+                        p.vy *= 0.995;
+                        p.life = Math.max(0, p.life - dt / p.ttl);
+                    }
+                }
+                if (this.input.down || this._flashT > 0) {
+                    let want = Math.floor(80 * I * dt);
+                    for (const p of this._sparks2d) {
+                        if (!want) break;
+                        if (p.life <= 0) {
+                            const ang =
+                                Math.random() * 0.6 - 0.3 + (Math.random() < 0.5 ? 0 : Math.PI);
+                            const spd = 120 + 200 * Math.random();
+                            p.x = this.input.x;
+                            p.y = this.input.y;
+                            p.vx = Math.cos(ang) * spd;
+                            p.vy = Math.sin(ang) * spd - 40 * Math.random();
+                            const len = 26 + Math.random() * 124;
+                            p.len = len;
+                            p.ttl = 0.05 + (len / 180) * 0.45;
+                            p.life = 1;
+                            p.colMix = Math.random();
+                            want--;
+                        }
+                    }
+                }
+            }
+        }
+
+        _draw(timeSec) {
+            const opacity = Math.max(0, Math.min(1, this.opts.opacity));
+            const dpr = this._dpr || 1;
+            const I = this._intensity(1 / 60);
+
+            if (this.gl) {
+                const gl = this.gl;
+                const w = this.canvas.width,
+                    h = this.canvas.height;
+                gl.viewport(0, 0, w, h);
+                gl.clearColor(0, 0, 0, 0);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+
+                // ------ GLOW (WebGL) : clamp 35vw et bords ------
+                gl.useProgram(this._progGlow);
+                gl.bindBuffer(gl.ARRAY_BUFFER, this._bufFSQ);
+                gl.enableVertexAttribArray(this._locG.aXY);
+                gl.vertexAttribPointer(this._locG.aXY, 2, gl.FLOAT, false, 0, 0);
+
+                const cx = this.input.x * dpr;
+                const cy = this.input.y2 * dpr; // gl_FragCoord a l'origine en bas-gauche
+                const maxRvw = 0.35 * window.innerWidth * dpr;
+                const maxRedges = Math.max(8, Math.min(cx, cy, w - cx, h - cy));
+
+                let r = this.opts.glowRadius * dpr * (0.8 + 0.6 * I);
+                r = Math.max(8, Math.min(r, maxRvw, maxRedges));
+
+                gl.uniform2f(this._locG.uCursor, cx, cy);
+                gl.uniform1f(this._locG.uRadius, r);
+                gl.uniform1f(this._locG.uIntensity, I + (this._flashT > 0 ? 1.5 : 0));
+                gl.uniform1f(this._locG.uTime, timeSec);
+                gl.uniform1f(this._locG.uOpacity, opacity);
+                gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+                // ------ LIGNES (WebGL) ------
+                gl.useProgram(this._progLines);
+                gl.uniform1f(this._locL.uOpacity, opacity);
+                gl.uniform2f(this._locL.uResolution, w, h);
+                gl.bindBuffer(gl.ARRAY_BUFFER, this._bufLines);
+                const stride = 6 * 4;
+                gl.enableVertexAttribArray(this._locL.aPos);
+                gl.vertexAttribPointer(this._locL.aPos, 2, gl.FLOAT, false, stride, 0);
+                gl.enableVertexAttribArray(this._locL.aCol);
+                gl.vertexAttribPointer(this._locL.aCol, 3, gl.FLOAT, false, stride, 8);
+                gl.enableVertexAttribArray(this._locL.aLife);
+                gl.vertexAttribPointer(this._locL.aLife, 1, gl.FLOAT, false, stride, 20);
+                gl.drawArrays(gl.LINES, 0, this._lineVertCount || 0);
+            } else {
+                const ctx = this.ctx2d;
+                const w = this.canvas.width,
+                    h = this.canvas.height;
+                ctx.clearRect(0, 0, w, h);
+
+                // ------ GLOW (Canvas2D) : clamp 35vw et bords ------
+                const gx = this.input.x * dpr;
+                const gy = this.input.y * dpr; // canvas 2D a l'origine en haut-gauche
+                const maxRvw = 0.35 * window.innerWidth * dpr;
+                const maxRedges = Math.max(8, Math.min(gx, gy, w - gx, h - gy));
+
+                let r = this.opts.glowRadius * dpr * (0.8 + 0.6 * I);
+                r = Math.max(8, Math.min(r, maxRvw, maxRedges));
+
+                const c = this.opts.glowColor;
+                const rgba = (a) =>
+                    `rgba(${(c[0] * 255) | 0},${(c[1] * 255) | 0},${(c[2] * 255) | 0},${
+                        a * opacity
+                    })`;
+                const g = ctx.createRadialGradient(gx, gy, 1, gx, gy, r);
+                g.addColorStop(0, rgba(0.8));
+                g.addColorStop(1, rgba(0));
+                ctx.globalCompositeOperation = "lighter";
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.arc(gx, gy, r, 0, Math.PI * 2);
+                ctx.fill();
+
+                // ------ LIGNES (Canvas2D) ------
+                ctx.lineCap = "round";
+                for (const p of this._sparks2d || []) {
+                    if (p.life > 0) {
+                        const vlen = Math.max(1e-3, Math.hypot(p.vx, p.vy));
+                        const stretch = 1.0 + Math.min(2.0, vlen / 200.0);
+                        const age = 1.0 - p.life,
+                            t0 = this.opts.tailShortenStart || 0.6;
+                        const tEnd = Math.max(0, Math.min(1, (age - t0) / (1 - t0)));
+                        const shorten =
+                            1.0 -
+                            (1.0 - (this.opts.tailMinFactor || 0.25)) *
+                            (tEnd * tEnd * (3 - 2 * tEnd));
+                        const dx = (p.vx / vlen) * p.len * stretch * dpr * shorten;
+                        const dy = (p.vy / vlen) * p.len * stretch * dpr * shorten;
+
+                        const t = p.colMix;
+                        const rC =
+                            this.opts.sparkColorA[0] * (1 - t) + this.opts.sparkColorB[0] * t;
+                        const gC =
+                            this.opts.sparkColorA[1] * (1 - t) + this.opts.sparkColorB[1] * t;
+                        const bC =
+                            this.opts.sparkColorA[2] * (1 - t) + this.opts.sparkColorB[2] * t;
+
+                        ctx.strokeStyle = `rgba(${(rC * 255) | 0},${(gC * 255) | 0},${
+                            (bC * 255) | 0
+                        },${(0.2 + 0.8 * p.life) * opacity})`;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x * dpr, p.y * dpr);
+                        ctx.lineTo(p.x * dpr + dx, p.y * dpr + dy);
+                        ctx.stroke();
+                    }
+                }
+                ctx.globalCompositeOperation = "source-over";
+            }
+        }
+
+        _init2D() {
+            this.ctx2d = this.canvas.getContext("2d");
+        }
+    }
+
+</script>
+</body>
+</html>

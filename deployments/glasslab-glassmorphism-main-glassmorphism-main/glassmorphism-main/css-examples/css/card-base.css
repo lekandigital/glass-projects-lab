@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  max-width: var(--card-width);
+  min-height: var(--card-height);
+  padding: var(--card-padding);
+
+  border-width: var(--card-border-width);
+  border-style: solid;
+  border-radius: var(--card-radius);
+
+  backdrop-filter: blur(var(--card-blur));
+
+  border-color: var(--card-border-color);
+  background-color: var(--card-bg-color);
+  box-shadow: 0 0 10px 1px var(--card-shadow);
+}
+
+.card-footer {
+  font-size: 65%;
+  line-height: 1;
+  color: var(--card-text-color-sec);
+}

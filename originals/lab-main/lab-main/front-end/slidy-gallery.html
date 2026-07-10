@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slidy Gallery</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #000000;
+        }
+
+        .slide-grid {
+            display: flex;
+            width: 100vw;
+            height: 50vh;
+            overflow: hidden;
+        }
+
+        .slide-grid__item {
+            height: 50vh;
+            min-width: 0;
+            width: 0.001px;
+            overflow: hidden;
+            flex-grow: 1;
+            transition: transform cubic-bezier(0.47, 1.64, 0.41, 0.8) 1.2s, width cubic-bezier(0.47, 1.64, 0.41, 0.8) 1.2s;
+            background-size: cover;
+            background-position: 50%;
+        }
+
+        .slide-grid__item--size-1 {
+            min-width: 33.33vw;
+            width: 33.33vw;
+        }
+
+        .slide-grid__item--size-2 {
+            min-width: 16.66vw;
+            width: 16.66vw;
+        }
+
+        .slide-grid__item--direction-1 {
+            animation: slide--1 1.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+        }
+
+        .slide-grid__item--direction-2 {
+            animation: slide--2 1.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+        }
+
+        .slide-grid__item--direction-3 {
+            animation: slide--3 1.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+        }
+
+        .slide-grid__item--direction-4 {
+            animation: slide--4 1.2s cubic-bezier(0.47, 1.64, 0.41, 0.8);
+        }
+
+        .slide-grid__item--background-1 {
+            background-color: #000000;
+            background-image: var(--image-01);
+        }
+
+        .slide-grid__item--background-2 {
+            background-color: #4d4d4d;
+            background-image: var(--image-02);
+        }
+
+        .slide-grid__item--background-3 {
+            background-color: #9f9e9e;
+            background-image: var(--image-03);
+        }
+
+        .slide-grid__item--background-4 {
+            background-color: #cecece;
+            background-image: var(--image-04);
+        }
+
+        .slide-grid__item--background-5 {
+            background-color: #ebeaea;
+            background-image: var(--image-05);
+        }
+
+        .slide-grid__item--background-6 {
+            background-color: #c0ff2b;
+            background-image: var(--image-06);
+        }
+
+        .slide-grid__item--background-7 {
+            background-color: #363636;
+            background-image: var(--image-07);
+        }
+
+        .slide-grid__item--background-8 {
+            background-color: #737373;
+            background-image: var(--image-08);
+        }
+
+        .slide-grid__item--background-9 {
+            background-color: #737373;
+            background-image: var(--image-09);
+        }
+
+        .slide-grid__item--background-10 {
+            background-color: #737373;
+            background-image: var(--image-10);
+        }
+
+        @keyframes slide--1 {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slide--2 {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slide--3 {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slide--4 {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /*# sourceMappingURL=style.css.map */
+
+    </style>
+    <style>
+        :root {
+            --image-01: url('https://images.unsplash.com/photo-1498429089284-41f8cf3ffd39?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-02: url('https://images.unsplash.com/photo-1653509517330-a5dbac11243f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-03: url('https://images.unsplash.com/photo-1581011277401-9f2953225051?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-04: url('https://images.unsplash.com/photo-1631630176127-6760429b4f6a?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-05: url('https://images.unsplash.com/photo-1425913397330-cf8af2ff40a1?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-06: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-07: url('https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-08: url('https://images.unsplash.com/photo-1551458601-14e8150ece4b?q=80&w=1674&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-09: url('https://images.unsplash.com/photo-1573156667488-5c0cec674762?q=80&w=1035&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            --image-10: url('https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?q=80&w=988&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        }
+    </style>
+</head>
+<body>
+<div class="slide-grid">
+    <div class="slide-grid__item slide-grid__item--size-2 slide-grid__item--background-1"></div>
+    <div class="slide-grid__item slide-grid__item--size-1 slide-grid__item--background-2"></div>
+    <div class="slide-grid__item slide-grid__item--size-2 slide-grid__item--background-3"></div>
+    <div class="slide-grid__item slide-grid__item--size-2 slide-grid__item--background-4"></div>
+    <div class="slide-grid__item slide-grid__item--size-2 slide-grid__item--background-5"></div>
+</div>
+<div class="slide-grid">
+    <div class="slide-grid__item slide-grid__item--size-1 slide-grid__item--background-2"></div>
+    <div class="slide-grid__item slide-grid__item--size-1 slide-grid__item--background-1"></div>
+    <div class="slide-grid__item slide-grid__item--size-2 slide-grid__item--background-3"></div>
+    <div class="slide-grid__item slide-grid__item--size-1 slide-grid__item--background-6"></div>
+    <div class="slide-grid__item slide-grid__item--size-1 slide-grid__item--background-5"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function numberGen(x) {
+        if (x === undefined) {
+            x = 10;
+        }
+        x = 1 + Math.floor(Math.random() * x);
+        return x;
+    }
+
+    function assignClass() {
+        var gridSelector = numberGen(2);
+        var gridItemSelector = numberGen(5);
+
+        let gridItem =
+            ".slide-grid:nth-of-type(" +
+            gridSelector +
+            ")" +
+            " .slide-grid__item:nth-of-type(" +
+            gridItemSelector +
+            ")";
+
+        $(gridItem).each(function () {
+            var sizeClass = numberGen(2);
+            var animationDirection = numberGen(4);
+            var itemBg = numberGen(10);
+
+            $(this).attr("class", "slide-grid__item");
+            $(this).addClass(gridItem);
+            $(this).addClass("slide-grid__item--size-" + sizeClass);
+            $(this).addClass("slide-grid__item--direction-" + animationDirection);
+            $(this).addClass("slide-grid__item--background-" + itemBg);
+        });
+
+        console.log(gridItem);
+    }
+
+    assignClass();
+
+    let time = numberGen(6) + "000";
+
+    window.setInterval(function () {
+        assignClass();
+        time = numberGen(2) + "000";
+    }, time);
+
+</script>
+</body>
+</html>

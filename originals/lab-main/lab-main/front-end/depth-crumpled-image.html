@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Depth crumpled image</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: #0b0b0b;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .ui {
+            position: fixed;
+            left: 12px;
+            bottom: 12px;
+            padding: 10px 12px;
+            color: #e6e6e6;
+            font: 12px/1.35 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            backdrop-filter: blur(6px);
+            user-select: none;
+            opacity: 0.85;
+        }
+
+    </style>
+</head>
+<body>
+<script type="importmap">
+    {
+    "imports": {
+      "three": "https://unpkg.com/three@0.180.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.180.0/examples/jsm/"
+    }
+  }
+</script>
+
+<div class="ui">Unfolding in 10s → a few creases remain. Drag to orbit.</div>
+
+<script type="module">
+    import * as THREE from "three";
+    import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+
+    /* -------------------- Config -------------------- */
+
+    const DURATION_SEC = 10; // unfold duration
+    const KEEP_RESIDUAL = 0.08; // final wrinkle amount (0.03–0.12 looks nice)
+    const START_WRINKLE = 0.55; // initial wrinkle strength
+    const NOISE_FREQ = 6.0; // wrinkle tightness (higher = finer)
+    const WORLD_HEIGHT = 1.6; // world space height of the sheet
+    const USE_A4 = true; // set false to use 9:16
+    const TARGET_RATIO = USE_A4 ? 1 / Math.SQRT2 : 9 / 16; // width/height
+    const WORLD_WIDTH = WORLD_HEIGHT * TARGET_RATIO;
+
+    /* -------------------- Renderer/Scene/Camera -------------------- */
+    const renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    document.body.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+        28,
+        innerWidth / innerHeight,
+        0.01,
+        50
+    );
+    camera.position.set(0, 0, 3.2);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.enablePan = false;
+    controls.minDistance = 2.0;
+    controls.maxDistance = 6.0;
+
+    /* -------------------- Texture -------------------- */
+    const texLoader = new THREE.TextureLoader();
+    texLoader.setCrossOrigin("anonymous");
+    const paperTex = await new Promise((res) =>
+        texLoader.load("https://picsum.photos/1000/1200", (t) => {
+            t.colorSpace = THREE.SRGBColorSpace;
+            t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy?.() || 8);
+            res(t);
+        })
+    );
+
+    /* -------------------- Geometry -------------------- */
+    const geo = new THREE.PlaneGeometry(WORLD_WIDTH, WORLD_HEIGHT, 420, 520);
+
+    /* -------------------- Shader -------------------- */
+    const vertexShader = /* glsl */ `
+varying vec2 vUv;
+varying vec3 vWorldPos;
+
+uniform float uTime;
+uniform float uProgress;   // 0..1
+uniform float uStartWrinkle;
+uniform float uEndWrinkle;
+uniform float uNoiseFreq;
+uniform float uHalfWidth;
+uniform float uHalfHeight;
+
+// Small, fast hash+noise and 5-octave FBM
+vec3 hash3(vec3 p) {
+  p = vec3( dot(p, vec3(127.1,311.7, 74.7)),
+            dot(p, vec3(269.5,183.3,246.1)),
+            dot(p, vec3(113.5,271.9,124.6)));
+  return -1.0 + 2.0*fract(sin(p)*43758.5453123);
+}
+float noise3(vec3 p) {
+  vec3 i = floor(p);
+  vec3 f = fract(p);
+  vec3 u = f*f*(3.0-2.0*f);
+
+  float n000 = dot(hash3(i+vec3(0,0,0)), f-vec3(0,0,0));
+  float n100 = dot(hash3(i+vec3(1,0,0)), f-vec3(1,0,0));
+  float n010 = dot(hash3(i+vec3(0,1,0)), f-vec3(0,1,0));
+  float n110 = dot(hash3(i+vec3(1,1,0)), f-vec3(1,1,0));
+  float n001 = dot(hash3(i+vec3(0,0,1)), f-vec3(0,0,1));
+  float n101 = dot(hash3(i+vec3(1,0,1)), f-vec3(1,0,1));
+  float n011 = dot(hash3(i+vec3(0,1,1)), f-vec3(0,1,1));
+  float n111 = dot(hash3(i+vec3(1,1,1)), f-vec3(1,1,1));
+
+  float nx00 = mix(n000, n100, u.x);
+  float nx10 = mix(n010, n110, u.x);
+  float nx01 = mix(n001, n101, u.x);
+  float nx11 = mix(n011, n111, u.x);
+
+  float nxy0 = mix(nx00, nx10, u.y);
+  float nxy1 = mix(nx01, nx11, u.y);
+
+  return mix(nxy0, nxy1, u.z);
+}
+float fbm(vec3 p) {
+  float a = 0.5;
+  float f = 1.0;
+  float s = 0.0;
+  for (int i=0;i<5;i++) {
+    s += a * noise3(p*f);
+    f *= 2.2;
+    a *= 0.5;
+  }
+  return s;
+}
+
+// Eases & helpers
+float easeOutCubic(float t){ return 1.0 - pow(1.0 - t, 3.0); }
+float rad(float d){ return d * 0.017453292519943295; }
+
+void main() {
+  vUv = uv;
+
+  float e = easeOutCubic(uProgress);
+  float wrinkle = mix(uStartWrinkle, uEndWrinkle, e);
+
+  vec3 p = position;
+
+  // Start with a bulge toward camera (crumpled ball), fade out over time
+  vec2 nrm = vec2(position.x / uHalfWidth, position.y / uHalfHeight);
+  float r = clamp(length(nrm), 0.0, 1.0);
+  float ball = (1.0 - r) * (1.0 - e);
+  p.z += ball * 0.45;
+
+  // Procedural wrinkles via FBM in 3D (x,y + slow z)
+  vec3 np = vec3(position.x, position.y, uTime*0.03) * (uNoiseFreq * 1.0);
+  float h = fbm(np);             // ~0..1
+  h = (h - 0.5) * 2.0;           // ~-1..1
+  p.z += h * wrinkle;
+
+  // Start rotated then straighten during unfold
+  float rx = mix(rad(-50.0), 0.0, e);
+  float ry = mix(rad( 35.0), 0.0, e);
+  float rz = mix(rad( 18.0), 0.0, e);
+
+  mat3 rotX = mat3(1,0,0,  0,cos(rx),-sin(rx),  0,sin(rx),cos(rx));
+  mat3 rotY = mat3(cos(ry),0,sin(ry),  0,1,0,  -sin(ry),0,cos(ry));
+  mat3 rotZ = mat3(cos(rz),-sin(rz),0,  sin(rz),cos(rz),0,  0,0,1);
+  p = rotZ * rotY * rotX * p;
+
+  vec4 wp = modelMatrix * vec4(p,1.0);
+  vWorldPos = wp.xyz;
+  gl_Position = projectionMatrix * viewMatrix * wp;
+}
+`;
+
+    const fragmentShader = /* glsl */ `
+precision highp float;
+varying vec2 vUv;
+varying vec3 vWorldPos;
+
+uniform sampler2D uTex;
+uniform vec3 uCamPos;
+
+// Face normal from derivatives
+vec3 faceNormal() {
+  vec3 dx = dFdx(vWorldPos);
+  vec3 dy = dFdy(vWorldPos);
+  return normalize(cross(dx, dy));
+}
+
+vec3 hemi(vec3 n) {
+  vec3 sky = vec3(1.0);
+  vec3 ground = vec3(0.18, 0.2, 0.25);
+  float h = n.y * 0.5 + 0.5;
+  return mix(ground, sky, h) * 0.55;
+}
+float lambert(vec3 n, vec3 l){ return max(dot(n, normalize(l)), 0.0); }
+
+void main() {
+  vec3 N = faceNormal();
+  vec3 base = texture2D(uTex, vUv).rgb;
+
+  vec3 L1 = normalize(vec3( 1.5, 1.1,  0.8));
+  vec3 L2 = normalize(vec3(-1.1,-0.6,  0.9));
+
+  vec3 col = base * (hemi(N) + 0.9*lambert(N, L1) + 0.45*lambert(N, L2));
+  vec3 V = normalize(uCamPos - vWorldPos);
+  vec3 H = normalize(L1 + V);
+  float spec = pow(max(dot(N, H), 0.0), 32.0) * 0.08;
+  col += spec;
+
+  col = mix(col, vec3(dot(col, vec3(0.333))), 0.04);
+  gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+    const mat = new THREE.ShaderMaterial({
+        uniforms: {
+            uTime: {value: 0},
+            uProgress: {value: 0}, // 0..1
+            uStartWrinkle: {value: START_WRINKLE},
+            uEndWrinkle: {value: KEEP_RESIDUAL},
+            uNoiseFreq: {value: NOISE_FREQ},
+            uHalfWidth: {value: WORLD_WIDTH * 0.5},
+            uHalfHeight: {value: WORLD_HEIGHT * 0.5},
+            uTex: {value: paperTex},
+            uCamPos: {value: new THREE.Vector3()}
+        },
+        vertexShader,
+        fragmentShader,
+        transparent: false
+    });
+    // Needed for dFdx/dFdy in fragment shader on WebGL1
+    mat.extensions = {derivatives: true};
+
+    const sheet = new THREE.Mesh(geo, mat);
+    scene.add(sheet);
+
+    /* -------------------- Animate -------------------- */
+    const start = performance.now();
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+    function tick(now) {
+        const t = Math.min(1, (now - start) / (DURATION_SEC * 1000));
+        mat.uniforms.uProgress.value = easeOutCubic(t);
+        mat.uniforms.uTime.value = now * 0.001;
+        mat.uniforms.uCamPos.value.copy(camera.position);
+
+        controls.update();
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+
+    /* -------------------- Resize -------------------- */
+    addEventListener(
+        "resize",
+        () => {
+            camera.aspect = innerWidth / innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(innerWidth, innerHeight);
+            // keep uniforms accurate if you ever change WORLD_* dynamically
+            mat.uniforms.uHalfWidth.value = WORLD_WIDTH * 0.5;
+            mat.uniforms.uHalfHeight.value = WORLD_HEIGHT * 0.5;
+        },
+        {passive: true}
+    );
+
+</script>
+</body>
+</html>

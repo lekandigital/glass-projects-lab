@@ -1,0 +1,26 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-shader-liquid-glass-shader-src --name glasslab-liquid-glass-shader-liquid-glass-shader-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-shader-liquid-glass-shader-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-liquid-glass-shader-liquid-glass-shader-src (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-liquid-glass-shader-liquid-glass-shader-src
+Uploading [--------------------] (0.0B/7.8KB)
+Uploading [========------------] (3.2KB/7.8KB)
+Uploading [===========---------] (4.3KB/7.8KB)
+Uploading [===================-] (7.5KB/7.8KB)
+Uploading [====================] (7.8KB/7.8KB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-liquid-glass-shader-liquid-glass-shader-src/9GN8FQGof4kfcw29WFDUMuPyi3QR [2s]
+Production: https://glasslab-liquid-glass-shader-liquid-glass-shader-mgdrp5rsq.vercel.app [2s]
+https://glasslab-liquid-glass-shader-liquid-glass-shader-mgdrp5rsq.vercel.appBuilding...
+Building...
+[2K[1A[2K[GProduction: https://glasslab-liquid-glass-shader-liquid-glass-shader-mgdrp5rsq.vercel.app [5s]
+Completing...
+Aliased: https://glasslab-liquid-glass-shader-liquid.vercel.app [5s]

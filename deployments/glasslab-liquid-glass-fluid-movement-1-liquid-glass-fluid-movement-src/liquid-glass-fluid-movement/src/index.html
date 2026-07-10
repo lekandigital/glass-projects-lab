@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass</title>
+</head>
+<body>
+    <h1>LIQUID GLASS</h1>
+  <p>
+    El efecto <strong>Liquid Glass</strong> busca recrear la apariencia de un vidrio líquido, suave y fluido, 
+    capaz de distorsionar sutilmente el contenido que se encuentra detrás mientras mantiene una estética moderna 
+    y luminosa. Este texto sirve como demostración para evaluar cómo responde el desplazamiento dinámico, 
+    la aberración cromática y la profundidad especular cuando el usuario mueve o interactúa con un componente 
+    que utiliza filtros avanzados de SVG, como <em>feDisplacementMap</em>, para generar distorsiones realistas. 
+    La intención es observar si las curvas, las sombras y los reflejos acompañan adecuadamente la animación, 
+    especialmente en pantallas de alta densidad y contextos donde el fondo presenta colores vibrantes o 
+    gradientes complejos. Con un párrafo largo se puede analizar si la lectura continúa siendo cómoda, si el 
+    contraste se mantiene estable y si el efecto no interfiere con la percepción del contenido principal. 
+    En experiencias premium, el vidrio líquido no solo debe verse bien, sino sentirse natural, suave y 
+    perfectamente integrado al flujo visual de la interfaz. Este texto extendido también permite revisar cómo 
+    se comportan las capas, las transiciones y las sombras internas, asegurando que el usuario perciba una 
+    sensación de calidad, fluidez y profundidad en todo momento.
+</p>
+    <!-- Botón draggable liquid glass -->
+    <glass-element 
+        id="draggableButton" 
+        width="200" 
+        height="80" 
+        radius="128"
+        autosize
+        depth="3" 
+        blur="1" 
+        strength="20" 
+        zoom="1.2"
+        background-color="transparent" 
+        chromatic-aberration="4"
+        contrast-observer
+        specular-intensity="0.4">
+        <div class="button-content"></div>
+    </glass-element>
+
+    <script src="script.js"></script>
+</body>
+</html>

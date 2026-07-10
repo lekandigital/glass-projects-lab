@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prime Polarity Universe Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font: 12px sans-serif
+        }
+
+        canvas {
+            display: block
+        }
+
+        #ui {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            color: #fff
+        }
+
+        input {
+            width: 100px;
+            vertical-align: middle
+        }
+
+        button {
+            margin: 5px 0
+        }
+
+        #graph {
+            margin-top: 5px;
+            background: rgba(255, 255, 255, .1)
+        }
+    </style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="ui">
+    <canvas height="100" id="graph" width="200"></canvas>
+    <div>
+        <button id="refresh">Refresh</button>
+        <button id="random">Randomize</button>
+    </div>
+</div>
+
+<script>
+    const {PI, cos, sin, sqrt, floor, ceil, max, min, round, random, hypot, log2} = Math;
+    const doc = document;
+    const canvas = doc.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const ui = doc.getElementById('ui');
+    const gx = doc.getElementById('graph').getContext('2d');
+
+    let W, H;
+
+    function resize() {
+        W = canvas.width = innerWidth;
+        H = canvas.height = innerHeight;
+    }
+
+    resize();
+    addEventListener('resize', resize);
+
+    // Pre-rendered glow
+    const glow = doc.createElement('canvas');
+    const gc = glow.getContext('2d');
+    glow.width = glow.height = 128;
+    const grad = gc.createRadialGradient(64, 64, 0, 64, 64, 64);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(.25, 'rgba(255,255,255,.8)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    gc.fillStyle = grad;
+    gc.fillRect(0, 0, 128, 128);
+
+    // Parameters
+    const P = {minDist: 150, maxDist: 400, tempDrag: .5, count: 200, centerF: .005, lineThr: 100, grid: 10};
+    const cfg = {
+        minDist: {name: "Min Dist", min: 0, max: 200},
+        maxDist: {name: "Max Dist", min: 0, max: 2000, init: 1},
+        tempDrag: {name: "Temp Drag", min: 0, max: 70, fmt: v => (v / 100).toFixed(2)},
+        count: {name: "Particles", min: 50, max: 200, step: 10, init: 1},
+        centerF: {name: "Center Force", min: 0, max: .1, step: .001, fmt: v => v.toFixed(3)},
+        lineThr: {name: "Line Thresh", min: 50, max: 200},
+        grid: {name: "Entropy Grid", min: 5, max: 20, step: 1, init: 1}
+    };
+
+    let particles = [], entropy = [], maxEntropy;
+
+    // Build UI
+    Object.keys(cfg).forEach(k => {
+        const c = cfg[k];
+        const val = P[k] * (k === 'tempDrag' ? 100 : 1);
+        ui.insertAdjacentHTML('afterbegin',
+            `<div>${c.name}: <span id="${k}Val">${c.fmt ? c.fmt(val) : val}</span><br>
+        <input type="range" id="${k}" min="${c.min}" max="${c.max}" value="${val}" step="${c.step || 'any'}"></div>`
+        );
+        doc.getElementById(k).oninput = e => {
+            const v = +e.target.value;
+            P[k] = k === 'tempDrag' ? v / 100 : v;
+            doc.getElementById(`${k}Val`).textContent = c.fmt ? c.fmt(v) : v;
+            if (c.init) init();
+        };
+    });
+
+    doc.getElementById('refresh').onclick = init;
+    doc.getElementById('random').onclick = () => {
+        Object.keys(cfg).forEach(k => {
+            const c = cfg[k];
+            let v = c.min + random() * (c.max - c.min);
+            if (c.step) v = round(v / c.step) * c.step;
+
+            P[k] = k === 'tempDrag' ? v / 100 : v;
+            doc.getElementById(`${k}Val`).textContent = c.fmt ? c.fmt(v) : v;
+            doc.getElementById(k).value = v;
+        });
+        init();
+    };
+
+    // Utilities
+    const isPrime = n => {
+        if (n < 2) return false;
+        for (let i = 2; i * i <= n; i++) if (n % i === 0) return false;
+        return true;
+    };
+
+    const gcd = (a, b) => {
+        while (b) [a, b] = [b, a % b];
+        return a;
+    };
+
+    const getColor = (d, prime) => {
+        let r, g, b;
+        if (d < .25) {
+            r = 0;
+            g = floor(400 * d);
+            b = 255;
+        } else if (d < .5) {
+            r = 0;
+            g = 255;
+            b = floor(255 * (2 - 4 * d));
+        } else if (d < .75) {
+            r = floor(255 * (4 * d - 2));
+            g = 255;
+            b = 0;
+        } else if (d < 1) {
+            r = 255;
+            g = floor(255 * (2 - 2 * d));
+            b = 0;
+        } else if (d < 1.5) {
+            r = 255;
+            g = floor(127 * (2 - 2 * d));
+            b = floor(510 * (d - 1));
+        } else {
+            r = 255;
+            g = floor(min(127 + 256 * (d - 1.5), 255));
+            b = 255;
+        }
+
+        if (prime) {
+            r = floor(r * .7 + 76);
+            g = floor(g * .7 + 76);
+            b = floor(b * .7);
+        }
+        return [r, g, b];
+    };
+
+    class Particle {
+        constructor(i) {
+            this.id = i + 1;
+            this.prime = isPrime(this.id);
+
+            // Spiral positioning
+            const g = ceil((1 + sqrt(1 + 24 * this.id)) / 6);
+            const s = (3 * g * g - 7 * g + 6) / 2;
+            const a = ((this.id - s + 1) / (3 * g - 2)) * 2 * PI + random() * .1;
+            const r = g * 30 + random() * 10;
+
+            this.x = W / 2 + r * cos(a);
+            this.y = H / 2 + r * sin(a);
+            this.vx = random() * 2 - 1;
+            this.vy = random() * 2 - 1;
+            this.size = this.prime ? 3 : 1 + random();
+            this.phase = this.prime ? 0 : ((this.id % 9 || 9) * 40);
+            this.density = this.ax = this.ay = this.phaseInf = this.infCount = 0;
+        }
+
+        update() {
+            const target = this.prime ? 90 : 180 + (this.density - 5) * 10;
+            this.phase += (target - this.phase) * .01;
+
+            if (this.infCount > 0) this.phase += (this.phaseInf / this.infCount) * .05;
+            this.phase += (random() - .5) * (this.prime ? .5 : 1);
+            this.phase = (this.phase % 360 + 360) % 360;
+
+            // Center force
+            const dist = hypot(W / 2 - this.x, H / 2 - this.y);
+            if (dist > 0) {
+                this.ax += (W / 2 - this.x) / dist * P.centerF;
+                this.ay += (H / 2 - this.y) / dist * P.centerF;
+            }
+
+            // Update velocity and position
+            const drag = 1 - (.05 + P.tempDrag);
+            this.vx = (this.vx + this.ax) * drag;
+            this.vy = (this.vy + this.ay) * drag;
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // Boundary bounce
+            if (this.x < 0 || this.x > W) {
+                this.vx *= -1;
+                this.x = max(0, min(W, this.x));
+            }
+            if (this.y < 0 || this.y > H) {
+                this.vy *= -1;
+                this.y = max(0, min(H, this.y));
+            }
+        }
+
+        draw() {
+            const d = min(this.density / 15, 2);
+            const [r, g, b] = getColor(d, this.prime);
+            const s = this.size * (1 + d) * (this.prime ? 1.5 : 1);
+
+            ctx.globalCompositeOperation = 'lighter';
+            ctx.fillStyle = `rgb(${r},${g},${b})`;
+            ctx.drawImage(glow, this.x - s, this.y - s, s * 2, s * 2);
+
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, 2 * PI);
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        if (!P.count || P.count < 0) return;
+        particles = Array.from({length: floor(P.count)}, (_, i) => new Particle(i));
+        entropy = [];
+        maxEntropy = log2(P.grid * P.grid);
+    }
+
+    let frame = 0;
+
+    function animate() {
+        ctx.fillStyle = 'rgba(0,0,0,.1)';
+        ctx.fillRect(0, 0, W, H);
+
+        if (!particles.length) {
+            requestAnimationFrame(animate);
+            return;
+        }
+
+        // Reset forces
+        particles.forEach(p => {
+            p.ax = p.ay = p.density = p.phaseInf = p.infCount = 0;
+        });
+
+        // Spatial grid optimization
+        const grid = new Map();
+        const cell = P.maxDist;
+        if (cell <= 0) {
+            requestAnimationFrame(animate);
+            return;
+        }
+
+        particles.forEach(p => {
+            const k = `${floor(p.x / cell)},${floor(p.y / cell)}`;
+            if (!grid.has(k)) grid.set(k, []);
+            grid.get(k).push(p);
+        });
+
+        const minSq = P.minDist * P.minDist;
+        const infSq = minSq * 4;
+        const denSq = minSq * 2.25;
+
+        // Physics interactions
+        particles.forEach(p1 => {
+            const gx = floor(p1.x / cell), gy = floor(p1.y / cell);
+            for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                    const neighbors = grid.get(`${gx + dx},${gy + dy}`);
+                    if (!neighbors) continue;
+
+                    neighbors.forEach(p2 => {
+                        if (p1.id >= p2.id) return;
+
+                        const dx = p1.x - p2.x, dy = p1.y - p2.y;
+                        const distSq = dx * dx + dy * dy;
+                        if (distSq > cell * cell || distSq === 0) return;
+
+                        const dist = sqrt(distSq);
+                        const shared = gcd(p1.id, p2.id) > 1;
+                        const t1 = p1.phase / 180, t2 = p2.phase / 180;
+                        let attr1 = 2 - t1, rep1 = t1, attr2 = 2 - t2, rep2 = t2;
+
+                        if (p1.prime) attr1 *= 1.5;
+                        if (p2.prime) attr2 *= 1.5;
+
+                        // Force calculation
+                        if (distSq < minSq) {
+                            const f = (P.minDist - dist) / P.minDist * .25;
+                            const f1 = f * rep1 * (shared ? .5 : 1) * (p1.prime && p2.prime ? .3 : 1);
+                            const f2 = f * rep2 * (shared ? .5 : 1) * (p1.prime && p2.prime ? .3 : 1);
+                            p1.ax += (dx / dist) * f1;
+                            p1.ay += (dy / dist) * f1;
+                            p2.ax -= (dx / dist) * f2;
+                            p2.ay -= (dy / dist) * f2;
+                        } else {
+                            const f = (dist - P.minDist) / P.maxDist * .25;
+                            const f1 = f * attr1 * (shared ? 1.5 : 1) * (p1.prime || p2.prime ? 1.2 : 1);
+                            const f2 = f * attr2 * (shared ? 1.5 : 1) * (p1.prime || p2.prime ? 1.2 : 1);
+                            p1.ax -= (dx / dist) * f1;
+                            p1.ay -= (dy / dist) * f1;
+                            p2.ax += (dx / dist) * f2;
+                            p2.ay += (dy / dist) * f2;
+                        }
+
+                        // Density
+                        if (distSq < denSq) {
+                            const w = 1 - sqrt(distSq / denSq);
+                            const e = (shared || (p1.prime && p2.prime)) ? 1.5 : 1;
+                            p1.density += w * e;
+                            p2.density += w * e;
+                        }
+
+                        // Phase influence
+                        if (distSq < infSq) {
+                            const w = 1 - sqrt(distSq / infSq);
+                            let pd = p2.phase - p1.phase;
+                            pd -= round(pd / 360) * 360;
+                            p1.phaseInf += pd * w;
+                            p2.phaseInf -= pd * w;
+                            p1.infCount += w;
+                            p2.infCount += w;
+                        }
+
+                        // Line rendering
+                        if (dist < P.lineThr) {
+                            const [r1, g1, b1] = getColor(min(p1.density / 15, 2), p1.prime);
+                            const [r2, g2, b2] = getColor(min(p2.density / 15, 2), p2.prime);
+                            const o = (.05 + min(p1.density + p2.density) / 15 * .2) *
+                                (1 - dist / P.lineThr) * (shared ? 1.5 : 1);
+                            const grad = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
+                            grad.addColorStop(0, `rgba(${r1},${g1},${b1},${o})`);
+                            grad.addColorStop(1, `rgba(${r2},${g2},${b2},${o})`);
+                            ctx.strokeStyle = grad;
+                            ctx.lineWidth = (shared || (p1.prime && p2.prime)) ? 2 : 1;
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    });
+                }
+            }
+        });
+
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+
+        // Entropy calculation
+        if (frame++ % 10 === 0) {
+            const gc = floor(P.grid);
+            const counts = new Array(gc * gc).fill(0);
+            const cw = W / gc, ch = H / gc;
+
+            particles.forEach(p => {
+                const i = floor(p.x / cw), j = floor(p.y / ch);
+                if (i >= 0 && i < gc && j >= 0 && j < gc) counts[i + j * gc]++;
+            });
+
+            let E = 0;
+            counts.forEach(c => {
+                if (c > 0) {
+                    const p = c / P.count;
+                    E -= p * log2(p);
+                }
+            });
+
+            if (isFinite(E)) {
+                entropy.push(E);
+                if (entropy.length > 50) entropy.shift();
+            }
+
+            // Draw entropy graph
+            gx.fillStyle = 'rgba(0,0,0,.5)';
+            gx.fillRect(0, 0, 200, 100);
+            gx.strokeStyle = '#0f0';
+            gx.beginPath();
+            entropy.forEach((e, i) => gx.lineTo(i * 4, 100 - (e / maxEntropy) * 100));
+            gx.stroke();
+            gx.fillStyle = '#fff';
+            gx.font = '10px sans-serif';
+            gx.fillText('Entropy', 5, 15);
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+</script>
+</body>
+</html>

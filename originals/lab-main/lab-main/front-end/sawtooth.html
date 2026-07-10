@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sawtooth</title>
+
+    <style>
+        body {
+            background: rgb(75, 85, 95);
+            display: flex;
+            overflow: hidden;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/2.0.5/p5.min.js"></script>
+<script>
+    //Mathober Day 21 2025
+    //#mathober #mathober2025
+
+    let t = 0;
+    let n = 25;
+    let rs;
+    let domain;
+
+    function setup() {
+        domain = [-2 * PI, 2 * PI];
+        createCanvas(500, 500);
+        background(255);
+        describe(
+            "arcs of sawtooth and scribbly curves drawn on radial graph paper with larger arcs at the edges and smaller towards the center. The sketch is staticky and with greys and whites. "
+        );
+        rectMode(CENTER);
+        strokeWeight(0.5);
+        strokeCap(SQUARE);
+        rs = [];
+        t = random(-10, 10);
+        r1 = random([3, 5, 6, 10]);
+        r2 = r1 + 1;
+        r3 = random([-2, -3, -4]);
+        r4 = random([-1, -5, -6]);
+        for (let i = 0; i < 30; i++) {
+            rs[i] = random([-6, -7, -8, -10, 8, 7, 6, 10]);
+        }
+    }
+
+    function draw() {
+        background(245, 250, 255, 20);
+        translate(width / 2, height / 2);
+        stroke(100, 110, 120, 10);
+        drawGrid();
+        t += 0.002;
+        noFill();
+        stroke(80, 90, 100);
+        for (let j = 0; j < 35; j++) {
+            stroke(j * 5 + 20, j * 5 + 30, j * 5 + 40, 20);
+            strokeWeight(abs(rs[j]));
+            push();
+            r = (width / 25) * 15 - (j * (width / 25)) / 2;
+            beginShape();
+            cnt = 0;
+            for (let i = domain[0]; i < domain[1]; i += 0.5) {
+                cnt++;
+                if (cnt % 2 === 0) {
+                    vertex(
+                        r * cos(i / rs[j + 1] + t / rs[j] + j * 2),
+                        r * sin(i / rs[j + 1] + t / rs[j] + j * 2)
+                    );
+                } else {
+                    vertex(
+                        r * cos(i / rs[j] + t / rs[j] + j * 2) * 0.95,
+                        r * sin(i / rs[j] + t / rs[j] + j * 2) * 0.95
+                    );
+                }
+            }
+            endShape();
+            pop();
+        }
+        if (frameCount % 500 == 0) {
+            r1 = random([1, 2, 4, 5]);
+            r2 = random([3, 3, 6, 7]);
+            r3 = random([-2, -3, -4]);
+            r4 = random([-1, -5, -6]);
+        }
+
+        strokeWeight(1);
+        noFill();
+        stroke(100, 110, 120, 30);
+        rect(0, 0, width / 1.02, width / 1.02);
+        rect(0, 0, width / 1.04, width / 1.04);
+    }
+
+    function drawGrid() {
+        for (let i = 0; i < n; i++) {
+            rotate((2 * PI) / n);
+            line(-width / 1.5, 0, width / 1.5, 0);
+            circle(0, 0, (width / n) * 2 * i);
+        }
+        noStroke();
+        for (let i = 0; i < 500; i++) {
+            x = random(-width / 2, width / 2);
+            y = random(-width / 2, width / 2);
+            fill(245, 250, 255, 150);
+            circle(x, y, 2);
+        }
+    }
+
+    function mousePressed() {
+        setup();
+        draw();
+    }
+
+</script>
+</body>
+</html>

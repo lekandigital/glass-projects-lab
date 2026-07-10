@@ -1,0 +1,30 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src --name glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src/Acof6PhbQtJvSxbV8TMHjYV8zPB7 [1s]
+Production: https://glasslab-liquid-glass-fluid-movement-1-liquid-glass-jf5b0j1ot.vercel.app [1s]
+https://glasslab-liquid-glass-fluid-movement-1-liquid-glass-jf5b0j1ot.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 5 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+Building: Build Completed in /vercel/output [26ms]
+Building: Deploying outputs...
+[2K[1A[2K[GProduction: https://glasslab-liquid-glass-fluid-movement-1-liquid-glass-jf5b0j1ot.vercel.app [5s]
+Completing...
+Aliased: https://glasslab-liquid-glass-fluid-movemen.vercel.app [5s]

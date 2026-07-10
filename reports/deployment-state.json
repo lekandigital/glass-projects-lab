@@ -1,0 +1,492 @@
+{
+  "glasslab-glassmorphism-main-glassmorphism-main": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-glassmorphism-main-glassmo.vercel.app",
+    "verify_url": "https://glasslab-glassmorphism-main-glassmo.vercel.app/glassmorphism-main"
+  },
+  "glasslab-glass-refraction-master-1-glass-refraction-master": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-glass-refraction-master-1.vercel.app",
+    "verify_url": "https://glasslab-glass-refraction-master-1.vercel.app/glass-refraction-master"
+  },
+  "glasslab-glass-refraction-master-1-glass-refraction-master-examples-vanilla": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-glass-refraction-master-1-amber.vercel.app",
+    "verify_url": "https://glasslab-glass-refraction-master-1-amber.vercel.app/glass-refraction-master/examples/vanilla"
+  },
+  "glasslab-css-glass-main-css-glass-main": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-css-glass-main-css-glass-m.vercel.app",
+    "verify_url": "https://glasslab-css-glass-main-css-glass-m.vercel.app/css.glass-main"
+  },
+  "glasslab-slider-button-liquid-glass-apple-ios-262025-slider-button-liquid-glass-apple-ios-262025-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-slider-button-liquid-glass.vercel.app",
+    "verify_url": "https://glasslab-slider-button-liquid-glass.vercel.app/slider-button-liquid-glass-apple-ios-262025/src"
+  },
+  "glasslab-glass-model-1-glass-model-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-glass-model-1-glass-model.vercel.app",
+    "verify_url": "https://glasslab-glass-model-1-glass-model.vercel.app/glass-model/src"
+  },
+  "glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-cross-browser-liquid-toggl.vercel.app",
+    "verify_url": "https://glasslab-cross-browser-liquid-toggl.vercel.app/cross-browser-liquid-toggle-drag-tap/src"
+  },
+  "glasslab-liquid-glass-effect-wwdc25-liquid-glass-effect-wwdc25-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-glass-effect-wwdc25.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-effect-wwdc25.vercel.app/liquid-glass-effect-wwdc25/src"
+  },
+  "glasslab-7-css-main-7-css-main": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-7-css-main-7-css-main.vercel.app",
+    "verify_url": "https://glasslab-7-css-main-7-css-main.vercel.app/7.css-main"
+  },
+  "glasslab-liquid-glass-main-liquid-glass-main": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/liquid-glass-main"
+  },
+  "glasslab-7-aero-stylesheet-main-7-aero-stylesheet-main": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-7-aero-stylesheet-main-7-a.vercel.app",
+    "verify_url": "https://glasslab-7-aero-stylesheet-main-7-a.vercel.app/7-Aero-Stylesheet-main"
+  },
+  "glasslab-glass-button-css-only-1-glass-button-css-only-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-glass-button-css-only-1-gl.vercel.app",
+    "verify_url": "https://glasslab-glass-button-css-only-1-gl.vercel.app/glass-button-css-only/src"
+  },
+  "glasslab-pure-css-ios-26-liquid-glass-effect-pure-css-ios-26-liquid-glass-effect-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-pure-css-ios-26-liquid-gla.vercel.app",
+    "verify_url": "https://glasslab-pure-css-ios-26-liquid-gla.vercel.app/pure-css-ios-26-liquid-glass-effect/src"
+  },
+  "glasslab-apple-liquid-glass-from-lucasromerodb-liquid-glass-effect-macos-apple-liquid-glass-from-lucasromerodb-liquid-glass-effect-macos-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-apple-liquid-glass-from-lu.vercel.app",
+    "verify_url": "https://glasslab-apple-liquid-glass-from-lu.vercel.app/apple-liquid-glass-from-lucasromerodb-liquid-glass-effect-macos/src"
+  },
+  "glasslab-liquid-glass-scroll-drag-configure-chromium-liquid-glass-scroll-drag-configure-chromium-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-scroll-drag-c.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-scroll-drag-c.vercel.app/liquid-glass-scroll-drag-configure-chromium/src"
+  },
+  "glasslab-liquidgl-main-liquidgl-main": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquidgl-main-liquidgl-mai.vercel.app",
+    "verify_url": "https://glasslab-liquidgl-main-liquidgl-mai.vercel.app/liquidGL-main"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-tictactoe-vanilla": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "deployment-failed",
+    "prod_url": "https://glasslab-frontend-projects-main-fro.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro.vercel.app/Frontend-Projects-main/tictactoe (vanilla)"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-css-if-function": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-nine.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-nine.vercel.app/Frontend-Projects-main/css-if-function"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-tau.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-tau.vercel.app/Frontend-Projects-main/weeklyhow-custom-storefront"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-tictactoe": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-cyan.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-cyan.vercel.app/Frontend-Projects-main/tictactoe"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-tictactoe-public": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-eight.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-eight.vercel.app/Frontend-Projects-main/tictactoe/public"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-prime-vue-project": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/Frontend-Projects-main/prime-vue-project"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-vuetify-project": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/Frontend-Projects-main/vuetify-project"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-instantsearch": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-two.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-two.vercel.app/Frontend-Projects-main/weeklyhow-instantsearch"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-task-manager-app": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-theta.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-theta.vercel.app/Frontend-Projects-main/task-manager-app"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-task-manager-app-client": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-blue.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-blue.vercel.app/Frontend-Projects-main/task-manager-app/client"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-task-manager-app-client-public": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-alpha.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-alpha.vercel.app/Frontend-Projects-main/task-manager-app/client/public"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-liquid-glass-vue": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-lilac.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-lilac.vercel.app/Frontend-Projects-main/liquid-glass-vue"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-advanced-javascript-class-word-guess-game-app": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-sigma.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-sigma.vercel.app/Frontend-Projects-main/advanced-javascript-class/word-guess-game/app"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-advanced-javascript-class-word-guess-game-app-public": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-sigma.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-sigma.vercel.app/Frontend-Projects-main/advanced-javascript-class/word-guess-game/app/public"
+  },
+  "glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-frontend-projects-main-fro-six.vercel.app",
+    "verify_url": "https://glasslab-frontend-projects-main-fro-six.vercel.app/Frontend-Projects-main/movie-instantsearch"
+  },
+  "glasslab-liquid-glass-effect-liquid-glass-effect-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-effect-liquid.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-effect-liquid.vercel.app/liquid-glass-effect/src"
+  },
+  "glasslab-liquid-glass-menu-liquid-glass-menu-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-menu-liquid-g.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-menu-liquid-g.vercel.app/liquid-glass-menu/src"
+  },
+  "glasslab-press-starthot-wheels-aerial-pursuit-liquid-glass-navigation-press-starthot-wheels-aerial-pursuit-liquid-glass-navigation-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-press-starthot-wheels-aeri.vercel.app",
+    "verify_url": "https://glasslab-press-starthot-wheels-aeri.vercel.app/press-starthot-wheels-aerial-pursuit-liquid-glass-navigation/src"
+  },
+  "glasslab-glass-like-css-1-glass-like-css-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-glass-like-css-1-glass-lik.vercel.app",
+    "verify_url": "https://glasslab-glass-like-css-1-glass-lik.vercel.app/glass-like-css/src"
+  },
+  "glasslab-liquid-glass-cubiq-liquid-glass-cubiq-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-cubiq-liquid.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-cubiq-liquid.vercel.app/liquid-glass-cubiq/src"
+  },
+  "glasslab-svg-liquid-glass-1-svg-liquid-glass-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-svg-liquid-glass-1-svg-liq.vercel.app",
+    "verify_url": "https://glasslab-svg-liquid-glass-1-svg-liq.vercel.app/svg-liquid-glass/src"
+  },
+  "glasslab-liquid-glass-6-liquid-glass-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-6-liquid-glas.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-6-liquid-glas.vercel.app/liquid-glass/src"
+  },
+  "glasslab-ios-liquid-glass-ios-liquid-glass-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-ios-liquid-glass-ios-liqui.vercel.app",
+    "verify_url": "https://glasslab-ios-liquid-glass-ios-liqui.vercel.app/ios-liquid-glass/src"
+  },
+  "glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-apple-liquid-glass-ui-2025.vercel.app",
+    "verify_url": "https://glasslab-apple-liquid-glass-ui-2025.vercel.app/apple-liquid-glass-ui-2025/src"
+  },
+  "glasslab-pure-css-glassmorphism-liquid-glass-ui-kit-1-pure-css-glassmorphism-liquid-glass-ui-kit-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-pure-css-glassmorphism-liq.vercel.app",
+    "verify_url": "https://glasslab-pure-css-glassmorphism-liq.vercel.app/pure-css-glassmorphism-liquid-glass-ui-kit/src"
+  },
+  "glasslab-select-dropdown-with-appearance-base-select-liquid-glass-1-select-dropdown-with-appearance-base-select-liquid-glass-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-select-dropdown-with-appea.vercel.app",
+    "verify_url": "https://glasslab-select-dropdown-with-appea.vercel.app/select-dropdown-with-appearance-base-select-liquid-glass/src"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid.vercel.app/liquid-dom-master"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-demo-three-react": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-theta.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-theta.vercel.app/liquid-dom-master/demo/three-react"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-demo-minimal": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-ten.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-ten.vercel.app/liquid-dom-master/demo/minimal"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-demo-three": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-orcin.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-orcin.vercel.app/liquid-dom-master/demo/three"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-demo-three-layout": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-xi.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-xi.vercel.app/liquid-dom-master/demo/three-layout"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-demo-showcase": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-amber.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-amber.vercel.app/liquid-dom-master/demo/showcase"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-demo-three-r3f": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-alpha.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-alpha.vercel.app/liquid-dom-master/demo/three-r3f"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-demo-blending": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-nine.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-nine.vercel.app/liquid-dom-master/demo/blending"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-packages-core": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-chi.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-chi.vercel.app/liquid-dom-master/packages/core"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-packages-layout": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-two.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-two.vercel.app/liquid-dom-master/packages/layout"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-packages-layout-playground": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-six.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-six.vercel.app/liquid-dom-master/packages/layout/playground"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-packages-r3f": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-tau.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-tau.vercel.app/liquid-dom-master/packages/r3f"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-packages-three": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-eight.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-eight.vercel.app/liquid-dom-master/packages/three"
+  },
+  "glasslab-liquid-dom-master-1-liquid-dom-master-packages-react": {
+    "local_build": "non-runnable-monorepo",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-liquid-dom-master-1-liquid-jet.vercel.app",
+    "verify_url": "https://glasslab-liquid-dom-master-1-liquid-jet.vercel.app/liquid-dom-master/packages/react"
+  },
+  "glasslab-untitled-6-untitled-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-untitled-6-untitled-src.vercel.app",
+    "verify_url": "https://glasslab-untitled-6-untitled-src.vercel.app/untitled/src"
+  },
+  "glasslab-liquid-glass-js-main-liquid-glass-js-main": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-glass-js-main-liqui.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-js-main-liqui.vercel.app/liquid-glass-js-main"
+  },
+  "glasslab-liquid-glass-components-1-liquid-glass-components-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-components-1.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-components-1.vercel.app/liquid-glass-components/src"
+  },
+  "glasslab-liquid-glass-tainwildcss-1-liquid-glass-tainwildcss-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-tainwildcss-1.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-tainwildcss-1.vercel.app/liquid-glass-tainwildcss/src"
+  },
+  "glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified",
+    "prod_url": "https://glasslab-liquid-glass-fluid-movemen.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-fluid-movemen.vercel.app/liquid-glass-fluid-movement/src"
+  },
+  "glasslab-liquid-glass-react-master-liquid-glass-react-master": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-liquid-glass-react-master-theta.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-react-master-theta.vercel.app/liquid-glass-react-master"
+  },
+  "glasslab-liquid-glass-react-master-liquid-glass-react-master-liquid-glass-example": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "http-404",
+    "prod_url": "https://glasslab-liquid-glass-react-master.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-react-master.vercel.app/liquid-glass-react-master/liquid-glass-example"
+  },
+  "glasslab-apple-liquid-glass-1-apple-liquid-glass-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-apple-liquid-glass-1-apple.vercel.app",
+    "verify_url": "https://glasslab-apple-liquid-glass-1-apple.vercel.app/apple-liquid-glass/src"
+  },
+  "glasslab-liquid-glass-shader-liquid-glass-shader-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-shader-liquid.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-shader-liquid.vercel.app/liquid-glass-shader/src"
+  },
+  "glasslab-liquid-glass-5-liquid-glass-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-5-liquid-glas.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-5-liquid-glas.vercel.app/liquid-glass/src"
+  },
+  "glasslab-liquid-glass-2-liquid-glass-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-2-liquid-glas.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-2-liquid-glas.vercel.app/liquid-glass/src"
+  },
+  "glasslab-liquid-glass-switcher-css-1-liquid-glass-switcher-css-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-switcher-css.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-switcher-css.vercel.app/liquid-glass-switcher-css/src"
+  },
+  "glasslab-liquid-glass-4-liquid-glass-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-liquid-glass-4-liquid-glas.vercel.app",
+    "verify_url": "https://glasslab-liquid-glass-4-liquid-glas.vercel.app/liquid-glass/src"
+  },
+  "glasslab-apple-liquid-glass-experiments-1-apple-liquid-glass-experiments-src": {
+    "local_build": "success",
+    "remote_deploy": "success",
+    "verification": "verified-with-warnings",
+    "prod_url": "https://glasslab-apple-liquid-glass-experim.vercel.app",
+    "verify_url": "https://glasslab-apple-liquid-glass-experim.vercel.app/apple-liquid-glass-experiments/src"
+  }
+}

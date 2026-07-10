@@ -1,0 +1,23 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-main-liquid-glass-main
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-main-liquid-glass-main
+----------------------------------------
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-liquid-glass-main-liquid-glass-main (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-liquid-glass-main-liquid-glass-main
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-liquid-glass-main-liquid-glass-main/E2SPj7xDQ6dPAXxHmHqiyQSvEXEx [956ms]
+Production: https://glasslab-liquid-glass-main-liquid-glass-main-3um6tudke.vercel.app [956ms]
+https://glasslab-liquid-glass-main-liquid-glass-main-3um6tudke.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+[2K[1A[2K[GProduction: https://glasslab-liquid-glass-main-liquid-glass-main-3um6tudke.vercel.app [4s]
+Completing...
+Aliased: https://glasslab-liquid-glass-main-liquid-g.vercel.app [5s]

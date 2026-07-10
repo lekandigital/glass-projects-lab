@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesmerizing Dots</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            background-color: #333;
+        }
+
+        body {
+            height: 100%;
+            font-family: "Montserrat", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0px;
+            color: #fff;
+        }
+
+        .shadows {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            grid-gap: 15px;
+            font-size: 4vw;
+            width: 90vw;
+        }
+
+        .shadows span {
+            display: block;
+            aspect-ratio: 1/1;
+            position: relative;
+        }
+
+        .shadows span:before {
+            animation-name: anim;
+            animation-iteration-count: infinite;
+            animation-duration: 3s;
+            content: " ";
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 3px;
+        }
+
+        .shadows span:nth-child(10n + 1):before:before {
+            animation-delay: -0.3s;
+        }
+
+        .shadows span:nth-child(10n + 2):before {
+            animation-delay: -0.6s;
+        }
+
+        .shadows span:nth-child(10n + 3):before {
+            animation-delay: -0.9s;
+        }
+
+        .shadows span:nth-child(10n + 4):before {
+            animation-delay: -1.2s;
+        }
+
+        .shadows span:nth-child(10n + 5):before {
+            animation-delay: -1.5s;
+        }
+
+        .shadows span:nth-child(10n + 6):before {
+            animation-delay: -1.8s;
+        }
+
+        .shadows span:nth-child(10n + 7):before {
+            animation-delay: -2.1s;
+        }
+
+        .shadows span:nth-child(10n + 8):before {
+            animation-delay: -2.4s;
+        }
+
+        .shadows span:nth-child(10n + 9):before {
+            animation-delay: -2.7s;
+        }
+
+        .shadows span:nth-child(10n):before {
+            animation-delay: -3s;
+        }
+
+        @keyframes anim {
+            0% {
+                margin-top: -10px;
+                box-shadow: 0px 40px 10px #000;
+            }
+            50% {
+                margin-top: 0px;
+                box-shadow: 0px 0px 1px #000;
+            }
+            100% {
+                margin-top: -10px;
+                box-shadow: 0px 40px 10px #000;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="shadows">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+<div style="position:fixed; bottom:10px; right:10px; color:#888">tuannm.com
+    <div>
+</body>
+</html>

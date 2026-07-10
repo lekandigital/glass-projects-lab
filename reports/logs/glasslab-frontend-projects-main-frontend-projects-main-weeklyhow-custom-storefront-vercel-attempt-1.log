@@ -1,0 +1,25 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront
+----------------------------------------
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront
+Uploading [--------------------] (0.0B/2.3MB)
+Uploading [=====---------------] (596.7KB/2.3MB)
+Uploading [==========----------] (1.2MB/2.3MB)
+Uploading [===============-----] (1.7MB/2.3MB)
+Uploading [====================] (2.3MB/2.3MB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront/2DSJU7cKBQ77srxnXuv2TbxQspiq [3s]
+Production: https://glasslab-frontend-projects-main-frontend-projects-ooxhvp48q.vercel.app [3s]
+https://glasslab-frontend-projects-main-frontend-projects-ooxhvp48q.vercel.appBuilding...
+Building...
+[2K[1A[2K[GProduction: https://glasslab-frontend-projects-main-frontend-projects-ooxhvp48q.vercel.app [9s]
+Completing...
+Aliased: https://glasslab-frontend-projects-main-fro-tau.vercel.app [9s]

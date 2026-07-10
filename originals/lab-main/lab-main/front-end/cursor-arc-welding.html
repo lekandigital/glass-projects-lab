@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cursor Arc Welding</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            background: #0b0f14;
+        }
+
+        wrap {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: crosshair;
+        }
+
+        .hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font: 12px/1.3 system-ui, Segoe UI, Roboto, Arial;
+            color: #cfe8ff;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 8px 10px;
+            border-radius: 8px;
+        }
+
+        code {
+            color: #9cf;
+        }
+
+    </style>
+</head>
+<body>
+<wrap>
+    <canvas id="fx"></canvas>
+    <div class="hud">
+        API: <code>const weld = new ArcWeldEffect(canvas[, options])</code><br/>
+        Méthodes: <code>start()</code> · <code>stop()</code> · <code>destroy()</code> ·
+        <code>setOptions()</code>
+    </div>
+</wrap>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const canvas = document.getElementById("fx");
+        const weld = new ArcWeldEffect(canvas, {
+            baseIntensity: 0.08,
+            speedGain: 1.0,
+            clickBoost: 1.6,
+            glowRadius: 90,
+            sparkCount: 500,
+            color: [0.81, 0.93, 1.0],
+            noiseSeed: 4025
+        });
+        weld.start();
+        // quick smoke tests
+        window.addEventListener("blur", () => weld.setOptions({
+            baseIntensity: 0.02
+        }));
+        window.addEventListener("focus", () =>
+            weld.setOptions({
+                baseIntensity: 0.08
+            })
+        );
+        window.addEventListener("resize", () => {
+            /* handled internally by ResizeObserver */
+        });
+    })
+</script>
+
+<script>
+    class ArcWeldEffect {
+        constructor(target, options = {}) {
+            // Public options (with defaults)
+            this.opts = {
+                baseIntensity: 0.08,
+                speedGain: 0.9,
+                clickBoost: 1.2,
+                glowRadius: 80,
+                sparkCount: 400,
+                color: [0.85, 0.95, 1.0], // electric white-blue
+                noiseSeed: 1337,
+                ...options
+            };
+
+            // Resolve canvas or container
+            this._externalCanvas = false;
+            if (target instanceof HTMLCanvasElement) {
+                this.canvas = target;
+                this._externalCanvas = true;
+            } else {
+                this.canvas = document.createElement("canvas");
+                (target || document.body).appendChild(this.canvas);
+            }
+
+            // Pointer state
+            this.pointer = {
+                x: 0,
+                y: 0,
+                y2: 0,
+                px: 0,
+                py: 0,
+                speed: 0,
+                down: false,
+                inside: false
+            };
+
+            this._running = false;
+            this._raf = null;
+            this._lastT = 0;
+            this._flashT = 0; // short flash when click pressed
+
+            // DPR / resize
+            this._resizeObserver = null;
+
+            // Try WebGL, else Canvas2D fallback
+            this.gl = this.canvas.getContext("webgl", {
+                premultipliedAlpha: false,
+                alpha: true,
+                antialias: false,
+                depth: false,
+                stencil: false
+            });
+            if (this.gl) {
+                this._initGL();
+            } else {
+                this._init2D();
+            }
+
+            // Events
+            this._bindEvents();
+            this._resize();
+        }
+
+        // --- Public API ---
+        start() {
+            if (this._running) return this;
+            this._running = true;
+            this._lastT = performance.now();
+            const loop = (t) => {
+                if (!this._running) return;
+                const dt = Math.min(0.05, Math.max(0, (t - this._lastT) / 1000));
+                this._lastT = t;
+                this._update(dt);
+                this._draw(t / 1000);
+                this._raf = requestAnimationFrame(loop);
+            };
+            this._raf = requestAnimationFrame(loop);
+            return this;
+        }
+
+        stop() {
+            this._running = false;
+            if (this._raf) cancelAnimationFrame(this._raf);
+            this._raf = null;
+            return this;
+        }
+
+        destroy() {
+            this.stop();
+            this._unbindEvents();
+
+            if (this.gl) {
+                const gl = this.gl;
+                // Cleanup GL resources
+                [this._progPoints, this._progGlow, this._vaoExt].forEach(() => {
+                }); // placeholders
+                if (this._bufPoints) gl.deleteBuffer(this._bufPoints);
+                if (this._progPoints) gl.deleteProgram(this._progPoints);
+                if (this._progGlow) gl.deleteProgram(this._progGlow);
+                if (!this._externalCanvas && this.canvas.parentNode)
+                    this.canvas.parentNode.removeChild(this.canvas);
+                // Lose context if possible
+                const extLose = gl.getExtension("WEBGL_lose_context");
+                if (extLose) extLose.loseContext();
+            } else if (this.ctx2d) {
+                if (!this._externalCanvas && this.canvas.parentNode)
+                    this.canvas.parentNode.removeChild(this.canvas);
+            }
+            return null;
+        }
+
+        setOptions(partial) {
+            Object.assign(this.opts, partial || {});
+            // Resize-dependent things
+            if (this.gl) this._syncUniformsStatic();
+            return this;
+        }
+
+        // --- Internals ---
+        _bindEvents() {
+            // PointerEvents
+            const c = this.canvas;
+            this._onPointerMove = (e) => {
+                const rect = c.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const y2 = rect.bottom - e.clientY;
+                const dx = x - this.pointer.x;
+                const dy = y - this.pointer.y;
+                const sp = Math.hypot(dx, dy);
+                this.pointer.px = this.pointer.x;
+                this.pointer.py = this.pointer.y;
+                this.pointer.py2 = this.pointer.y2;
+                this.pointer.x = x;
+                this.pointer.y = y;
+                this.pointer.y2 = y2;
+                // speed in px per frame -> convert to per second scale via dt later; rough immediate smoothing here
+                this.pointer.speed = sp;
+            };
+            this._onPointerEnter = () => {
+                this.pointer.inside = true;
+            };
+            this._onPointerLeave = () => {
+                this.pointer.inside = false;
+            };
+            this._onPointerDown = () => {
+                this.pointer.down = true;
+                this._flashT = 0.08; // quick flash window
+            };
+            this._onPointerUp = () => {
+                this.pointer.down = false;
+            };
+
+            c.addEventListener("pointermove", this._onPointerMove);
+            c.addEventListener("pointerenter", this._onPointerEnter);
+            c.addEventListener("pointerleave", this._onPointerLeave);
+            c.addEventListener("pointerdown", this._onPointerDown);
+            window.addEventListener("pointerup", this._onPointerUp);
+
+            // Resize observer
+            this._resizeObserver = new ResizeObserver(() => this._resize());
+            this._resizeObserver.observe(this.canvas);
+            window.addEventListener("orientationchange", this._resize, {passive: true});
+            window.addEventListener("resize", this._resize, {passive: true});
+            document.addEventListener("visibilitychange", () => {
+                if (document.hidden) this.pointer.speed = 0; // avoid spikes after tab switch
+            });
+        }
+
+        _unbindEvents() {
+            const c = this.canvas;
+            if (this._onPointerMove)
+                c.removeEventListener("pointermove", this._onPointerMove);
+            if (this._onPointerEnter)
+                c.removeEventListener("pointerenter", this._onPointerEnter);
+            if (this._onPointerLeave)
+                c.removeEventListener("pointerleave", this._onPointerLeave);
+            if (this._onPointerDown)
+                c.removeEventListener("pointerdown", this._onPointerDown);
+            window.removeEventListener("pointerup", this._onPointerUp);
+            if (this._resizeObserver) this._resizeObserver.disconnect();
+            window.removeEventListener("orientationchange", this._resize);
+            window.removeEventListener("resize", this._resize);
+        }
+
+        _resize = () => {
+            const dpr = Math.max(1, Math.min(2.5, window.devicePixelRatio || 1));
+            this._dpr = dpr;
+            const rect = this.canvas.getBoundingClientRect();
+            const w = Math.max(2, Math.floor(rect.width * dpr));
+            const h = Math.max(2, Math.floor(rect.height * dpr));
+            if (this.canvas.width !== w || this.canvas.height !== h) {
+                this.canvas.width = w;
+                this.canvas.height = h;
+                if (this.gl) {
+                    this.gl.viewport(0, 0, w, h);
+                    this._syncUniformsStatic();
+                }
+            }
+        };
+
+        _intensity(dt) {
+            const speed =
+                (this.pointer.speed * (this._dpr || 1)) / Math.max(1e-3, dt * 60); // normalize to ~per-frame speed
+            const base = this.opts.baseIntensity;
+            const sGain = this.opts.speedGain;
+            const cBoost = this.pointer.down ? this.opts.clickBoost : 0;
+            const dynamic = base + sGain * (speed / 40);
+            let I = Math.min(2.5, dynamic + cBoost);
+            if (!this.pointer.inside) I *= 0.2; // outside canvas -> faint idle
+            if (this._flashT > 0) I += 1.5; // short flash
+            return I;
+        }
+
+        // ---- WebGL path ----
+        _initGL() {
+            const gl = this.gl;
+            // Blending for additive glow/particles
+            gl.enable(gl.BLEND);
+            gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+
+            // Programs
+            this._progPoints = this._createProgram(
+                // Vertex: project px coords into clip; gl_PointSize from attribute * uPointScale
+                `attribute vec2 aPos;\n\nattribute float aSize;\nattribute float aLife;\n\nuniform vec2 uResolution;\nuniform float uPointScale;\nuniform float uTime;\n\nvarying float vLife;\n\nvoid main(){\n  vec2 pos = aPos;\n  // Convert to clip space
+  vec2 z = (pos / uResolution) * 2.0 - 1.0;\n  z.y = -z.y;\n  gl_Position = vec4(z, 0.0, 1.0);\n  gl_PointSize = max(1.0, aSize * uPointScale);\n  vLife = aLife;\n}`,
+                // Fragment: circular falloff, blue-white core, fade with life
+                `precision mediump float;\n\nvarying float vLife;\nuniform vec3 uColor;\n\nfloat smoothCircle(vec2 p){\n  float r = length(p - 0.5);\n  float m = smoothstep(0.5, 0.0, r);\n  return m;\n}\n\nvoid main(){\n  float m = smoothCircle(gl_PointCoord);\n  // hotter core
+  float core = pow(m, 4.0);\n  vec3 c = mix(uColor*0.6, vec3(1.0), core);
+  float alpha = m * (0.2 + 0.8 * vLife);
+  gl_FragColor = vec4(c, alpha);
+}`
+            );
+
+            this._locP = {
+                aPos: gl.getAttribLocation(this._progPoints, "aPos"),
+                aSize: gl.getAttribLocation(this._progPoints, "aSize"),
+                aLife: gl.getAttribLocation(this._progPoints, "aLife"),
+                uResolution: gl.getUniformLocation(this._progPoints, "uResolution"),
+                uPointScale: gl.getUniformLocation(this._progPoints, "uPointScale"),
+                uTime: gl.getUniformLocation(this._progPoints, "uTime"),
+                uColor: gl.getUniformLocation(this._progPoints, "uColor")
+            };
+
+            this._progGlow = this._createProgram(
+                // Fullscreen triangle
+                `attribute vec2 aXY;\n\nvoid main(){\n  gl_Position = vec4(aXY, 0.0, 1.0);\n}`,
+                // Radial glow with flicker (hash noise)
+                `precision mediump float;\n\nuniform vec2 uCursor;\nuniform vec2 uResolution;\nuniform float uRadius;\nuniform float uIntensity;\nuniform float uTime;\nuniform float uSeed;\nuniform vec3 uColor;\n\n// hash-based pseudo-random
+float hash(vec2 p){
+  p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
+  return fract(sin(p.x+p.y)*43758.5453);
+}
+
+void main(){\n  vec2 uv = gl_FragCoord.xy;\n  float d = distance(uv, uCursor);\n  float r = max(1.0, uRadius);\n  float g = exp(- (d*d) / (2.0*r*r)); // gaussian-like
+  // subtle flicker
+  float n = hash(uv * (0.035 + 0.015 * uIntensity) + uSeed + floor(uTime*60.0));
+  float flick = 0.85 + 0.3*(n-0.5);
+  float a = g * uIntensity * 0.9 * flick;
+  gl_FragColor = vec4(uColor, a);
+}`
+            );
+
+            this._locG = {
+                aXY: gl.getAttribLocation(this._progGlow, "aXY"),
+                uCursor: gl.getUniformLocation(this._progGlow, "uCursor"),
+                uResolution: gl.getUniformLocation(this._progGlow, "uResolution"),
+                uRadius: gl.getUniformLocation(this._progGlow, "uRadius"),
+                uIntensity: gl.getUniformLocation(this._progGlow, "uIntensity"),
+                uTime: gl.getUniformLocation(this._progGlow, "uTime"),
+                uSeed: gl.getUniformLocation(this._progGlow, "uSeed"),
+                uColor: gl.getUniformLocation(this._progGlow, "uColor")
+            };
+
+            // Fullscreen triangle buffer
+            this._bufFSQ = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, this._bufFSQ);
+            gl.bufferData(
+                gl.ARRAY_BUFFER,
+                new Float32Array([-1, -1, 3, -1, -1, 3]),
+                gl.STATIC_DRAW
+            );
+
+            // Particles CPU sim → point sprites
+            this._max = Math.max(32, this.opts.sparkCount | 0);
+            this._particles = new Float32Array(this._max * 7); // x,y,vx,vy,life,ttl,size
+            this._spawnCarry = 0; // fractional spawns
+
+            // GPU buffer for position/size/life
+            this._bufPoints = gl.createBuffer();
+            this._pointsData = new Float32Array(this._max * 4); // x,y,size,life sent to GPU
+
+            // Initial state
+            for (let i = 0; i < this._max; i++) {
+                const off = i * 7;
+                this._particles[off + 4] = 0; // life
+                this._particles[off + 5] = 0; // ttl
+                this._particles[off + 6] = 1 + Math.random() * 2; // size
+            }
+
+            this._syncUniformsStatic();
+        }
+
+        _syncUniformsStatic() {
+            if (!this.gl) return;
+            const gl = this.gl;
+            const w = this.canvas.width,
+                h = this.canvas.height;
+            // Points program static uniforms
+            gl.useProgram(this._progPoints);
+            gl.uniform2f(this._locP.uResolution, w, h);
+            gl.uniform3fv(this._locP.uColor, new Float32Array(this.opts.color));
+            gl.uniform1f(this._locP.uPointScale, Math.max(0.8, this._dpr || 1));
+
+            // Glow static uniforms
+            gl.useProgram(this._progGlow);
+            gl.uniform2f(this._locG.uResolution, w, h);
+            gl.uniform1f(this._locG.uSeed, this.opts.noiseSeed);
+            gl.uniform3fv(this._locG.uColor, new Float32Array(this.opts.color));
+        }
+
+        _createProgram(vsSrc, fsSrc) {
+            const gl = this.gl;
+            const vs = gl.createShader(gl.VERTEX_SHADER);
+            gl.shaderSource(vs, vsSrc);
+            gl.compileShader(vs);
+            if (!gl.getShaderParameter(vs, gl.COMPILE_STATUS)) {
+                throw new Error("VS compile error: " + gl.getShaderInfoLog(vs));
+            }
+            const fs = gl.createShader(gl.FRAGMENT_SHADER);
+            gl.shaderSource(fs, fsSrc);
+            gl.compileShader(fs);
+            if (!gl.getShaderParameter(fs, gl.COMPILE_STATUS)) {
+                throw new Error("FS compile error: " + gl.getShaderInfoLog(fs));
+            }
+            const prog = gl.createProgram();
+            gl.attachShader(prog, vs);
+            gl.attachShader(prog, fs);
+            gl.linkProgram(prog);
+            if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+                throw new Error("Program link error: " + gl.getProgramInfoLog(prog));
+            }
+            gl.deleteShader(vs);
+            gl.deleteShader(fs);
+            return prog;
+        }
+
+        _spawn(dt, intensity) {
+            // Spawn rate proportional to intensity; clamp
+            const baseRate = 120; // sparks/sec at I=1
+            const want = baseRate * intensity * dt + this._spawnCarry;
+            let n = Math.floor(want);
+            this._spawnCarry = want - n;
+
+            for (let i = 0; i < this._max && n > 0; i++) {
+                const off = i * 7;
+                if (this._particles[off + 4] <= 0) {
+                    // dead
+                    // Spawn around cursor with small random cone
+                    const ang = Math.random() * 0.6 - 0.3 + (Math.random() < 0.5 ? 0 : Math.PI); // bidirectional scatter
+                    const spd = 120 + 1240 * Math.random() * Math.max(0.5, intensity);
+                    const vx = Math.cos(ang) * spd;
+                    const vy = Math.sin(ang) * spd - 60 * Math.random();
+                    this._particles[off + 0] = this.pointer.x * (this._dpr || 1);
+                    this._particles[off + 1] = this.pointer.y * (this._dpr || 1);
+                    this._particles[off + 2] = vx;
+                    this._particles[off + 3] = vy;
+                    this._particles[off + 4] = 1; // life
+                    this._particles[off + 5] = 0.15 + Math.random() * 0.35; // ttl
+                    this._particles[off + 6] = 1 + Math.random() * 2; // size base
+                    n--;
+                }
+            }
+        }
+
+        _update(dt) {
+            // Click flash decay
+            if (this._flashT > 0) this._flashT = Math.max(0, this._flashT - dt);
+
+            const I = this._intensity(dt);
+
+            if (this.gl) {
+                // CPU simulate particles (no per-frame allocations)
+                const g = 380; // gravity-like
+                const air = 0.98; // damping
+                const maxX = this.canvas.width,
+                    maxY = this.canvas.height;
+                for (let i = 0; i < this._max; i++) {
+                    const off = i * 7;
+                    let life = this._particles[off + 4];
+                    if (life > 0) {
+                        // Integrate
+                        let x = this._particles[off + 0];
+                        let y = this._particles[off + 1];
+                        let vx = this._particles[off + 2];
+                        let vy = this._particles[off + 3];
+                        vy += g * dt * (0.6 + 0.4 * Math.random());
+                        x += vx * dt;
+                        y += vy * dt;
+                        vx *= air;
+                        vy *= air;
+                        // Kill if outside
+                        if (x < -10 || x > maxX + 10 || y < -10 || y > maxY + 10) {
+                            life = 0;
+                        } else {
+                            const ttl = this._particles[off + 5];
+                            life = Math.max(0, life - dt / ttl);
+                        }
+                        this._particles[off + 0] = x;
+                        this._particles[off + 1] = y;
+                        this._particles[off + 2] = vx;
+                        this._particles[off + 3] = vy;
+                        this._particles[off + 4] = life;
+                    }
+                }
+                this._spawn(dt, I);
+
+                // Pack live particles to GPU array
+                let idx = 0;
+                for (let i = 0; i < this._max; i++) {
+                    const off = i * 7;
+                    const life = this._particles[off + 4];
+                    if (life > 0) {
+                        this._pointsData[idx++] = this._particles[off + 0];
+                        this._pointsData[idx++] = this._particles[off + 1];
+                        this._pointsData[idx++] =
+                            (2 + this._particles[off + 6] * 2) * (0.8 + 0.6 * life);
+                        this._pointsData[idx++] = life;
+                    }
+                }
+                this._liveCount = idx / 4;
+
+                // Update GPU buffer
+                const gl = this.gl;
+                gl.bindBuffer(gl.ARRAY_BUFFER, this._bufPoints);
+                gl.bufferData(gl.ARRAY_BUFFER, this._pointsData, gl.DYNAMIC_DRAW); // reuses same typed array object
+            } else {
+                // 2D fallback: light glow + few sparks (cheaper)
+                const max = Math.min(80, this.opts.sparkCount | 0);
+                if (!this._sparks2d) {
+                    this._sparks2d = new Array(max)
+                        .fill(0)
+                        .map(() => ({x: 0, y: 0, vx: 0, vy: 0, life: 0, ttl: 0, size: 1}));
+                }
+                for (const p of this._sparks2d) {
+                    if (p.life > 0) {
+                        p.vy += 300 * dt;
+                        p.x += p.vx * dt;
+                        p.y += p.vy * dt;
+                        p.vx *= 0.98;
+                        p.vy *= 0.98;
+                        p.life = Math.max(0, p.life - dt / p.ttl);
+                    }
+                }
+                // spawn
+                let want = Math.floor(80 * I * dt);
+                for (const p of this._sparks2d) {
+                    if (!want) break;
+                    if (p.life <= 0) {
+                        const ang =
+                            Math.random() * 0.6 - 0.3 + (Math.random() < 0.5 ? 0 : Math.PI);
+                        const spd = 120 + 200 * Math.random();
+                        p.x = this.pointer.x;
+                        p.y = this.pointer.y;
+                        p.vx = Math.cos(ang) * spd;
+                        p.vy = Math.sin(ang) * spd - 40 * Math.random();
+                        p.life = 1;
+                        p.ttl = 0.15 + Math.random() * 0.35;
+                        p.size = 1 + Math.random() * 2;
+                        want--;
+                    }
+                }
+            }
+        }
+
+        _draw(timeSec) {
+            if (this.gl) {
+                const gl = this.gl;
+                const w = this.canvas.width,
+                    h = this.canvas.height;
+                gl.viewport(0, 0, w, h);
+                gl.clearColor(0, 0, 0, 0);
+                gl.clear(gl.COLOR_BUFFER_BIT);
+
+                const I = this._intensity(1 / 60);
+
+                // Glow pass: fullscreen triangle
+                gl.useProgram(this._progGlow);
+                gl.bindBuffer(gl.ARRAY_BUFFER, this._bufFSQ);
+                gl.enableVertexAttribArray(this._locG.aXY);
+                gl.vertexAttribPointer(this._locG.aXY, 2, gl.FLOAT, false, 0, 0);
+                gl.uniform2f(
+                    this._locG.uCursor,
+                    this.pointer.x * (this._dpr || 1),
+                    this.pointer.y2 * (this._dpr || 1)
+                );
+                gl.uniform1f(
+                    this._locG.uRadius,
+                    Math.max(8, this.opts.glowRadius * (this._dpr || 1) * (0.8 + 0.6 * I))
+                );
+                gl.uniform1f(this._locG.uIntensity, I + (this._flashT > 0 ? 1.5 : 0));
+                gl.uniform1f(this._locG.uTime, timeSec);
+                gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+                // Sparks pass: points
+                gl.useProgram(this._progPoints);
+                gl.uniform1f(this._locP.uTime, timeSec);
+                gl.bindBuffer(gl.ARRAY_BUFFER, this._bufPoints);
+                const stride = 4 * 4; // 4 floats per vertex
+                gl.enableVertexAttribArray(this._locP.aPos);
+                gl.vertexAttribPointer(this._locP.aPos, 2, gl.FLOAT, false, stride, 0);
+                gl.enableVertexAttribArray(this._locP.aSize);
+                gl.vertexAttribPointer(this._locP.aSize, 1, gl.FLOAT, false, stride, 8);
+                gl.enableVertexAttribArray(this._locP.aLife);
+                gl.vertexAttribPointer(this._locP.aLife, 1, gl.FLOAT, false, stride, 12);
+                gl.drawArrays(gl.POINTS, 0, this._liveCount || 0);
+            } else {
+                // Canvas2D fallback
+                const ctx = this.ctx2d;
+                const w = this.canvas.width,
+                    h = this.canvas.height;
+                ctx.clearRect(0, 0, w, h);
+                const I = this._intensity(1 / 60);
+                // glow
+                const gx = this.pointer.x * (this._dpr || 1),
+                    gy = this.pointer.y * (this._dpr || 1);
+                const r = Math.max(
+                    8,
+                    this.opts.glowRadius * (this._dpr || 1) * (0.8 + 0.6 * I)
+                );
+                const g = ctx.createRadialGradient(gx, gy, 1, gx, gy, r);
+                const c = this.opts.color;
+                const rgba = (a) =>
+                    `rgba(${Math.round(c[0] * 255)},${Math.round(c[1] * 255)},${Math.round(
+                        c[2] * 255
+                    )},${a})`;
+                g.addColorStop(0, rgba(0.8));
+                g.addColorStop(1, rgba(0));
+                ctx.globalCompositeOperation = "lighter";
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.arc(gx, gy, r, 0, Math.PI * 2);
+                ctx.fill();
+
+                // sparks
+                for (const p of this._sparks2d || []) {
+                    if (p.life > 0) {
+                        ctx.beginPath();
+                        ctx.fillStyle = rgba(0.2 + 0.8 * p.life);
+                        ctx.arc(
+                            p.x * (this._dpr || 1),
+                            p.y * (this._dpr || 1),
+                            (1 + p.size) * 0.9,
+                            0,
+                            Math.PI * 2
+                        );
+                        ctx.fill();
+                    }
+                }
+                ctx.globalCompositeOperation = "source-over";
+            }
+        }
+
+        _init2D() {
+            this.ctx2d = this.canvas.getContext("2d");
+        }
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+/*
+  Recreation of Apple's Liquid Glass effect using HTML and CSS combined with a SVG filter.
+  Based on https://github.com/lucasromerodb/liquid-glass-effect-macos but tweaked after my liking.
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100dvh;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  background-image: url(https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=3764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-size: cover;
+}
+
+.liquid-glass {
+  position: relative;
+  padding: 1.5rem;
+  border-radius: 100vmax;
+  isolation: isolate;
+  background-color: rgb(255 255 255 / 25%);
+  color: rgb(255 255 255 / 90%);
+  text-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+  font-size: 1.25rem;
+  box-shadow: 0 6px 6px rgb(0 0 0 / 20%), 0 0 20px rgb(0 0 0 / 10%);
+  text-align: center;
+  user-select: none;
+  cursor: grab;
+  
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+  
+  // Glass distortion effect
+  &::before {
+    backdrop-filter: blur(3px);
+    filter: url(#glass-distortion);
+    z-index: -1;
+  }
+  
+  // Outline shine
+  &::after {
+    box-shadow: inset 2px 2px 1px 0 rgb(255 255 255 / 50%), inset -1px -1px 1px 1px rgb(255 255 255 / 50%);
+  }
+  
+  &.dragging {
+    cursor: grabbing;
+  }
+}

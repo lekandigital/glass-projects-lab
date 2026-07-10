@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alternate line background paper with perforations</title>
+
+    <style>
+        body {
+            background: url(https://images.unsplash.com/photo-1744042246407-f216e4aa80de) 50%/ cover;
+            filter: drop-shadow(2px 2px 4px #000c)
+        }
+        content {
+            --f: .7; /* fraction of line the hole occupies */
+            --b: 1.5lh; /* at least 1lh to fit */
+            --l: 2px; /* dashed line thickness */
+            display: block;
+            margin: 1em auto;
+            border: solid 0 #0000;
+            border-width: 0 var(--b);
+            padding: 0 1ch;
+            max-width: 43em;
+            border-radius: 3px;
+            background: conic-gradient(at var(--l), #0000 75%, silver 25%) 0 -.125lh/ calc(100% - var(--l)) .5lh padding-box,
+            linear-gradient(peachpuff 50%, whitesmoke 0) 0 0/ 1% 2lh;
+            font: 1.25em/ 1.5 monospace;
+            tab-size: 2;
+            white-space: pre-wrap;
+            mask: radial-gradient(calc(.5 * var(--f) * 1lh) at calc(.5 * var(--b)),
+            #0000 calc(100% - 1px), red) 0 0/ calc(100% - var(--b)) 1lh no-clip
+        }
+    </style>
+</head>
+<body>
+<content contenteditable>Content editable
+    The HTML contenteditable attribute makes any element's content editable by the user, using values like true (or an empty string) for editable content and false for non-editable content. This Global Attribute allows for rich text editing directly within elements like div or blockquote, giving greater styling control than a standard textarea. When the attribute isn't set, the element inherits the editable state from its parent.
+</content>
+</body>
+</html>

@@ -1,0 +1,35 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-task-manager-app --name glasslab-frontend-projects-main-frontend-projects-main-task-manager-app
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-task-manager-app
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-task-manager-app (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-task-manager-app
+Uploading [--------------------] (0.0B/1.3MB)
+Uploading [=====---------------] (352.6KB/1.3MB)
+Uploading [==========----------] (688.6KB/1.3MB)
+Uploading [===============-----] (1.0MB/1.3MB)
+Uploading [====================] (1.3MB/1.3MB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-task-manager-app/EWzTt1dD4P4uuyLWLQiyteX1ecKa [4s]
+Production: https://glasslab-frontend-projects-main-frontend-projects-57s0ayj10.vercel.app [4s]
+https://glasslab-frontend-projects-main-frontend-projects-57s0ayj10.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 248 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+Building: Build Completed in /vercel/output [371ms]
+Building: Deploying outputs...
+[2K[1A[2K[GProduction: https://glasslab-frontend-projects-main-frontend-projects-57s0ayj10.vercel.app [11s]
+Completing...
+Aliased: https://glasslab-frontend-projects-main-fro-theta.vercel.app [11s]
