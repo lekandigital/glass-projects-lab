@@ -1,0 +1,96 @@
+<Window x:Class="GlassMorphismInteractive.MainWindow"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
+        xmlns:viewModels="clr-namespace:GlassMorphismInteractive.ViewModels"
+        Title="Glassmorphism Interactive Cards" Height="800" Width="1200"
+        WindowStartupLocation="CenterScreen"
+        d:DataContext="{d:DesignInstance Type=viewModels:MainViewModel, IsDesignTimeCreatable=True}"
+        Background="Black">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </Window.Resources>
+    <Grid>
+        <!-- SkiaSharp canvas for all rendering -->
+        <skia:SKElement x:Name="SkiaCanvas" PaintSurface="OnPaintSurface" />
+
+        <!-- Control panel -->
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top"
+                    Margin="20" Background="{StaticResource PanelBackgroundBrush}" Orientation="Vertical">
+            <TextBlock Text="{StaticResource InteractiveControlsText}"
+                       Foreground="{StaticResource TextForegroundBrush}" FontWeight="Bold"
+                       Margin="10" />
+            <Button Content="{Binding PlayPauseButtonText}" Command="{Binding PlayPauseCommand}"
+                    Margin="10" Padding="10,5" Background="{StaticResource PlayPauseButtonBrush}"
+                    Foreground="{StaticResource ButtonForegroundBrush}" />
+            <Button Content="{Binding PauseCardsButtonText}" Command="{Binding PauseCardsCommand}"
+                    Margin="10" Padding="10,5" Background="{StaticResource PauseCardsButtonBrush}"
+                    Foreground="{StaticResource ButtonForegroundBrush}" />
+            <Button Content="{Binding PauseBackgroundButtonText}" Command="{Binding PauseBackgroundCommand}"
+                    Margin="10" Padding="10,5" Background="{StaticResource PauseBackgroundButtonBrush}"
+                    Foreground="{StaticResource ButtonForegroundBrush}" />
+            <Button Content="{StaticResource ResetButtonText}" Command="{Binding ResetCommand}"
+                    Margin="10" Padding="10,5" Background="{StaticResource ResetButtonBrush}"
+                    Foreground="{StaticResource ButtonForegroundBrush}" />
+            <Slider Value="{Binding SpeedMultiplier}" Minimum="0.1" Maximum="3.0"
+                    Margin="10" Width="120" />
+            <TextBlock Text="{StaticResource SpeedText}" Foreground="{StaticResource TextForegroundBrush}"
+                       Margin="10,0"
+                       HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <!-- Effect Selection Panel -->
+        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Margin="20" Background="{StaticResource PanelBackgroundBrush}" Orientation="Vertical"
+                    MinWidth="200">
+            <TextBlock Text="{StaticResource EffectSelectionText}" Foreground="{StaticResource TextForegroundBrush}"
+                       FontWeight="Bold"
+                       Margin="10" />
+            <TextBlock Text="{StaticResource BackgroundText}" Foreground="{StaticResource TextForegroundBrush}"
+                       Margin="10,5,10,0" />
+            <ComboBox x:Name="BackgroundComboBox" Margin="10,0,10,5"
+                      SelectedIndex="{Binding SelectedBackgroundIndex}">
+                <ComboBoxItem Content="{StaticResource ClassicGradientText}" />
+                <ComboBoxItem Content="{StaticResource AuroraWavesText}" />
+                <ComboBoxItem Content="{StaticResource NeonGridText}" />
+                <ComboBoxItem Content="{StaticResource ImageBackgroundText}" />
+            </ComboBox>
+
+            <!-- Image selection button - only visible when Image Background is selected -->
+            <Button Content="{StaticResource SelectImageText}" Command="{Binding SelectImageCommand}"
+                    Margin="10,5,10,5" Padding="10,5"
+                    Background="{StaticResource PlayPauseButtonBrush}"
+                    Foreground="{StaticResource ButtonForegroundBrush}"
+                    Visibility="{Binding IsImageBackgroundSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+            <!-- Selected image path display -->
+            <TextBlock Text="{Binding SelectedImagePath}"
+                       Foreground="{StaticResource TextForegroundBrush}"
+                       Margin="10,0,10,10"
+                       TextWrapping="Wrap"
+                       FontSize="10"
+                       Visibility="{Binding IsImageBackgroundSelected, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <TextBlock Text="{StaticResource CardStyleText}" Foreground="{StaticResource TextForegroundBrush}"
+                       Margin="10,5,10,0" />
+            <ComboBox x:Name="CardComboBox" Margin="10,0,10,5"
+                      SelectedIndex="{Binding SelectedCardIndex}">
+                <ComboBoxItem Content="{StaticResource ClassicGlassText}" />
+                <ComboBoxItem Content="{StaticResource HolographicText}" />
+                <ComboBoxItem Content="{StaticResource NeonGlowText}" />
+                <ComboBoxItem Content="{StaticResource TransparentGlassText}" />
+                <ComboBoxItem Content="{StaticResource EnhancedGlassText}" />
+                <ComboBoxItem Content="{StaticResource WaterDropText}" />
+            </ComboBox>
+            <TextBlock Text="{StaticResource EffectProcessorText}" Foreground="{StaticResource TextForegroundBrush}"
+                       Margin="10,5,10,0" />
+            <ComboBox x:Name="ProcessorComboBox" Margin="10,0,10,5"
+                      SelectedIndex="{Binding SelectedProcessorIndex}">
+                <ComboBoxItem Content="{StaticResource ClassicGlassmorphismText}" />
+                <ComboBoxItem Content="{StaticResource EnhancedGlassmorphismText}" />
+            </ComboBox>
+        </StackPanel>
+    </Grid>
+</Window>

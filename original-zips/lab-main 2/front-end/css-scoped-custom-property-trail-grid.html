@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <meta
+            content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1.0"
+            name="viewport"
+    />
+    <title>CSS scoped custom property trail grid</title>
+
+    <style>
+        @import url('https://unpkg.com/normalize.css') layer(normalize);
+
+        @layer normalize, base, demo, mobile;
+
+        @layer mobile {
+            .grid div[data-hover] {
+                transition-property: opacity, rotate, filter;
+                transition-duration: 0s;
+                rotate: calc(var(--grade, 0) * 90deg);
+                filter: grayscale(0) brightness(1.5);
+                opacity: 1;
+            }
+        }
+
+        @layer demo {
+            h1 {
+                --font-level: 5;
+                translate: 12px;
+                margin: 0;
+                margin-bottom: 1rem;
+                color: color-mix(in hsl, canvasText, canvas 25%);
+            }
+
+            .grid {
+                touch-action: none;
+                display: grid;
+                grid-template: repeat(var(--rows, 10), 1fr) / repeat(var(--cols, 10), 1fr);
+                font-size: 2rem;
+                font-weight: 600;
+                line-height: 1;
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+                cursor: none;
+
+                div {
+                    touch-action: none;
+                    padding: 2px;
+                    opacity: calc(var(--opacity) * 0.5);
+                    aspect-ratio: 1;
+                    display: grid;
+                    place-items: center;
+                    transition-property: opacity, rotate, filter;
+                    transition-duration: 0.8s, 0.4s, 0.6s;
+                    transition-timing-function: ease-in, ease-out, ease-out;
+                    scale: 1.5;
+                    filter: grayscale(1);
+                    color: hsl(var(--hue) 80% 50%);
+
+                    @media (prefers-color-scheme: dark) {
+                        opacity: calc(var(--opacity) + 0.2);
+                    }
+                    @media (hover: hover) and (pointer: fine) {
+                        &:hover {
+                            transition-property: opacity, rotate, filter;
+                            transition-duration: 0s;
+                            rotate: calc(var(--grade, 0) * 90deg);
+                            filter: grayscale(0) brightness(1.5);
+                            opacity: 1;
+                        }
+                    }
+
+                }
+            }
+
+            [data-theme='dark'] .grid div {
+                opacity: calc(var(--opacity) + 0.2);
+                @media (hover: hover) and (pointer: fine) {
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        @layer base {
+            :root {
+                --font-size-min: 16;
+                --font-size-max: 20;
+                --font-ratio-min: 1.2;
+                --font-ratio-max: 1.33;
+                --font-width-min: 375;
+                --font-width-max: 1500;
+            }
+
+            html {
+                color-scheme: light dark;
+            }
+
+            [data-theme='light'] {
+                color-scheme: light only;
+            }
+
+            [data-theme='dark'] {
+                color-scheme: dark only;
+            }
+
+            :where(.fluid) {
+                --fluid-min: calc(
+                        var(--font-size-min) * pow(var(--font-ratio-min), var(--font-level, 0))
+                );
+                --fluid-max: calc(
+                        var(--font-size-max) * pow(var(--font-ratio-max), var(--font-level, 0))
+                );
+                --fluid-preferred: calc(
+                        (var(--fluid-max) - var(--fluid-min)) /
+                        (var(--font-width-max) - var(--font-width-min))
+                );
+                --fluid-type: clamp(
+                        (var(--fluid-min) / 16) * 1rem,
+                        ((var(--fluid-min) / 16) * 1rem) -
+                        (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
+                        (var(--fluid-preferred) * var(--variable-unit, 100vi)),
+                        (var(--fluid-max) / 16) * 1rem
+                );
+                font-size: var(--fluid-type);
+            }
+
+            *,
+            *:after,
+            *:before {
+                box-sizing: border-box;
+            }
+
+            body {
+                overflow-x: hidden;
+                background: light-dark(#fff, #000);
+                display: grid;
+                place-items: center;
+                min-height: 100vh;
+                font-family: 'SF Pro Text', 'SF Pro Icons', 'AOS Icons', 'Helvetica Neue',
+                Helvetica, Arial, sans-serif, system-ui;
+            }
+
+            body::before {
+                --size: 45px;
+                --line: color-mix(in hsl, canvasText, transparent 80%);
+                content: '';
+                height: 100vh;
+                width: 100vw;
+                position: fixed;
+                background: linear-gradient(
+                        90deg,
+                        var(--line) 1px,
+                        transparent 1px var(--size)
+                ) calc(var(--size) * 0.36) 50% / var(--size) var(--size),
+                linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0% calc(var(--size) * 0.32) / var(--size) var(--size);
+                mask: linear-gradient(-20deg, transparent 50%, white);
+                top: 0;
+                transform-style: flat;
+                pointer-events: none;
+                z-index: -1;
+            }
+
+            .bear-link {
+                color: canvasText;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                width: 48px;
+                aspect-ratio: 1;
+                display: grid;
+                place-items: center;
+                opacity: 0.8;
+            }
+
+            :where(.x-link, .bear-link):is(:hover, :focus-visible) {
+                opacity: 1;
+            }
+
+            .bear-link svg {
+                width: 75%;
+            }
+
+            /* Utilities */
+            .sr-only {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border-width: 0;
+            }
+        }
+
+        div.tp-dfwv {
+            width: 256px;
+            position: fixed;
+        }
+
+    </style>
+</head>
+<body>
+<main>
+    <h1 class="fluid">hey.</h1>
+    <div class="grid"></div>
+</main>
+<a
+        aria-label="Follow Jhey"
+        class="bear-link"
+        href="https://twitter.com/intent/follow?screen_name=jh3yy"
+        rel="noreferrer noopener"
+        target="_blank"
+>
+    <svg
+            class="w-9"
+            fill="none"
+            viewBox="0 0 969 955"
+            xmlns="http://www.w3.org/2000/svg"
+    >
+        <circle
+                cx="161.191"
+                cy="320.191"
+                r="133.191"
+                stroke="currentColor"
+                stroke-width="20"
+        ></circle>
+        <circle
+                cx="806.809"
+                cy="320.191"
+                r="133.191"
+                stroke="currentColor"
+                stroke-width="20"
+        ></circle>
+        <circle
+                cx="695.019"
+                cy="587.733"
+                fill="currentColor"
+                r="31.4016"
+        ></circle>
+        <circle
+                cx="272.981"
+                cy="587.733"
+                fill="currentColor"
+                r="31.4016"
+        ></circle>
+        <path
+                d="M564.388 712.083C564.388 743.994 526.035 779.911 483.372 779.911C440.709 779.911 402.356 743.994 402.356 712.083C402.356 680.173 440.709 664.353 483.372 664.353C526.035 664.353 564.388 680.173 564.388 712.083Z"
+                fill="currentColor"
+        ></path>
+        <rect
+                fill="#FF1E1E"
+                height="51.4986"
+                width="343.468"
+                x="310.42"
+                y="448.31"
+        ></rect>
+        <path
+                clip-rule="evenodd"
+                d="M745.643 288.24C815.368 344.185 854.539 432.623 854.539 511.741H614.938V454.652C614.938 433.113 597.477 415.652 575.938 415.652H388.37C366.831 415.652 349.37 433.113 349.37 454.652V511.741L110.949 511.741C110.949 432.623 150.12 344.185 219.845 288.24C289.57 232.295 384.138 200.865 482.744 200.865C581.35 200.865 675.918 232.295 745.643 288.24Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+        ></path>
+    </svg>
+</a>
+</body>
+
+<script type="module">
+    import gsap from 'https://cdn.skypack.dev/gsap@3.13.0'
+    import Draggable from 'https://cdn.skypack.dev/gsap@3.13.0/Draggable'
+    import {Pane} from 'https://cdn.skypack.dev/tweakpane@4.0.4'
+
+    gsap.registerPlugin(Draggable)
+
+    const config = {
+        theme: 'system',
+        cols: 20,
+        rows: 10,
+    }
+
+    const ctrl = new Pane({
+        title: 'config',
+        expanded: true,
+    })
+
+    const grid = document.querySelector('.grid')
+    const buildGrid = () => {
+        grid.innerHTML = new Array(config.cols * config.rows).fill(0).map((_, index) => `
+    <div style="
+      --grade: ${Math.floor(Math.random() * 12 - 6)};
+      --opacity: ${Math.min(Math.random(), 0.2)};
+      --hue: ${Math.floor(Math.random() * 30)};
+    ">+</div>
+  `).join('')
+        grid.style.setProperty('--cols', config.cols)
+        grid.style.setProperty('--rows', config.rows)
+    }
+    buildGrid()
+
+    const update = () => {
+        document.documentElement.dataset.theme = config.theme
+    }
+
+    const sync = (event) => {
+        if (
+            !document.startViewTransition ||
+            event.target.controller.view.labelElement.innerText !== 'theme'
+        )
+            return update()
+        document.startViewTransition(() => update())
+    }
+
+    ctrl.addBinding(config, 'cols', {
+        min: 5,
+        max: 30,
+        step: 1,
+    }).on('change', buildGrid)
+    ctrl.addBinding(config, 'rows', {
+        min: 5,
+        max: 30,
+        step: 1,
+    }).on('change', buildGrid)
+
+    ctrl.addBinding(config, 'theme', {
+        label: 'theme',
+        options: {
+            system: 'system',
+            light: 'light',
+            dark: 'dark',
+        },
+    })
+
+    ctrl.on('change', sync)
+    update()
+
+    // make tweakpane panel draggable
+    const tweakClass = 'div.tp-dfwv'
+    const d = Draggable.create(tweakClass, {
+        type: 'x,y',
+        allowEventDefault: true,
+        trigger: tweakClass + ' button.tp-rotv_b',
+    })
+    document.querySelector(tweakClass).addEventListener('dblclick', () => {
+        gsap.to(tweakClass, {
+            x: `+=${d[0].x * -1}`,
+            y: `+=${d[0].y * -1}`,
+            onComplete: () => {
+                gsap.set(tweakClass, {clearProps: 'all'})
+            },
+        })
+    })
+
+    if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+        grid.addEventListener('pointermove', (event) => {
+            document.querySelector('[data-hover]')?.removeAttribute('data-hover')
+            document.elementFromPoint(event.x, event.y).dataset.hover = 'true'
+        }, true)
+        grid.addEventListener('pointerleave', (event) => {
+            document.querySelector('[data-hover]')?.removeAttribute('data-hover')
+        }, true)
+    }
+</script>
+</html>

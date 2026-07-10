@@ -1,3 +1,0 @@
-# Verification
-
-Documentation placeholder.

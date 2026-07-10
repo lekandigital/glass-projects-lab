@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroll Text</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://picsum.photos/id/33/1920/1080');
+        }
+
+        .lyric-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            height: 100vh;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .lyric-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .lyric-line {
+            text-align: center;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            transition: opacity 0.2s ease-out;
+            will-change: opacity;
+            padding: 0.5rem 0;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center p-4">
+<div class="lyric-container rounded-lg">
+    <div class="p-8">
+        <!-- 歌詞の行をここに挿入 -->
+        <div class="lyric-line">I see the world in different colors now</div>
+        <div class="lyric-line">The sky's a shade I've never known</div>
+        <div class="lyric-line">The city lights are painted gold and red</div>
+        <div class="lyric-line">And every street feels like a different home</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">Oh, this feeling, it's a symphony</div>
+        <div class="lyric-line">A melody of light and sound</div>
+        <div class="lyric-line">I'm floating on a cloud of silent dreams</div>
+        <div class="lyric-line">With no one else for miles around</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">It's a new day, a new start</div>
+        <div class="lyric-line">A canvas waiting for a brush</div>
+        <div class="lyric-line">I'm running free, a work of art</div>
+        <div class="lyric-line">In this beautiful, chaotic rush</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">Let's find a rhythm, a steady beat</div>
+        <div class="lyric-line">That guides us through the tangled ways</div>
+        <div class="lyric-line">And makes these moments bittersweet</div>
+        <div class="lyric-line">The best of all our fleeting days</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">I see the world in different colors now</div>
+        <div class="lyric-line">The sky's a shade I've never known</div>
+        <div class="lyric-line">The city lights are painted gold and red</div>
+        <div class="lyric-line">And every street feels like a different home</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">Oh, this feeling, it's a symphony</div>
+        <div class="lyric-line">A melody of light and sound</div>
+        <div class="lyric-line">I'm floating on a cloud of silent dreams</div>
+        <div class="lyric-line">With no one else for miles around</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">It's a new day, a new start</div>
+        <div class="lyric-line">A canvas waiting for a brush</div>
+        <div class="lyric-line">I'm running free, a work of art</div>
+        <div class="lyric-line">In this beautiful, chaotic rush</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">Let's find a rhythm, a steady beat</div>
+        <div class="lyric-line">That guides us through the tangled ways</div>
+        <div class="lyric-line">And makes these moments bittersweet</div>
+        <div class="lyric-line">The best of all our fleeting days</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">I see the world in different colors now</div>
+        <div class="lyric-line">The sky's a shade I've never known</div>
+        <div class="lyric-line">The city lights are painted gold and red</div>
+        <div class="lyric-line">And every street feels like a different home</div>
+        <div class="lyric-line"></div>
+        <div class="lyric-line">Oh, this feeling, it's a symphony</div>
+        <div class="lyric-line">A melody of light and sound</div>
+        <div class="lyric-line">I'm floating on a cloud of silent dreams</div>
+        <div class="lyric-line">With no one else for miles around</div>
+    </div>
+</div>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const lyricContainer = document.querySelector('.lyric-container');
+        const lyricLines = document.querySelectorAll('.lyric-line');
+
+        // スクロールイベントリスナー
+        lyricContainer.addEventListener('scroll', () => {
+            const containerTop = lyricContainer.scrollTop;
+            const containerHeight = lyricContainer.clientHeight;
+            const containerCenter = containerTop + containerHeight / 2;
+
+            lyricLines.forEach(line => {
+                const lineTop = line.offsetTop;
+                const lineHeight = line.clientHeight;
+                const lineCenter = lineTop + lineHeight / 2;
+
+                // スクロールコンテナの中心からの距離を計算
+                const distance = Math.abs(containerCenter - lineCenter);
+
+                // 透明度を計算
+                // 距離が遠いほど透明度が上がる（0.2から1.0の範囲）
+                const maxDistance = containerHeight * 0.4;
+                const opacity = Math.min(1.0, Math.max(0.2, distance / maxDistance));
+
+                // 歌詞の中心にある行の透明度を高くする（透明度0.2~1.0の反転）
+                const finalOpacity = 1.0 - (opacity * 1.0);
+                line.style.opacity = finalOpacity;
+            });
+        });
+
+        // ページの読み込み時にも透明度を初期設定
+        window.addEventListener('load', () => {
+            lyricContainer.dispatchEvent(new Event('scroll'));
+        });
+    });
+</script>
+</body>
+</html>

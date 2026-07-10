@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slide Projector</title>
+    <style>
+        body {
+            background: #888;
+        }
+
+        .slideshow-container {
+            font-size: 2vmin;
+            position: absolute;
+            overflow: hidden;
+            width: 100vmin;
+            height: 80vmin;
+            background: #eee;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            filter: brightness(var(--light));
+            box-shadow: 0.25em 0.25em 2.5em #0009, inset 0 0 6em #0006;
+            --blur: 0.4;
+            --light: 0.99;
+        }
+
+        .slide {
+            position: absolute;
+            border-radius: 2.5%;
+            width: 90%;
+            height: 90%;
+            left: 5%;
+            top: 5%;
+            object-fit: cover;
+            mix-blend-mode: darken;
+            filter: blur(calc(var(--blur) * 1em));
+            --angle: 8deg;
+            transform: translateX(1000%) rotate(var(--angle)) translateX(-1000%) rotate(1.5deg);
+            transition: 270ms transform linear, 8s filter;
+
+            &.visible {
+                --angle: 0deg;
+            }
+        }
+
+        .mote {
+            position: absolute;
+            opacity: 0;
+            width: calc(var(--size) * 1em);
+            height: calc(var(--size) * 1em);
+            background: #000;
+            left: calc(var(--x) * 100%);
+            top: calc(var(--y) * 100%);
+            opacity: 0.82;
+            border-radius: 50%;
+            filter: blur(0.6em);
+        }
+
+    </style>
+</head>
+<body>
+<div class="slideshow-container">
+    <img alt="Closeup of a curling ocean wave. "
+         class="slide" src="https://images.unsplash.com/photo-1501949997128-2fdb9f6428f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTIyNjYzNTZ8&ixlib=rb-4.1.0&q=80&w=400" title="photo by Jeremy Bishop for Unsplash"/>
+    <img alt="Foamy waves gently lapping a sandy beach shore. "
+         class="slide" src="https://images.unsplash.com/photo-1476673160081-cf065607f449?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTIyNjYzOTJ8&ixlib=rb-4.1.0&q=80&w=400"
+         title="photo by Frank McKenna for Unsplash"/>
+    <img alt="A starfish at the shallow edge of ocean water, alone on a backdrop of white sand. "
+         class="slide"
+         src="https://images.unsplash.com/photo-1490365728022-deae76380607?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTIyNjY0Mjd8&ixlib=rb-4.1.0&q=80&w=400" title=" photo by Amy Humphries for Unsplash"/>
+    <img alt="An aerial view of waves rolling onto a sandy beach. "
+         class="slide" src="https://images.unsplash.com/photo-1506252374453-ef5237291d83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTIyNjY0NzR8&ixlib=rb-4.1.0&q=80&w=400"
+         title="photo by Samuel Scrimshaw for Unsplash"/>
+</div>
+
+<script type="module">
+    import {$} from "https://esm.sh/@xtia/jel";
+    import {Timeline} from "https://esm.sh/@xtia/timeline";
+
+    const body = $(document.body);
+    const container = body.qsa(".slideshow-container")[0];
+    const slides = container.qsa(".slide");
+
+    let activeIndex = -1;
+
+    function next() {
+        if (activeIndex > -1) {
+            const previous = slides[activeIndex];
+            setTimeout(() => previous.classes.remove("visible"), 400);
+        }
+        activeIndex++;
+        if (activeIndex == slides.length) activeIndex = 0;
+        const current = slides[activeIndex];
+        current.classes.add("visible");
+    }
+
+    setTimeout(() => {
+        container.setCSSVariable("blur", 0);
+    }, 500);
+
+    next();
+    setInterval(next, 5000);
+
+    setInterval(() => {
+        container.setCSSVariable("light", 0.98 + Math.random() * 0.02);
+    }, 16);
+
+    function spawnMote() {
+        const startX = Math.random();
+        const startY = Math.random();
+        const endX = Math.random();
+        const endY = Math.random();
+        const duration = 8500 + Math.random() * 3000;
+        const opacity = Math.random() * 0.25 + 0.5;
+        const tl = new Timeline(true);
+        const mote = $.div({
+            classes: "mote",
+            cssVariables: {
+                size: Math.random() * 0.6 + 0.3
+            }
+        });
+        tl.tween(0, duration * 0.5, (v) => (mote.style.opacity = v), 0, opacity);
+        tl.tween(
+            duration * 0.5,
+            duration * 0.5,
+            (v) => (mote.style.opacity = v),
+            opacity,
+            0
+        );
+        tl.tween(0, duration, (v) => mote.setCSSVariable("x", v), startX, endX);
+        tl.tween(0, duration, (v) => mote.setCSSVariable("y", v), startY, endY);
+        tl.at(tl.end, () => mote.remove());
+        container.append(mote);
+    }
+
+    spawnMote();
+
+    setInterval(spawnMote, 4000);
+
+</script>
+</body>
+</html>

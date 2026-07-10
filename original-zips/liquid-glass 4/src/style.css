@@ -1,0 +1,60 @@
+:root {
+  --accent: #FFFFFF;
+  --bg1: url("https://i.imgur.com/AAZ85Je.jpeg");
+  --bg2: url("https://i.imgur.com/r4mflhD.jpeg");
+  --bg3: url("https://i.imgur.com/jWHdCIw.jpeg");
+  --bg4: url("https://i.imgur.com/Laq4Mot.jpeg");
+  --bg5: url("https://i.imgur.com/iR0Yds8.jpeg");
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--bg3)
+    center center;
+  background-size: 100%;
+  animation: moveBackground 40s linear infinite;
+}
+
+@keyframes moveBackground {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 0% 100%;
+  }
+}
+
+.out {
+  width: 50%;
+  height: 20%;
+  border-radius: 7px;
+  overflow: hidden;
+  border: solid 1px color-mix(in srgb, var(--accent) 30%, transparent);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: color-mix(in srgb, var(--accent) 7.5%, transparent);
+  transform: translateZ(0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.out:before {
+  position: absolute;
+  content: '';
+  z-index: -99;
+  height: 101%;
+  width: 101%;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  filter: url(#glass-distortion);
+  transform: translateZ(0);
+}
+.out a {
+  color: color-mix(in srgb, var(--accent) 75%, transparent);
+  text-shadow: 0px 0px 5px var(--accent);
+}

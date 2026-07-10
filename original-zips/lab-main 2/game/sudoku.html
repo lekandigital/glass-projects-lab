@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sudoku</title>
+
+    <style>
+        :root {
+            --bg: #f0f2f5;
+            --board-bg: #fff;
+            --border: #34495e;
+            --border-light: #bdc3c7;
+            --primary: #3498db;
+            --highlight: #e8f6fd;
+            --original-text: #2c3e50;
+            --user-text: #2980b9;
+            --solved-text: #27ae60;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--border);
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .game-wrapper {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Sudoku Grid */
+        .board {
+            display: grid;
+            grid-template-columns: repeat(9, 50px);
+            grid-template-rows: repeat(9, 50px);
+            border: 2px solid var(--border);
+            margin-bottom: 20px;
+        }
+
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.1s;
+        }
+
+        /* Thick borders for 3x3 subgrids */
+        .cell:nth-child(3n) {
+            border-right: 2px solid var(--border);
+        }
+
+        .cell:nth-child(9n) {
+            border-right: 0; /* Handled by container border */
+        }
+
+        .cell:nth-child(n + 19):nth-child(-n + 27),
+        .cell:nth-child(n + 46):nth-child(-n + 54) {
+            border-bottom: 2px solid var(--border);
+        }
+
+        /* Cell States */
+        .cell.selected {
+            background-color: var(--primary);
+            color: white !important;
+        }
+
+        .cell.highlighted {
+            background-color: var(--highlight);
+        }
+
+        .cell.original {
+            font-weight: bold;
+            color: var(--original-text);
+        }
+
+        .cell.user-input {
+            color: var(--user-text);
+        }
+
+        .cell.solved {
+            color: var(--solved-text);
+            animation: popIn 0.3s ease-out;
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            background-color: #ecf0f1;
+            color: #2c3e50;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            background-color: #bdc3c7;
+        }
+
+        .solve-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .solve-btn:hover {
+            background-color: #2980b9;
+        }
+
+        .status {
+            font-size: 14px;
+            color: #7f8c8d;
+            min-height: 20px;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>DLX Sudoku</h1>
+    <div class="game-wrapper">
+        <div class="board" id="board"></div>
+        <div class="controls">
+            <button id="btn-new-easy">New (Easy)</button>
+            <button id="btn-new-hard">New (Hard)</button>
+            <button class="solve-btn" id="btn-solve">Solve with DLX</button>
+            <button id="btn-clear">Clear Board</button>
+        </div>
+        <div class="status" id="status">Select a difficulty or start solving</div>
+    </div>
+</div>
+
+<script>
+    /**
+     * DANCING LINKS (DLX) IMPLEMENTATION
+     * Based on Knuth's Algorithm X
+     */
+
+    class DLXNode {
+        constructor(column = null) {
+            this.left = this;
+            this.right = this;
+            this.up = this;
+            this.down = this;
+            this.column = column; // Pointer to column header
+            this.rowID = -1; // Holds the Sudoku data (index, number)
+        }
+
+        linkRight(node) {
+            node.right = this.right;
+            node.left = this;
+            this.right.left = node;
+            this.right = node;
+        }
+
+        linkDown(node) {
+            node.down = this.down;
+            node.up = this;
+            this.down.up = node;
+            this.down = node;
+        }
+    }
+
+    class ColumnHeader extends DLXNode {
+        constructor(id) {
+            super();
+            this.size = 0;
+            this.id = id;
+            this.column = this;
+        }
+    }
+
+    class DancingLinksSolver {
+        constructor() {
+            this.header = new ColumnHeader("master");
+            this.columns = [];
+            this.solution = [];
+            this.result = null;
+        }
+
+        // Create the 4 constraints matrix for Sudoku
+        // 1. Cell constraint (each cell one number)
+        // 2. Row constraint (each row has 1-9)
+        // 3. Col constraint (each col has 1-9)
+        // 4. Box constraint (each box has 1-9)
+        initializeMatrix(fixedValues = []) {
+            this.header = new ColumnHeader("master");
+            this.columns = [];
+
+            // 4 constraints * 81 cells = 324 columns
+            for (let i = 0; i < 324; i++) {
+                let col = new ColumnHeader(i);
+                this.columns.push(col);
+                this.header.linkRight(col);
+            }
+
+            // Create rows for every valid number placement (9*9*9 = 729 options)
+            for (let r = 0; r < 9; r++) {
+                for (let c = 0; c < 9; c++) {
+                    for (let n = 1; n <= 9; n++) {
+                        // If this cell is pre-filled with a different number, skip this row
+                        if (fixedValues[r * 9 + c] !== 0 && fixedValues[r * 9 + c] !== n) {
+                            continue;
+                        }
+
+                        this.addMatrixRow(r, c, n);
+                    }
+                }
+            }
+        }
+
+        addMatrixRow(r, c, n) {
+            let box = Math.floor(r / 3) * 3 + Math.floor(c / 3);
+
+            // Constraint Column Indices
+            let idx1 = r * 9 + c; // Cell Constraint (0-80)
+            let idx2 = 81 + r * 9 + (n - 1); // Row Constraint (81-161)
+            let idx3 = 162 + c * 9 + (n - 1); // Col Constraint (162-242)
+            let idx4 = 243 + box * 9 + (n - 1); // Box Constraint (243-323)
+
+            let rowNode = null;
+            let indices = [idx1, idx2, idx3, idx4];
+
+            for (let i = 0; i < indices.length; i++) {
+                let colNode = this.columns[indices[i]];
+                let newNode = new DLXNode(colNode);
+                // Store the sudoku value in the node for retrieval: [row, col, num]
+                newNode.rowID = [r, c, n];
+
+                if (rowNode == null) {
+                    rowNode = newNode;
+                } else {
+                    rowNode.linkRight(newNode);
+                }
+                colNode.up.linkDown(newNode);
+                colNode.size++;
+            }
+        }
+
+        search(k) {
+            if (this.header.right === this.header) {
+                // Solution found! Copy logic
+                this.result = [...this.solution];
+                return true; // Return true to stop at first solution
+            }
+
+            // Heuristic: Choose column with fewest nodes (Optimization)
+            let c = this.header.right;
+            let minSize = c.size;
+            for (let temp = c.right; temp !== this.header; temp = temp.right) {
+                if (temp.size < minSize) {
+                    c = temp;
+                    minSize = temp.size;
+                }
+            }
+
+            this.cover(c);
+
+            for (let r = c.down; r !== c; r = r.down) {
+                this.solution.push(r);
+
+                for (let j = r.right; j !== r; j = j.right) {
+                    this.cover(j.column);
+                }
+
+                if (this.search(k + 1)) return true;
+
+                // Backtrack
+                r = this.solution.pop();
+                for (let j = r.left; j !== r; j = j.left) {
+                    this.uncover(j.column);
+                }
+            }
+
+            this.uncover(c);
+            return false;
+        }
+
+        cover(c) {
+            c.right.left = c.left;
+            c.left.right = c.right;
+            for (let i = c.down; i !== c; i = i.down) {
+                for (let j = i.right; j !== i; j = j.right) {
+                    j.down.up = j.up;
+                    j.up.down = j.down;
+                    j.column.size--;
+                }
+            }
+        }
+
+        uncover(c) {
+            for (let i = c.up; i !== c; i = i.up) {
+                for (let j = i.left; j !== i; j = j.left) {
+                    j.column.size++;
+                    j.down.up = j;
+                    j.up.down = j;
+                }
+            }
+            c.right.left = c;
+            c.left.right = c;
+        }
+
+        solve(fixedValues) {
+            this.solution = [];
+            this.result = null;
+            this.initializeMatrix(fixedValues);
+            this.search(0);
+
+            if (!this.result) return null;
+
+            // Convert DLX nodes back to 9x9 grid
+            let solvedGrid = new Array(81).fill(0);
+            for (let node of this.result) {
+                let [r, c, n] = node.rowID;
+                solvedGrid[r * 9 + c] = n;
+            }
+            return solvedGrid;
+        }
+    }
+
+    /**
+     * GAME UI & LOGIC
+     */
+    class SudokuGame {
+        constructor() {
+            this.boardElement = document.getElementById("board");
+            this.statusElement = document.getElementById("status");
+            this.cells = [];
+            this.selectedCellIndex = -1;
+            this.grid = new Array(81).fill(0); // Current state
+            this.fixed = new Array(81).fill(false); // Fixed original numbers
+
+            this.dlx = new DancingLinksSolver();
+
+            this.initBoard();
+            this.addEventListeners();
+            this.generateGame(30); // Start with an easy game
+        }
+
+        initBoard() {
+            this.boardElement.innerHTML = "";
+            this.cells = [];
+            for (let i = 0; i < 81; i++) {
+                let cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.dataset.index = i;
+                cell.addEventListener("click", () => this.selectCell(i));
+                this.boardElement.appendChild(cell);
+                this.cells.push(cell);
+            }
+        }
+
+        selectCell(index) {
+            if (this.selectedCellIndex !== -1) {
+                this.cells[this.selectedCellIndex].classList.remove("selected");
+            }
+            this.selectedCellIndex = index;
+            this.cells[index].classList.add("selected");
+            this.highlightRelated(index);
+        }
+
+        highlightRelated(index) {
+            // Clear old highlights
+            this.cells.forEach((c) => c.classList.remove("highlighted"));
+
+            if (index === -1) return;
+
+            const row = Math.floor(index / 9);
+            const col = index % 9;
+            const boxStartRow = Math.floor(row / 3) * 3;
+            const boxStartCol = Math.floor(col / 3) * 3;
+
+            for (let i = 0; i < 81; i++) {
+                const r = Math.floor(i / 9);
+                const c = i % 9;
+                // Highlight Row, Col, and Box
+                if (
+                    r === row ||
+                    c === col ||
+                    (r >= boxStartRow &&
+                        r < boxStartRow + 3 &&
+                        c >= boxStartCol &&
+                        c < boxStartCol + 3)
+                ) {
+                    this.cells[i].classList.add("highlighted");
+                }
+            }
+        }
+
+        updateCell(number) {
+            if (this.selectedCellIndex === -1) return;
+            if (this.fixed[this.selectedCellIndex]) return; // Can't change original clues
+
+            this.grid[this.selectedCellIndex] = number;
+            this.render();
+        }
+
+        render() {
+            for (let i = 0; i < 81; i++) {
+                const cell = this.cells[i];
+                const val = this.grid[i];
+                cell.textContent = val === 0 ? "" : val;
+
+                // Reset classes
+                cell.className = "cell";
+                if (i === this.selectedCellIndex) cell.classList.add("selected");
+
+                if (this.fixed[i]) {
+                    cell.classList.add("original");
+                } else if (val !== 0) {
+                    cell.classList.add("user-input");
+                }
+            }
+            // Re-apply highlights if needed
+            this.highlightRelated(this.selectedCellIndex);
+        }
+
+        generateGame(holes) {
+            this.statusElement.innerText = "Generating...";
+
+            // 1. Start with empty grid
+            const empty = new Array(81).fill(0);
+
+            // 2. Solve empty grid (DLX will give the first valid sudoku solution it finds)
+            // To make it random, we could shuffle the input rows in DLX,
+            // but simplified here: we just fill diagonal boxes randomly then solve.
+
+            // Randomize diagonal boxes to ensure variety
+            const seedGrid = new Array(81).fill(0);
+            this.fillDiagonalBox(seedGrid, 0);
+            this.fillDiagonalBox(seedGrid, 4);
+            this.fillDiagonalBox(seedGrid, 8);
+
+            const solved = this.dlx.solve(seedGrid);
+
+            // 3. Create puzzle by removing numbers
+            this.grid = [...solved];
+            this.fixed = new Array(81).fill(true);
+
+            // Remove 'holes' number of cells
+            let attempts = holes;
+            while (attempts > 0) {
+                let idx = Math.floor(Math.random() * 81);
+                if (this.grid[idx] !== 0) {
+                    this.grid[idx] = 0;
+                    this.fixed[idx] = false;
+                    attempts--;
+                }
+            }
+
+            this.selectedCellIndex = -1;
+            this.render();
+            this.statusElement.innerText = `New Game Generated (${holes} empty cells)`;
+        }
+
+        fillDiagonalBox(grid, boxIdx) {
+            // 3x3 box start index
+            const startRow = Math.floor(boxIdx / 3) * 3;
+            const startCol = (boxIdx % 3) * 3;
+            const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9].sort(() => Math.random() - 0.5);
+
+            let k = 0;
+            for (let r = 0; r < 3; r++) {
+                for (let c = 0; c < 3; c++) {
+                    grid[(startRow + r) * 9 + (startCol + c)] = nums[k++];
+                }
+            }
+        }
+
+        solveGame() {
+            // Take current fixed + user inputs that are valid
+            // Strictly speaking, we should check if user inputs are valid first.
+            // Here we just ask DLX to solve based on what's currently on board.
+
+            const result = this.dlx.solve(this.grid);
+
+            if (result) {
+                // Animation effect for new solved numbers
+                for (let i = 0; i < 81; i++) {
+                    if (this.grid[i] === 0) {
+                        this.cells[i].classList.add("solved");
+                    }
+                    this.grid[i] = result[i];
+                }
+                this.render();
+                this.statusElement.innerText = "Solved!";
+            } else {
+                this.statusElement.innerText =
+                    "No solution exists for current board configuration.";
+            }
+        }
+
+        clearBoard() {
+            for (let i = 0; i < 81; i++) {
+                if (!this.fixed[i]) this.grid[i] = 0;
+            }
+            this.render();
+            this.statusElement.innerText = "Board Cleared";
+        }
+
+        addEventListeners() {
+            // Keypad
+            document.addEventListener("keydown", (e) => {
+                const key = e.key;
+                if (key >= "1" && key <= "9") {
+                    this.updateCell(parseInt(key));
+                } else if (key === "Backspace" || key === "Delete") {
+                    this.updateCell(0);
+                }
+            });
+
+            // Buttons
+            document.getElementById("btn-new-easy").onclick = () =>
+                this.generateGame(30);
+            document.getElementById("btn-new-hard").onclick = () =>
+                this.generateGame(50);
+            document.getElementById("btn-solve").onclick = () => this.solveGame();
+            document.getElementById("btn-clear").onclick = () => this.clearBoard();
+        }
+    }
+
+    // Initialize
+    const game = new SudokuGame();
+
+</script>
+</body>
+</html>

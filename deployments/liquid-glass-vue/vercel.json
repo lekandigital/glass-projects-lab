@@ -1,5 +1,0 @@
-{
-  "name": "glasslab-liquid-vue",
-  "buildCommand": "cd upstream && npm install && npm run build",
-  "outputDirectory": "upstream/dist"
-}

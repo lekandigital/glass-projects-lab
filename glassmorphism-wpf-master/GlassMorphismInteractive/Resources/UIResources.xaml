@@ -1,0 +1,40 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!-- UI Colors -->
+    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="#33000000" />
+    <SolidColorBrush x:Key="TextForegroundBrush" Color="White" />
+    <SolidColorBrush x:Key="PlayPauseButtonBrush" Color="#4400FF88" />
+    <SolidColorBrush x:Key="PauseCardsButtonBrush" Color="#44FF4400" />
+    <SolidColorBrush x:Key="PauseBackgroundButtonBrush" Color="#4444FF00" />
+    <SolidColorBrush x:Key="ResetButtonBrush" Color="#44FF8800" />
+    <SolidColorBrush x:Key="ButtonForegroundBrush" Color="White" />
+
+    <!-- UI Text Constants -->
+    <sys:String x:Key="InteractiveControlsText">Interactive Controls</sys:String>
+    <sys:String x:Key="ResetButtonText">Reset</sys:String>
+    <sys:String x:Key="SpeedText">Speed</sys:String>
+    <sys:String x:Key="EffectSelectionText">Effect Selection</sys:String>
+    <sys:String x:Key="BackgroundText">Background:</sys:String>
+    <sys:String x:Key="CardStyleText">Card Style:</sys:String>
+    <sys:String x:Key="EffectProcessorText">Effect Processor:</sys:String>
+    <sys:String x:Key="SelectImageText">Select Image...</sys:String>
+
+    <!-- Background Options -->
+    <sys:String x:Key="ClassicGradientText">Classic Gradient</sys:String>
+    <sys:String x:Key="AuroraWavesText">Aurora Waves</sys:String>
+    <sys:String x:Key="NeonGridText">Neon Grid</sys:String>
+    <sys:String x:Key="ImageBackgroundText">Image Background</sys:String>
+
+    <!-- Card Style Options -->
+    <sys:String x:Key="ClassicGlassText">Classic Glass</sys:String>
+    <sys:String x:Key="HolographicText">Holographic</sys:String>
+    <sys:String x:Key="NeonGlowText">Neon Glow</sys:String>
+    <sys:String x:Key="TransparentGlassText">Transparent Glass</sys:String>
+    <sys:String x:Key="EnhancedGlassText">Enhanced Glass</sys:String>
+    <sys:String x:Key="WaterDropText">Water Drop</sys:String>
+
+    <!-- Effect Processor Options -->
+    <sys:String x:Key="ClassicGlassmorphismText">Classic Glassmorphism</sys:String>
+    <sys:String x:Key="EnhancedGlassmorphismText">Enhanced Glassmorphism</sys:String>
+</ResourceDictionary>

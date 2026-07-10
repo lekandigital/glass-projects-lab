@@ -1,8 +1,0 @@
-Running: npx --yes bun install
-CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-react-master-liquid-glass-react-master/liquid-glass-react-master
-----------------------------------------
-bun install v1.3.14 (0d9b296a)
-9 |   "workspaces": ["liquid-glass"],
-                     ^
-error: Workspace not found "liquid-glass"
-    at /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-react-master-liquid-glass-react-master/liquid-glass-react-master/package.json:9:18

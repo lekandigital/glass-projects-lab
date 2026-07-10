@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Riemann's Manifold and Metric Tensor</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #111525;
+            color: #FFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #FFF;
+            margin-bottom: 10px;
+        }
+
+        p {
+            max-width: 1000px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        canvas {
+            border: 2px solid #2c3e50;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            max-width: 1000px;
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-size: 1.1em;
+            margin-right: 10px;
+            color: #000;
+        }
+
+        input[type="range"] {
+            width: 500px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 1000px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
+
+            canvas {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Riemann's Manifold and Metric Tensor (1854)</h1>
+<p>
+    In his 1854 habilitation lecture, Bernhard Riemann introduced the concept of a manifold with a smoothly varying
+    positive-definite metric tensor, laying the foundation for modern differential geometry. This interactive
+    visualization simplifies the metric as a scalar field on a 2D surface, with colors indicating its magnitude. Adjust
+    the variation speed below.
+</p>
+<canvas height="400" id="manifoldCanvas" width="1000"></canvas>
+<div class="controls">
+    <label for="speed">Metric Variation Speed:</label>
+    <input id="speed" max="0.1" min="0" step="0.001" type="range" value="0.02">
+</div>
+
+<script>
+    const canvas = document.getElementById('manifoldCanvas');
+    const ctx = canvas.getContext('2d');
+    const speedSlider = document.getElementById('speed');
+
+    // Canvas dimensions
+    const width = canvas.width;
+    const height = canvas.height;
+
+    // Function to compute a simple manifold surface height (for visualization)
+    function getSurfaceHeight(x, y, t) {
+        return 50 * Math.sin((x / 50 + t) * Math.cos(y / 50));
+    }
+
+    // Function to compute a simplified metric scalar field
+    function getMetric(x, y, t) {
+        return 1 + 0.5 * Math.sin(x / 50 + t) * Math.cos(y / 50);
+    }
+
+    // Color mapping for metric visualization
+    function getColor(metric) {
+        const r = Math.min(255, Math.floor(255 * (1 - metric / 2)));
+        const g = Math.min(255, Math.floor(255 * metric / 2));
+        const b = 50;
+        return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    // Animation loop
+    let time = 0;
+
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Draw grid on manifold
+        const gridSize = 20;
+        for (let x = 0; x < width; x += gridSize) {
+            for (let y = 0; y < height; y += gridSize) {
+                const metric = getMetric(x, y, time);
+                ctx.fillStyle = getColor(metric);
+                ctx.beginPath();
+                ctx.arc(x, y + getSurfaceHeight(x, y, time), 3, 0, 2 * Math.PI);
+                ctx.fill();
+
+                // Draw lines to form grid
+                ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+                ctx.beginPath();
+                if (x + gridSize < width) {
+                    ctx.moveTo(x, y + getSurfaceHeight(x, y, time));
+                    ctx.lineTo(x + gridSize, y + getSurfaceHeight(x + gridSize, y, time));
+                }
+                if (y + gridSize < height) {
+                    ctx.moveTo(x, y + getSurfaceHeight(x, y, time));
+                    ctx.lineTo(x, y + gridSize + getSurfaceHeight(x, y + gridSize, time));
+                }
+                ctx.stroke();
+            }
+        }
+
+        // Update time based on slider
+        time += parseFloat(speedSlider.value);
+        requestAnimationFrame(animate);
+    }
+
+    // Start animation
+    animate();
+</script>
+</body>
+</html>

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blending Colours with Sacred Geometry</title>
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;800;900&family=Teko:wght@700&display=swap");
+        :root {
+            --cyan: #0cdbf5;
+            --pink: #ff0cb8;
+            --white: #fff;
+            --black: #000;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: Orbitron, sans-serif;
+        }
+
+        .blend-mode-selector {
+            display: flex;
+        }
+
+        .instagram-cta {
+            --shadow-colour: var(--cyan);
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--black);
+            border-radius: 8px;
+        }
+
+        .instagram-cta__link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s;
+            color: var(--white);
+            font-family: "Orbitron", monospace;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 0 24px var(--shadow-colour), 0 0 12px var(--shadow-colour), 0 0 6px var(--shadow-colour), 0 0 3px var(--shadow-colour);
+        }
+
+        .instagram-cta__link:hover {
+            --shadow-colour: var(--pink);
+        }
+
+        .instagram-cta__icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            fill: currentColor;
+            transition: all 0.5s;
+        }
+
+        .instagram-cta__text {
+            font-size: 18px;
+            font-family: "Orbitron", monospace;
+            font-weight: 800;
+            -webkit-text-stroke: 1px var(--black);
+        }
+
+        @media screen and (min-width: 768px) {
+            .instagram-cta__action {
+                display: inline;
+            }
+        }
+
+        /*# sourceMappingURL=style.css.map */
+
+    </style>
+</head>
+<body>
+<div class="instagram-cta">
+    <a href="https://www.instagram.com/labcat2020/" class="instagram-cta__link" target="_blank" rel="noopener noreferrer">
+        <svg class="instagram-cta__icon" viewBox="0 0 169.06 169.06" xmlns="http://www.w3.org/2000/svg">
+            <path d="M122.406,0H46.654C20.929,0,0,20.93,0,46.655v75.752c0,25.726,20.929,46.655,46.654,46.655h75.752   c25.727,0,46.656-20.93,46.656-46.655V46.655C169.063,20.93,148.133,0,122.406,0z M154.063,122.407   c0,17.455-14.201,31.655-31.656,31.655H46.654C29.2,154.063,15,139.862,15,122.407V46.655C15,29.201,29.2,15,46.654,15h75.752   c17.455,0,31.656,14.201,31.656,31.655V122.407z"></path>
+            <path d="m84.531 40.97c-24.021 0-43.563 19.542-43.563 43.563 0 24.02 19.542 43.561 43.563 43.561s43.563-19.541 43.563-43.561c0-24.021-19.542-43.563-43.563-43.563zm0 72.123c-15.749 0-28.563-12.812-28.563-28.561 0-15.75 12.813-28.563 28.563-28.563s28.563 12.813 28.563 28.563c0 15.749-12.814 28.561-28.563 28.561z"></path>
+            <path d="m129.92 28.251c-2.89 0-5.729 1.17-7.77 3.22-2.051 2.04-3.23 4.88-3.23 7.78 0 2.891 1.18 5.73 3.23 7.78 2.04 2.04 4.88 3.22 7.77 3.22 2.9 0 5.73-1.18 7.78-3.22 2.05-2.05 3.22-4.89 3.22-7.78 0-2.9-1.17-5.74-3.22-7.78-2.04-2.05-4.88-3.22-7.78-3.22z"></path>
+        </svg>
+        <span class="instagram-cta__text">
+      <span class="instagram-cta__action">Follow</span>
+      @labcat2020
+    </span>
+    </a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/liz-peng/p5.Polar@latest/p5.Polar.min.js"></script>
+<script>
+    const sketch = (p) => {
+        /**
+         * Current shape type being used for drawing
+         * @type {string}
+         */
+        p.currentShapeType = "";
+
+        /**
+         * Array of available polar shape types
+         * @type {string[]}
+         */
+        p.shapeTypes = [
+            "polarEllipse",
+            "polarTriangle",
+            "polarSquare",
+            "polarPentagon",
+            "polarHexagon",
+            "polarHeptagon",
+            "polarOctagon"
+        ];
+
+        /**
+         * Current pattern function being used
+         * @type {string}
+         */
+        p.currentPattern = "";
+
+        /**
+         * Array of available pattern drawing functions
+         * @type {string[]}
+         */
+        p.patternFunctions = [
+            "drawVesicaPiscis",
+            "drawSeedOfLife",
+            "drawEggOfLife",
+            "drawFlowerOfLife",
+            "drawFruitOfLife",
+            "drawMetatronsCube"
+        ];
+
+        /**
+         * Available blend modes for the sketch
+         * @type {string[]}
+         */
+        p.blendModes = [
+            "ADD",
+            "DARKEST",
+            "LIGHTEST",
+            "EXCLUSION",
+            "MULTIPLY",
+            "SCREEN",
+            "DIFFERENCE",
+            "HARD_LIGHT"
+        ];
+
+        /**
+         * Initializes the canvas and sets up the sketch
+         */
+        p.setup = () => {
+            p.createCanvas(window.innerWidth, window.innerHeight);
+            p.colorMode(p.HSB, 360, 100, 100, 100);
+            p.setStrokeWeight();
+
+            p.currentBlendMode = p.random(p.blendModes);
+            p.initializeRandomValues();
+            p.initializeUI();
+        };
+
+        /**
+         * Initializes random values for the sketch
+         */
+        p.initializeRandomValues = () => {
+            p.baseHue = p.random(360);
+            p.complementaryHue = (p.baseHue + 180) % 360;
+            p.currentShapeType = p.random(p.shapeTypes);
+            p.currentPattern = p.random(p.patternFunctions);
+            p.altColor = p.setAltColor(p.currentBlendMode);
+        };
+
+        /**
+         * Initializes UI components
+         */
+        p.initializeUI = () => {
+            p.createShapeSelector(p.currentShapeType);
+            p.createRegenerateButton();
+            p.createBlendModeSelector(p.currentBlendMode);
+        };
+
+        /**
+         * Main drawing function that renders the sketch
+         */
+        p.draw = () => {
+            p.clear();
+
+            const cellWidth = p.width / 2;
+            const cellHeight = p.height / 2;
+            const cellAspectRatio = cellWidth / cellHeight;
+            const baseColor = p.color(p.baseHue, 100, 100);
+            const complementaryColor = p.color(p.complementaryHue, 100, 100);
+
+            if (cellAspectRatio > 1.5 && window.innerHeight < 500) {
+                // Single row layout when aspect ratio > 3:2
+                const singleCellWidth = p.width / 4;
+                const singleCellHeight = p.height;
+                p.drawCell(
+                    baseColor,
+                    p.complementaryHue,
+                    0,
+                    0,
+                    singleCellWidth,
+                    singleCellHeight
+                );
+                p.drawCell(
+                    p.altColor,
+                    p.complementaryHue,
+                    singleCellWidth,
+                    0,
+                    singleCellWidth,
+                    singleCellHeight
+                );
+                p.drawCell(
+                    complementaryColor,
+                    p.baseHue,
+                    singleCellWidth * 2,
+                    0,
+                    singleCellWidth,
+                    singleCellHeight
+                );
+                p.drawCell(
+                    p.altColor,
+                    p.baseHue,
+                    singleCellWidth * 3,
+                    0,
+                    singleCellWidth,
+                    singleCellHeight
+                );
+            } else {
+                // 2x2 grid layout
+                p.drawCell(baseColor, p.complementaryHue, 0, 0, cellWidth, cellHeight);
+                p.drawCell(p.altColor, p.baseHue, cellWidth, 0, cellWidth, cellHeight);
+                p.drawCell(
+                    p.altColor,
+                    p.complementaryHue,
+                    0,
+                    cellHeight,
+                    cellWidth,
+                    cellHeight
+                );
+                p.drawCell(
+                    complementaryColor,
+                    p.baseHue,
+                    cellWidth,
+                    cellHeight,
+                    cellWidth,
+                    cellHeight
+                );
+            }
+        };
+
+        /**
+         * Draws a single cell with background color and sacred geometry pattern
+         * @param {p5.Color} bgColor - Background color object
+         * @param {number} strokeHue - Stroke hue value
+         * @param {number} x - X position of the cell
+         * @param {number} y - Y position of the cell
+         * @param {number} w - Width of the cell
+         * @param {number} h - Height of the cell
+         */
+        p.drawCell = (bgColor, strokeHue, x, y, w, h) => {
+            const size = p.min(w, h) * 0.35;
+            p.push();
+            p.translate(x, y);
+            p.fill(bgColor);
+            p.noStroke();
+            p.rect(0, 0, w, h);
+            p.noFill();
+            p.setCenter(w / 2, h / 2);
+            if (["EXCLUSION", "DIFFERENCE"].includes(p.currentBlendMode)) {
+                p.fill(0, 0, 100, 100);
+            } else {
+                p.fill(strokeHue, 100, 100, 20);
+            }
+            p.stroke(strokeHue, 100, 100);
+            p[p.currentPattern](size);
+            p.pop();
+        };
+
+        /**
+         * Creates a blend mode dropdown selector
+         * @param {string} currentBlendMode - Currently selected blend mode
+         */
+        p.createBlendModeSelector = (currentBlendMode = "BLEND") => {
+            const container = document.createElement("div");
+            container.className = "blend-mode-selector";
+            Object.assign(container.style, {
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                zIndex: "1000",
+                alignItems: "center",
+                gap: "5px"
+            });
+
+            const label = document.createElement("div");
+            label.textContent = "BLEND MODE";
+            label.style.cssText =
+                "color: white; font-size: 10px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); background-color: rgba(0,0,0,0.7); padding: 5px; border-radius: 3px;";
+            container.appendChild(label);
+
+            const select = document.createElement("select");
+            select.style.cssText =
+                "padding: 5px; border-radius: 3px; border: none; background-color: white; color: black; font-size: 12px; cursor: pointer;";
+
+            const blendModes = p.blendModes;
+
+            blendModes.forEach((mode) => {
+                const option = document.createElement("option");
+                option.value = mode;
+                option.textContent = mode;
+                if (mode === currentBlendMode) {
+                    option.selected = true;
+                }
+                select.appendChild(option);
+            });
+
+            select.addEventListener("change", (event) => {
+                event.stopPropagation();
+                const selectedMode = event.target.value;
+                p.currentBlendMode = selectedMode;
+                p.blendMode(p[selectedMode]);
+                p.altColor = p.setAltColor(selectedMode);
+            });
+
+            select.addEventListener("click", (event) => {
+                event.stopPropagation();
+            });
+
+            select.addEventListener("mousedown", (event) => {
+                event.stopPropagation();
+            });
+
+            container.appendChild(select);
+            document.body.appendChild(container);
+
+            // Set initial blend mode
+            p.currentBlendMode = currentBlendMode;
+            p.blendMode(p[currentBlendMode]);
+        };
+
+        /**
+         * Determines alternate color based on blend mode
+         * @param {string} blendMode - Current blend mode
+         * @returns {p5.Color} Color object (black or white)
+         */
+        p.setAltColor = (blendMode) => {
+            console.log(blendMode);
+
+            if (["DARKEST", "MULTIPLY", "DIFFERENCE"].includes(blendMode))
+                return p.color(0, 0, 100);
+            if (["ADD", "LIGHTEST", "EXCLUSION", "SCREEN"].includes(blendMode))
+                return p.color(0, 0, 0);
+            return Math.random() < 0.5 ? p.color(0, 0, 0) : p.color(0, 0, 100);
+        };
+
+        /**
+         * Draws the vesica piscis pattern
+         * @param {number} size - Size of the pattern
+         */
+        p.drawVesicaPiscis = (size) => {
+            if (p.currentShapeType === "polarEllipse") {
+                p.polarEllipse(0, size, size);
+                p.polarEllipse(0, size / 2, size / 2);
+                p.polarEllipse(0, (size / 4) * 3, (size / 4) * 3, size / 4);
+                p.polarEllipse(0, (size / 4) * 3, (size / 4) * 3, -size / 4);
+            } else {
+                p[p.currentShapeType](0, size);
+                p[p.currentShapeType](0, size / 2);
+                p[p.currentShapeType](0, (size / 4) * 3, -size / 4);
+                p[p.currentShapeType](180, (size / 4) * 3, -size / 4);
+            }
+        };
+
+        /**
+         * Draws the seed of life pattern
+         * @param {number} size - Size of the pattern
+         */
+        p.drawSeedOfLife = (size) => {
+            const shapeSize = size / 2;
+            if (p.currentShapeType === "polarEllipse") {
+                p.polarEllipse(0, shapeSize, shapeSize);
+                p.polarEllipses(6, shapeSize, shapeSize, shapeSize);
+            } else {
+                p[p.currentShapeType](0, shapeSize);
+                p[`${p.currentShapeType}s`](6, shapeSize, shapeSize);
+            }
+        };
+
+        /**
+         * Draws the seed of life pattern
+         * @param {number} size - Size of the pattern
+         */
+        p.drawEggOfLife = (size) => {
+            const shapeSize = size / 3;
+            if (p.currentShapeType === "polarEllipse") {
+                p.polarEllipse(0, shapeSize, shapeSize);
+                p.polarEllipses(6, shapeSize, shapeSize, shapeSize * 2);
+            } else {
+                p[p.currentShapeType](0, shapeSize);
+                p[`${p.currentShapeType}s`](6, shapeSize, shapeSize * 2);
+            }
+        };
+
+        /**
+         * Draws the flower of life pattern
+         * @param {number} size - Size of the pattern
+         */
+        p.drawFlowerOfLife = (size) => {
+            const shapeSize = size / 3;
+            if (p.currentShapeType === "polarEllipse") {
+                p.polarEllipse(0, size, size);
+                p.polarEllipse(0, shapeSize, shapeSize);
+                p.polarEllipses(6, shapeSize, shapeSize, shapeSize);
+                p.polarEllipses(12, shapeSize, shapeSize, shapeSize * 2);
+            } else {
+                p[p.currentShapeType](0, size);
+                p[p.currentShapeType](0, shapeSize);
+                p[`${p.currentShapeType}s`](6, shapeSize, shapeSize);
+                p[`${p.currentShapeType}s`](12, shapeSize, shapeSize * 2);
+            }
+        };
+
+        /**
+         * Draws the fruit of life pattern
+         * @param {number} size - Size of the pattern
+         */
+        p.drawFruitOfLife = (size) => {
+            const shapeSize = size / 5;
+            if (p.currentShapeType === "polarEllipse") {
+                p.polarEllipse(0, shapeSize, shapeSize);
+                p.polarEllipses(6, shapeSize, shapeSize, shapeSize * 2);
+                p.polarEllipses(6, shapeSize, shapeSize, shapeSize * 4);
+            } else {
+                p[p.currentShapeType](0, shapeSize);
+                p[`${p.currentShapeType}s`](6, shapeSize, shapeSize * 2);
+                p[`${p.currentShapeType}s`](6, shapeSize, shapeSize * 4);
+            }
+        };
+
+        /**
+         * Draws Metatrons Cube pattern
+         * @param {number} size - Size of the pattern
+         */
+        p.drawMetatronsCube = (size) => {
+            const shapeSize = size / 5;
+            if (p.currentShapeType === "polarEllipse") {
+                p.polarEllipse(0, shapeSize, shapeSize);
+                p.polarEllipses(6, shapeSize, shapeSize, shapeSize * 2);
+                p.polarEllipses(6, shapeSize, shapeSize, shapeSize * 4);
+            } else {
+                p[p.currentShapeType](0, shapeSize);
+                p[`${p.currentShapeType}s`](6, shapeSize, shapeSize * 2);
+                p[`${p.currentShapeType}s`](6, shapeSize, shapeSize * 4);
+            }
+
+            const originalStrokeWeight = p.drawingContext.lineWidth;
+            p.strokeWeight(originalStrokeWeight / 4);
+
+            const linePositions = [];
+            for (let i = 0; i < 6; i++) {
+                const angle = (p.TWO_PI / 6) * i + p.PI / 6;
+                linePositions.push({
+                    x: p.cos(angle) * shapeSize * 2,
+                    y: p.sin(angle) * shapeSize * 2
+                });
+                linePositions.push({
+                    x: p.cos(angle) * shapeSize * 4,
+                    y: p.sin(angle) * shapeSize * 4
+                });
+            }
+
+            for (let i = 0; i < linePositions.length; i++) {
+                for (let j = i + 1; j < linePositions.length; j++) {
+                    p.line(
+                        linePositions[i].x,
+                        linePositions[i].y,
+                        linePositions[j].x,
+                        linePositions[j].y
+                    );
+                }
+            }
+            p.strokeWeight(originalStrokeWeight);
+        };
+
+        p.createShapeSelector = (currentShape) => {
+            const container = document.createElement("div");
+            container.className = "shape-selector";
+            Object.assign(container.style, {
+                position: "absolute",
+                top: "10px",
+                left: "10px",
+                zIndex: "1000",
+                display: "flex",
+                alignItems: "center",
+                gap: "5px"
+            });
+
+            const label = document.createElement("div");
+            label.textContent = "SELECT SHAPE";
+            label.style.cssText =
+                "color: white; font-size: 10px; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); background-color: rgba(0,0,0,0.7); padding: 5px; border-radius: 3px;";
+            container.appendChild(label);
+
+            const shapeNames = [
+                "Circle",
+                "Triangle",
+                "Square",
+                "Pentagon",
+                "Hexagon",
+                "Heptagon",
+                "Octagon"
+            ];
+
+            shapeNames.forEach((shapeName, index) => {
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "shape";
+                radio.value = p.shapeTypes[index];
+                radio.style.display = "none";
+
+                const button = document.createElement("div");
+                Object.assign(button.style, {
+                    width: "28px",
+                    height: "28px",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                });
+
+                const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svg.setAttribute("viewBox", "0 0 20 20");
+                svg.style.cssText =
+                    "width: 20px; height: 20px; stroke: black; stroke-width: 2; fill: none;";
+
+                // Create shape
+                if (shapeName === "Circle") {
+                    const circle = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "circle"
+                    );
+                    circle.setAttribute("cx", "10");
+                    circle.setAttribute("cy", "10");
+                    circle.setAttribute("r", "8");
+                    svg.appendChild(circle);
+                } else if (shapeName === "Triangle") {
+                    const triangle = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "polygon"
+                    );
+                    triangle.setAttribute("points", "10,2 18,16 2,16");
+                    svg.appendChild(triangle);
+                } else if (shapeName === "Square") {
+                    const square = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "rect"
+                    );
+                    square.setAttribute("x", "2");
+                    square.setAttribute("y", "2");
+                    square.setAttribute("width", "16");
+                    square.setAttribute("height", "16");
+                    svg.appendChild(square);
+                } else {
+                    const sides = { Pentagon: 5, Hexagon: 6, Heptagon: 7, Octagon: 8 }[
+                        shapeName
+                        ];
+                    const rotationOffset =
+                        shapeName === "Hexagon"
+                            ? Math.PI / 6
+                            : shapeName === "Octagon"
+                                ? Math.PI / 8
+                                : 0;
+
+                    const polygon = document.createElementNS(
+                        "http://www.w3.org/2000/svg",
+                        "polygon"
+                    );
+                    const points = [];
+                    for (let i = 0; i < sides; i++) {
+                        const angle =
+                            (i * 2 * Math.PI) / sides - Math.PI / 2 + rotationOffset;
+                        points.push(
+                            `${10 + 8 * Math.cos(angle)},${10 + 8 * Math.sin(angle)}`
+                        );
+                    }
+                    polygon.setAttribute("points", points.join(" "));
+                    svg.appendChild(polygon);
+                }
+
+                button.appendChild(svg);
+
+                const handleClick = (event) => {
+                    if (event) {
+                        event.stopPropagation();
+                        event.preventDefault();
+                    }
+                    document.querySelectorAll('input[name="shape"]').forEach((r) => {
+                        r.checked = false;
+                        const nextSibling = r.nextElementSibling;
+                        if (nextSibling) nextSibling.style.backgroundColor = "transparent";
+                    });
+                    radio.checked = true;
+                    button.style.backgroundColor = "white";
+                    p.currentShapeType = radio.value;
+                };
+
+                button.addEventListener("click", handleClick);
+                if (radio.value === currentShape) handleClick();
+
+                container.appendChild(radio);
+                container.appendChild(button);
+            });
+
+            document.body.appendChild(container);
+        };
+
+        /**
+         * Creates the regenerate button and pattern display
+         */
+        p.createRegenerateButton = () => {
+            const container = document.createElement("div");
+            container.style.position = "absolute";
+            container.style.bottom = "10px";
+            container.style.right = "10px";
+            container.style.display = "flex";
+            container.style.flexDirection = "column";
+            container.style.alignItems = "flex-end";
+            container.style.gap = "10px";
+            container.style.zIndex = "1000";
+
+            const patternText = document.createElement("div");
+            patternText.id = "pattern-display";
+            patternText.style.color = "white";
+            patternText.style.fontSize = "14px";
+            patternText.style.fontWeight = "bold";
+            patternText.style.textShadow = "1px 1px 2px rgba(0,0,0,0.8)";
+            patternText.style.backgroundColor = "rgba(0,0,0,0.7)";
+            patternText.style.padding = "5px 10px";
+            patternText.style.borderRadius = "3px";
+
+            const button = document.createElement("button");
+            button.textContent = "REGENERATE";
+            button.style.backgroundColor = "black";
+            button.style.color = "white";
+            button.style.border = "none";
+            button.style.padding = "10px 20px";
+            button.style.cursor = "pointer";
+            button.style.fontSize = "16px";
+            button.style.borderRadius = "5px";
+
+            container.appendChild(patternText);
+            container.appendChild(button);
+            document.body.appendChild(container);
+
+            p.updatePatternDisplay();
+        };
+
+        /**
+         * Updates the pattern display text
+         */
+        p.updatePatternDisplay = () => {
+            const patternDisplay = document.getElementById("pattern-display");
+            if (patternDisplay) {
+                const patternName = p.currentPattern
+                    .replace("draw", "")
+                    .replace(/([A-Z])/g, " $1")
+                    .trim();
+                patternDisplay.textContent = patternName;
+            }
+        };
+
+        /**
+         * Sets the global stroke weight based on the smaller dimension of the canvas
+         */
+        p.setStrokeWeight = () => {
+            const weight = p.min(p.width, p.height) * 0.01;
+            p.strokeWeight(weight);
+        };
+
+        /**
+         * Customized mouse press handler for sketch-2
+         * Handles blend mode selector and regenerates the sketch
+         */
+        p.mousePressed = () => {
+            const elements = document.elementsFromPoint(
+                p.mouseX + p.canvas.offsetLeft,
+                p.mouseY + p.canvas.offsetTop
+            );
+            const isOverShapeSelector = elements.some((el) =>
+                el.closest(".shape-selector")
+            );
+            const isOverBlendModeSelector = elements.some((el) =>
+                el.closest(".blend-mode-selector")
+            );
+
+            if (isOverShapeSelector || isOverBlendModeSelector) return;
+
+            p.initializeRandomValues();
+
+            p.updatePatternDisplay();
+
+            // Update shape selector UI
+            const allRadios = document.querySelectorAll('input[name="shape"]');
+            allRadios.forEach((r) => {
+                r.checked = false;
+                const shapeButton = r.nextElementSibling;
+                if (shapeButton) {
+                    shapeButton.style.backgroundColor = "transparent";
+                }
+            });
+
+            const selectedRadio = document.querySelector(
+                `input[value="${p.currentShapeType}"]`
+            );
+            if (selectedRadio) {
+                selectedRadio.checked = true;
+                const shapeButton = selectedRadio.nextElementSibling;
+                if (shapeButton) {
+                    shapeButton.style.backgroundColor = "white";
+                }
+            }
+        };
+
+        /**
+         * Sets the global stroke weight based on the smaller dimension of the canvas
+         */
+        p.setStrokeWeight = () => {
+            const weight = Math.min(p.width, p.height) * 0.01;
+            p.strokeWeight(weight);
+        };
+
+        /**
+         * Resizes the canvas when the window is resized and redraws
+         */
+        p.windowResized = () => {
+            p.resizeCanvas(p.windowWidth, p.windowHeight);
+            p.setStrokeWeight();
+            p.redraw();
+        };
+
+        /**
+         * Checks if the canvas is in portrait orientation
+         * @returns {boolean} true if portrait, false otherwise
+         */
+        p.isPortraitCanvas = () => {
+            return p.height > p.width;
+        };
+
+        /**
+         * Converts a string to a deterministic seed for p5.js random functions
+         * Used with highlight.xyz for consistent generative art
+         * @param {string} str - The string to convert to a seed
+         * @returns {number} A deterministic seed value
+         */
+        p.hashToSeed = (str) => {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = (Math.imul(31, hash) + str.charCodeAt(i)) | 0;
+            }
+            return Math.abs(hash);
+        };
+    };
+
+    new p5(sketch);
+
+</script>
+</body>
+</html>

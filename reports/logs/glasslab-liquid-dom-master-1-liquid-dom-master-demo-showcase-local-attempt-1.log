@@ -1,6 +1,0 @@
-Running: npm install
-CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-dom-master-1-liquid-dom-master-demo-showcase/liquid-dom-master/demo/showcase
-----------------------------------------
-npm error code EUNSUPPORTEDPROTOCOL
-npm error Unsupported URL Type "workspace:": workspace:*
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T02_27_35_644Z-debug-0.log

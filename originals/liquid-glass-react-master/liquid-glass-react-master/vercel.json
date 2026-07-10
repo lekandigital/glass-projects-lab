@@ -1,4 +1,0 @@
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "liquid-glass-react-master/liquid-glass-example/.next"
-}

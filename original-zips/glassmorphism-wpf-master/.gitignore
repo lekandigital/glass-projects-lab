@@ -1,0 +1,10 @@
+﻿/.vscode/launch.json
+/GlassMorphismInteractive/obj/*
+/.idea/.idea.glassmorphism-wpf/.idea
+/.vs/glassmorphism-wpf
+/.vscode
+/GlassmorphismSkiaSharp/bin/Release/net8.0-windows
+/GlassmorphismSkiaSharp/obj
+/GlassmorphismXaml/bin/Release/net8.0-windows
+/GlassmorphismXaml/obj
+/glassmorphism-wpf.sln.DotSettings.user
