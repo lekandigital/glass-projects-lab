@@ -1,11 +1,12 @@
 # Projects Glass Attempt Two
 
 Live gallery: https://projects-glass-attempt-two-chi.vercel.app
-GitHub repository: https://github.com/lekandigital/projects-glass-attempt-two
+GitHub repository: https://github.com/lekandigital/glass-projects-lab
 
 ## Documentation Links
-- [Projects Index](index.html)
-- [Deploy Instructions](DEPLOY_INSTRUCTIONS.md)
+- [Live Gallery](https://projects-glass-attempt-two-chi.vercel.app)
+- [All Deployments](docs/deployments.md)
+- [All References](docs/references.md)
 
 ## Verified Projects
 
