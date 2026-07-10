@@ -23,11 +23,11 @@ Use this file as the replay guide when moving the catalog to a new Vercel accoun
 
 | Project | Type / preset | Deploy folder | Notes |
 | --- | --- | --- | --- |
-| `.` root catalog | Static / no framework | `/Users/lekan/Dev/projects-glass-attempt-two` | Serves the catalog page in `index.html`. Deploy from the repo root. |
-| `Frontend-Projects-main/liquid-glass-vue` | Vite | `/Users/lekan/Dev/projects-glass-attempt-two/Frontend-Projects-main/liquid-glass-vue` | Vercel auto-detected Vite and built successfully. Live alias: `https://liquid-glass-vue-eta.vercel.app/` |
-| `liquid-glass-react-master/liquid-glass-example` | Next.js | `/Users/lekan/Dev/projects-glass-attempt-two/liquid-glass-react-master/liquid-glass-example` | Vercel blocked `next@15.3.3` as vulnerable. Bumped to `next@16.2.10`, then deploy worked. Live alias: `https://liquid-glass-example-sage.vercel.app/` |
-| `glass-refraction-master/examples/vanilla` | Static HTML/CSS/JS | `/Users/lekan/Dev/projects-glass-attempt-two/glass-refraction-master/examples/vanilla` | This is a static page. The stylesheet link must point to `../../src/css/glass.css`. No generated CSS file was needed. |
-| `glass-refraction-master/examples/nextjs` | Next.js | Temporary demo folder used during deploy | The catalog points at `https://glass-refraction-next-demo.vercel.app/`. To reproduce from a fresh account, recreate a small Next app shell with the example `page.tsx` and shared glass components, then deploy that folder. |
+| `.` root catalog | Static / no framework | `/Users/lekan/Dev/glass-projects-lab` | Serves the catalog page in `index.html`. Deploy from the repo root. |
+| `Frontend-Projects-main/liquid-glass-vue` | Vite | `/Users/lekan/Dev/glass-projects-lab/Frontend-Projects-main/liquid-glass-vue` | Vercel auto-detected Vite and built successfully. Live alias: `https://glass-projects-lab-frontend-vue.vercel.app/` |
+| `liquid-glass-react-master/liquid-glass-example` | Next.js | `/Users/lekan/Dev/glass-projects-lab/liquid-glass-react-master/liquid-glass-example` | Vercel blocked `next@15.3.3` as vulnerable. Bumped to `next@16.2.10`, then deploy worked. Live alias: `https://glass-projects-lab-liquid-glass-exa.vercel.app/` |
+| `glass-refraction-master/examples/vanilla` | Static HTML/CSS/JS | `/Users/lekan/Dev/glass-projects-lab/glass-refraction-master/examples/vanilla` | This is a static page. The stylesheet link must point to `../../src/css/glass.css`. No generated CSS file was needed. |
+| `glass-refraction-master/examples/nextjs` | Next.js | Temporary demo folder used during deploy | The catalog points at `https://glass-projects-lab-glass-refraction.vercel.app/`. To reproduce from a fresh account, recreate a small Next app shell with the example `page.tsx` and shared glass components, then deploy that folder. |
 | `glassmorphism-wpf-master` | Undeployable | N/A | Windows WPF project. Keep the catalog row greyed out with the `undeployable net` badge. |
 
 ## Other static catalog entries
@@ -52,15 +52,15 @@ The repo already contains a lot of those static demos, so the root catalog is th
 
 ```bash
 # Root catalog
-cd /Users/lekan/Dev/projects-glass-attempt-two
+cd /Users/lekan/Dev/glass-projects-lab
 vercel deploy --prod --yes
 
 # Frontend Projects Vue demo
-cd /Users/lekan/Dev/projects-glass-attempt-two/Frontend-Projects-main/liquid-glass-vue
+cd /Users/lekan/Dev/glass-projects-lab/Frontend-Projects-main/liquid-glass-vue
 vercel deploy --prod --yes
 
 # Liquid Glass React example
-cd /Users/lekan/Dev/projects-glass-attempt-two/liquid-glass-react-master/liquid-glass-example
+cd /Users/lekan/Dev/glass-projects-lab/liquid-glass-react-master/liquid-glass-example
 vercel deploy --prod --yes
 ```
 
