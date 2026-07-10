@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Moon - Glowing Cards</title>
+
+    <style>
+        @layer base, demo;
+        @import url(https://fonts.bunny.net/css?family=abel:400);
+
+        @property --angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        @layer demo {
+            .cards {
+                width: min(100% - 4rem, 600px);
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+                gap: 3rem;
+            }
+
+            .card {
+                --animation-duration: 8s;
+
+                --border-width: 5px;
+                --glow-offset: -20px;
+                --border-radius: 0px;
+                /*
+                --neon-clr-1: rgb(110, 17, 176);
+                --neon-clr-2: rgb(190, 219, 255);
+                */
+
+                position: relative;
+                border: solid var(--border-width) #0000;
+                border-radius: var(--border-radius);
+
+                @media (width > 600px) {
+                    min-height: 350px;
+                }
+
+                /*isolation: isolate;*/
+                /* not relevant - just to place the text in the center */
+
+                background-image: url("https://images.unsplash.com/photo-1481819613568-3701cbc70156?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDQ2NTU3MTR8&ixlib=rb-4.0.3&q=85");
+                background-attachment: fixed;
+                background-size: cover;
+                background-position: top center;
+
+                /* natural color */
+
+                &:nth-child(1) {
+                    --moon-clr: rgb(1, 1, 1);
+                }
+
+                /* orange moon */
+
+                &:nth-child(2) {
+                    --moon-clr: rgb(166, 95, 0);
+                }
+
+                /* red moon */
+
+                &:nth-child(3) {
+                    --moon-clr: rgb(159, 7, 18);
+                }
+
+                /* blue moon */
+
+                &:nth-child(4) {
+                    --moon-clr: rgb(0, 89, 138);
+                }
+
+                & > div {
+                    position: relative;
+                    z-index: 2;
+                    display: grid;
+                    grid-template-rows: auto 1fr auto;
+                    height: 100%;
+                    padding: 1rem;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient(to bottom, var(--moon-clr), #0000);
+                        opacity: 0.5;
+                        z-index: -1;
+                    }
+                }
+
+                & h2 {
+                    margin: 0;
+                    font-size: 1.4rem;
+                    text-shadow: 1px 1px var(--moon-clr);
+                }
+
+                & p {
+                    text-shadow: 0 0 2px black;
+                    font-size: 0.9rem;
+                    line-height: 1.4;
+                }
+
+                & a {
+                    background-color: var(--moon-clr);
+                    color: white;
+                    font-size: 0.8rem;
+                    text-transform: lowercase;
+                    width: 80px;
+                    padding: 0.25rem 0.5rem;
+                    text-decoration: none;
+                    transition: 150ms ease-in-out;
+                    border: 1px solid rgba(255 255 255 / 0.5);
+
+                    &:hover {
+                        width: 100%;
+                    }
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    inset: calc(
+                            var(--border-width) * -1
+                    ); /* use negative inset to place the "border" where it would be in the parent element */
+                    border: inherit;
+                    border-radius: inherit;
+                    background: conic-gradient(
+                            from var(--angle),
+                            var(--moon-clr) 40%,
+                            transparent,
+                            var(--moon-clr) 60%
+                    ) border-box;
+                    mask: conic-gradient(yellow 0 0) subtract,
+                    conic-gradient(yellow 0 0) padding-box;
+
+                    opacity: 0.75;
+                    z-index: 1;
+                    animation-name: neon-rotate;
+                    animation-duration: var(--animation-duration);
+                    animation-direction: forwards;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: linear;
+                }
+
+                &::after {
+                    content: "";
+                    inset: var(--glow-offset);
+                    position: absolute;
+                    z-index: -2;
+                    background-color: var(--moon-clr);
+                    background: conic-gradient(
+                            from var(--angle),
+                            var(--moon-clr),
+                            transparent,
+                            var(--moon-clr)
+                    );
+                    border-radius: 15px;
+                    filter: blur(12px);
+                    opacity: 0.75;
+
+                    animation-name: neon-rotate;
+                    animation-duration: var(--animation-duration);
+                    animation-direction: forwards;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: linear;
+                }
+            }
+
+            @keyframes neon-rotate {
+                from {
+                    --angle: 0deg;
+                }
+                to {
+                    --angle: 360deg;
+                }
+            }
+        }
+
+        /* general styling */
+        @layer base {
+            * {
+                box-sizing: border-box;
+            }
+
+            :root {
+                /*color-scheme: light dark;*/
+
+                --bg-dark: rgb(2, 6, 24);
+                --bg-light: rgb(229, 229, 229);
+                --txt-light: rgb(10, 10, 10);
+                --txt-dark: rgb(245, 245, 245);
+            }
+
+            body {
+                background-color: var(--bg-dark);
+                background-image: radial-gradient(#444, #000);
+                color: var(--txt-dark);
+                min-height: 100svh;
+                margin: 0;
+                padding: 1rem;
+                font-size: 1rem;
+                font-family: "Abel", sans-serif;
+                line-height: 1.5;
+                display: grid;
+                place-items: center;
+                gap: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="cards">
+    <article class="card">
+        <div>
+            <h2>The Moon</h2>
+
+            <p>The Moon is Earth's only natural satellite, roughly 1/6th our gravity and 1/4th our size. It's tidally
+                locked, always showing the same face to us. Formed around 4.5 billion years ago, the Moon influences
+                ocean tides and stabilizes Earth's axial tilt.</p>
+
+            <a href="#">Read more</a>
+        </div>
+    </article>
+
+    <article class="card">
+        <div>
+
+            <h2>Orange Moon</h2>
+
+            <p>An orange or reddish Moon usually appears when it’s low on the horizon. This happens because the Moon’s
+                light passes through a thicker layer of Earth’s atmosphere, which scatters shorter blue wavelengths and
+                allows longer red and orange wavelengths to reach your eyes—similar to how sunsets look red.</p>
+
+            <a href="#">Read more</a>
+        </div>
+    </article>
+
+    <article class="card">
+        <div>
+            <h2>Red Moon / Blood Moon</h2>
+
+            <p>A red Moon, often called a “Blood Moon,” occurs during a total lunar eclipse. The Earth moves between the
+                Sun and the Moon, blocking direct sunlight. However, some sunlight still reaches the Moon after being
+                filtered and bent through Earth’s atmosphere. This light is rich in red wavelengths, giving the eclipsed
+                Moon a deep red or coppery glow.</p>
+
+            <a href="#">Read more</a>
+        </div>
+    </article>
+
+    <article class="card">
+        <div>
+
+            <h2>Blue Moon</h2>
+
+            <p>Though rare, a Moon can actually appear blue—not just in name. This happens when there are particles in
+                the atmosphere of just the right size, such as after a large volcanic eruption or major wildfire. These
+                particles scatter red light and allow blue light to pass through, tinting the Moon blue. It's a real but
+                unusual phenomenon.</p>
+
+            <a href="#">Read more</a>
+        </div>
+    </article>
+
+</div>
+</body>
+</html>

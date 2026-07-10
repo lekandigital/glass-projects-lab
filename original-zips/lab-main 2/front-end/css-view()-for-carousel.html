@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Alan+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet">
+    <base href="https://www.ikea.com/ext/ingkadam/m/">
+    <title>CSS view() for carousel</title>
+
+    <style>
+        @keyframes slide {
+            100% {
+                background-position-x: 100%;
+            }
+        }
+
+        @layer base, layout;
+
+        @layer layout {
+            .carousel {
+                width: max(480px, 50vw);
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                scrollbar-width: none;
+                border-radius: 20px;
+                box-shadow: 0 0 20px rgb(233, 236, 237);
+                filter: brightness(1.1) saturate(0);
+
+                .carousel-slide {
+                    flex-shrink: 0;
+                    width: calc(100% / 3);
+                    aspect-ratio: 0.6;
+                    scroll-snap-align: center;
+                    background-size: cover;
+                    background-position-x: 0%;
+
+                    animation: slide;
+                    animation-timeline: view(inline);
+
+                    &:nth-of-type(1) {
+                        background-image: url("4df297e1c1c0b49d/original/PH195827.jpg?f=sg");
+                    }
+
+                    &:nth-of-type(2) {
+                        background-image: url("23a17cc0ce4d6638/original/PH193236.jpg?f=sg");
+                    }
+
+                    &:nth-of-type(3) {
+                        background-image: url("8f1baacf2c21f39/original/PH187161.jpg?f=sg");
+                    }
+
+                    &:nth-of-type(4) {
+                        background-image: url("5ddf41cb7d8ec055/original/PH195860.jpg?f=sg");
+                    }
+
+                    &:nth-of-type(5) {
+                        background-image: url("61273b0d8956b270/original/PH174643-crop001.jpg?f=sg");
+                    }
+
+                    &:nth-of-type(6) {
+                        background-image: url("35e59c03236fb0f5/original/PH197508.JPG?f=s&r=1:1&p=0.5,0.7");
+                    }
+
+                    &:nth-of-type(7) {
+                        background-image: url("741082f271bda1a1/original/PH200747.jpg?f=sg");
+                    }
+
+                    &:nth-of-type(8) {
+                        background-image: url("65224f7fe3522ef1/original/PH206421.jpg?f=sg");
+                    }
+                }
+            }
+        }
+
+        @layer base {
+            body {
+                height: 100vh;
+                margin: 0;
+                display: grid;
+                place-content: center;
+                user-select: none;
+                -webkit-user-select: none;
+                cursor: default;
+                font: 14px "alan sans";
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 1.6em;
+                font-weight: 500;
+                margin-block: -40px 60px;
+            }
+
+            footer {
+                position: fixed;
+                inset: auto 0 0 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<h1>Scroll through the images</h1>
+<main class="carousel">
+    <div class="carousel-slide"></div>
+    <div class="carousel-slide"></div>
+    <div class="carousel-slide"></div>
+    <div class="carousel-slide"></div>
+    <div class="carousel-slide"></div>
+    <div class="carousel-slide"></div>
+    <div class="carousel-slide"></div>
+    <div class="carousel-slide"></div>
+</main>
+<footer>
+    <p>Photos: IKEA kitchen gallery</p>
+</footer>
+</body>
+</html>

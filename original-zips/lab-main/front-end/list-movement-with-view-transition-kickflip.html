@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Movement with View Transition Kickflip</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            font-family: Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro,
+            sans-serif;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            li {
+                background: orange;
+                padding: 0.5rem 3rem 0.5rem 1rem;
+                margin-block-end: 0.25rem;
+                view-transition-name: match-element;
+                position: relative;
+
+                button {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    height: 100%;
+                    width: 30px;
+                    border: 0;
+                    background: lch(100% 0 0 / 50%);
+                    display: grid;
+                    place-items: center;
+
+                    &[hidden] {
+                        display: none;
+                    }
+
+                    &:focus,
+                    &:hover {
+                        background: lch(100% 0 0 / 75%);
+                    }
+
+                    &:disabled {
+                        svg,
+                        & {
+                            opacity: 0.5;
+                        }
+                    }
+
+                    svg {
+                        width: 100%;
+                        view-transition-name: match-element;
+                    }
+                }
+            }
+        }
+
+        ::view-transition-group(*) {
+            animation-duration: 1s;
+        }
+
+        ::view-transition-old(woosh),
+        ::view-transition-new(woosh) {
+            animation: woosh 1s ease-in-out;
+        }
+
+        @keyframes woosh {
+            50% {
+                translate: -100px 0;
+                scale: 1.5;
+                box-shadow: 0 30px 15px lch(0% 0 0 / 50%);
+            }
+        }
+
+        ::view-transition-old(tony-hawk),
+        ::view-transition-new(tony-hawk) {
+            animation: tony-hawk 1s ease-in-out;
+        }
+
+        @keyframes tony-hawk {
+            50% {
+                rotate: 20deg;
+                scale: 2.5;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<ul class="list">
+    <li>Apples
+        <button aria-label="Move to Top" disabled hidden>
+            <svg title="arrow-up" viewBox="0 0 448 512" width="100">
+                <path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/>
+            </svg>
+        </button>
+    </li>
+    <li>Oranges
+        <button aria-label="Move to Top" hidden>
+            <svg title="arrow-up" viewBox="0 0 448 512" width="100">
+                <path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/>
+            </svg>
+        </button>
+    </li>
+    <li>Mangos
+        <button aria-label="Move to Top" hidden>
+            <svg title="arrow-up" viewBox="0 0 448 512" width="100">
+                <path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/>
+            </svg>
+        </button>
+    </li>
+    <li>Bananas
+        <button aria-label="Move to Top" hidden>
+            <svg title="arrow-up" viewBox="0 0 448 512" width="100">
+                <path d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z"/>
+            </svg>
+        </button>
+    </li>
+</ul>
+
+<script>
+    const button = document.querySelector("button");
+    const list = document.querySelector(".list");
+    let listItems = list.querySelectorAll("li");
+    const listItemButtons = list.querySelectorAll("li > button");
+
+    function makeFirstListItemsButtonDisabled() {
+        listItems = list.querySelectorAll("li");
+        listItems.forEach((item) => {
+            item.querySelector("button").disabled = false;
+        });
+        listItems[0].querySelector("button").disabled = true;
+    }
+
+    function moveListItemFirst(item) {
+        const firstListItem = list.querySelector(".list :first-child");
+
+        list.insertBefore(item, firstListItem);
+
+        // This is probably the better API to use, but less supported...
+        // list.moveBefore(item, firstListItem);
+    }
+
+    listItemButtons.forEach((button) => {
+        button.hidden = false;
+        button.addEventListener("click", async () => {
+            const item = button.parentElement;
+
+            item.style.viewTransitionName = "woosh";
+            item.querySelector("svg").style.viewTransitionName = "tony-hawk";
+
+            if (document.startViewTransition) {
+                const transition = document.startViewTransition(() => {
+                    moveListItemFirst(item);
+                });
+
+                try {
+                    await transition.finished;
+                } finally {
+                    item.style.viewTransitionName = "";
+                    item.querySelector("svg").style.viewTransitionName = "";
+                    makeFirstListItemsButtonDisabled();
+                }
+            } else {
+                moveListItemFirst(item);
+            }
+        });
+    });
+
+</script>
+</body>
+</html>

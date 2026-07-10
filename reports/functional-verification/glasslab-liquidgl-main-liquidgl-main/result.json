@@ -1,6 +1,0 @@
-{
-  "project_id": "glasslab-liquidgl-main-liquidgl-main",
-  "url": "https://glasslab-liquidgl-main-liquidgl-mai.vercel.app",
-  "final_status": "broken-production-render",
-  "error": "Page.wait_for_timeout: 'str' object has no attribute 'error_text'"
-}

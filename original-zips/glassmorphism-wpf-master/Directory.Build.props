@@ -1,0 +1,26 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors/>
+    <WarningsNotAsErrors/>
+    <NoWarn>$(NoWarn);NU1701</NoWarn> <!-- Suppress .NET Framework compatibility warnings -->
+  </PropertyGroup>
+
+  <!-- Common package versions -->
+  <PropertyGroup>
+    <SkiaSharpVersion>3.119.0</SkiaSharpVersion>
+    <AutofacVersion>8.3.0</AutofacVersion>
+    <MicrosoftExtensionsLoggingVersion>8.0.0</MicrosoftExtensionsLoggingVersion>
+  </PropertyGroup>
+
+  <!-- Code analysis settings -->
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)code-analysis.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+</Project>

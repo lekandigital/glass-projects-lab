@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>In the Shade - hover shadow effect</title>
+    <style>@import url(https://fonts.bunny.net/css?family=annie-use-your-telescope:400);
+    @layer base, demo;
+
+    @layer demo {
+        body {
+
+            --shadow-offset-factor: 1px; /* higher number = more offset but also increased jumps between shadow elements */
+
+            --shadow-x: var(--shadow-offset-factor);
+            --shadow-y: var(--shadow-offset-factor);
+            --shadow-blur: 4px;
+
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(30deg, rgb(0, 117, 149), rgb(152, 16, 250));
+            font-family: system-ui;
+            font-size: 1rem;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 1rem;
+            color: #EEE;
+            font-size: .8rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            background-color: rgba(255 255 255 / .15);
+            padding: .5rem 1rem;
+            border: 1px solid rgba(255 255 255 / .35);
+            transition: all 50ms ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+                color: white;
+                background-color: rgba(255 255 255 / .25);
+            }
+
+            & > input {
+                outline: none;
+            }
+
+            &:has(:focus-visible) {
+                outline: 1px dashed white;
+                outline-offset: 3px;
+            }
+        }
+
+        .hidden-corners {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+            grid-template-rows: 2fr 1fr auto 1fr 2fr;
+            counter-reset: cell-counter;
+
+
+            & > * {
+                display: grid;
+                place-content: center;
+                color: white;
+                position: relative;
+                counter-increment: cell-counter;
+
+                /* for dev view - numbers, borders and hover */
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    z-index: -10;
+                    inset: 0;
+                    padding: 1rem;
+                    color: white;
+                    outline: 1px dashed var(--dev-line-color, transparent);
+                    background-color: var(--dev-bg-hover, transparent);
+                    transition: all 150ms ease-in-out;
+                    color: rgba(255 255 255 / .5);
+                    font-size: 1rem;
+                    opacity: var(--dev-opacity, 0);
+                    transition: all 150ms ease-in-out;
+                }
+
+                &:not(.shadow-text)::after {
+                    /* no visual number on main text cell */
+                    content: counter(cell-counter);
+                }
+            }
+        }
+
+        /* dev - toggle outlines and numbers */
+        body:has(.show-dev:checked) .hidden-corners > * {
+            --dev-line-color: rgba(255 255 255 / .25);
+            --dev-opacity: 1;
+
+            &:hover {
+                --dev-bg-hover: rgba(255 255 255 / .05);
+            }
+        }
+
+        /*  shadow text*/
+        .shadow-text {
+            --shadow-color: #333;
+
+            grid-column: 2 / span 3;
+            grid-row: 3;
+            text-align: center;
+            /*text-transform: uppercase;*/
+            font-family: 'Annie Use Your Telescope', handwriting;
+            font-size: clamp(1.4rem, 13.5vw + 0.05rem, 12rem);
+            line-height: 1;
+
+            &::after {
+                content: '';
+            }
+
+            /*> span{
+                display: inline-block;
+                translate:0 -2rem;
+                font-size: clamp(1rem, 2.5vw + 0.05rem, 2rem);
+                text-shadow: none;
+                font-family: system-ui;
+            }
+            */
+            font-weight: 500;
+            transition: text-shadow 50ms linear;
+            text-shadow: calc(var(--shadow-x) * 1) calc(var(--shadow-y) * 1) calc(var(--shadow-blur) * .1) var(--shadow-color),
+            calc(var(--shadow-x) * 2) calc(var(--shadow-y) * 2) calc(var(--shadow-blur) * .2) var(--shadow-color),
+            calc(var(--shadow-x) * 3) calc(var(--shadow-y) * 3) calc(var(--shadow-blur) * .3) var(--shadow-color),
+            calc(var(--shadow-x) * 4) calc(var(--shadow-y) * 4) calc(var(--shadow-blur) * .4) var(--shadow-color),
+            calc(var(--shadow-x) * 5) calc(var(--shadow-y) * 5) calc(var(--shadow-blur) * .5) var(--shadow-color),
+            calc(var(--shadow-x) * 6) calc(var(--shadow-y) * 6) calc(var(--shadow-blur) * .6) var(--shadow-color),
+            calc(var(--shadow-x) * 7) calc(var(--shadow-y) * 7) calc(var(--shadow-blur) * .7) var(--shadow-color),
+            calc(var(--shadow-x) * 8) calc(var(--shadow-y) * 8) calc(var(--shadow-blur) * .8) var(--shadow-color),
+            calc(var(--shadow-x) * 9) calc(var(--shadow-y) * 9) calc(var(--shadow-blur) * .9) var(--shadow-color),
+            calc(var(--shadow-x) * 10) calc(var(--shadow-y) * 10) calc(var(--shadow-blur) * .10) var(--shadow-color),
+            calc(var(--shadow-x) * 11) calc(var(--shadow-y) * 11) calc(var(--shadow-blur) * .11) var(--shadow-color),
+            calc(var(--shadow-x) * 12) calc(var(--shadow-y) * 12) calc(var(--shadow-blur) * .12) var(--shadow-color),
+            calc(var(--shadow-x) * 13) calc(var(--shadow-y) * 13) calc(var(--shadow-blur) * .13) var(--shadow-color),
+            calc(var(--shadow-x) * 14) calc(var(--shadow-y) * 14) calc(var(--shadow-blur) * .14) var(--shadow-color),
+            calc(var(--shadow-x) * 15) calc(var(--shadow-y) * 15) calc(var(--shadow-blur) * .15) var(--shadow-color),
+            calc(var(--shadow-x) * 16) calc(var(--shadow-y) * 16) calc(var(--shadow-blur) * .16) var(--shadow-color),
+            calc(var(--shadow-x) * 17) calc(var(--shadow-y) * 17) calc(var(--shadow-blur) * .17) var(--shadow-color),
+            calc(var(--shadow-x) * 18) calc(var(--shadow-y) * 18) calc(var(--shadow-blur) * .18) var(--shadow-color),
+            calc(var(--shadow-x) * 19) calc(var(--shadow-y) * 19) calc(var(--shadow-blur) * .19) var(--shadow-color),
+            calc(var(--shadow-x) * 20) calc(var(--shadow-y) * 20) calc(var(--shadow-blur) * .20) var(--shadow-color);
+        }
+
+        /* top row */
+        body:has(.hidden-corners > :nth-child(1):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 2);
+            --shadow-y: calc(var(--shadow-offset-factor) * 2);
+        }
+
+        body:has(.hidden-corners > :nth-child(2):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 1);
+            --shadow-y: calc(var(--shadow-offset-factor) * 2);
+        }
+
+        body:has(.hidden-corners > :nth-child(3):hover) {
+            --shadow-x: 0px;
+            --shadow-y: calc(var(--shadow-offset-factor) * 2);
+        }
+
+        body:has(.hidden-corners > :nth-child(4):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -1);
+            --shadow-y: calc(var(--shadow-offset-factor) * 2);
+        }
+
+        body:has(.hidden-corners > :nth-child(5):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -2);
+            --shadow-y: calc(var(--shadow-offset-factor) * 2);
+        }
+
+        /* row 2 */
+        body:has(.hidden-corners > :nth-child(6):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 2);
+            --shadow-y: calc(var(--shadow-offset-factor) * 1);
+        }
+
+        body:has(.hidden-corners > :nth-child(7):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 1);
+            --shadow-y: calc(var(--shadow-offset-factor) * 1);
+        }
+
+        body:has(.hidden-corners > :nth-child(8):hover) {
+            --shadow-x: 0px;
+            --shadow-y: calc(var(--shadow-offset-factor) * 1);
+        }
+
+        body:has(.hidden-corners > :nth-child(9):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -1);
+            --shadow-y: calc(var(--shadow-offset-factor) * 1);
+        }
+
+        body:has(.hidden-corners > :nth-child(10):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -2);
+            --shadow-y: calc(var(--shadow-offset-factor) * 1);
+        }
+
+
+        /* row 3 (inc center) */
+        body:has(.hidden-corners > :nth-child(11):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 1);
+            --shadow-y: 0px;
+        }
+
+        /* center */
+        body:has(.hidden-corners > :nth-child(12):hover) {
+            --shadow-x: 0px;
+            --shadow-y: 0px;
+            --shadow-blur: 4px;
+        }
+
+        body:has(.hidden-corners > :nth-child(13):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -1);
+            --shadow-y: 0px;
+        }
+
+
+        /* row 4 */
+        body:has(.hidden-corners > :nth-child(14):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 2);
+            --shadow-y: calc(var(--shadow-offset-factor) * -1);
+        }
+
+        body:has(.hidden-corners > :nth-child(15):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 1);
+            --shadow-y: calc(var(--shadow-offset-factor) * -1);
+        }
+
+        body:has(.hidden-corners > :nth-child(16):hover) {
+            --shadow-x: 0px;
+            --shadow-y: calc(var(--shadow-offset-factor) * -1);
+        }
+
+        body:has(.hidden-corners > :nth-child(17):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -1);
+            --shadow-y: calc(var(--shadow-offset-factor) * -1);
+        }
+
+        body:has(.hidden-corners > :nth-child(18):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -2);
+            --shadow-y: calc(var(--shadow-offset-factor) * -1);
+        }
+
+
+        /* row 5 */
+        body:has(.hidden-corners > :nth-child(19):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 2);
+            --shadow-y: calc(var(--shadow-offset-factor) * -2);
+        }
+
+        body:has(.hidden-corners > :nth-child(20):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * 1);
+            --shadow-y: calc(var(--shadow-offset-factor) * -2);
+        }
+
+        body:has(.hidden-corners > :nth-child(21):hover) {
+            --shadow-x: 0px;
+            --shadow-y: calc(var(--shadow-offset-factor) * -2);
+        }
+
+        body:has(.hidden-corners > :nth-child(22):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -1);
+            --shadow-y: calc(var(--shadow-offset-factor) * -2);
+        }
+
+        body:has(.hidden-corners > :nth-child(23):hover) {
+            --shadow-x: calc(var(--shadow-offset-factor) * -2);
+            --shadow-y: calc(var(--shadow-offset-factor) * -2);
+        }
+    }</style>
+</head>
+<body>
+
+<div class="hidden-corners">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div class="shadow-text">in the SHADE</div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+<label class="controls" for="show-dev">
+    <input aria-label="Toggle Dev lines and numbers" class="show-dev" id="show-dev" type="checkbox">
+    Display hover cells
+</label>
+
+</body>
+</html>

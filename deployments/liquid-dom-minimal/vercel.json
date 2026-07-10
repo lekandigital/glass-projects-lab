@@ -1,5 +1,0 @@
-{
-  "name": "glasslab-liquiddom-minimal",
-  "buildCommand": "cd upstream && pnpm --filter minimal build",
-  "outputDirectory": "upstream/demo/minimal/dist"
-}

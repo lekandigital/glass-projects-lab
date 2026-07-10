@@ -1,8 +1,0 @@
-{
-  "projectId": "glasslab-Users-lekan-Dev-glass-projects-lab-originals-glass-refraction-master-1-glass-refraction-master-examples-vanilla",
-  "isProduction": false,
-  "success": false,
-  "reason": "Failed assets: http://localhost:3167/dist/css/glass.css",
-  "diffScore": 0,
-  "timestamp": "2026-07-10T05:37:50.303Z"
-}

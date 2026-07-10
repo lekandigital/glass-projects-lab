@@ -1,8 +1,0 @@
-
-Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src --name glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src
-CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src
-----------------------------------------
-The "--name" option is deprecated (https://vercel.link/name-flag)
-Retrieving project…
-Deploying lekandigitals-projects/glasslab-liquid-glass-fluid-movement-1-liquid-glass-fluid-movement-src
-Error: Resource is limited - try again in 24 hours (more than 100, code: "api-deployments-free-per-day").

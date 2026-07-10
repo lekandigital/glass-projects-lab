@@ -1,0 +1,118 @@
+.main {
+  align-items: center;
+  background: url("https://assets.codepen.io/204808/berkay-gumustekin-ngqyo2AYYnE-unsplash%281%29.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.heading {
+  color: #fff;
+  font-size: clamp(3.125rem, 8.083vw + 1.033rem, 7.5rem);
+  line-height: clamp(3.75rem, 6.928vw + 1.957rem, 7.5rem);
+  position: fixed;
+  top: 1.25rem;
+}
+
+.liquid-glass {
+  --glass-size-w: 16.875rem;
+  --glass-size-h: 16.875rem;
+  --glass-padding: 1.875rem;
+  --border-radius: 2rem;
+  --transition: 0.4s cubic-bezier(0.5, 1.5, 0.5, 1);
+  --menu-gap: 1rem;
+  --icon-size: 4rem;
+  --icon-border-radius: 1rem;
+  --icon-padding: 0.75rem;
+  border-radius: var(--border-radius);
+  cursor: -webkit-grab;
+  cursor: grab;
+  height: var(--glass-size-h);
+  padding: var(--glass-padding);
+  position: relative;
+  transition: width var(--transition), height var(--transition), padding var(--transition);
+  width: var(--glass-size-w);
+}
+.liquid-glass.is-expanded {
+  --glass-size-w: 34.375rem;
+  --glass-size-h: 43.75rem;
+  --glass-padding: 2.5rem;
+}
+
+.liquid-glass--bend {
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  border-radius: var(--border-radius);
+  filter: url(#glass-blur);
+  inset: 0;
+  position: absolute;
+  z-index: 0;
+}
+
+.liquid-glass--face {
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08);
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.liquid-glass--edge {
+  border-radius: var(--border-radius);
+  box-shadow: inset 3px 3px 3px 0 rgba(255, 255, 255, 0.45), inset -3px -3px 3px 0 rgba(255, 255, 255, 0.45);
+  inset: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.liquid-glass__menus {
+  display: flex;
+  gap: var(--menu-gap);
+  transition: gap var(--transition);
+}
+.is-expanded .liquid-glass__menus {
+  --menu-gap: 2rem;
+}
+
+.liquid-glass__link {
+  border-radius: var(--icon-border-radius);
+  box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.45), inset -1px -1px 1px 0 rgba(255, 255, 255, 0.45);
+  display: flex;
+  height: var(--icon-size);
+  padding: var(--icon-padding);
+  pointer-events: none;
+  transition: width var(--transition), height var(--transition), border-radius var(--transition);
+  width: var(--icon-size);
+  z-index: 3;
+}
+.is-expanded .liquid-glass__link {
+  --icon-size: 8rem;
+  --icon-border-radius: 2rem;
+  --icon-padding: 1.5rem;
+  cursor: default;
+  pointer-events: auto;
+  box-shadow: inset 1px 2px 2px 0 rgba(255, 255, 255, 0.45), inset -1px -2px 2px 0 rgba(255, 255, 255, 0.45);
+}
+
+.link-linkedin {
+  background: #1a76ad;
+  background: linear-gradient(90deg, #1a76ad 0%, #288ec9 100%);
+}
+
+.link-frontendly {
+  background: #262626;
+  background: linear-gradient(90deg, #262626 0%, #303030 100%);
+}
+
+.description {
+  bottom: 3.125rem;
+  color: #fff;
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 1.5rem;
+  left: 50%;
+  position: fixed;
+  text-align: center;
+  transform: translateX(-50%);
+}

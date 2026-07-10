@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pick a Card</title>
+
+    <style>
+        body {
+            background: #2e2e2e;
+            margin: 0;
+            overflow: hidden;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .deck {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            position: absolute;
+            perspective: 1000px;
+            transform-origin: bottom center;
+            border-radius: 10px;
+            transition: transform 0.08s ease-in-out;
+        }
+
+        .card:hover {
+        / / box-shadow: 0 0 10 px rgba(255, 255, 0, .8);
+        / / transform: scale(2);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            backface-visibility: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .card-front:hover, .card-back:hover {
+            box-shadow: 0 0 10px rgba(255, 255, 0, .8);
+        }
+
+        .card-front:hover {
+            transform: scale(1.05);
+        }
+
+        .card-front {
+            background-color: white;
+        }
+
+        .card-back {
+            background: repeating-linear-gradient(
+                    45deg,
+                    #555,
+                    #555 10px,
+                    #333 10px,
+                    #333 20px
+            );
+            transform: rotateY(180deg);
+        }
+
+        .corner {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .top-left {
+            align-self: flex-start;
+        }
+
+        .bottom-right {
+            align-self: flex-end;
+            transform: rotate(180deg);
+        }
+
+        .center-suit {
+            font-size: 36px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel {
+            width: 200px;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+            box-sizing: border-box;
+            border-left: 2px solid #444;
+        }
+
+        .panel h2 {
+            margin-top: 0;
+        }
+
+        .panel label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .panel input[type="range"],
+        .panel select,
+        .panel button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 6px;
+            font-size: 16px;
+        }
+
+        @media (max-width: 520px) {
+            .panel,
+            .panel select,
+            .panel button {
+                font-size: 0.7rem;
+            }
+
+            .panel input[type="range"] {
+                width: 80px;
+            }
+
+            .panel {
+                width: 120px;
+                padding: 5px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="deck" id="deck"></div>
+
+    <div class="panel">
+        <h2>Controls</h2>
+        <p><strong>Instruction:</strong><br/>Hold to drag. Double click to flip</p>
+
+        <label for="sizeSlider">Card Size</label>
+        <input id="sizeSlider" max="200" min="100" type="range" value="100"/>
+
+        <label for="suitSelect">Card Suit</label>
+        <select id="suitSelect">
+            <option value="♠">Spade</option>
+            <option selected value="♥">Heart</option>
+            <option value="♣">Club</option>
+            <option value="♦">Diamond</option>
+        </select>
+
+        <button id="randomizeBtn">Randomize</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+<script>
+    const deck = document.getElementById("deck");
+    const sizeSlider = document.getElementById("sizeSlider");
+    const suitSelect = document.getElementById("suitSelect");
+    const resetBtn = document.getElementById("resetBtn");
+    const faces = [
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "J",
+        "Q",
+        "K",
+        "A"
+    ];
+    const total = faces.length;
+    const angleSpread = 90;
+    const startAngle = -angleSpread / 2;
+    let cardElements = [];
+
+    function createCards() {
+        deck.innerHTML = "";
+        cardElements = [];
+        const size = parseInt(sizeSlider.value);
+        const suit = suitSelect.value;
+        const color = suit === "♥" || suit === "♦" ? "red" : "black";
+        faces.forEach((face, i) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.style.width = `${size}px`;
+            card.style.height = `${size * 1.4}px`;
+            const angle = startAngle + (angleSpread / (total - 1)) * i;
+            gsap.set(card, {
+                x: 0,
+                y: 0,
+                rotation: angle
+            });
+            const inner = document.createElement("div");
+            inner.className = "card-inner";
+            inner.innerHTML = `
+        <div class="card-front" style="color:${color}">
+          <div class="corner top-left">${face}<br>${suit}</div>
+          <div class="center-suit">${suit}</div>
+          <div class="corner bottom-right">${face}<br>${suit}</div>
+        </div>
+        <div class="card-back"></div>
+      `;
+            card.appendChild(inner);
+            deck.appendChild(card);
+            cardElements.push({
+                card,
+                angle
+            });
+            Draggable.create(card, {
+                type: "x,y",
+                inertia: true,
+                edgeResistance: 0.65,
+                bounds: document.body
+            });
+            card.addEventListener("dblclick", () => {
+                card.classList.toggle("flipped");
+            });
+        });
+    }
+
+    // Initial render
+    createCards();
+
+    // Events
+    sizeSlider.addEventListener("input", createCards);
+    suitSelect.addEventListener("change", createCards);
+
+    const randomizeBtn = document.getElementById("randomizeBtn");
+    randomizeBtn.addEventListener("click", () => {
+        cardElements.forEach(({card}, index) => {
+            const randX = Math.random() * 400 - 200; // between -200 and +200 px
+            const randY = Math.random() * 300 - 150; // between -150 and +150 px
+            const randRotation = Math.random() * 360 - 180; // between -180 and +180 deg
+            gsap.to(card, {
+                x: randX,
+                y: randY,
+                rotation: randRotation,
+                duration: 0.5,
+                ease: "power2.inOut"
+            });
+            card.style.zIndex = index; // preserve stacking order
+        });
+    });
+
+    resetBtn.addEventListener("click", () => {
+        cardElements.forEach(({card, angle}, index) => {
+            gsap.to(card, {
+                x: 0,
+                y: 0,
+                rotation: angle,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+            card.style.zIndex = index;
+        });
+    });
+
+</script>
+</body>
+</html>

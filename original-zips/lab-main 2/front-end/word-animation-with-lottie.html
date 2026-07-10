@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Word animation with Lottie</title>
+
+    <style>
+        :root {
+            --bg: #0f1114;
+            --fg: #e8e8ea;
+            --muted: #9aa0a6;
+            --accent: #ffd36b;
+            --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter,
+            "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            --spark-size: 28px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(ellipse at center, #1a1d22 0%, #0f1114 100%);
+            color: var(--fg);
+            font-family: var(--font);
+        }
+
+        .wrap {
+            display: grid;
+            gap: 1rem;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            line-height: 0.9;
+            margin: 0;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            font-family: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .ch {
+            position: relative;
+            display: inline-block;
+            padding-inline: 0.05em;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center bottom;
+        }
+
+        .title:hover .ch {
+            transform: translateY(-4px) scale(1.05);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .title:hover .ch:nth-child(1) {
+            transform: translateY(-6px) rotate(-2deg) scale(1.1);
+            transition-delay: 0.05s;
+        }
+
+        .title:hover .ch:nth-child(2) {
+            transform: translateY(-3px) rotate(1deg) scale(1.08);
+            transition-delay: 0.1s;
+        }
+
+        .title:hover .ch:nth-child(3) {
+            transform: translateY(-5px) rotate(-1deg) scale(1.12);
+            transition-delay: 0.15s;
+        }
+
+        .title:hover .ch:nth-child(4) {
+            transform: translateY(-2px) rotate(2deg) scale(1.06);
+            transition-delay: 0.2s;
+        }
+
+        .title:hover .ch:nth-child(5) {
+            transform: translateY(-7px) rotate(-1deg) scale(1.15);
+            transition-delay: 0.25s;
+        }
+
+        .title:hover .ch:nth-child(6) {
+            transform: translateY(-4px) rotate(1deg) scale(1.09);
+            transition-delay: 0.3s;
+        }
+
+        .title:hover .ch:nth-child(7) {
+            transform: translateY(-3px) rotate(-2deg) scale(1.07);
+            transition-delay: 0.35s;
+        }
+
+        .title:hover .ch:nth-child(8) {
+            transform: translateY(-6px) rotate(1deg) scale(1.11);
+            transition-delay: 0.4s;
+        }
+
+        .title:hover .ch:nth-child(9) {
+            transform: translateY(-2px) rotate(-1deg) scale(1.08);
+            transition-delay: 0.45s;
+        }
+
+        .spark {
+            position: absolute;
+            inset: auto auto auto auto;
+            width: var(--spark-size);
+            height: var(--spark-size);
+            pointer-events: none;
+        }
+
+        .spark-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            filter: drop-shadow(0 0 0.4rem var(--accent));
+        }
+
+        .spark[data-spark=center] {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 240px;
+            height: 240px;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            margin-top: 1.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .hint:hover {
+            opacity: 1;
+        }
+
+        html[data-sparkles=off] .spark-canvas {
+            opacity: 0;
+            filter: none;
+            transition: opacity 0.18s ease;
+        }
+
+        .title {
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.05), 0 0 22px rgba(255, 211, 107, 0.07);
+        }
+
+        /*# sourceMappingURL=style.css.map */
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <h1 aria-live="polite" class="title" id="word">
+        <span class="ch">A</span>
+        <span class="ch">n</span>
+        <span class="ch">i</span>
+        <span class="ch">m</span>
+        <span class="ch">a</span>
+        <span class="ch">t</span>
+        <span class="ch">i</span>
+        <span class="ch">o</span>
+        <span class="ch">n</span>
+        <span class="spark" data-spark="center"></span>
+    </h1>
+</div>
+
+<script type="module">
+    import {DotLottie} from "https://esm.sh/@lottiefiles/dotlottie-web";
+
+    const SPARKLE_URL =
+        "https://lottie.host/aa8461b8-0395-40aa-9916-3aa8737d127d/wgZlYJ42zU.lottie";
+
+    const word = document.querySelector("#word");
+    const sparkElement = document.querySelector(".spark");
+
+    const canvas = document.createElement("canvas");
+    canvas.width = 240;
+    canvas.height = 240;
+    canvas.className = "spark-canvas";
+    sparkElement.appendChild(canvas);
+
+    const player = new DotLottie({
+        canvas: canvas,
+        loop: true,
+        autoplay: false,
+        src: SPARKLE_URL,
+        renderConfig: {
+            clearCanvas: true,
+            backgroundAlpha: 0,
+            devicePixelRatio: Math.min(2, window.devicePixelRatio || 1)
+        }
+    });
+
+    player.setSpeed(1);
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)")
+        .matches;
+    if (prefersReduced) {
+        setSparkles(false);
+    } else {
+        setSparkles(false);
+    }
+
+    word.addEventListener("mouseenter", () => {
+        setSparkles(true);
+    });
+
+    word.addEventListener("mouseleave", () => {
+        setSparkles(false);
+    });
+
+    function setSparkles(isOn) {
+        document.documentElement.toggleAttribute("data-sparkles", isOn ? "on" : "off");
+        if (isOn) {
+            player.play();
+        } else {
+            player.pause();
+        }
+    }
+
+    setSparkles(false);
+
+</script>
+</body>
+</html>

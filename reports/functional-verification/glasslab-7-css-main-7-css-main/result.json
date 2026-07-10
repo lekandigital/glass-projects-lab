@@ -1,6 +1,0 @@
-{
-  "project_id": "glasslab-7-css-main-7-css-main",
-  "url": "http://127.0.0.1:52109",
-  "final_status": "broken-local-render",
-  "error": "Page.wait_for_timeout: 'str' object has no attribute 'error_text'"
-}

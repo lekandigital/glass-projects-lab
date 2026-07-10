@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scroll Driven Animation</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            align-items: center;
+            background-color: #DAC5A6;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+            padding: 2rem 1rem;
+        }
+
+        .figure {
+            max-width: 100%;
+            position: sticky;
+            top: 2rem;
+            width: 29.75rem;
+
+            img {
+                filter: drop-shadow(0 0 1.25rem rgba(0, 0, 0, 0.25));
+                object-fit: cover;
+                width: 100%;
+            }
+
+            &:first-of-type img {
+                animation: img1 10ms linear;
+                animation-timeline: scroll(block root);
+            }
+
+            &:nth-of-type(2) img {
+                animation: img2 10ms linear;
+                animation-timeline: scroll(block root);
+            }
+
+            &:last-of-type img {
+                margin-bottom: 8rem;
+            }
+        }
+
+        @keyframes img1 {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(5.27deg);
+            }
+        }
+
+        @keyframes img2 {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(-5.67deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<figure class="figure">
+    <img alt="Grand Teton"
+         src="https://raw.githubusercontent.com/henryzarza/advent-of-css-2024/refs/heads/main/challenge-24/img/GRAND-TETON.png">
+</figure>
+<figure class="figure">
+    <img alt="Acadia"
+         src="https://raw.githubusercontent.com/henryzarza/advent-of-css-2024/refs/heads/main/challenge-24/img/ACADIA.png">
+</figure>
+<figure class="figure">
+    <img alt="Yosemite"
+         src="https://raw.githubusercontent.com/henryzarza/advent-of-css-2024/refs/heads/main/challenge-24/img/YOSEMITE.png">
+</figure>
+</body>
+</html>
