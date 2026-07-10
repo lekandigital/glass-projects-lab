@@ -1,0 +1,14 @@
+[
+  {
+    "url": "http://127.0.0.1:50435/",
+    "status": 200,
+    "headers": {
+      "content-length": "1721",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:37:20 GMT",
+      "last-modified": "Sun, 26 Oct 2025 10:37:58 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  }
+]

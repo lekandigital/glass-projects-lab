@@ -1,0 +1,382 @@
+[
+  {
+    "url": "http://127.0.0.1:50489/",
+    "status": 200,
+    "headers": {
+      "content-length": "1235",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/index-D4KOyldm.css",
+    "status": 200,
+    "headers": {
+      "content-length": "575100",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/index-BcQJI80D.js",
+    "status": 200,
+    "headers": {
+      "content-length": "148745",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/materialdesignicons-webfont-B7mPwVP_.ttf",
+    "status": 200,
+    "headers": {
+      "content-length": "1307660",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "font/ttf",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "font/ttf"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/materialdesignicons-webfont-PXm3-2wK.woff",
+    "status": 200,
+    "headers": {
+      "content-length": "587984",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "font/woff",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "font/woff"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/materialdesignicons-webfont-Dp5v-WZN.woff2",
+    "status": 200,
+    "headers": {
+      "content-length": "403216",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "font/woff2",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "font/woff2"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/VMain-B1JVUNw1.css",
+    "status": 200,
+    "headers": {
+      "content-length": "529",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/dimensions-CqbtZd5K.css",
+    "status": 200,
+    "headers": {
+      "content-length": "932",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/_plugin-vue_export-helper-DlAUqK2U.js",
+    "status": 200,
+    "headers": {
+      "content-length": "91",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/default-UlDQNXgg.js",
+    "status": 200,
+    "headers": {
+      "content-length": "3984",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/dimensions-D-fj8z9C.js",
+    "status": 200,
+    "headers": {
+      "content-length": "3832",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/default-STvHEzSq.css",
+    "status": 200,
+    "headers": {
+      "content-length": "1040",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/index-DY02y3C8.css",
+    "status": 200,
+    "headers": {
+      "content-length": "381",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/VRow-C1yt39Ce.css",
+    "status": 200,
+    "headers": {
+      "content-length": "24596",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/VMain-Cp3ZEKoq.js",
+    "status": 200,
+    "headers": {
+      "content-length": "876",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/index-iKJDk17z.js",
+    "status": 200,
+    "headers": {
+      "content-length": "2357",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/VRow-8hd1VI7G.js",
+    "status": 200,
+    "headers": {
+      "content-length": "28961",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/logo-DtuIbWiQ.png",
+    "status": 200,
+    "headers": {
+      "content-length": "11955",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "image/png",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/png"
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/materialdesignicons-webfont-Dp5v-WZN.woff2?v=7.4.47",
+    "status": 200,
+    "headers": {
+      "content-length": "403216",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "font/woff2",
+      "last-modified": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "font/woff2"
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap",
+    "status": 200,
+    "headers": {
+      "content-encoding": "gzip",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "content-type": "text/css; charset=utf-8",
+      "vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
+      "last-modified": "Fri, 10 Jul 2026 04:31:40 GMT",
+      "x-frame-options": "SAMEORIGIN",
+      "strict-transport-security": "max-age=31536000",
+      "link": "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
+      "cache-control": "private, max-age=86400, stale-while-revalidate=604800",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin-allow-popups",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-origin": "*",
+      "x-xss-protection": "0",
+      "server": "ESF"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
+    "url": "https://cdn.vuetifyjs.com/docs/images/one/create/feature.png",
+    "status": 200,
+    "headers": {
+      "cdn-status": "200",
+      "cdn-fileserver": "786",
+      "date": "Fri, 10 Jul 2026 04:37:40 GMT",
+      "cdn-storageserver": "NY-673",
+      "content-type": "image/png",
+      "cdn-cachedat": "04/19/2025 15:02:47",
+      "last-modified": "Tue, 26 Mar 2024 17:35:16 GMT",
+      "cdn-requestpullcode": "206",
+      "cdn-cache": "HIT",
+      "cache-control": "public, max-age=2592000",
+      "cdn-requestpullsuccess": "True",
+      "cdn-requesttime": "0",
+      "cdn-requestid": "6506acb8214f4148bc2f13b6be596a40",
+      "cdn-pullzone": "133257",
+      "cdn-proxyver": "1.23",
+      "accept-ranges": "bytes",
+      "content-length": "2017",
+      "cdn-edgestorageid": "1163",
+      "server": "BunnyCDN-BO1-1163",
+      "cdn-requestcountrycode": "US"
+    },
+    "content_type": "image/png"
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "headers": {
+      "age": "434312",
+      "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+      "x-content-type-options": "nosniff",
+      "expires": "Mon, 05 Jul 2027 03:59:08 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Sun, 05 Jul 2026 03:59:08 GMT",
+      "last-modified": "Wed, 18 Feb 2026 19:52:08 GMT",
+      "content-type": "font/woff2",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+      "cross-origin-resource-policy": "cross-origin",
+      "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "37520",
+      "x-xss-protection": "0",
+      "server": "sffe"
+    },
+    "content_type": "font/woff2"
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "headers": {
+      "age": "434312",
+      "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+      "x-content-type-options": "nosniff",
+      "expires": "Mon, 05 Jul 2027 03:59:08 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Sun, 05 Jul 2026 03:59:08 GMT",
+      "last-modified": "Wed, 18 Feb 2026 19:52:08 GMT",
+      "content-type": "font/woff2",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+      "cross-origin-resource-policy": "cross-origin",
+      "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "37520",
+      "x-xss-protection": "0",
+      "server": "sffe"
+    },
+    "content_type": "font/woff2"
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "headers": {
+      "age": "434312",
+      "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+      "x-content-type-options": "nosniff",
+      "expires": "Mon, 05 Jul 2027 03:59:08 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Sun, 05 Jul 2026 03:59:08 GMT",
+      "last-modified": "Wed, 18 Feb 2026 19:52:08 GMT",
+      "content-type": "font/woff2",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+      "cross-origin-resource-policy": "cross-origin",
+      "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "37520",
+      "x-xss-protection": "0",
+      "server": "sffe"
+    },
+    "content_type": "font/woff2"
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "headers": {
+      "age": "434312",
+      "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+      "x-content-type-options": "nosniff",
+      "expires": "Mon, 05 Jul 2027 03:59:08 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Sun, 05 Jul 2026 03:59:08 GMT",
+      "last-modified": "Wed, 18 Feb 2026 19:52:08 GMT",
+      "content-type": "font/woff2",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+      "cross-origin-resource-policy": "cross-origin",
+      "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "37520",
+      "x-xss-protection": "0",
+      "server": "sffe"
+    },
+    "content_type": "font/woff2"
+  }
+]

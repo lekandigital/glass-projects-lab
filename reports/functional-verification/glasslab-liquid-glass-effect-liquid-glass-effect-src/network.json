@@ -1,0 +1,148 @@
+[
+  {
+    "url": "http://127.0.0.1:50759/",
+    "status": 200,
+    "headers": {
+      "content-length": "1080",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50759/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "1338",
+      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50759/script.js",
+    "status": 200,
+    "headers": {
+      "content-length": "279",
+      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap",
+    "status": 200,
+    "headers": {
+      "content-encoding": "gzip",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "content-type": "text/css; charset=utf-8",
+      "vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
+      "last-modified": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "x-frame-options": "SAMEORIGIN",
+      "strict-transport-security": "max-age=31536000",
+      "link": "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
+      "cache-control": "private, max-age=86400, stale-while-revalidate=604800",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin-allow-popups",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-origin": "*",
+      "x-xss-protection": "0",
+      "server": "ESF"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1683657535824-5b570c7a1749?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "status": 200,
+    "headers": {
+      "age": "1902963",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "h3=\":443\";ma=86400,h3-29=\":443\";ma=86400,h3-27=\":443\";ma=86400",
+      "x-cache": "HIT, HIT",
+      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "last-modified": "Thu, 18 Jun 2026 04:03:27 GMT",
+      "x-served-by": "cache-chi-klot8100110-CHI, cache-bos-kbos510044-BOS",
+      "vary": "Accept, User-Agent",
+      "content-type": "image/avif",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-resource-policy": "cross-origin",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "93824",
+      "server": "imgix",
+      "x-imgix-id": "10a422857a76a12b8698f3efd03c20a97f015e37"
+    },
+    "content_type": "image/avif"
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/orbitron/v35/yMJRMIlzdpvBhQQL_Qq7dy1biN15.woff2",
+    "status": 200,
+    "headers": {
+      "age": "473554",
+      "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+      "x-content-type-options": "nosniff",
+      "expires": "Sun, 04 Jul 2027 17:06:55 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Sat, 04 Jul 2026 17:06:55 GMT",
+      "last-modified": "Thu, 04 Sep 2025 17:04:38 GMT",
+      "content-type": "font/woff2",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+      "cross-origin-resource-policy": "cross-origin",
+      "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "11768",
+      "x-xss-protection": "0",
+      "server": "sffe"
+    },
+    "content_type": "font/woff2"
+  },
+  {
+    "url": "https://essykings.github.io/JavaScript/map.png",
+    "status": 200,
+    "headers": {
+      "x-fastly-request-id": "32cda5be893f763f142fd498c16ad81e9982120c",
+      "etag": "\"69451b23-3b973\"",
+      "age": "0",
+      "x-github-request-id": "CDB6:EFC15:22ACA21:261E3EB:6A507780",
+      "expires": "Fri, 10 Jul 2026 04:49:29 GMT",
+      "x-proxy-cache": "MISS",
+      "x-cache": "MISS",
+      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "content-type": "image/png",
+      "last-modified": "Fri, 19 Dec 2025 09:30:11 GMT",
+      "x-cache-hits": "0",
+      "x-served-by": "cache-bos-kbos510031-BOS",
+      "vary": "Accept-Encoding",
+      "cache-control": "max-age=600",
+      "x-timer": "S1783658370.938130,VS0,VE25",
+      "via": "1.1 varnish",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "244083",
+      "server": "GitHub.com"
+    },
+    "content_type": "image/png"
+  },
+  {
+    "url": "blob:http://127.0.0.1:50759/7a968e67-bf74-443e-892b-aaf85f88ef08",
+    "status": 200,
+    "headers": {
+      "content-type": "image/png",
+      "content-length": "244083"
+    },
+    "content_type": "image/png"
+  }
+]

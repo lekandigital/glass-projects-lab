@@ -1,0 +1,26 @@
+[
+  {
+    "url": "http://127.0.0.1:50784/",
+    "status": 200,
+    "headers": {
+      "content-length": "2171",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:39:35 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50784/script.js",
+    "status": 200,
+    "headers": {
+      "content-length": "437",
+      "date": "Fri, 10 Jul 2026 04:39:35 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  }
+]

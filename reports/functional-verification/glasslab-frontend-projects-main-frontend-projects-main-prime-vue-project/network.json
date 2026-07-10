@@ -1,0 +1,50 @@
+[
+  {
+    "url": "http://127.0.0.1:50455/",
+    "status": 200,
+    "headers": {
+      "content-length": "461",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50455/assets/index-C5Uk72q6.css",
+    "status": 200,
+    "headers": {
+      "content-length": "28483",
+      "date": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50455/assets/index-BfnSoal4.js",
+    "status": 200,
+    "headers": {
+      "content-length": "325199",
+      "date": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:50455/assets/primeicons-C6QP2o4f.woff2",
+    "status": 200,
+    "headers": {
+      "content-length": "35148",
+      "date": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "content-type": "font/woff2",
+      "last-modified": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "font/woff2"
+  }
+]

@@ -1,0 +1,68 @@
+[
+  {
+    "url": "http://127.0.0.1:49975/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:49975/style.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:49975/script.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/gsap@3.13.0",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/gsap@3.13.0/Draggable",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/tweakpane@4.0.4",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://unpkg.com/normalize.css",
+    "status": 302,
+    "content_type": "text/plain;charset=UTF-8",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/gsap@3.13.0/es2022/gsap.mjs",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/gsap@3.13.0/es2022/Draggable.mjs",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/tweakpane@4.0.4/es2022/tweakpane.mjs",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://unpkg.com/normalize.css@8.0.1/normalize.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  }
+]

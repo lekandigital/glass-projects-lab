@@ -1,0 +1,63 @@
+[
+  {
+    "url": "http://127.0.0.1:50644/",
+    "status": 200,
+    "headers": {
+      "content-length": "644",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:38:33 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:38:32 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50644/static/css/main.f4dd2295.css",
+    "status": 200,
+    "headers": {
+      "content-length": "22092",
+      "date": "Fri, 10 Jul 2026 04:38:33 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:38:32 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50644/static/js/main.8b5805bf.js",
+    "status": 200,
+    "headers": {
+      "content-length": "273877",
+      "date": "Fri, 10 Jul 2026 04:38:33 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:38:32 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap",
+    "status": 200,
+    "headers": {
+      "content-encoding": "gzip",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 10 Jul 2026 04:38:33 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Fri, 10 Jul 2026 04:38:33 GMT",
+      "content-type": "text/css; charset=utf-8",
+      "vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
+      "last-modified": "Fri, 10 Jul 2026 03:48:16 GMT",
+      "x-frame-options": "SAMEORIGIN",
+      "strict-transport-security": "max-age=31536000",
+      "link": "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
+      "cache-control": "private, max-age=86400, stale-while-revalidate=604800",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin-allow-popups",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-origin": "*",
+      "x-xss-protection": "0",
+      "server": "ESF"
+    },
+    "content_type": "text/css; charset=utf-8"
+  }
+]

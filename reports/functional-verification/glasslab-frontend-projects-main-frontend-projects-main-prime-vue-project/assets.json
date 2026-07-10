@@ -1,0 +1,26 @@
+[
+  {
+    "url": "http://127.0.0.1:50455/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50455/assets/index-C5Uk72q6.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50455/assets/index-BfnSoal4.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50455/assets/primeicons-C6QP2o4f.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "url": "http://127.0.0.1:50124/",
+    "status": 200,
+    "headers": {
+      "content-length": "1665",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:36:03 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50124/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "1876",
+      "date": "Fri, 10 Jul 2026 04:36:03 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Altja_j%C3%B5gi_Lahemaal.jpg",
+    "status": 200,
+    "headers": {
+      "x-request-id": "14bef06a-08ce-4510-bb12-933a547eb0f2",
+      "access-control-expose-headers": "Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache",
+      "etag": "25e937083406c94e55da0de60a1cfcc1",
+      "age": "2077",
+      "x-object-meta-sha1base36": "ozm1hmct9phnqkrvqy8f452jllqq55q",
+      "report-to": "{ \"group\": \"wm_nel\", \"max_age\": 604800, \"endpoints\": [{ \"url\": \"https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0\" }] }",
+      "x-content-type-options": "nosniff",
+      "server-timing": "cache;desc=\"hit-local\", host;desc=\"cp1101\"",
+      "x-cache": "cp1101 hit, cp1101 miss",
+      "date": "Fri, 10 Jul 2026 04:01:26 GMT",
+      "content-type": "image/jpeg",
+      "last-modified": "Thu, 27 Nov 2014 15:34:50 GMT",
+      "x-client-ip": "73.219.36.66",
+      "x-cache-status": "hit-local",
+      "strict-transport-security": "max-age=106384710; includeSubDomains; preload",
+      "nel": "{ \"report_to\": \"wm_nel\", \"max_age\": 604800, \"failure_fraction\": 0.05, \"success_fraction\": 0.0}",
+      "timing-allow-origin": "*",
+      "x-content-security-policy-report-only": "default-src 'none'; style-src 'unsafe-inline' data:; font-src data:; img-src data: https://upload.wikimedia.org/favicon.ico; connect-src https://upload.wikimedia.org/favicon.ico; media-src data: 'self'; report-uri https://commons.wikimedia.org/w/api.php?reportonly=1&source=image&action=cspreport&format=json&",
+      "x-ratelimit-reset": "1",
+      "content-security-policy-report-only": "default-src 'none'; style-src 'unsafe-inline' data:; font-src data:; img-src data: https://upload.wikimedia.org/favicon.ico; connect-src https://upload.wikimedia.org/favicon.ico; media-src data: 'self'; report-uri https://commons.wikimedia.org/w/api.php?reportonly=1&source=image&action=cspreport&format=json&",
+      "x-ratelimit-remaining": "9999",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "4986765",
+      "x-ratelimit-limit": "10000, 10000;w=1",
+      "server": "envoy"
+    },
+    "content_type": "image/jpeg"
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-liquid-glass-effect-liquid-glass-effect-src",
+  "url": "http://127.0.0.1:50759",
+  "status_code": 200,
+  "title": "Liquid Glass Effect Liquid Glass Effect Src",
+  "html_length": 980,
+  "body_text_length": 7,
+  "visible_element_count": 4,
+  "canvas_count": 0,
+  "svg_count": 1,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "Times",
+    "backgroundImage": "url(\"https://images.unsplash.com/photo-1683657535824-5b570c7a1749?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\")",
+    "margin": "8px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "BUTTON",
+    "id": "",
+    "className": "glass-button",
+    "width": "350px",
+    "height": "180px",
+    "position": "fixed",
+    "filter": "none",
+    "backdropFilter": "url(\"#glass\")",
+    "borderRadius": "999px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 591.969781541666,
+  "final_status": "verified-functional"
+}
