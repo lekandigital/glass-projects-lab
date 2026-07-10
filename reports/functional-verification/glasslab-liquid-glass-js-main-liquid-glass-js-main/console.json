@@ -1,0 +1,552 @@
+[
+  {
+    "type": "log",
+    "text": "Capturing page snapshot...",
+    "location": {
+      "url": "http://127.0.0.1:56498/container.js",
+      "line": 193,
+      "column": 12,
+      "lineNumber": 193,
+      "columnNumber": 12
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 0ms Starting document clone with size 1440x900 scrolled to 0,0",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x124004dc000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "location": {
+      "url": "http://127.0.0.1:56498/",
+      "line": 328,
+      "column": 0,
+      "lineNumber": 328,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x124004e0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "location": {
+      "url": "http://127.0.0.1:56498/",
+      "line": 328,
+      "column": 0,
+      "lineNumber": 328,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x124004e0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+    "location": {
+      "url": "http://127.0.0.1:56498/",
+      "line": 328,
+      "column": 0,
+      "lineNumber": 328,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x124004e0e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+    "location": {
+      "url": "http://127.0.0.1:56498/",
+      "line": 328,
+      "column": 0,
+      "lineNumber": 328,
+      "columnNumber": 0
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 577ms Document cloned, element located at 0,0 with size 1440x5230 using computed rendering",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 577ms Starting DOM parsing",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 597ms Added image https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=300&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 599ms Added image https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 600ms Added image https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 600ms Added image https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 600ms Added image https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 601ms Added image https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 608ms Starting renderer for element at 0,0 with size 1440x5230",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 611ms Canvas renderer initialized (1440x5230) with scale 1",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#1 650ms Finished rendering",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "log",
+    "text": "Page snapshot captured",
+    "location": {
+      "url": "http://127.0.0.1:56498/container.js",
+      "line": 209,
+      "column": 16,
+      "lineNumber": 209,
+      "columnNumber": 16
+    }
+  },
+  {
+    "type": "log",
+    "text": "Window resized, recapturing page snapshot...",
+    "location": {
+      "url": "http://127.0.0.1:56498/demo.js",
+      "line": 81,
+      "column": 12,
+      "lineNumber": 81,
+      "columnNumber": 12
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 0ms Starting document clone with size 390x844 scrolled to 0,0",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 60ms Document cloned, element located at 0,0 with size 390x6114 using computed rendering",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 61ms Starting DOM parsing",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 62ms Added image https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=300&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 63ms Added image https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 64ms Added image https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 64ms Added image https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 65ms Added image https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 65ms Added image https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 71ms Starting renderer for element at 0,0 with size 390x6114",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 73ms Canvas renderer initialized (390x6114) with scale 1",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#2 98ms Finished rendering",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "log",
+    "text": "Page snapshot recaptured after resize",
+    "location": {
+      "url": "http://127.0.0.1:56498/demo.js",
+      "line": 104,
+      "column": 16,
+      "lineNumber": 104,
+      "columnNumber": 16
+    }
+  },
+  {
+    "type": "log",
+    "text": "Updated nested button texture: 245x80",
+    "location": {
+      "url": "http://127.0.0.1:56498/demo.js",
+      "line": 142,
+      "column": 24,
+      "lineNumber": 142,
+      "columnNumber": 24
+    }
+  },
+  {
+    "type": "log",
+    "text": "Updated nested button texture: 245x80",
+    "location": {
+      "url": "http://127.0.0.1:56498/demo.js",
+      "line": 142,
+      "column": 24,
+      "lineNumber": 142,
+      "columnNumber": 24
+    }
+  },
+  {
+    "type": "log",
+    "text": "Window resized, recapturing page snapshot...",
+    "location": {
+      "url": "http://127.0.0.1:56498/demo.js",
+      "line": 81,
+      "column": 12,
+      "lineNumber": 81,
+      "columnNumber": 12
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 0ms Starting document clone with size 1440x900 scrolled to 0,0",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 69ms Document cloned, element located at 0,0 with size 1440x5230 using computed rendering",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 69ms Starting DOM parsing",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 70ms Added image https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=300&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 71ms Added image https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 72ms Added image https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 72ms Added image https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 72ms Added image https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 73ms Added image https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=400&fit=crop",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 81ms Starting renderer for element at 0,0 with size 1440x5230",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 84ms Canvas renderer initialized (1440x5230) with scale 1",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "debug",
+    "text": "#3 110ms Finished rendering",
+    "location": {
+      "url": "https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js",
+      "line": 19,
+      "column": 191993,
+      "lineNumber": 19,
+      "columnNumber": 191993
+    }
+  },
+  {
+    "type": "log",
+    "text": "Page snapshot recaptured after resize",
+    "location": {
+      "url": "http://127.0.0.1:56498/demo.js",
+      "line": 104,
+      "column": 16,
+      "lineNumber": 104,
+      "columnNumber": 16
+    }
+  },
+  {
+    "type": "log",
+    "text": "Updated nested button texture: 245x80",
+    "location": {
+      "url": "http://127.0.0.1:56498/demo.js",
+      "line": 142,
+      "column": 24,
+      "lineNumber": 142,
+      "columnNumber": 24
+    }
+  },
+  {
+    "type": "log",
+    "text": "Updated nested button texture: 245x80",
+    "location": {
+      "url": "http://127.0.0.1:56498/demo.js",
+      "line": 142,
+      "column": 24,
+      "lineNumber": 142,
+      "columnNumber": 24
+    }
+  }
+]

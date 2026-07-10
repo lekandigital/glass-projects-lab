@@ -1,0 +1,134 @@
+[
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/index-D4KOyldm.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/materialdesignicons-webfont-Dp5v-WZN.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/index-BcQJI80D.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/materialdesignicons-webfont-PXm3-2wK.woff",
+    "status": 200,
+    "content_type": "font/woff",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/materialdesignicons-webfont-B7mPwVP_.ttf",
+    "status": 200,
+    "content_type": "font/ttf",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/default-UlDQNXgg.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/default-STvHEzSq.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/dimensions-D-fj8z9C.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/_plugin-vue_export-helper-DlAUqK2U.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/index-iKJDk17z.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/dimensions-CqbtZd5K.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/VMain-B1JVUNw1.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/VRow-C1yt39Ce.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/VRow-8hd1VI7G.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/VMain-Cp3ZEKoq.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/index-DY02y3C8.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/materialdesignicons-webfont-Dp5v-WZN.woff2?v=7.4.47",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://cdn.vuetifyjs.com/docs/images/one/create/feature.png",
+    "status": 200,
+    "content_type": "image/png",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/logo-DtuIbWiQ.png",
+    "status": 200,
+    "content_type": "image/png",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  }
+]

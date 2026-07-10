@@ -1,0 +1,3 @@
+# Licensing
+
+Documentation placeholder.

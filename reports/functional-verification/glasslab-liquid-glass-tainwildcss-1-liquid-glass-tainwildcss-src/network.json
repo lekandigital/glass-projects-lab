@@ -1,0 +1,61 @@
+[
+  {
+    "url": "http://127.0.0.1:56623/",
+    "status": 200,
+    "headers": {
+      "content-length": "3988",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 05:10:35 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:41 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:56623/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "629",
+      "date": "Fri, 10 Jul 2026 05:10:35 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:41 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:56623/script.js",
+    "status": 200,
+    "headers": {
+      "content-length": "1730",
+      "date": "Fri, 10 Jul 2026 05:10:35 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:33:41 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "https://media.istockphoto.com/id/478656454/photo/maroon-bells-autumn-aspen-trees-lake-reflections-aspen-colorado.jpg?s=612x612&w=0&k=20&c=1PFoVcuH1Xo47V9oRjTfGTpEQd-9KBjV8PN-rd9Lyfk=",
+    "status": 200,
+    "headers": {
+      "age": "474781",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "x-cache": "Hit from cloudfront",
+      "x-amz-cf-id": "bQfMWlK1avsrgmxGtqeqfbT8ydvaVCbg1GnNGr5In2ril1gKJ_2ubA==",
+      "date": "Sat, 04 Jul 2026 17:17:34 GMT",
+      "content-type": "image/jpeg",
+      "content-disposition": "inline; filename=istockphoto-478656454-612x612.jpg",
+      "last-modified": "Sat, 04 Jul 2026 17:17:34 GMT",
+      "strict-transport-security": "max-age=60; includeSubDomains; preload",
+      "cache-control": "public, max-age=7776000",
+      "connection": "keep-alive",
+      "via": "1.1 444cff119449030682546c5e05bfd1da.cloudfront.net (CloudFront)",
+      "access-control-allow-origin": "*",
+      "content-length": "94937",
+      "x-amz-cf-pop": "BOS50-P4",
+      "server": "Kestrel"
+    },
+    "content_type": "image/jpeg"
+  }
+]

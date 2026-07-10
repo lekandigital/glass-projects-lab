@@ -1,0 +1,33 @@
+
+Running: npm install
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-7-css-main-7-css-main
+----------------------------------------
+
+up to date, audited 369 packages in 1s
+
+20 packages are looking for funding
+  run `npm fund` for details
+
+23 vulnerabilities (2 low, 12 moderate, 8 high, 1 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues possible (including breaking changes), run:
+  npm audit fix --force
+
+Some issues need review, and may require choosing
+a different dependency.
+
+Run `npm audit` for details.
+
+Running: npm run build
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-7-css-main-7-css-main
+----------------------------------------
+
+> 7.css@0.21.1 build
+> node build.js
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme

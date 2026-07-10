@@ -1,0 +1,73 @@
+
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-svg-liquid-glass-1-svg-liquid-glass-src --name glasslab-svg-liquid-glass-1-svg-liquid-glass-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-svg-liquid-glass-1-svg-liquid-glass-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Retrieving project…
+Deploying lekandigitals-projects/glasslab-svg-liquid-glass-1-svg-liquid-glass-src
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-svg-liquid-glass-1-svg-liquid-glass-src/6LBKahYj1iikQV9pbM5QuGbB7Yu6 [1s]
+Production: https://glasslab-svg-liquid-glass-1-svg-liquid-glass-a92wge5b4.vercel.app [1s]
+https://glasslab-svg-liquid-glass-1-svg-liquid-glass-a92wge5b4.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Downloading 17 deployment files...
+Building: Restored build cache from previous deployment (AixH4WmN9wRehXw8TpBDT8cDA1aU)
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+Building: Installing dependencies...
+Building: npm warn ERESOLVE overriding peer dependency
+Building: npm warn While resolving: @monogrid/gainmap-js@3.4.0
+Building: npm warn Found: three@0.150.1
+Building: npm warn node_modules/three
+Building: npm warn   three@"^0.150.0" from the root project
+Building: npm warn   9 more (@react-spring/three, @react-three/drei, ...)
+Building: npm warn
+Building: npm warn Could not resolve dependency:
+Building: npm warn peer three@">= 0.159.0" from @monogrid/gainmap-js@3.4.0
+Building: npm warn node_modules/@react-three/drei/node_modules/@monogrid/gainmap-js
+Building: npm warn   @monogrid/gainmap-js@"^3.0.6" from @react-three/drei@9.122.0
+Building: npm warn   node_modules/@react-three/drei
+Building: npm warn
+Building: npm warn Conflicting peer dependency: three@0.185.1
+Building: npm warn node_modules/three
+Building: npm warn   peer three@">= 0.159.0" from @monogrid/gainmap-js@3.4.0
+Building: npm warn   node_modules/@react-three/drei/node_modules/@monogrid/gainmap-js
+Building: npm warn     @monogrid/gainmap-js@"^3.0.6" from @react-three/drei@9.122.0
+Building: npm warn     node_modules/@react-three/drei
+Building: npm warn ERESOLVE overriding peer dependency
+Building: npm warn While resolving: three-mesh-bvh@0.7.8
+Building: npm warn Found: three@0.150.1
+Building: npm warn node_modules/three
+Building: npm warn   three@"^0.150.0" from the root project
+Building: npm warn   9 more (@react-spring/three, @react-three/drei, ...)
+Building: npm warn
+Building: npm warn Could not resolve dependency:
+Building: npm warn peer three@">= 0.151.0" from three-mesh-bvh@0.7.8
+Building: npm warn node_modules/@react-three/drei/node_modules/three-mesh-bvh
+Building: npm warn   three-mesh-bvh@"^0.7.8" from @react-three/drei@9.122.0
+Building: npm warn   node_modules/@react-three/drei
+Building: npm warn
+Building: npm warn Conflicting peer dependency: three@0.185.1
+Building: npm warn node_modules/three
+Building: npm warn   peer three@">= 0.151.0" from three-mesh-bvh@0.7.8
+Building: npm warn   node_modules/@react-three/drei/node_modules/three-mesh-bvh
+Building: npm warn     three-mesh-bvh@"^0.7.8" from @react-three/drei@9.122.0
+Building: npm warn     node_modules/@react-three/drei
+Building: up to date in 913ms
+Building: 11 packages are looking for funding
+Building: run `npm fund` for details
+Building: Running "npm run build"
+Building: > glasslab-svg-liquid-glass-1-svg-liquid-glass-src@1.0.0 build
+Building: > vite build
+Building: vite v4.5.14 building for production...
+Building: transforming...
+Building: [plugin:vite:esbuild] The JSX factory cannot be set when using React's "automatic" JSX transform
+Building: 1  |  /** @jsx h */
+Building: |           ^
+Building: 2  |
+Building: 3  |  import { render, h } from "https://esm.sh/preact";
+[2K[1A[2K[GProduction: https://glasslab-svg-liquid-glass-1-svg-liquid-glass-a92wge5b4.vercel.app [7s]
+Completing...
+Aliased: https://glasslab-svg-liquid-glass-1-svg-liq.vercel.app [7s]

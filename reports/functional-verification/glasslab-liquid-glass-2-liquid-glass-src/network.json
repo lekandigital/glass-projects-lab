@@ -1,0 +1,60 @@
+[
+  {
+    "url": "http://127.0.0.1:56971/",
+    "status": 200,
+    "headers": {
+      "content-length": "33609",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 05:11:50 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:56971/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "736",
+      "date": "Fri, 10 Jul 2026 05:11:50 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "https://i.ibb.co/bMvc7Zr6/Vibrant-Summer-Meadow-Watercolor.png",
+    "status": 200,
+    "headers": {
+      "cache-control": "max-age=315360000, public",
+      "access-control-allow-methods": "GET, OPTIONS",
+      "expires": "Thu, 31 Dec 2037 23:55:55 GMT",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "1024698",
+      "date": "Fri, 10 Jul 2026 05:11:50 GMT",
+      "content-type": "image/png",
+      "last-modified": "Tue, 10 Jun 2025 05:01:32 GMT",
+      "server": "openresty"
+    },
+    "content_type": "image/png"
+  },
+  {
+    "url": "https://i.ibb.co/ZRH04pV3/Vibrant-Summer-Meadow-Watercolor-1.png",
+    "status": 200,
+    "headers": {
+      "cache-control": "max-age=315360000, public",
+      "access-control-allow-methods": "GET, OPTIONS",
+      "expires": "Thu, 31 Dec 2037 23:55:55 GMT",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "1194723",
+      "date": "Fri, 10 Jul 2026 05:11:50 GMT",
+      "content-type": "image/png",
+      "last-modified": "Tue, 10 Jun 2025 05:04:05 GMT",
+      "server": "openresty"
+    },
+    "content_type": "image/png"
+  }
+]

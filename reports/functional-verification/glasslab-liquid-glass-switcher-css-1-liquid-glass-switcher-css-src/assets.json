@@ -1,0 +1,44 @@
+[
+  {
+    "url": "http://127.0.0.1:57003/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:57003/style.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:57003/script.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1734606901283-489b25f7aa9b?q=80&w=2360&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "status": 200,
+    "content_type": "image/avif",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&display=swap",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1706720094773-d91e070e4b90?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "status": 200,
+    "content_type": "image/avif",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/dmsans/v17/rP2Hp2ywxg089UriCZOIHTWEBlw.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  }
+]

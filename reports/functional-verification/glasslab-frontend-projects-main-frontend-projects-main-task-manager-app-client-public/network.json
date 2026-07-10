@@ -1,0 +1,22 @@
+[
+  {
+    "url": "https://glasslab-frontend-projects-main-fro-alpha.vercel.app/",
+    "status": 200,
+    "headers": {
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 05:03:23 GMT",
+      "etag": "W/\"ef8a02db437c74f2ecb0d88becc4b9d4\"",
+      "last-modified": "Fri, 10 Jul 2026 05:03:23 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::dg9qw-1783659803888-a95fce29fcfc"
+    },
+    "content_type": "text/html; charset=utf-8"
+  }
+]

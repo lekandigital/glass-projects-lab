@@ -1,0 +1,123 @@
+/* ===== CORE GLASS EFFECT STYLES ===== */
+
+/* Main glass card container */
+/* Make position relative and set height/width to 100% for flex/grid container usage */
+.d-glass-card {
+  position: absolute;
+  left: calc(50% - 120px);
+  top: calc(50% - 120px);
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  border-radius: 32px;
+  transition: transform 0.2s ease;
+  height: 240px;
+  width: 240px;
+  font-size: 18px;
+}
+
+/* The glass effect is created here using SVG filter distortion */
+.d-glass-card-morph {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Control background blur intensity with backdrop-filter */
+  backdrop-filter: blur(2px);
+  filter: url(#liquid-glass);
+  border-radius: inherit;
+}
+
+/* Content wrapper - must have z-index 3 or higher */
+.d-glass-card-item {
+  position: relative;
+  z-index: 3;
+  border-radius: inherit;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+/* Inner border effect */
+.d-glass-card-border {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  box-shadow: inset 2px 2px 2px 0 rgba(255, 255, 255, 0.2),
+    inset -2px -2px 2px 0 rgba(255, 255, 255, 0.2);
+  border-radius: inherit;
+}
+
+/* Outer shadow effects */
+.d-glass-card-corner {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15), 0 0 12px rgba(0, 0, 0, 0.08);
+  border-radius: inherit;
+}
+
+/* ===== MOBILE OPTIMIZATION ===== */
+@media (max-width: 768px) {
+  .d-glass-card {
+    /* Smaller card for mobile */
+    left: calc(50% - 80px);
+    top: calc(50% - 80px);
+    height: 160px;
+    width: 160px;
+    font-size: 14px;
+  }
+
+  .d-glass-card-morph {
+    /* Enhanced blur for mobile fallback */
+    height: 200%;
+    mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      black 0% 50%,
+      transparent 50% 100%
+    );
+    background: hsl(0, 0, 40%, 0.1);
+    backdrop-filter: blur(4px) sepia(10%) brightness(115%);
+    -webkit-backdrop-filter: blur(4px) sepia(10%) brightness(115%);
+  }
+}
+
+/* ===== DEMO/PREVIEW STYLES (not required for glass effect) ===== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  text-shadow: 0px 0px 5px rgba(26, 26, 26, 0.4);
+}
+
+body {
+  background-image: url("https://www.vets4pets.com/siteassets/species/cat/kitten/cat-and-kitten-snuggling.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 40px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Dragging states */
+.d-glass-card:active {
+  cursor: grabbing;
+}
+
+.d-glass-card.dragging {
+  transition: none;
+}
+
+.drag-effect {
+  opacity: 0.9;
+  transform: scale(0.98);
+}

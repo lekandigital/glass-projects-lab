@@ -1,0 +1,8 @@
+
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-pure-css-glassmorphism-liquid-glass-ui-kit-1-pure-css-glassmorphism-liquid-glass-ui-kit-src --name glasslab-pure-css-glassmorphism-liquid-glass-ui-kit-1-pure-css-glassmorphism-liquid-glass-ui-ki
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-pure-css-glassmorphism-liquid-glass-ui-kit-1-pure-css-glassmorphism-liquid-glass-ui-kit-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Retrieving project…
+Deploying lekandigitals-projects/glasslab-pure-css-glassmorphism-liquid-glass-ui-kit-1-pure-css-glassmorphism-liquid-glass-ui-ki
+Error: Resource is limited - try again in 24 hours (more than 100, code: "api-deployments-free-per-day").

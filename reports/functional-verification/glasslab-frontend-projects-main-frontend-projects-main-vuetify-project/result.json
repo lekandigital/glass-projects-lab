@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-frontend-projects-main-frontend-projects-main-vuetify-project",
+  "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app",
+  "status_code": 200,
+  "title": "Welcome to Vuetify 3",
+  "html_length": 28113,
+  "body_text_length": 352,
+  "visible_element_count": 103,
+  "canvas_count": 0,
+  "svg_count": 3,
+  "stylesheets_count": 8,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "Roboto, sans-serif",
+    "backgroundImage": "none",
+    "margin": "0px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "DIV",
+    "id": "app",
+    "className": "",
+    "width": "1440px",
+    "height": "900px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "0px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 0.0,
+  "final_status": "verified-functional"
+}

@@ -1,0 +1,130 @@
+[
+  {
+    "url": "https://glasslab-liquid-glass-cubiq-liquid.vercel.app/",
+    "status": 200,
+    "headers": {
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "etag": "W/\"c6107ee3256cb61b9949d693e12ad168\"",
+      "last-modified": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::tlxqp-1783659988395-d919048b6947"
+    },
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://glasslab-liquid-glass-cubiq-liquid.vercel.app/script.js",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "x-vercel-cache": "MISS",
+      "etag": "\"fbb1a219eda5b3a8ce76004f7ef85de3\"",
+      "age": "0",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "16",
+      "date": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "content-disposition": "inline; filename=\"script.js\"",
+      "content-type": "application/javascript; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "x-vercel-id": "iad1::c426x-1783659988544-8bb499df281d"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://glasslab-liquid-glass-cubiq-liquid.vercel.app/style.css",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"899130a128e29c3940f147eaaf3b3334\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "content-disposition": "inline; filename=\"style.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "x-vercel-id": "iad1::c2x76-1783659988582-1d5479f573dc"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Manrope",
+    "status": 200,
+    "headers": {
+      "content-encoding": "gzip",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "content-type": "text/css; charset=utf-8",
+      "vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
+      "last-modified": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "x-frame-options": "SAMEORIGIN",
+      "strict-transport-security": "max-age=31536000",
+      "link": "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
+      "cache-control": "private, max-age=86400, stale-while-revalidate=604800",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin-allow-popups",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-origin": "*",
+      "x-xss-protection": "0",
+      "server": "ESF"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
+    "url": "https://i.ibb.co/ZpTYhmfq/tulip.jpg",
+    "status": 200,
+    "headers": {
+      "cache-control": "max-age=315360000, public",
+      "access-control-allow-methods": "GET, OPTIONS",
+      "expires": "Thu, 31 Dec 2037 23:55:55 GMT",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "1414168",
+      "date": "Fri, 10 Jul 2026 05:06:28 GMT",
+      "content-type": "image/jpeg",
+      "last-modified": "Sat, 19 Jul 2025 23:48:06 GMT",
+      "server": "openresty"
+    },
+    "content_type": "image/jpeg"
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FN_C-bnTfc7AGrY.woff2",
+    "status": 200,
+    "headers": {
+      "age": "24767",
+      "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 09 Jul 2027 22:13:41 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Thu, 09 Jul 2026 22:13:41 GMT",
+      "last-modified": "Thu, 04 Sep 2025 17:08:05 GMT",
+      "content-type": "font/woff2",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+      "cross-origin-resource-policy": "cross-origin",
+      "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "14196",
+      "x-xss-protection": "0",
+      "server": "sffe"
+    },
+    "content_type": "font/woff2"
+  }
+]
