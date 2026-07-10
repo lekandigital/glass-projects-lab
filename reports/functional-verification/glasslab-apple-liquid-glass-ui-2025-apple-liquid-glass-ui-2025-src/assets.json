@@ -1,0 +1,26 @@
+[
+  {
+    "url": "http://127.0.0.1:50889/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50889/style.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1619983081593-e2ba5b543168?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDk1NzAwNDV8&ixlib=rb-4.1.0&q=80&w=400",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1551384963-cccb0b7ed94b?q=80&w=3247&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "status": 200,
+    "content_type": "image/avif",
+    "failed": false
+  }
+]

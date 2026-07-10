@@ -1,0 +1,26 @@
+[
+  {
+    "url": "http://127.0.0.1:50847/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50847/src/style.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50847/src/main.jsx",
+    "status": 200,
+    "content_type": "application/octet-stream",
+    "failed": false
+  },
+  {
+    "url": "https://i0.wp.com/mrmacintosh.com/wp-content/uploads/2025/06/Screenshot-2025-06-09-at-3.49.32%E2%80%AFPM.png?resize=1024%2C1015&ssl=1",
+    "status": 200,
+    "content_type": "image/webp",
+    "failed": false
+  }
+]

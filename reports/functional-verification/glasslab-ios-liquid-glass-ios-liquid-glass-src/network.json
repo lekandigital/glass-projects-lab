@@ -1,0 +1,66 @@
+[
+  {
+    "url": "http://127.0.0.1:50873/",
+    "status": 200,
+    "headers": {
+      "content-length": "1234",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:40:10 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50873/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "2821",
+      "date": "Fri, 10 Jul 2026 04:40:10 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50873/script.js",
+    "status": 200,
+    "headers": {
+      "content-length": "1006",
+      "date": "Fri, 10 Jul 2026 04:40:10 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "https://www.vets4pets.com/siteassets/species/cat/kitten/cat-and-kitten-snuggling.jpg",
+    "status": 200,
+    "headers": {
+      "cf-bgj": "h2pri,imgq:85",
+      "etag": "\"1dafefd7b58343d\"",
+      "age": "13201",
+      "cf-cache-status": "HIT",
+      "expires": "Fri, 10 Jul 2026 13:00:09 GMT",
+      "cf-polished": "webp_bigger",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "date": "Fri, 10 Jul 2026 04:40:11 GMT",
+      "content-type": "image/jpeg",
+      "last-modified": "Wed, 04 Sep 2024 19:06:01 GMT",
+      "vary": "accept-encoding",
+      "priority": "u=5;i,cf-chb=(33389;u=5;i)",
+      "x-frame-options": "SAMEORIGIN",
+      "reporting-endpoints": "stott-security-endpoint=\"https://ccsl02mstrm053qprod.azurewebsites.net/stott.security.optimizely/api/cspreporting/reporttoviolation/\"",
+      "cache-control": "public, max-age=29998",
+      "content-security-policy-report-only": "child-src 'self'; connect-src 'self' https://*.ads.linkedin.com https://*.aptrinsic.com https://*.audiencemanager.de https://*.bing.net https://*.clarity.ms https://*.creativecdn.com https://*.doubleclick.net https://*.eu-central-1.amazonaws.com https://*.eu-west-2.amazonaws.com https://*.google-analytics.com https://*.google.com https://*.googleapis.com https://*.googletagmanager.com https://*.hotjar.io https://*.onetrust.com https://*.quantcount.com https://*.quantserve.com https://*.woosmap.com https://ad.doubleclick.net https://adservice.google.com https://ams.creativecdn.com https://analytics-ipv6.tiktokw.us https://analytics.tiktok.com https://api.woosmap.com https://cdn-ukwest.onetrust.com https://dc.services.visualstudio.com https://google.com https://pixel.quantserve.com https://snap.licdn.com https://www.facebook.com https://www.google.com https://www.googleadservices.com wss://ws.hotjar.com; default-src 'self'; font-src 'self' data: https://*.audiencemanager.de https://*.cloudfront.net/graphik/ https://*.cloudfront.net/lato/ https://*.googletagmanager.com https://*.monitor.azure.com https://*.typekit.net https://fonts.gstatic.com; frame-src 'self' https://*.creativecdn.com https://*.fls.doubleclick.net https://*.googletagmanager.com https://petsathome.cnddtid.com https://player.vimeo.com https://service.force.com https://td.doubleclick.net https://vethelpdirect.com https://www.facebook.com https://www.google.co.uk https://www.google.com https://www.youtube.com; img-src 'self' data: https://*.adnxs.com https://*.ads.linkedin.com https://*.aptrinsic.com https://*.companioncare.co.uk https://*.eu-central-1.amazonaws.com https://*.facebook.com https://*.fbcdn.net https://*.force.com https://*.g.doubleclick.net https://*.google-analytics.com https://*.google.com.tr https://*.googleapis.com https://*.onetrust.com https://*.quantcount.com https://*.quantserve.com https://*.s3.eu-west-2.amazonaws.com https://*.seedtag.com https://*.teads.tv https://*.typekit.net https://*.vets4pets.com https://*.vets4petscareers.com https://*.woosmap.com https://*.ytimg.com https://ad.doubleclick.net https://adservice.google.com https://alb.reddit.com https://bat.bing.com https://bat.bing.net https://maps.googleapis.com https://maps.gstatic.com https://petsathome00001--c.vf.force.com https://secure.adnxs.com https://vethelpdirect.com https://vets4petscareers.com https://www.facebook.com https://www.google.co.uk https://www.google.com https://www.googletagmanager.com; media-src 'self' https://petsathome00001--c.vf.force.com; script-src-elem 'self' 'unsafe-eval' 'unsafe-inline' https://*.aptrinsic.com https://*.audiencemanager.de https://*.bing.net https://*.creativecdn.com https://*.google-analytics.com https://*.googleapis.com https://*.googletagmanager.com https://*.hotjar.com https://*.licdn.com https://*.lightning.force.com https://*.monitor.azure.com https://*.onetrust.com https://*.quantcount.com https://*.quantserve.com https://*.salesforceliveagent.com https://*.typekit.net https://*.vethelpdirect.com https://*.woosmap.com https://*.youtube.com https://adservice.google.com https://analytics.tiktok.com https://bat.bing.com https://connect.facebook.net https://googleads.g.doubleclick.net https://petsathome.cnddtid.com https://petsathome00001.my.salesforce.com https://service.force.com https://snap.licdn.com https://t.contentsquare.net https://vethelpdirect.com https://www.clarity.ms; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.audiencemanager.de https://*.bing.net https://*.creativecdn.com https://*.google-analytics.com https://*.googleapis.com https://*.googletagmanager.com https://*.hotjar.com https://*.monitor.azure.com https://*.onetrust.com https://*.quantcount.com https://*.quantserve.com https://*.salesforceliveagent.com https://*.typekit.net https://*.woosmap.com https://adservice.google.com https://analytics.tiktok.com https://bat.bing.com https://googleads.g.doubleclick.net https://petsathome.cnddtid.com https://service.force.com https://snap.licdn.com https://vethelpdirect.com; style-src-elem 'self' 'unsafe-inline' https://*.aptrinsic.com https://*.googleapis.com https://fonts.googleapis.com https://googleads.g.doubleclick.net https://service.force.com; style-src 'self' 'unsafe-inline' https://*.aptrinsic.com https://*.googleapis.com https://googleads.g.doubleclick.net https://service.force.com; worker-src 'self' blob:; frame-ancestors https://*.companioncare.co.uk https://*.vets4pets.com https://*.vets4petscareers.com https://petsathome.cnddtid.com; report-to stott-security-endpoint;",
+      "request-context": "appId=cid-v1:7963dcd0-4ed2-445a-a56c-af206583e13c",
+      "cf-ray": "a18ce38d5de6228f-BOS",
+      "accept-ranges": "bytes",
+      "content-length": "640701",
+      "server": "cloudflare"
+    },
+    "content_type": "image/jpeg"
+  }
+]

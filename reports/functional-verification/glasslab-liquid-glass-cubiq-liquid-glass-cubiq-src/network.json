@@ -1,0 +1,105 @@
+[
+  {
+    "url": "http://127.0.0.1:50822/",
+    "status": 200,
+    "headers": {
+      "content-length": "47178",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:39:51 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50822/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "2995",
+      "date": "Fri, 10 Jul 2026 04:39:51 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50822/script.js",
+    "status": 200,
+    "headers": {
+      "content-length": "16",
+      "date": "Fri, 10 Jul 2026 04:39:51 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Manrope",
+    "status": 200,
+    "headers": {
+      "content-encoding": "gzip",
+      "x-content-type-options": "nosniff",
+      "expires": "Fri, 10 Jul 2026 04:39:51 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Fri, 10 Jul 2026 04:39:51 GMT",
+      "content-type": "text/css; charset=utf-8",
+      "vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
+      "last-modified": "Fri, 10 Jul 2026 04:39:51 GMT",
+      "x-frame-options": "SAMEORIGIN",
+      "strict-transport-security": "max-age=31536000",
+      "link": "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
+      "cache-control": "private, max-age=86400, stale-while-revalidate=604800",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin-allow-popups",
+      "cross-origin-resource-policy": "cross-origin",
+      "access-control-allow-origin": "*",
+      "x-xss-protection": "0",
+      "server": "ESF"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FN_C-bnTfc7AGrY.woff2",
+    "status": 200,
+    "headers": {
+      "age": "467763",
+      "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
+      "x-content-type-options": "nosniff",
+      "expires": "Sun, 04 Jul 2027 18:43:48 GMT",
+      "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
+      "date": "Sat, 04 Jul 2026 18:43:48 GMT",
+      "last-modified": "Thu, 04 Sep 2025 17:08:05 GMT",
+      "content-type": "font/woff2",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-opener-policy": "same-origin; report-to=\"apps-themes\"",
+      "cross-origin-resource-policy": "cross-origin",
+      "content-security-policy-report-only": "require-trusted-types-for 'script'; report-uri https://csp.withgoogle.com/csp/apps-themes",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "14196",
+      "x-xss-protection": "0",
+      "server": "sffe"
+    },
+    "content_type": "font/woff2"
+  },
+  {
+    "url": "https://i.ibb.co/ZpTYhmfq/tulip.jpg",
+    "status": 200,
+    "headers": {
+      "cache-control": "max-age=315360000, public",
+      "access-control-allow-methods": "GET, OPTIONS",
+      "expires": "Thu, 31 Dec 2037 23:55:55 GMT",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "1414168",
+      "date": "Fri, 10 Jul 2026 04:39:51 GMT",
+      "content-type": "image/jpeg",
+      "last-modified": "Sat, 19 Jul 2025 23:48:06 GMT",
+      "server": "openresty"
+    },
+    "content_type": "image/jpeg"
+  }
+]
