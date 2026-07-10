@@ -1,0 +1,12 @@
+{
+  "project_id": "liquid-glass-vue",
+  "source_tier": "external-github",
+  "source_root": "/Users/lekan/Dev/glass-projects-lab/external-sources/liquid-glass-vue/upstream/liquid-glass-vue",
+  "entrypoint": "index.html",
+  "adapter": "framework-build",
+  "build_command": "npm install && npm run build",
+  "output_directory": "dist",
+  "vercel_project": "glasslab-liquid-vue",
+  "interaction": "pointer-move",
+  "threshold": 10.0
+}

@@ -1,0 +1,16 @@
+{
+  "project_id": "glass-refraction",
+  "source_tier": "external-github",
+  "original_url": "https://github.com/Z1Code/glass-refraction.git",
+  "source_root": "/Users/lekan/Dev/glass-projects-lab/originals/glass-refraction-master-1/glass-refraction-master",
+  "adapter": "framework-build",
+  "serve_dir": ".",
+  "entrypoint": "examples/vanilla/index.html",
+  "package_manager": "npm",
+  "install_command": "npm install",
+  "build_command": "npm run build",
+  "output_directory": ".",
+  "vercel_project": "glasslab-glass-refraction",
+  "interaction": "hover",
+  "threshold": 1000.0
+}

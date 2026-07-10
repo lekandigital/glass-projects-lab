@@ -1,0 +1,9 @@
+{
+  "name": "glasslab-archisvaze",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/upstream/$1"
+    }
+  ]
+}

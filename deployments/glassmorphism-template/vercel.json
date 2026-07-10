@@ -1,0 +1,5 @@
+{
+  "name": "glasslab-glassmorphism",
+  "buildCommand": "cd upstream && npm run build",
+  "outputDirectory": "upstream/static"
+}

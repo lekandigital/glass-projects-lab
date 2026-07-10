@@ -1,0 +1,12 @@
+{
+  "project_id": "glasslab-kube-liquid-glass-css-svg",
+  "source_tier": "downloads-archive",
+  "source_root": "/Users/lekan/Dev/glass-projects-lab/deployments/glasslab-kube-liquid-glass-css-svg/archive",
+  "entrypoint": "original-singlefile.html",
+  "adapter": "none",
+  "build_command": null,
+  "output_directory": ".",
+  "vercel_project": "glasslab-kube-liquid-glass",
+  "interaction": "pointer-move",
+  "threshold": 10.0
+}

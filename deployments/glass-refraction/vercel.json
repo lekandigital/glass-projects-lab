@@ -1,0 +1,11 @@
+{
+  "name": "glasslab-glass-refraction",
+  "buildCommand": "cd upstream && npm run build",
+  "outputDirectory": "upstream/.",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/examples/vanilla/index.html"
+    }
+  ]
+}

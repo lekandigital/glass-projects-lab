@@ -98,10 +98,12 @@ if (adapter === 'none') {
   console.log('Adapter: none. Using upstream directly.');
   // Copy upstream content to root of absoluteDest or generate a vercel.json that points to upstream
   fs.writeFileSync(path.join(absoluteDest, 'vercel.json'), JSON.stringify({
+    "name": recipe.vercel_project,
     "rewrites": [{ "source": "/(.*)", "destination": "/upstream/$1" }]
   }, null, 2));
 } else if (adapter === 'root-rewrite') {
   fs.writeFileSync(path.join(absoluteDest, 'vercel.json'), JSON.stringify({
+    "name": recipe.vercel_project,
     "rewrites": [{ "source": "/(.*)", "destination": `/upstream/${recipe.entrypoint}` }]
   }, null, 2));
 } else if (adapter === 'codepen-fragment-wrapper') {
@@ -120,15 +122,20 @@ if (adapter === 'none') {
 </body>
 </html>`;
   fs.writeFileSync(path.join(absoluteDest, 'index.html'), htmlWrapper);
+  fs.writeFileSync(path.join(absoluteDest, 'vercel.json'), JSON.stringify({ "name": recipe.vercel_project }, null, 2));
 } else if (adapter === 'framework-build' || adapter === 'workspace-demo') {
-  // Add a deployment vercel.json or just configure Vercel settings remotely
-  // We will leave the source untouched, vercel will build it.
-  fs.writeFileSync(path.join(absoluteDest, 'vercel.json'), JSON.stringify({
+  const vercelConfig = {
+    "name": recipe.vercel_project,
     "buildCommand": `cd upstream && ${recipe.build_command}`,
     "outputDirectory": `upstream/${recipe.output_directory}`
-  }, null, 2));
+  };
+  if (recipe.entrypoint && recipe.entrypoint !== 'index.html' && recipe.output_directory === '.') {
+     vercelConfig.rewrites = [{ "source": "/(.*)", "destination": `/${recipe.entrypoint}` }];
+  }
+  fs.writeFileSync(path.join(absoluteDest, 'vercel.json'), JSON.stringify(vercelConfig, null, 2));
 } else if (adapter === 'codepen-generated-entry') {
   fs.writeFileSync(path.join(absoluteDest, 'vercel.json'), JSON.stringify({
+    "name": recipe.vercel_project,
     "rewrites": [{ "source": "/(.*)", "destination": "/upstream/entry.html" }]
   }, null, 2));
 } else {

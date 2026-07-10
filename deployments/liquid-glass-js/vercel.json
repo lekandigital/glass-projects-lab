@@ -1,0 +1,9 @@
+{
+  "name": "glasslab-liquid-glass-js",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/upstream/$1"
+    }
+  ]
+}
