@@ -1,0 +1,30 @@
+[
+  {
+    "url": "http://localhost:5223/",
+    "status": 200
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/safari.png",
+    "status": 200
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/notes.png",
+    "status": 200
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/map.png",
+    "status": 200
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/finder.png",
+    "status": 200
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/messages.png",
+    "status": 200
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/books.png",
+    "status": 200
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "url": "http://localhost:4203/",
+    "status": 200
+  },
+  {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg",
+    "status": 200
+  },
+  {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Opera_2015_icon.svg/250px-Opera_2015_icon.svg.png",
+    "status": 200
+  },
+  {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Microsoft_Edge_logo_%282019%29.svg/250px-Microsoft_Edge_logo_%282019%29.svg.png",
+    "status": 200
+  },
+  {
+    "url": "https://picsum.photos/id/521/1500",
+    "status": 302
+  },
+  {
+    "url": "https://fastly.picsum.photos/id/521/1500/1500.jpg?hmac=4R4JA6Xv75Be2m-Pp_0FbDJWKfGY7AH8CaQy9kY0API",
+    "status": 200
+  }
+]

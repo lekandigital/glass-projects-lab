@@ -1,0 +1,10 @@
+[
+  {
+    "url": "http://localhost:3700/",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:3700/script.js",
+    "status": 200
+  }
+]

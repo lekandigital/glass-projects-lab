@@ -1,0 +1,34 @@
+[
+  {
+    "url": "http://localhost:7319/",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7319/index.css",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7319/bg-picker.js",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7319/backgrounds/image1.jpg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7319/backgrounds/image4.jpg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7319/backgrounds/image3.jpg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7319/backgrounds/image2.jpg",
+    "status": 200
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop",
+    "status": 200
+  }
+]

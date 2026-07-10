@@ -1,0 +1,30 @@
+[
+  {
+    "url": "http://localhost:4955/",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:4955/assets/index-_LgMHtwF.css",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:4955/assets/index-l7KpjPXa.js",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:4955/images/chrome.png",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:4955/images/netflix.png",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:4955/images/discord.png",
+    "status": 200
+  },
+  {
+    "url": "https://images.pexels.com/photos/623147/pexels-photo-623147.jpeg",
+    "status": 200
+  }
+]

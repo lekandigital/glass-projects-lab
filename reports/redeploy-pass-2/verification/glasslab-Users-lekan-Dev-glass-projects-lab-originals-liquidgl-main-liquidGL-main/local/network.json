@@ -1,0 +1,374 @@
+[
+  {
+    "url": "http://localhost:7466/",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/scripts/liquidGL.js",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/scripts/html2canvas.min.js",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/loop-opt.mp4",
+    "status": 206
+  },
+  {
+    "url": "http://localhost:7466/assets/liquidGlass-Full-Promo25fps-OPT.mp4",
+    "status": 206
+  },
+  {
+    "url": "http://localhost:7466/assets/liquidGlass-Full-Promo25fps-OPT.mp4",
+    "status": 206
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/lil-gui@0.19.1/dist/lil-gui.umd.min.js",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 304
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "blob:http://localhost:7466/2c5bee93-8294-4522-9a49-5fdf2041003f",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 304
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 304
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 304
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/play-icon.svg",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:7466/assets/naughtyduk-logo.svg",
+    "status": 304
+  }
+]

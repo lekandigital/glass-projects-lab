@@ -1,0 +1,18 @@
+ .../glasslab-kube-liquid-glass-css-svg/index.html  |  260 +++--
+ .../scripts/main.js                                |    3 -
+ .../styles/main.css                                |   15 -
+ originals/7-css-main/7.css-main/.gitignore         |    1 +
+ originals/css-glass-main/css.glass-main/.gitignore |    1 +
+ .../word-guess-game/app/.gitignore                 |    1 +
+ .../movie-instantsearch/.gitignore                 |    1 +
+ .../prime-vue-project/.gitignore                   |    1 +
+ .../task-manager-app/.gitignore                    |    1 +
+ .../Frontend-Projects-main/tictactoe/.gitignore    |    1 +
+ .../weeklyhow-custom-storefront/.gitignore         |    1 +
+ .../weeklyhow-instantsearch/.gitignore             |    1 +
+ .../glass-refraction-master/.gitignore             |    1 +
+ .../liquid-dom-master/.gitignore                   |    1 +
+ .../liquid-glass-js-main/.gitignore                |    1 +
+ reports/functional-deployment-state.json           | 1077 --------------------
+ scripts/test-all-production-deployments.py         |   72 +-
+ 17 files changed, 199 insertions(+), 1240 deletions(-)

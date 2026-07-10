@@ -1,0 +1,3 @@
+[
+  "Failed to resolve module specifier \"@/plugins\". Relative references must start with either \"/\", \"./\", or \"../\"."
+]

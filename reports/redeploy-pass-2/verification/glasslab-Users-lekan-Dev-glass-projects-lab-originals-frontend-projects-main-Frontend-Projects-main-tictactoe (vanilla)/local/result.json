@@ -1,0 +1,8 @@
+{
+  "projectId": "glasslab-Users-lekan-Dev-glass-projects-lab-originals-frontend-projects-main-Frontend-Projects-main-tictactoe (vanilla)",
+  "isProduction": false,
+  "success": false,
+  "reason": "Navigation or execution failed: page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:7395/\nCall log:\n  - navigating to \"http://localhost:7395/\", waiting until \"networkidle\"\n",
+  "diffScore": 0,
+  "timestamp": "2026-07-10T05:39:26.694Z"
+}
