@@ -1,0 +1,56 @@
+[
+  {
+    "url": "http://127.0.0.1:50141/",
+    "status": 200,
+    "headers": {
+      "content-length": "33866",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:36:09 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50141/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "3184",
+      "date": "Fri, 10 Jul 2026 04:36:09 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/flowers.jpg",
+    "status": 200,
+    "headers": {
+      "x-fastly-request-id": "8b0e28a30eafe330226b7c4e3631381ab8182808",
+      "etag": "W/\"a049707f50b0eb99d08ea5177a399bb9e6d237d1baafa5a3584569173459ab2f\"",
+      "x-content-type-options": "nosniff",
+      "x-github-request-id": "094C:51A3:1009CC3:149A761:6A5076B8",
+      "expires": "Fri, 10 Jul 2026 04:41:09 GMT",
+      "x-cache": "MISS",
+      "date": "Fri, 10 Jul 2026 04:36:09 GMT",
+      "content-type": "image/jpeg",
+      "x-served-by": "cache-bos-kbos510036-BOS",
+      "x-cache-hits": "0",
+      "source-age": "0",
+      "x-frame-options": "deny",
+      "strict-transport-security": "max-age=31536000",
+      "vary": "Authorization,Accept-Encoding",
+      "content-security-policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+      "cache-control": "max-age=300",
+      "x-timer": "S1783658170.839518,VS0,VE109",
+      "cross-origin-resource-policy": "cross-origin",
+      "via": "1.1 varnish",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "464556",
+      "x-xss-protection": "1; mode=block"
+    },
+    "content_type": "image/jpeg"
+  }
+]

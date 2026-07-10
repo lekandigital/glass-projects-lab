@@ -1,0 +1,38 @@
+[
+  {
+    "url": "http://127.0.0.1:50322/",
+    "status": 200,
+    "headers": {
+      "content-length": "1952",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:36:33 GMT",
+      "last-modified": "Sun, 26 Oct 2025 10:37:58 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50322/assets/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "3686",
+      "date": "Fri, 10 Jul 2026 04:36:33 GMT",
+      "content-type": "text/css",
+      "last-modified": "Sun, 26 Oct 2025 10:37:58 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50322/assets/script.js",
+    "status": 200,
+    "headers": {
+      "content-length": "4156",
+      "date": "Fri, 10 Jul 2026 04:36:33 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Sun, 26 Oct 2025 10:37:58 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  }
+]

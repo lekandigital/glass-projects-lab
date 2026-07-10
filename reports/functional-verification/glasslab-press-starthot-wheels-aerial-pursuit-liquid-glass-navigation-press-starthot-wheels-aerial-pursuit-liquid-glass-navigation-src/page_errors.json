@@ -1,0 +1,6 @@
+[
+  {
+    "message": "gsap is not defined",
+    "stack": "ReferenceError: gsap is not defined\n    at init (http://127.0.0.1:50795/script.js:40:9)\n    at http://127.0.0.1:50795/script.js:29:1"
+  }
+]

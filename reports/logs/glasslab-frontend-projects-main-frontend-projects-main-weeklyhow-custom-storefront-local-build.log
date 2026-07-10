@@ -1,0 +1,39 @@
+
+Running: npm install
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront
+----------------------------------------
+npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
+npm warn deprecated rollup-plugin-inject@3.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-inject.
+npm warn deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+
+added 1454 packages, and audited 1455 packages in 13s
+
+317 packages are looking for funding
+  run `npm fund` for details
+
+94 vulnerabilities (11 low, 24 moderate, 52 high, 7 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+Running: npm run build
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront
+----------------------------------------
+
+> hello-world@0.0.0 build
+> shopify hydrogen build
+
+
+🏗️  Building in production mode...
+📦 Worker built: 339.636ms
+   dist/worker/index.js  0.20 MB
+
+Heads up: Shopify stores have a number of standard routes that aren’t set up yet.
+Some functionality and backlinks might not work as expected until these are created or redirects are set up.
+This build is missing 17 routes. For more details, run `npx shopify hydrogen check routes`.
+

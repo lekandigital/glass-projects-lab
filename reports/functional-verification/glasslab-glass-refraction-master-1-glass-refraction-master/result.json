@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-glass-refraction-master-1-glass-refraction-master",
+  "url": "http://127.0.0.1:49901",
+  "status_code": 200,
+  "title": "Directory listing for /",
+  "html_length": 657,
+  "body_text_length": 121,
+  "visible_element_count": 24,
+  "canvas_count": 0,
+  "svg_count": 0,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "Times",
+    "backgroundImage": "none",
+    "margin": "8px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "H1",
+    "id": "",
+    "className": "",
+    "width": "1424px",
+    "height": "37px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "0px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 0.0,
+  "final_status": "verified-functional"
+}

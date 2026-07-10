@@ -1,0 +1,50 @@
+[
+  {
+    "url": "http://127.0.0.1:50083/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50083/index.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50083/bg-picker.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50083/backgrounds/image3.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50083/backgrounds/image2.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50083/backgrounds/image1.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50083/backgrounds/image4.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop",
+    "status": 200,
+    "content_type": "image/avif",
+    "failed": false
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "url": "http://127.0.0.1:50336/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50336/style.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  }
+]

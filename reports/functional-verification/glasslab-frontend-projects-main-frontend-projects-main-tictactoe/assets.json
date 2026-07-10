@@ -1,0 +1,20 @@
+[
+  {
+    "url": "http://127.0.0.1:50424/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50424/static/css/main.97eaa6d5.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50424/static/js/main.8e6adebe.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  }
+]

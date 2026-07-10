@@ -1,0 +1,44 @@
+[
+  {
+    "url": "http://127.0.0.1:49967/",
+    "status": 200,
+    "headers": {
+      "content-length": "733",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:35:31 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:38 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:49967/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "663",
+      "date": "Fri, 10 Jul 2026 04:35:31 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:38 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "https://orecticdesign.com/wp-content/uploads/2025/09/mv-bg.jpeg",
+    "status": 200,
+    "headers": {
+      "x-nginx-cache": "MISS",
+      "etag": "\"7b5c6-63f8d13007680\"",
+      "x-content-type-options": "nosniff",
+      "accept-ranges": "bytes",
+      "content-length": "505286",
+      "date": "Fri, 10 Jul 2026 04:35:33 GMT",
+      "x-xss-protection": "1; mode=block",
+      "content-type": "image/webp",
+      "vary": "Accept",
+      "server": "nginx",
+      "last-modified": "Wed, 24 Sep 2025 14:43:22 GMT"
+    },
+    "content_type": "image/webp"
+  }
+]

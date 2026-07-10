@@ -1,1 +1,8 @@
-.vercel
+node_modules
+.pnpm-store
+.dist
+coverage
+*.log
+dist
+.DS_Store
+.codex

@@ -1,0 +1,20 @@
+[
+  {
+    "url": "http://127.0.0.1:50141/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50141/style.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/flowers.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  }
+]

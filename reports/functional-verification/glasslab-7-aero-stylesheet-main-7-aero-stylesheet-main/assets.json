@@ -1,0 +1,50 @@
+[
+  {
+    "url": "http://127.0.0.1:50103/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50103/stylesheet.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50103/assets/profilebg.svg",
+    "status": 200,
+    "content_type": "image/svg+xml",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50103/assets/profile.png",
+    "status": 200,
+    "content_type": "image/png",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50103/assets/logon.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50103/assets/startup.mp3",
+    "status": 200,
+    "content_type": "audio/mpeg",
+    "failed": false
+  },
+  {
+    "url": "http://c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2",
+    "status": 301,
+    "content_type": "",
+    "failed": false
+  },
+  {
+    "url": "https://c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  }
+]

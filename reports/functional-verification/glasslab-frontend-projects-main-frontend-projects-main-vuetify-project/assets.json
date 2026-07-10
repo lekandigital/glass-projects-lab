@@ -1,0 +1,152 @@
+[
+  {
+    "url": "http://127.0.0.1:50489/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/index-D4KOyldm.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/index-BcQJI80D.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/materialdesignicons-webfont-B7mPwVP_.ttf",
+    "status": 200,
+    "content_type": "font/ttf",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/materialdesignicons-webfont-PXm3-2wK.woff",
+    "status": 200,
+    "content_type": "font/woff",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/materialdesignicons-webfont-Dp5v-WZN.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/VMain-B1JVUNw1.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/dimensions-CqbtZd5K.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/_plugin-vue_export-helper-DlAUqK2U.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/default-UlDQNXgg.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/dimensions-D-fj8z9C.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/default-STvHEzSq.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/index-DY02y3C8.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/VRow-C1yt39Ce.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/VMain-Cp3ZEKoq.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/index-iKJDk17z.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/VRow-8hd1VI7G.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/logo-DtuIbWiQ.png",
+    "status": 200,
+    "content_type": "image/png",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50489/assets/materialdesignicons-webfont-Dp5v-WZN.woff2?v=7.4.47",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://cdn.vuetifyjs.com/docs/images/one/create/feature.png",
+    "status": 200,
+    "content_type": "image/png",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBHMdazQ.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  }
+]

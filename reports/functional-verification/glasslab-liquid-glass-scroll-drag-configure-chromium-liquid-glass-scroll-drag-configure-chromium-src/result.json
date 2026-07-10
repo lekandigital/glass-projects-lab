@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-liquid-glass-scroll-drag-configure-chromium-liquid-glass-scroll-drag-configure-chromium-src",
+  "url": "http://127.0.0.1:50199",
+  "status_code": 200,
+  "title": "Liquid Glass Scroll Drag Configure Chromium Liquid Glass Scroll Drag Configure Chromium Src",
+  "html_length": 10752,
+  "body_text_length": 958,
+  "visible_element_count": 78,
+  "canvas_count": 0,
+  "svg_count": 3,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgb(255, 255, 255)",
+    "fontFamily": "\"SF Pro Text\", \"SF Pro Icons\", \"AOS Icons\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, system-ui",
+    "backgroundImage": "none",
+    "margin": "0px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "HEADER",
+    "id": "",
+    "className": "",
+    "width": "720px",
+    "height": "307.781px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "0px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 1,
+  "page_errors_count": 0,
+  "interaction_diff_score": 0.0,
+  "final_status": "verified-functional-with-minor-warnings"
+}
