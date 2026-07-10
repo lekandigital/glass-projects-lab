@@ -1,6 +1,6 @@
 {
   "project_id": "glasslab-frontend-projects-main-frontend-projects-main-tictactoe-public",
-  "url": "http://127.0.0.1:50435",
+  "url": "https://glasslab-frontend-projects-main-fro-eight.vercel.app",
   "status_code": 200,
   "title": "React App",
   "html_length": 1687,
@@ -32,5 +32,5 @@
   "console_errors_count": 0,
   "page_errors_count": 0,
   "interaction_diff_score": 0.0,
-  "final_status": "broken-local-render"
+  "final_status": "verified-functional"
 }

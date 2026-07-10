@@ -1,20 +1,20 @@
 [
   {
-    "url": "http://127.0.0.1:50822/",
+    "url": "https://glasslab-liquid-glass-cubiq-liquid.vercel.app/",
     "status": 200,
-    "content_type": "text/html",
+    "content_type": "text/html; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50822/style.css",
+    "url": "https://glasslab-liquid-glass-cubiq-liquid.vercel.app/script.js",
     "status": 200,
-    "content_type": "text/css",
+    "content_type": "application/javascript; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50822/script.js",
+    "url": "https://glasslab-liquid-glass-cubiq-liquid.vercel.app/style.css",
     "status": 200,
-    "content_type": "text/javascript",
+    "content_type": "text/css; charset=utf-8",
     "failed": false
   },
   {
@@ -24,15 +24,15 @@
     "failed": false
   },
   {
-    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FN_C-bnTfc7AGrY.woff2",
-    "status": 200,
-    "content_type": "font/woff2",
-    "failed": false
-  },
-  {
     "url": "https://i.ibb.co/ZpTYhmfq/tulip.jpg",
     "status": 200,
     "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FN_C-bnTfc7AGrY.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
     "failed": false
   }
 ]

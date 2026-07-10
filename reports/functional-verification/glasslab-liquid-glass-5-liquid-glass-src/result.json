@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-liquid-glass-5-liquid-glass-src",
+  "url": "http://127.0.0.1:56925",
+  "status_code": 200,
+  "title": "Liquid Glass 5 Liquid Glass Src",
+  "html_length": 1471,
+  "body_text_length": 11,
+  "visible_element_count": 4,
+  "canvas_count": 0,
+  "svg_count": 1,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "Times",
+    "backgroundImage": "url(\"https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=2070&auto=format&fit=crop\")",
+    "margin": "0px",
+    "display": "flex"
+  },
+  "primary_style": {
+    "tagName": "DIV",
+    "id": "",
+    "className": "out",
+    "width": "720px",
+    "height": "180px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "7px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 579.4986040238462,
+  "final_status": "verified-functional"
+}

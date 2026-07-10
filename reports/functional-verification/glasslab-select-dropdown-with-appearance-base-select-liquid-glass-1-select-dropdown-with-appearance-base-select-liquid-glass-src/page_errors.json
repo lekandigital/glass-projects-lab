@@ -1,6 +1,6 @@
 [
   {
     "message": "$ is not defined",
-    "stack": "ReferenceError: $ is not defined\n    at http://127.0.0.1:50930/script.js:29:1"
+    "stack": "ReferenceError: $ is not defined\n    at http://127.0.0.1:56140/script.js:29:1"
   }
 ]

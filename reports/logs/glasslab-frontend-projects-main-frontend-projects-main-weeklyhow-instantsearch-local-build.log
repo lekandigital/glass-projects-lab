@@ -165,7 +165,7 @@ npm error gyp ERR! node-gyp -v v12.2.0
 npm error gyp ERR! $npm_package_name lmdb
 npm error gyp ERR! $npm_package_version 2.2.4
 npm error gyp ERR! not ok
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_37_45_357Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_04_58_382Z-debug-0.log
 
 Running: rm -rf node_modules
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-instantsearch
@@ -337,7 +337,7 @@ npm error gyp ERR! node-gyp -v v12.2.0
 npm error gyp ERR! $npm_package_name lmdb
 npm error gyp ERR! $npm_package_version 2.2.4
 npm error gyp ERR! not ok
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_37_58_878Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_05_160Z-debug-0.log
 
 Running: npm install --legacy-peer-deps
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-instantsearch
@@ -505,7 +505,7 @@ npm error gyp ERR! node-gyp -v v12.2.0
 npm error gyp ERR! $npm_package_name lmdb
 npm error gyp ERR! $npm_package_version 2.2.4
 npm error gyp ERR! not ok
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_38_04_864Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_12_294Z-debug-0.log
 
 Running: npm ci
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-instantsearch
@@ -586,4 +586,4 @@ npm error
 npm error aliases: clean-install, ic, install-clean, isntall-clean
 npm error
 npm error Run "npm help ci" for more info
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_38_10_747Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_18_324Z-debug-0.log

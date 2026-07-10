@@ -1,27 +1,43 @@
 [
   {
-    "url": "http://127.0.0.1:49864/",
+    "url": "https://glasslab-glassmorphism-main-glassmo.vercel.app/",
     "status": 200,
     "headers": {
-      "content-length": "1312",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:35:04 GMT",
-      "last-modified": "Mon, 13 Nov 2023 14:53:36 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 04:57:00 GMT",
+      "etag": "W/\"c737e26898140b208e0aa16d69d7c4b4\"",
+      "last-modified": "Fri, 10 Jul 2026 04:57:00 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::cnvqz-1783659420593-d4e97a94be77"
     },
-    "content_type": "text/html"
+    "content_type": "text/html; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:49864/css-examples/css/global.css",
+    "url": "https://glasslab-glassmorphism-main-glassmo.vercel.app/css-examples/css/global.css",
     "status": 200,
     "headers": {
-      "content-length": "1086",
-      "date": "Fri, 10 Jul 2026 04:35:04 GMT",
-      "content-type": "text/css",
-      "last-modified": "Mon, 13 Nov 2023 14:53:36 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"f513683c786cd97c0c4614e03dfdc78c\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:57:00 GMT",
+      "content-disposition": "inline; filename=\"global.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:57:00 GMT",
+      "x-vercel-id": "iad1::cnvqz-1783659420696-5e66c11d8a57"
     },
-    "content_type": "text/css"
+    "content_type": "text/css; charset=utf-8"
   },
   {
     "url": "https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Roboto+Mono:wght@400;700&display=swap",
@@ -29,12 +45,12 @@
     "headers": {
       "content-encoding": "gzip",
       "x-content-type-options": "nosniff",
-      "expires": "Fri, 10 Jul 2026 04:35:04 GMT",
+      "expires": "Fri, 10 Jul 2026 04:57:00 GMT",
       "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
-      "date": "Fri, 10 Jul 2026 04:35:04 GMT",
+      "date": "Fri, 10 Jul 2026 04:57:00 GMT",
       "content-type": "text/css; charset=utf-8",
       "vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
-      "last-modified": "Fri, 10 Jul 2026 04:35:04 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:57:00 GMT",
       "x-frame-options": "SAMEORIGIN",
       "strict-transport-security": "max-age=31536000",
       "link": "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
@@ -52,12 +68,12 @@
     "url": "https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2",
     "status": 200,
     "headers": {
-      "age": "7963",
+      "age": "80297",
       "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
       "x-content-type-options": "nosniff",
-      "expires": "Sat, 10 Jul 2027 02:22:21 GMT",
+      "expires": "Fri, 09 Jul 2027 06:38:43 GMT",
       "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
-      "date": "Fri, 10 Jul 2026 02:22:21 GMT",
+      "date": "Thu, 09 Jul 2026 06:38:43 GMT",
       "last-modified": "Tue, 09 Sep 2025 18:40:32 GMT",
       "content-type": "font/woff2",
       "cache-control": "public, max-age=31536000",

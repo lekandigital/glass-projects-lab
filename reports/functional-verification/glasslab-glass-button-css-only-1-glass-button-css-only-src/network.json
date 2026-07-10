@@ -1,36 +1,52 @@
 [
   {
-    "url": "http://127.0.0.1:50124/",
+    "url": "https://glasslab-glass-button-css-only-1-gl.vercel.app/",
     "status": 200,
     "headers": {
-      "content-length": "1665",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:36:03 GMT",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 04:59:05 GMT",
+      "etag": "W/\"5293575a704ef12ffd639ad5084cce2a\"",
+      "last-modified": "Fri, 10 Jul 2026 04:59:05 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::ft2md-1783659545802-6aeac43754f7"
     },
-    "content_type": "text/html"
+    "content_type": "text/html; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50124/style.css",
+    "url": "https://glasslab-glass-button-css-only-1-gl.vercel.app/style.css",
     "status": 200,
     "headers": {
-      "content-length": "1876",
-      "date": "Fri, 10 Jul 2026 04:36:03 GMT",
-      "content-type": "text/css",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"91fb9919faa33880b38f4dafd3ef7789\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:59:05 GMT",
+      "content-disposition": "inline; filename=\"style.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:59:05 GMT",
+      "x-vercel-id": "iad1::ft2md-1783659545906-ee3e14d0e531"
     },
-    "content_type": "text/css"
+    "content_type": "text/css; charset=utf-8"
   },
   {
     "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Altja_j%C3%B5gi_Lahemaal.jpg",
     "status": 200,
     "headers": {
-      "x-request-id": "14bef06a-08ce-4510-bb12-933a547eb0f2",
+      "x-request-id": "cc6eaca8-74b1-4535-a034-6a4e544da4ff",
       "access-control-expose-headers": "Age, Date, Content-Length, Content-Range, X-Content-Duration, X-Cache",
       "etag": "25e937083406c94e55da0de60a1cfcc1",
-      "age": "2077",
+      "age": "3460",
       "x-object-meta-sha1base36": "ozm1hmct9phnqkrvqy8f452jllqq55q",
       "report-to": "{ \"group\": \"wm_nel\", \"max_age\": 604800, \"endpoints\": [{ \"url\": \"https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0\" }] }",
       "x-content-type-options": "nosniff",

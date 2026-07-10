@@ -165,7 +165,7 @@ npm error gyp ERR! node-gyp -v v12.2.0
 npm error gyp ERR! $npm_package_name lmdb
 npm error gyp ERR! $npm_package_version 2.2.4
 npm error gyp ERR! not ok
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_39_06_857Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_24_314Z-debug-0.log
 
 Running: rm -rf node_modules
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch
@@ -337,7 +337,7 @@ npm error gyp ERR! node-gyp -v v12.2.0
 npm error gyp ERR! $npm_package_name lmdb
 npm error gyp ERR! $npm_package_version 2.2.4
 npm error gyp ERR! not ok
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_39_14_576Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_30_513Z-debug-0.log
 
 Running: npm install --legacy-peer-deps
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch
@@ -505,7 +505,7 @@ npm error gyp ERR! node-gyp -v v12.2.0
 npm error gyp ERR! $npm_package_name lmdb
 npm error gyp ERR! $npm_package_version 2.2.4
 npm error gyp ERR! not ok
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_39_21_948Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_37_109Z-debug-0.log
 
 Running: npm ci
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch
@@ -586,4 +586,4 @@ npm error
 npm error aliases: clean-install, ic, install-clean, isntall-clean
 npm error
 npm error Run "npm help ci" for more info
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_39_28_793Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_43_557Z-debug-0.log

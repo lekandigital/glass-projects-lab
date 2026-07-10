@@ -1,26 +1,42 @@
 [
   {
-    "url": "http://127.0.0.1:50003/",
+    "url": "https://glasslab-liquid-glass-effect-wwdc25.vercel.app/",
     "status": 200,
     "headers": {
-      "content-length": "3512",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:35:42 GMT",
-      "last-modified": "Fri, 10 Jul 2026 05:40:14 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 04:58:20 GMT",
+      "etag": "W/\"125353d5a5bc8b43d506ab110f3a0066\"",
+      "last-modified": "Fri, 10 Jul 2026 04:58:20 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::tdp9p-1783659500063-c479bcac9271"
     },
-    "content_type": "text/html"
+    "content_type": "text/html; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50003/style.css",
+    "url": "https://glasslab-liquid-glass-effect-wwdc25.vercel.app/style.css",
     "status": 200,
     "headers": {
-      "content-length": "1656",
-      "date": "Fri, 10 Jul 2026 04:35:42 GMT",
-      "content-type": "text/css",
-      "last-modified": "Fri, 10 Jul 2026 05:40:14 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"fd6eededb91559951a4843f3f16e0dac\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:20 GMT",
+      "content-disposition": "inline; filename=\"style.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:20 GMT",
+      "x-vercel-id": "iad1::fj79k-1783659500211-8c32ed1bcc81"
     },
-    "content_type": "text/css"
+    "content_type": "text/css; charset=utf-8"
   }
 ]

@@ -1,0 +1,21 @@
+
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-cubiq-liquid-glass-cubiq-src --name glasslab-liquid-glass-cubiq-liquid-glass-cubiq-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-cubiq-liquid-glass-cubiq-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Retrieving project…
+Deploying lekandigitals-projects/glasslab-liquid-glass-cubiq-liquid-glass-cubiq-src
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-liquid-glass-cubiq-liquid-glass-cubiq-src/6ToSHM4LDv1aa8p2XSxdMQkjLv1G [1s]
+Production: https://glasslab-liquid-glass-cubiq-liquid-glass-cubiq-hz9hjgaom.vercel.app [1s]
+https://glasslab-liquid-glass-cubiq-liquid-glass-cubiq-hz9hjgaom.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 11 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+[2K[1A[2K[GProduction: https://glasslab-liquid-glass-cubiq-liquid-glass-cubiq-hz9hjgaom.vercel.app [7s]
+Completing...
+Aliased: https://glasslab-liquid-glass-cubiq-liquid.vercel.app [7s]

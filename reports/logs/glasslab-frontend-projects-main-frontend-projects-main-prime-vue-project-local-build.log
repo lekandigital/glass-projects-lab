@@ -3,7 +3,7 @@ Running: npm install
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-prime-vue-project
 ----------------------------------------
 
-added 118 packages, and audited 119 packages in 1s
+up to date, audited 119 packages in 1s
 
 17 packages are looking for funding
   run `npm fund` for details
@@ -35,4 +35,4 @@ dist/assets/primeicons-DMOk5skT.eot     85.16 kB
 dist/assets/primeicons-Dr5RGzOO.svg    342.53 kB │ gzip: 106.35 kB
 dist/assets/index-C5Uk72q6.css          28.48 kB │ gzip:   6.68 kB
 dist/assets/index-BfnSoal4.js          325.20 kB │ gzip:  74.47 kB
-✓ built in 439ms
+✓ built in 430ms

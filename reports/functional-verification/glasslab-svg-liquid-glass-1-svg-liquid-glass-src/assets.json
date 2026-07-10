@@ -1,26 +1,50 @@
 [
   {
-    "url": "http://127.0.0.1:50847/",
+    "url": "https://glasslab-svg-liquid-glass-1-svg-liq.vercel.app/",
     "status": 200,
-    "content_type": "text/html",
+    "content_type": "text/html; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50847/src/style.css",
+    "url": "https://glasslab-svg-liquid-glass-1-svg-liq.vercel.app/assets/index-0ff70d89.css",
     "status": 200,
-    "content_type": "text/css",
+    "content_type": "text/css; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50847/src/main.jsx",
+    "url": "https://glasslab-svg-liquid-glass-1-svg-liq.vercel.app/assets/index-6a91cf24.js",
     "status": 200,
-    "content_type": "application/octet-stream",
+    "content_type": "application/javascript; charset=utf-8",
     "failed": false
   },
   {
     "url": "https://i0.wp.com/mrmacintosh.com/wp-content/uploads/2025/06/Screenshot-2025-06-09-at-3.49.32%E2%80%AFPM.png?resize=1024%2C1015&ssl=1",
     "status": 200,
     "content_type": "image/webp",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/preact",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/preact/hooks",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/preact@10.29.7/es2022/preact.mjs",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://esm.sh/preact@10.29.7/es2022/hooks.mjs",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
     "failed": false
   }
 ]

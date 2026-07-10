@@ -1,14 +1,14 @@
 {
   "project_id": "glasslab-liquid-glass-scroll-drag-configure-chromium-liquid-glass-scroll-drag-configure-chromium-src",
-  "url": "http://127.0.0.1:50199",
+  "url": "https://glasslab-liquid-glass-scroll-drag-c.vercel.app",
   "status_code": 200,
   "title": "Liquid Glass Scroll Drag Configure Chromium Liquid Glass Scroll Drag Configure Chromium Src",
-  "html_length": 10752,
-  "body_text_length": 958,
-  "visible_element_count": 78,
+  "html_length": 53194,
+  "body_text_length": 1054,
+  "visible_element_count": 126,
   "canvas_count": 0,
-  "svg_count": 3,
-  "stylesheets_count": 1,
+  "svg_count": 27,
+  "stylesheets_count": 2,
   "body_style": {
     "backgroundColor": "rgb(255, 255, 255)",
     "fontFamily": "\"SF Pro Text\", \"SF Pro Icons\", \"AOS Icons\", \"Helvetica Neue\", Helvetica, Arial, sans-serif, system-ui",
@@ -17,20 +17,20 @@
     "display": "block"
   },
   "primary_style": {
-    "tagName": "HEADER",
+    "tagName": "BUTTON",
     "id": "",
-    "className": "",
-    "width": "720px",
-    "height": "307.781px",
-    "position": "static",
+    "className": "tp-rotv_b",
+    "width": "280px",
+    "height": "24px",
+    "position": "relative",
     "filter": "none",
     "backdropFilter": "none",
-    "borderRadius": "0px"
+    "borderRadius": "6px 6px 0px 0px"
   },
   "css_applied": true,
   "assets_failed_count": 0,
-  "console_errors_count": 1,
+  "console_errors_count": 0,
   "page_errors_count": 0,
-  "interaction_diff_score": 0.0,
-  "final_status": "verified-functional-with-minor-warnings"
+  "interaction_diff_score": 572.4363134181418,
+  "final_status": "verified-functional"
 }

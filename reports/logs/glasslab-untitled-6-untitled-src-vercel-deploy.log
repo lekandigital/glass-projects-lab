@@ -1,0 +1,8 @@
+
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-untitled-6-untitled-src --name glasslab-untitled-6-untitled-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-untitled-6-untitled-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Retrieving project…
+Deploying lekandigitals-projects/glasslab-untitled-6-untitled-src
+Error: Resource is limited - try again in 24 hours (more than 100, code: "api-deployments-free-per-day").

@@ -1,0 +1,59 @@
+[
+  {
+    "url": "http://127.0.0.1:56604/",
+    "status": 200,
+    "headers": {
+      "content-length": "1185",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 05:10:30 GMT",
+      "last-modified": "Fri, 10 Jul 2026 05:10:30 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:56604/assets/index-c320c841.css",
+    "status": 200,
+    "headers": {
+      "content-length": "15622",
+      "date": "Fri, 10 Jul 2026 05:10:30 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 05:10:30 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:56604/assets/index-9fbd3d78.js",
+    "status": 200,
+    "headers": {
+      "content-length": "25234",
+      "date": "Fri, 10 Jul 2026 05:10:30 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 05:10:30 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "https://i.imgur.com/ENjzWVm.jpeg",
+    "status": 403,
+    "headers": {
+      "strict-transport-security": "max-age=300",
+      "retry-after": "0",
+      "x-timer": "S1783660231.756976,VS0,VE0",
+      "access-control-allow-methods": "GET, OPTIONS",
+      "x-content-type-options": "nosniff",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "x-cache": "MISS",
+      "content-length": "0",
+      "date": "Fri, 10 Jul 2026 05:10:30 GMT",
+      "content-type": "",
+      "x-served-by": "cache-bos-kbos510051-BOS",
+      "x-cache-hits": "0",
+      "server": "cat factory 1.0"
+    },
+    "content_type": ""
+  }
+]

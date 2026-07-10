@@ -1,49 +1,83 @@
 [
   {
-    "url": "http://127.0.0.1:50455/",
+    "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/",
     "status": 200,
     "headers": {
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
       "content-length": "461",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:37:29 GMT",
-      "last-modified": "Fri, 10 Jul 2026 04:37:29 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 05:01:54 GMT",
+      "etag": "\"7af1c70b2a75d0b2d155a1dcb6b553a1\"",
+      "last-modified": "Fri, 10 Jul 2026 05:01:54 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::wlbfp-1783659714063-636b82608dfc"
     },
-    "content_type": "text/html"
+    "content_type": "text/html; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50455/assets/index-C5Uk72q6.css",
+    "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/assets/index-CJebgv0A.css",
     "status": 200,
     "headers": {
-      "content-length": "28483",
-      "date": "Fri, 10 Jul 2026 04:37:29 GMT",
-      "content-type": "text/css",
-      "last-modified": "Fri, 10 Jul 2026 04:37:29 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"902665dea7180321b07e9e2c183b4b15\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 05:01:54 GMT",
+      "content-disposition": "inline; filename=\"index-CJebgv0A.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:01:54 GMT",
+      "x-vercel-id": "iad1::6tn6m-1783659714178-158f75781a96"
     },
-    "content_type": "text/css"
+    "content_type": "text/css; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50455/assets/index-BfnSoal4.js",
+    "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/assets/index-DamoTuTO.js",
     "status": 200,
     "headers": {
-      "content-length": "325199",
-      "date": "Fri, 10 Jul 2026 04:37:29 GMT",
-      "content-type": "text/javascript",
-      "last-modified": "Fri, 10 Jul 2026 04:37:29 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"504bfd7b3e76b0c10570105626cb43e3\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 05:01:54 GMT",
+      "content-disposition": "inline; filename=\"index-DamoTuTO.js\"",
+      "content-type": "application/javascript; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:01:54 GMT",
+      "x-vercel-id": "iad1::wlbfp-1783659714175-5c0ae9e6a4db"
     },
-    "content_type": "text/javascript"
+    "content_type": "application/javascript; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50455/assets/primeicons-C6QP2o4f.woff2",
+    "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/assets/primeicons-C6QP2o4f.woff2",
     "status": 200,
     "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "x-vercel-cache": "MISS",
+      "etag": "\"aef2b0c4a5a1966adcbb0e07733f0493\"",
+      "age": "0",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
       "content-length": "35148",
-      "date": "Fri, 10 Jul 2026 04:37:29 GMT",
+      "date": "Fri, 10 Jul 2026 05:01:54 GMT",
+      "content-disposition": "inline; filename=\"primeicons-C6QP2o4f.woff2\"",
       "content-type": "font/woff2",
-      "last-modified": "Fri, 10 Jul 2026 04:37:29 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:01:54 GMT",
+      "x-vercel-id": "iad1::2l29b-1783659714394-1b5a032770b2"
     },
     "content_type": "font/woff2"
   }

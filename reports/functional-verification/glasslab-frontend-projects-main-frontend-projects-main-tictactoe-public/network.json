@@ -1,14 +1,22 @@
 [
   {
-    "url": "http://127.0.0.1:50435/",
+    "url": "https://glasslab-frontend-projects-main-fro-eight.vercel.app/",
     "status": 200,
     "headers": {
-      "content-length": "1721",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:37:20 GMT",
-      "last-modified": "Sun, 26 Oct 2025 10:37:58 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 05:01:22 GMT",
+      "etag": "W/\"ef8a02db437c74f2ecb0d88becc4b9d4\"",
+      "last-modified": "Fri, 10 Jul 2026 05:01:22 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::6kfbv-1783659682660-5675a28ab56d"
     },
-    "content_type": "text/html"
+    "content_type": "text/html; charset=utf-8"
   }
 ]

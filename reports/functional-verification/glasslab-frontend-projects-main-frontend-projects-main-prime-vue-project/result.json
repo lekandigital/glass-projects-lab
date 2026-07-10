@@ -1,6 +1,6 @@
 {
   "project_id": "glasslab-frontend-projects-main-frontend-projects-main-prime-vue-project",
-  "url": "http://127.0.0.1:50455",
+  "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app",
   "status_code": 200,
   "title": "Vite + Vue + TS",
   "html_length": 85790,
@@ -31,6 +31,6 @@
   "assets_failed_count": 0,
   "console_errors_count": 0,
   "page_errors_count": 0,
-  "interaction_diff_score": 577.4703954292568,
+  "interaction_diff_score": 577.4703987062405,
   "final_status": "verified-functional"
 }

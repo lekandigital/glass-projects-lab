@@ -1,20 +1,20 @@
 [
   {
-    "url": "http://127.0.0.1:49975/",
+    "url": "https://glasslab-cross-browser-liquid-toggl.vercel.app/",
     "status": 200,
-    "content_type": "text/html",
+    "content_type": "text/html; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:49975/style.css",
+    "url": "https://glasslab-cross-browser-liquid-toggl.vercel.app/script.js",
     "status": 200,
-    "content_type": "text/css",
+    "content_type": "application/javascript; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:49975/script.js",
+    "url": "https://glasslab-cross-browser-liquid-toggl.vercel.app/style.css",
     "status": 200,
-    "content_type": "text/javascript",
+    "content_type": "text/css; charset=utf-8",
     "failed": false
   },
   {
@@ -36,9 +36,9 @@
     "failed": false
   },
   {
-    "url": "https://unpkg.com/normalize.css",
-    "status": 302,
-    "content_type": "text/plain;charset=UTF-8",
+    "url": "https://esm.sh/gsap@3.13.0/es2022/Draggable.mjs",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
     "failed": false
   },
   {
@@ -48,9 +48,9 @@
     "failed": false
   },
   {
-    "url": "https://esm.sh/gsap@3.13.0/es2022/Draggable.mjs",
-    "status": 200,
-    "content_type": "application/javascript; charset=utf-8",
+    "url": "https://unpkg.com/normalize.css",
+    "status": 302,
+    "content_type": "text/plain;charset=UTF-8",
     "failed": false
   },
   {

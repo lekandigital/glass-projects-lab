@@ -1,38 +1,62 @@
 [
   {
-    "url": "http://127.0.0.1:50322/",
+    "url": "https://glasslab-frontend-projects-main-fro.vercel.app/",
     "status": 200,
     "headers": {
-      "content-length": "1952",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:36:33 GMT",
-      "last-modified": "Sun, 26 Oct 2025 10:37:58 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 05:00:48 GMT",
+      "etag": "W/\"98afa13b7c365fb7035b13f37f230c48\"",
+      "last-modified": "Fri, 10 Jul 2026 05:00:48 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::tlxqp-1783659648735-116fc839fbb6"
     },
-    "content_type": "text/html"
+    "content_type": "text/html; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50322/assets/style.css",
+    "url": "https://glasslab-frontend-projects-main-fro.vercel.app/assets/script.js",
     "status": 200,
     "headers": {
-      "content-length": "3686",
-      "date": "Fri, 10 Jul 2026 04:36:33 GMT",
-      "content-type": "text/css",
-      "last-modified": "Sun, 26 Oct 2025 10:37:58 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"4a8a0aafd271d5e6a5f3b7c5ef8bc5e5\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 05:00:48 GMT",
+      "content-disposition": "inline; filename=\"script.js\"",
+      "content-type": "application/javascript; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:00:48 GMT",
+      "x-vercel-id": "iad1::9pwtn-1783659648861-eeaddf30f8ca"
     },
-    "content_type": "text/css"
+    "content_type": "application/javascript; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50322/assets/script.js",
+    "url": "https://glasslab-frontend-projects-main-fro.vercel.app/assets/style.css",
     "status": 200,
     "headers": {
-      "content-length": "4156",
-      "date": "Fri, 10 Jul 2026 04:36:33 GMT",
-      "content-type": "text/javascript",
-      "last-modified": "Sun, 26 Oct 2025 10:37:58 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"251ca1b80f74acf9795421b14c155692\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 05:00:48 GMT",
+      "content-disposition": "inline; filename=\"style.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:00:48 GMT",
+      "x-vercel-id": "iad1::wcs6s-1783659648855-69a46fadf40e"
     },
-    "content_type": "text/javascript"
+    "content_type": "text/css; charset=utf-8"
   }
 ]

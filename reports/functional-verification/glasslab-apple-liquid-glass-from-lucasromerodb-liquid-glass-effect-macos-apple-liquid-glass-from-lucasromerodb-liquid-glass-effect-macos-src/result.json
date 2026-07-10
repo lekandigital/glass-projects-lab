@@ -1,6 +1,6 @@
 {
   "project_id": "glasslab-apple-liquid-glass-from-lucasromerodb-liquid-glass-effect-macos-apple-liquid-glass-from-lucasromerodb-liquid-glass-effect-macos-src",
-  "url": "http://127.0.0.1:50157",
+  "url": "https://glasslab-apple-liquid-glass-from-lu.vercel.app",
   "status_code": 200,
   "title": "Apple Liquid Glass From Lucasromerodb Liquid Glass Effect Macos Apple Liquid Glass From Lucasromerodb Liquid Glass Effect Macos Src",
   "html_length": 2849,
@@ -31,6 +31,6 @@
   "assets_failed_count": 0,
   "console_errors_count": 0,
   "page_errors_count": 0,
-  "interaction_diff_score": 642.6253233967934,
+  "interaction_diff_score": 642.6052889818673,
   "final_status": "verified-functional"
 }

@@ -1,6 +1,6 @@
 {
   "project_id": "glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src",
-  "url": "http://127.0.0.1:50889",
+  "url": "https://glasslab-apple-liquid-glass-ui-2025.vercel.app",
   "status_code": 200,
   "title": "Apple Liquid Glass Ui 2025 Apple Liquid Glass Ui 2025 Src",
   "html_length": 2750,
@@ -31,6 +31,6 @@
   "assets_failed_count": 0,
   "console_errors_count": 0,
   "page_errors_count": 0,
-  "interaction_diff_score": 591.1552363856492,
+  "interaction_diff_score": 587.1061568481041,
   "final_status": "verified-functional"
 }

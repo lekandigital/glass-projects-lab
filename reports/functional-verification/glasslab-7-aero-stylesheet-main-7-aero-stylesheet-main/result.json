@@ -1,6 +1,6 @@
 {
   "project_id": "glasslab-7-aero-stylesheet-main-7-aero-stylesheet-main",
-  "url": "http://127.0.0.1:50103",
+  "url": "http://127.0.0.1:55064",
   "status_code": 200,
   "title": "Frutiger Aero Web",
   "html_length": 555,
@@ -12,7 +12,7 @@
   "body_style": {
     "backgroundColor": "rgba(0, 0, 0, 0)",
     "fontFamily": "SegoeUI",
-    "backgroundImage": "url(\"http://127.0.0.1:50103/assets/logon.jpg\")",
+    "backgroundImage": "url(\"http://127.0.0.1:55064/assets/logon.jpg\")",
     "margin": "0px",
     "display": "flex"
   },

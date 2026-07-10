@@ -1,6 +1,6 @@
 {
   "project_id": "glasslab-glass-button-css-only-1-glass-button-css-only-src",
-  "url": "http://127.0.0.1:50124",
+  "url": "https://glasslab-glass-button-css-only-1-gl.vercel.app",
   "status_code": 200,
   "title": "Glass Button Css Only 1 Glass Button Css Only Src",
   "html_length": 1663,
@@ -31,6 +31,6 @@
   "assets_failed_count": 0,
   "console_errors_count": 0,
   "page_errors_count": 0,
-  "interaction_diff_score": 612.025222031558,
+  "interaction_diff_score": 614.5370467039436,
   "final_status": "verified-functional"
 }

@@ -1,0 +1,26 @@
+[
+  {
+    "url": "http://127.0.0.1:57068/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:57068/style.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:57068/script.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "https://cdn.pixabay.com/photo/2020/05/27/22/18/meadow-5229169_1280.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  }
+]

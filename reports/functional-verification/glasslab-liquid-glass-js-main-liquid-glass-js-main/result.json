@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-liquid-glass-js-main-liquid-glass-js-main",
+  "url": "http://127.0.0.1:56498",
+  "status_code": 200,
+  "title": "Liquid Glass JS - Apple-Inspired Glass Effects Library",
+  "html_length": 18379,
+  "body_text_length": 4865,
+  "visible_element_count": 166,
+  "canvas_count": 9,
+  "svg_count": 0,
+  "stylesheets_count": 4,
+  "body_style": {
+    "backgroundColor": "rgb(255, 255, 255)",
+    "fontFamily": "sans-serif",
+    "backgroundImage": "none",
+    "margin": "0px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "CANVAS",
+    "id": "",
+    "className": "",
+    "width": "196px",
+    "height": "90px",
+    "position": "absolute",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "36px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 0.0,
+  "final_status": "verified-functional-with-minor-warnings"
+}

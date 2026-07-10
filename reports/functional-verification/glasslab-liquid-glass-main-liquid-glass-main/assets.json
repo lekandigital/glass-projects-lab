@@ -1,42 +1,24 @@
 [
   {
-    "url": "http://127.0.0.1:50083/",
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/",
     "status": 200,
-    "content_type": "text/html",
+    "content_type": "text/html; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50083/index.css",
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/bg-picker.js",
     "status": 200,
-    "content_type": "text/css",
+    "content_type": "application/javascript; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50083/bg-picker.js",
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/index.css",
     "status": 200,
-    "content_type": "text/javascript",
+    "content_type": "text/css; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50083/backgrounds/image3.jpg",
-    "status": 200,
-    "content_type": "image/jpeg",
-    "failed": false
-  },
-  {
-    "url": "http://127.0.0.1:50083/backgrounds/image2.jpg",
-    "status": 200,
-    "content_type": "image/jpeg",
-    "failed": false
-  },
-  {
-    "url": "http://127.0.0.1:50083/backgrounds/image1.jpg",
-    "status": 200,
-    "content_type": "image/jpeg",
-    "failed": false
-  },
-  {
-    "url": "http://127.0.0.1:50083/backgrounds/image4.jpg",
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/backgrounds/image3.jpg",
     "status": 200,
     "content_type": "image/jpeg",
     "failed": false
@@ -45,6 +27,24 @@
     "url": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop",
     "status": 200,
     "content_type": "image/avif",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/backgrounds/image2.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/backgrounds/image1.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/backgrounds/image4.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
     "failed": false
   }
 ]

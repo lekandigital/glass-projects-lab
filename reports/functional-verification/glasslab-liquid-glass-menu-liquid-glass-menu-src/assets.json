@@ -1,12 +1,12 @@
 [
   {
-    "url": "http://127.0.0.1:50784/",
+    "url": "http://127.0.0.1:55283/",
     "status": 200,
     "content_type": "text/html",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50784/script.js",
+    "url": "http://127.0.0.1:55283/script.js",
     "status": 200,
     "content_type": "text/javascript",
     "failed": false

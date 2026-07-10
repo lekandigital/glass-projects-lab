@@ -1,0 +1,13 @@
+[
+  {
+    "type": "error",
+    "text": "Failed to load resource: the server responded with a status of 403 ()",
+    "location": {
+      "url": "https://i.imgur.com/ENjzWVm.jpeg",
+      "line": 0,
+      "column": 0,
+      "lineNumber": 0,
+      "columnNumber": 0
+    }
+  }
+]
