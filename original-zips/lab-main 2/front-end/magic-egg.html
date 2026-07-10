@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magic Egg</title>
+    <style>
+        :root {
+            --frames: 11;
+        }
+
+        html, body {
+            margin: 0;
+            height: 100%;
+            background: linear-gradient(315deg,
+            rgb(172, 21, 177) 3%,
+            rgba(60, 132, 206, 1) 38%,
+            rgba(48, 238, 226, 1) 68%,
+            rgb(137, 237, 140) 98%);
+            background-size: 400% 400%;
+            animation: gradient 5s ease infinite;
+            background-attachment: fixed;
+        }
+
+        @keyframes gradient {
+            0%, 100% {
+                background-position: 0 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+
+        body::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .scroll {
+            height: calc(var(--frames) * 100vh);
+        }
+
+        .block {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .frame {
+            width: calc(480 / 720 * 100vh);
+            height: 90vh;
+            background: url("https://raw.githubusercontent.com/BlackStar1991/Pictures-for-sharing-/refs/heads/master/Sprite/sprite1.webp") center top no-repeat;
+            background-size: 100% calc(90vh * var(--frames));
+            animation: change-bg steps(calc(var(--frames) - 1)) both;
+            animation-timeline: scroll();
+            animation-range: 0 100%;
+            border-radius: 50%;
+            box-shadow: -2px 1px 15px 9px rgba(0, 0, 0, 0.61);
+        }
+
+        @keyframes change-bg {
+            from {
+                background-position: center 0;
+            }
+            to {
+                background-position: center 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="scroll">
+    <div class="block">
+        <div class="frame"></div>
+    </div>
+</div>
+</body>
+</html>

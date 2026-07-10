@@ -1,9 +1,0 @@
-{
-  "name": "glasslab-codepen-hdshy",
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/upstream/entry.html"
-    }
-  ]
-}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Glass-model</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <body>
+    <div class="scene"></div>
+
+    <div class="fixed">
+      <!-- 透明寄せ：contrast="light" を選択（白膜控えめ） -->
+      <sv-liquid-glass
+        styles='{
+        "style":{"roundness":60,"padding_x":3,"padding_y":3},
+        "text":{"content":"Glass-model","edit":false,"font_family":"Inter","size_weight":500,"font_size":3.5},
+        "color":{"accent":"#D7DADD"}
+      }'
+        contrast="light"
+      >
+      </sv-liquid-glass>
+    </div>
+    <script src='https://glass.danilofiumi.com/web-comps/boundle.js'></script>
+  </body>
+  
+</html>

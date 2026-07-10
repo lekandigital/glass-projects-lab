@@ -1,8 +1,0 @@
-{
-  "projectId": "glasslab-Users-lekan-Dev-glass-projects-lab-originals-glassmorphism-main-glassmorphism-main",
-  "isProduction": true,
-  "success": false,
-  "reason": "Failed assets: https://vercel.com/api/jwt, https://o205439.ingest.sentry.io/api/1323670/envelope/?sentry_key=d00780d432ac4ccf882f60dd02062e14&sentry_version=7&sentry_client=sentry.javascript.browser%2F7.111.0",
-  "diffScore": 0,
-  "timestamp": "2026-07-10T05:37:29.850Z"
-}

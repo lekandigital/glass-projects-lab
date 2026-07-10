@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flip Card</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+        body {
+            background: #171717;
+            background: linear-gradient(
+                    90deg,
+                    rgba(23, 23, 23, 1) 0%,
+                    rgba(38, 37, 37, 1) 50%,
+                    rgba(0, 0, 0, 1) 100%
+            );
+            font-family: "Poppins", sans-serif;
+        }
+
+        p {
+            font-weight: 300;
+            color: #353131;
+            text-align: justify;
+            padding-bottom: 2em;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: center;
+            max-width: 1000px;
+            position: relative;
+            align-content: center;
+            padding: 2rem;
+        }
+
+        .container_text {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: start;
+            margin: 2em 0;
+        }
+
+        h2 {
+            margin: 0.25em 0;
+            padding: 0;
+            line-height: 120%;
+            font-size: 1.95em;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-style: italic;
+            font-weight: 400;
+            width: 50%;
+        }
+
+        .card {
+            border: 1px solid black;
+            padding: 1rem;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+
+            border-radius: 30px;
+            transform-origin: center;
+            transform-style: preserve-3d; /* Important for 3D effect */
+            perspective: 1000px; /* Add perspective to enhance 3D effect */
+        }
+
+        .card-front img {
+            width: 100%;
+            margin-bottom: 1rem;
+            border-radius: 20px; /* Rounded corners for the image */
+        }
+
+        .img_wrapper {
+            position: relative;
+        }
+
+        .read-more {
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn_back {
+            width: auto;
+            background-color: rgb(23, 46, 46);
+            color: white;
+            border-radius: 30px;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            padding: 1em 1em;
+            border: 1px solid black;
+        }
+
+        .round_wrapper {
+            width: 60px;
+            height: 60px;
+            background-color: rgb(23, 46, 46);
+            border-radius: 100%;
+            position: absolute;
+            right: 0.5em;
+            top: 0.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .round_wrapper svg {
+        }
+
+        .btn {
+            position: absolute;
+            bottom: 0em;
+            right: 0rem;
+            width: 5rem;
+            height: 5rem;
+            background: white;
+            border-top-left-radius: 50%;
+        }
+
+        .btn::before {
+            position: absolute;
+            content: "";
+            bottom: 1.3rem;
+            left: -1.22rem;
+            background: transparent;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-bottom-right-radius: 1.25rem;
+            box-shadow: 0.313rem 0.313rem 0 0.313rem #fff;
+        }
+
+        .btn::after {
+            position: absolute;
+            content: "";
+            top: -1.25rem;
+            right: -0.06rem;
+            background: transparent;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-bottom-right-radius: 1.25rem;
+            box-shadow: 0.313rem 0.313rem 0 0.313rem white;
+        }
+
+        .card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            backface-visibility: hidden; /* Hide the back face when it is flipped */
+            opacity: 0; /* Initially hidden */
+            transform: rotateY(180deg); /* Initially rotated to the back */
+
+            box-shadow: 23px 23px 46px #0c0c0c, -23px -23px 46px #303030;
+            justify-content: center;
+        }
+
+        .card-front {
+            background-color: white;
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden; /* Hide the front face when it is flipped */
+            box-shadow: 23px 23px 46px #0c0c0c, -23px -23px 46px #303030;
+        }
+
+        .card_container {
+            position: relative;
+            width: 300px;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card_container">
+        <div class="card card-front">
+            <div class="img_wrapper">
+                <img alt="Card image"
+                     src="https://images.unsplash.com/photo-1439405326854-014607f694d7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDQwMzk1OTJ8&ixlib=rb-4.0.3&q=85"
+                     title="Photo by Joseph Barrientos for Unsplash">
+                <div class="btn">
+                    <div class="round_wrapper"><a class="read-more" href="#">
+                        <svg fill="white" height="30" viewBox="0 0 512 512" with="30"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/>
+                        </svg>
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <div class="container_text">
+                <h2>Where in the World Will You Go Next ?</h2>
+                <p>From coastal escapes to mountain retreats, your journey begins here.
+                    Each destination is handpicked for wanderers with a taste for wonder.
+                    Pack your bags—your next chapter is just a card away. </p>
+            </div>
+        </div>
+
+        <div class="card card-back">
+            <h3>Where Every Sunset Feels Like Magic</h3>
+            <h1>Maui, Hawai‘i</h1>
+
+            <p>Savor island flavors, from fresh poke bowls to sweet shaved ice by the shore.
+                End your days with golden sunsets over the Pacific and the sound of waves lapping at your feet.
+                In Maui, every bite and every view is a memory in the making.</p>
+            <div class="btn_back">
+                <a class="read-more" href="#">Read more</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script>
+    const card = document.querySelector(".card_container");
+    const cardFront = card.querySelector(".card-front");
+    const cardBack = card.querySelector(".card-back");
+    let tl = gsap.timeline({paused: true, reversed: true});
+
+    function frontToBack() {
+        // Set initial styles for back card (hidden behind the front card)
+        tl.set(cardBack, {opacity: 1, rotationY: 180}, "<");
+
+        // Animate the front card rotating 180 degrees
+        tl.to(cardFront, {
+            rotateY: 180,
+            duration: 1, // Adjust duration for the flip effect
+            ease: "power2.inOut"
+        });
+
+        // Animate the back card rotating from 180 to 0 degrees to show it
+        tl.to(
+            cardBack,
+            {
+                rotateY: 0,
+                duration: 1,
+                ease: "power2.inOut"
+            },
+            "<"
+        );
+
+        tl.play(); // Start the animation
+    }
+
+    function backToFront() {
+        tl.reverse(); // Reverse the flip animation
+    }
+
+    card.addEventListener("mouseenter", frontToBack);
+    card.addEventListener("mouseleave", backToFront);
+
+</script>
+</body>
+</html>

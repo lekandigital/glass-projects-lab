@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gelatinous, Viscous, Iridescent Black Goo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: sans-serif;
+            color: #fff;
+            user-select: none;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .dg.main .property-name {
+            color: #ccc !important;
+        }
+
+        .dg.main .c input[type=text] {
+            color: #eee !important;
+            background-color: #222 !important;
+            border: 1px solid #444 !important;
+        }
+
+        .dg.main .slider {
+            background-color: #444 !important;
+        }
+
+        .dg.main .slider-fg {
+            background-color: #0088ff !important;
+        }
+    </style>
+</head>
+<body>
+<canvas id="goo-canvas"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/dat.gui@0.7.9/build/dat.gui.min.js"></script>
+
+<script type="module">
+    import * as THREE from 'https://cdn.skypack.dev/three@0.136.0/build/three.module.js';
+    import {OrbitControls} from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
+    import {EffectComposer} from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/EffectComposer.js';
+    import {RenderPass} from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/RenderPass.js';
+    import {ShaderPass} from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/ShaderPass.js';
+    import {
+        UnrealBloomPass
+    } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+    import {RGBShiftShader} from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/shaders/RGBShiftShader.js';
+    import {GUI} from 'https://cdn.skypack.dev/dat.gui';
+
+
+    const canvas = document.querySelector('#goo-canvas');
+    const renderer = new THREE.WebGLRenderer({canvas});
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 5;
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.screenSpacePanning = false;
+    controls.minDistance = 1;
+    controls.maxDistance = 10;
+    controls.update();
+
+    window.addEventListener('resize', () => {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setPixelRatio(window.devicePixelRatio);
+    });
+
+    const mouse = new THREE.Vector2(0.5, 0.5);
+    window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX / window.innerWidth;
+        mouse.y = 1.0 - e.clientY / window.innerHeight;
+    });
+
+    const uniforms = {
+        iTime: {value: 0},
+        mouse: {value: mouse},
+        distortion: {value: 0.25},
+        jellyFreq: {value: 3.0},
+        fineNoiseAmp: {value: 0.15},
+        broadNoiseAmp: {value: 0.25},
+        noiseSpeed: {value: 0.7},
+        gooColor: {value: new THREE.Vector3(0.325, 0.358, 0.347)},
+        iridescenceStrength: {value: 2.0},
+        iridescenceOffset: {value: 0.5},
+        specularShininess: {value: 128.0},
+        specularColor: {value: new THREE.Vector3(0.9, 0.95, 1.0)}
+    };
+
+    const material = new THREE.ShaderMaterial({
+        uniforms,
+        vertexShader: `
+          uniform float iTime;
+          uniform float distortion;
+          uniform float jellyFreq;
+          uniform float fineNoiseAmp;
+          uniform float broadNoiseAmp;
+          uniform float noiseSpeed;
+
+          varying vec2 vUv;
+          varying vec3 vNormal;
+          varying vec3 vViewPosition;
+
+          vec4 permute(vec4 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
+          vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+          vec3 fade(vec3 t) { return t * t * t * (t * (t * 6.0 - 15.0) + 10.0); }
+
+          float snoise(vec3 v) {
+            const vec2 F = vec2(1.0/3.0, 1.0/6.0);
+            vec3 i = floor(v + dot(v, F.xxx) );
+            vec3 x0 = v - i + dot(i, F.yyy) ;
+
+            vec3 g = vec3(0.0);
+            if (x0.x < x0.y) {
+              if (x0.y < x0.z) g = vec3(0,1,2); else if (x0.x < x0.z) g = vec3(0,2,1); else g = vec3(2,0,1);
+            } else {
+              if (x0.z < x0.y) g = vec3(2,1,0); else if (x0.z < x0.x) g = vec3(1,2,0); else g = vec3(1,0,2);
+            }
+
+            vec3 x1 = x0 - vec3(g.y, g.z, g.x) + F.yyy;
+            vec3 x2 = x0 - vec3(g.z, g.x, g.y) + 2.0 * F.yyy;
+            vec3 x3 = x0 - vec3(1.0, 1.0, 1.0) + 3.0 * F.yyy;
+
+            vec4 p = permute( permute( permute(
+              i.z + vec4(0.0, g.x, g.y, g.z ))
+              + i.y + vec4(0.0, g.y, g.z, g.x ))
+              + i.x + vec4(0.0, g.z, g.x, g.y ));
+
+            vec4 pi = mod(floor(p / 4.0), 2.0) * 2.0 - 1.0;
+            vec4 r0 = mod(p, 4.0);
+            vec4 r1 = r0 - 2.0;
+
+            vec4 p0 = vec4(r0.x, r1.x, r0.y, r1.y);
+            vec4 p1 = vec4(r0.z, r1.z, r0.w, r1.w);
+
+            vec4 h = taylorInvSqrt(vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)));
+            vec4 m = max(0.5 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+            m = m * m;
+            m = m * m;
+
+            vec4 gx = p0 * pi.x + p1 * pi.y;
+            vec4 gy = p0 * pi.z + p1 * pi.w;
+            vec4 gz = r0 - 1.5;
+
+            vec3 g0 = vec3(gx.x, gy.x, gz.x);
+            vec3 g1 = vec3(gx.y, gy.y, gz.y);
+            vec3 g2 = vec3(gx.z, gy.z, gz.z);
+            vec3 g3 = vec3(gx.w, gy.w, gz.w);
+
+            return 130.0 * dot(m, vec4(dot(g0, x0), dot(g1, x1), dot(g2, x2), dot(g3, x3)));
+          }
+
+
+          void main() {
+            vUv = uv;
+            vNormal = normal;
+
+            vec3 pos = position;
+
+            float fineNoiseFreq = jellyFreq * 2.0;
+            float broadNoiseFreq = jellyFreq * 0.5;
+
+            // Apply multiple layers of noise with different frequencies and amplitudes
+            // and offset their sampling slightly to break up patterns.
+            float noiseValue =
+              snoise(pos * fineNoiseFreq + iTime * noiseSpeed) * fineNoiseAmp +
+              snoise(pos * broadNoiseFreq * 1.5 + iTime * noiseSpeed * 0.5 + vec3(10.0, 5.0, 2.0)) * broadNoiseAmp * 0.7 +
+              snoise(pos * fineNoiseFreq * 0.75 + iTime * noiseSpeed * 1.2 + vec3(5.0, 15.0, 8.0)) * fineNoiseAmp * 0.5;
+
+            float offset = distortion * noiseValue;
+
+            pos += normal * offset;
+
+            vViewPosition = (modelViewMatrix * vec4(pos, 1.0)).xyz;
+
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform float iTime;
+          uniform vec2 mouse;
+          uniform vec3 gooColor;
+          uniform float iridescenceStrength;
+          uniform float iridescenceOffset;
+          uniform float specularShininess;
+          uniform vec3 specularColor;
+
+          varying vec2 vUv;
+          varying vec3 vNormal;
+          varying vec3 vViewPosition;
+
+          const float W_GLOBAL = 1.2;
+          const float T2 = 7.5;
+
+          vec4 permute(vec4 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
+          vec4 taylorInvSqrt(vec4 r) { return 1.79284291400159 - 0.85373472095314 * r; }
+          vec3 fade(vec3 t) { return t * t * t * (t * (t * 6.0 - 15.0) + 10.0); }
+
+          float snoise(vec3 v) {
+            const vec2 F = vec2(1.0/3.0, 1.0/6.0);
+            vec3 i = floor(v + dot(v, F.xxx) );
+            vec3 x0 = v - i + dot(i, F.yyy) ;
+
+            vec3 g = vec3(0.0);
+            if (x0.x < x0.y) {
+              if (x0.y < x0.z) g = vec3(0,1,2); else if (x0.x < x0.z) g = vec3(0,2,1); else g = vec3(2,0,1);
+            } else {
+              if (x0.z < x0.y) g = vec3(2,1,0); else if (x0.z < x0.x) g = vec3(1,2,0); else g = vec3(1,0,2);
+            }
+
+            vec3 x1 = x0 - vec3(g.y, g.z, g.x) + F.yyy;
+            vec3 x2 = x0 - vec3(g.z, g.x, g.y) + 2.0 * F.yyy;
+            vec3 x3 = x0 - vec3(1.0, 1.0, 1.0) + 3.0 * F.yyy;
+
+            vec4 p = permute( permute( permute(
+              i.z + vec4(0.0, g.x, g.y, g.z ))
+              + i.y + vec4(0.0, g.y, g.z, g.x ))
+              + i.x + vec4(0.0, g.z, g.x, g.y ));
+
+            vec4 pi = mod(floor(p / 4.0), 2.0) * 2.0 - 1.0;
+            vec4 r0 = mod(p, 4.0);
+            vec4 r1 = r0 - 2.0;
+
+            vec4 p0 = vec4(r0.x, r1.x, r0.y, r1.y);
+            vec4 p1 = vec4(r0.z, r1.z, r0.w, r1.w);
+
+            vec4 h = taylorInvSqrt(vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)));
+            vec4 m = max(0.5 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
+            m = m * m;
+            m = m * m;
+
+            vec4 gx = p0 * pi.x + p1 * pi.y;
+            vec4 gy = p0 * pi.z + p1 * pi.w;
+            vec4 gz = r0 - 1.5;
+
+            vec3 g0 = vec3(gx.x, gy.x, gz.x);
+            vec3 g1 = vec3(gx.y, gy.y, gz.y);
+            vec3 g2 = vec3(gx.z, gy.z, gz.z);
+            vec3 g3 = vec3(gx.w, gy.w, gz.w);
+
+            return 130.0 * dot(m, vec4(dot(g0, x0), dot(g1, x1), dot(g2, x2), dot(g3, x3)));
+          }
+
+          float filmic(float x) {
+            float q = (T2*T2 + 1.0) * x*x;
+            return q / (q + x + T2*T2);
+          }
+          vec3 filmicToneMap(vec3 col) {
+            float w = filmic(W_GLOBAL);
+            return vec3(filmic(col.r), filmic(col.g), filmic(col.b)) / w;
+          }
+
+          void main() {
+            vec3 normal = normalize(vNormal);
+
+            // Add more noise layers and slight offsets for less predictable patterns
+            float detailNoise = snoise(vViewPosition * 5.0 + iTime * 0.7 + vec3(1.0, 2.0, 3.0));
+            float patternGoo = snoise(vViewPosition * 2.0 + iTime * 0.3 + vec3(4.0, 5.0, 6.0));
+            float veryFineNoise = snoise(vViewPosition * 15.0 + iTime * 1.5 + vec3(7.0, 8.0, 9.0));
+
+            float finalPattern = (detailNoise * 0.4) + (patternGoo * 0.4) + (veryFineNoise * 0.2);
+            finalPattern = smoothstep(-0.5, 1.0, finalPattern);
+
+            vec3 baseColor = mix(vec3(0.005), gooColor, finalPattern);
+
+            vec3 lightDirection = normalize(vec3(0.5, 1.0, 0.8));
+
+            // Perturb normals with a combination of noise frequencies for more organic bumps
+            vec3 normalOffset = vec3(
+              snoise(vViewPosition * 10.0 + iTime * 1.0 + vec3(10.0)),
+              snoise(vViewPosition * 10.0 + iTime * 1.0 + vec3(20.0)),
+              snoise(vViewPosition * 10.0 + iTime * 1.0 + vec3(30.0))
+            ) * 0.05 + // Reduced amplitude for primary normal perturbation
+            vec3(
+              snoise(vViewPosition * 25.0 + iTime * 2.0 + vec3(40.0)),
+              snoise(vViewPosition * 25.0 + iTime * 2.0 + vec3(50.0)),
+              snoise(vViewPosition * 25.0 + iTime * 2.0 + vec3(60.0))
+            ) * 0.02; // Smaller, faster noise for subtle surface imperfections
+            vec3 perturbedNormal = normalize(normal + normalOffset);
+
+
+            float diffuse = max(dot(perturbedNormal, lightDirection), 0.0);
+
+            vec3 viewDirection = normalize(-vViewPosition);
+            vec3 reflectDirection = reflect(-lightDirection, perturbedNormal);
+            float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), specularShininess);
+
+            float fresnel = pow(1.0 - max(dot(viewDirection, normal), 0.0), iridescenceStrength);
+
+            vec3 iridColor1 = vec3(0.8, 0.2, 0.5);
+            vec3 iridColor2 = vec3(0.2, 0.8, 0.5);
+            vec3 iridColor3 = vec3(0.5, 0.5, 0.8);
+
+            vec3 iridescence = mix(iridColor1, iridColor2, fract(fresnel * iridescenceOffset));
+            iridescence = mix(iridescence, iridColor3, fract(fresnel * iridescenceOffset + 0.33));
+
+            vec3 finalSpecularColor = mix(specularColor, iridescence, fresnel * 2.0);
+
+            vec3 ambientLight = baseColor * 0.05;
+
+            vec3 finalColor = ambientLight + (baseColor * diffuse * 0.5) + (finalSpecularColor * spec * 2.5);
+
+            float glow = pow(1.0 - dot(viewDirection, normal), 3.0);
+            finalColor += gooColor * glow * 0.2;
+
+            finalColor = filmicToneMap(finalColor);
+            finalColor = pow(finalColor, vec3(1.0 / 2.2));
+
+            gl_FragColor = vec4(finalColor, 1.0);
+          }
+        `,
+        wireframe: true // Initial wireframe state
+    });
+
+    let sphereGeometry = new THREE.SphereGeometry(1, 128, 128);
+    const sphere = new THREE.Mesh(sphereGeometry, material);
+    sphere.rotation.x = 5;
+    sphere.rotation.y = 3;
+    sphere.rotation.z = 0;
+    scene.add(sphere);
+
+    // Post-processing setup
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+
+    const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+    bloomPass.threshold = 0;
+    bloomPass.strength = 0.5;
+    bloomPass.radius = 0.5;
+    composer.addPass(bloomPass);
+
+    const rgbShiftPass = new ShaderPass(RGBShiftShader);
+    rgbShiftPass.uniforms['amount'].value = 0.0015;
+    composer.addPass(rgbShiftPass);
+
+    const settings = {
+        distortion: 0.25,
+        jellyFreq: 3.0,
+        colorR: 0.1,
+        colorG: 0.1,
+        colorB: 0.1,
+        fineNoiseAmp: 0.15,
+        broadNoiseAmp: 0.25,
+        noiseSpeed: 0.7,
+        iridescenceStrength: 2.0,
+        iridescenceOffset: 0.5,
+        specularShininess: 128.0,
+        specularColorR: 0.0,
+        specularColorG: 0.0,
+        specularColorB: 0.0,
+        // New post-processing settings
+        enableBloom: true,
+        bloomStrength: 0.5,
+        bloomRadius: 0.5,
+        bloomThreshold: 0.0,
+        enableRGBShift: true,
+        rgbShiftAmount: 0.0015,
+        // New sphere settings
+        sphereRadius: 1,
+        sphereWidthSegments: 80,
+        sphereHeightSegments: 80,
+        wireframe: true, // Wireframe toggle for the ShaderMaterial
+        fullscreen: false, // Fullscreen toggle
+        randomize: () => {
+        } // Placeholder for the randomize function in GUI
+    };
+
+    const gui = new dat.GUI();
+    gui.close();
+
+    const folderDeformation = gui.addFolder('Deformation');
+    folderDeformation.add(settings, 'distortion', 0.0, 0.5).name('Global Intensity');
+    folderDeformation.add(settings, 'jellyFreq', 1.0, 8.0).name('Jelly Frequency');
+    folderDeformation.add(settings, 'fineNoiseAmp', 0.0, 0.5).name('Fine Noise Amplitude');
+    folderDeformation.add(settings, 'broadNoiseAmp', 0.0, 0.5).name('Broad Noise Amplitude');
+    folderDeformation.add(settings, 'noiseSpeed', 0.1, 2.0).name('Animation Speed');
+    folderDeformation.open();
+
+    const folderGooColor = gui.addFolder('Goo Color');
+    folderGooColor.add(settings, 'colorR', 0.0, 1.0).name('Red').onChange(() => {
+        uniforms.gooColor.value.set(settings.colorR, settings.colorG, settings.colorB);
+    });
+    folderGooColor.add(settings, 'colorG', 0.0, 1.0).name('Green').onChange(() => {
+        uniforms.gooColor.value.set(settings.colorR, settings.colorG, settings.colorB);
+    });
+    folderGooColor.add(settings, 'colorB', 0.0, 1.0).name('Blue').onChange(() => {
+        uniforms.gooColor.value.set(settings.colorR, settings.colorG, settings.colorB);
+    });
+    folderGooColor.open();
+
+    const folderIridescence = gui.addFolder('Iridescent Reflections');
+    folderIridescence.add(settings, 'iridescenceStrength', 0.1, 10.0).name('Iridescence Strength');
+    folderIridescence.add(settings, 'iridescenceOffset', 0.0, 2.0).name('Color Offset');
+    folderIridescence.add(settings, 'specularShininess', 10.0, 256.0).name('Specular Shininess');
+
+    const folderSpecularColor = folderIridescence.addFolder('Base Specular Color');
+    folderSpecularColor.add(settings, 'specularColorR', 0.0, 1.0).name('Specular Red').onChange(() => {
+        uniforms.specularColor.value.set(settings.specularColorR, settings.specularColorG, settings.specularColorB);
+    });
+    folderSpecularColor.add(settings, 'specularColorG', 0.0, 1.0).name('Specular Green').onChange(() => {
+        uniforms.specularColor.value.set(settings.specularColorR, settings.specularColorG, settings.specularColorB);
+    });
+    folderSpecularColor.add(settings, 'specularColorB', 0.0, 1.0).name('Specular Blue').onChange(() => {
+        uniforms.specularColor.value.set(settings.specularColorR, settings.specularColorG, settings.specularColorB);
+    });
+    folderSpecularColor.open();
+    folderIridescence.open();
+
+    // Bloom Pass GUI
+    const folderBloom = gui.addFolder('Bloom Pass');
+    folderBloom.add(settings, 'enableBloom').name('Enable Bloom').onChange(value => {
+        bloomPass.enabled = value;
+    });
+    folderBloom.add(settings, 'bloomStrength', 0.0, 3.0).name('Strength').onChange(value => {
+        bloomPass.strength = value;
+    });
+    folderBloom.add(settings, 'bloomRadius', 0.0, 1.0).name('Radius').onChange(value => {
+        bloomPass.radius = value;
+    });
+    folderBloom.add(settings, 'bloomThreshold', 0.0, 1.0).name('Threshold').onChange(value => {
+        bloomPass.threshold = value;
+    });
+    folderBloom.open();
+
+    // RGB Shift Pass GUI
+    const folderRGBShift = gui.addFolder('RGB Shift Pass');
+    folderRGBShift.add(settings, 'enableRGBShift').name('Enable RGB Shift').onChange(value => {
+        rgbShiftPass.enabled = value;
+    });
+    folderRGBShift.add(settings, 'rgbShiftAmount', 0.0, 0.01).name('Amount').onChange(value => {
+        rgbShiftPass.uniforms['amount'].value = value;
+    });
+    folderRGBShift.open();
+
+    // --- Sphere Parameters GUI ---
+    const folderSphere = gui.addFolder('Sphere Parameters');
+    folderSphere.add(settings, 'sphereRadius', 0.1, 5.0).name('Radius').onChange(updateSphereGeometry);
+    folderSphere.add(settings, 'sphereWidthSegments', 8, 256).step(1).name('Width Segments').onChange(updateSphereGeometry);
+    folderSphere.add(settings, 'sphereHeightSegments', 8, 256).step(1).name('Height Segments').onChange(updateSphereGeometry);
+    folderSphere.open();
+
+    // --- Material Settings GUI ---
+    const folderMaterial = gui.addFolder('Material Settings');
+    folderMaterial.add(settings, 'wireframe').name('Wireframe').onChange(value => {
+        material.wireframe = value;
+    });
+    folderMaterial.open();
+
+    // --- General Settings GUI (including Fullscreen and Randomize) ---
+    const folderGeneral = gui.addFolder('General');
+    folderGeneral.add(settings, 'fullscreen').name('Toggle Fullscreen').onChange(toggleFullscreen);
+    // Add the randomize button
+    folderGeneral.add(settings, 'randomize').name('Randomize Parameters');
+    folderGeneral.open();
+
+
+    function updateSphereGeometry() {
+        sphere.geometry.dispose(); // Dispose of the old geometry
+        sphereGeometry = new THREE.SphereGeometry(
+            settings.sphereRadius,
+            settings.sphereWidthSegments,
+            settings.sphereHeightSegments
+        );
+        sphere.geometry = sphereGeometry; // Assign the new geometry
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message} (${err.name})`);
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+
+    // --- Randomize Function ---
+    function randomizeParameters() {
+        // Deformation Parameters
+        settings.distortion = Math.random() * (0.4 - 0.05) + 0.05;
+        settings.jellyFreq = Math.random() * (6.0 - 1.0) + 1.0;
+        settings.fineNoiseAmp = Math.random() * (0.3 - 0.05) + 0.05;
+        settings.broadNoiseAmp = Math.random() * (0.4 - 0.1) + 0.1;
+        settings.noiseSpeed = Math.random() * (1.5 - 0.3) + 0.3;
+
+        // Post-processing parameters (ensure they are enabled first)
+        settings.enableBloom = true;
+        bloomPass.enabled = true;
+        settings.bloomStrength = Math.random() * (2.0 - 0.1) + 0.1;
+        settings.bloomRadius = Math.random() * (0.9 - 0.1) + 0.1;
+        settings.bloomThreshold = Math.random() * 0.5; // Threshold can be lower
+
+        settings.enableRGBShift = true;
+        rgbShiftPass.enabled = true;
+        settings.rgbShiftAmount = Math.random() * 0.005; // Keep this low
+
+        // Apply updates to GUI and uniforms
+        // This ensures the GUI reflects the new random values
+        for (let i in gui.__controllers) {
+            gui.__controllers[i].updateDisplay();
+        }
+        // Also update controllers within folders
+        gui.__folders['Deformation'].__controllers.forEach(c => c.updateDisplay());
+        gui.__folders['Bloom Pass'].__controllers.forEach(c => c.updateDisplay());
+        gui.__folders['RGB Shift Pass'].__controllers.forEach(c => c.updateDisplay());
+        gui.__folders['General'].__controllers.forEach(c => c.updateDisplay()); // For enableBloom/RGBShift toggles
+
+        // Explicitly update uniforms for relevant parameters
+        uniforms.distortion.value = settings.distortion;
+        uniforms.jellyFreq.value = settings.jellyFreq;
+        uniforms.fineNoiseAmp.value = settings.fineNoiseAmp;
+        uniforms.broadNoiseAmp.value = settings.broadNoiseAmp;
+        uniforms.noiseSpeed.value = settings.noiseSpeed;
+        bloomPass.strength = settings.bloomStrength;
+        bloomPass.radius = settings.bloomRadius;
+        bloomPass.threshold = settings.bloomThreshold;
+        rgbShiftPass.uniforms['amount'].value = settings.rgbShiftAmount;
+    }
+
+    // Assign the randomize function to the settings object
+    settings.randomize = randomizeParameters;
+
+    // Double-click event listener for the canvas
+    canvas.addEventListener('dblclick', randomizeParameters);
+
+
+    function animate(time) {
+        uniforms.iTime.value = time * 0.001;
+        uniforms.distortion.value = settings.distortion;
+        uniforms.jellyFreq.value = settings.jellyFreq;
+        uniforms.fineNoiseAmp.value = settings.fineNoiseAmp;
+        uniforms.broadNoiseAmp.value = settings.broadNoiseAmp;
+        uniforms.noiseSpeed.value = settings.noiseSpeed;
+        // gooColor and specularColor are updated in onChange callbacks of dat.GUI
+        uniforms.iridescenceStrength.value = settings.iridescenceStrength;
+        uniforms.iridescenceOffset.value = settings.iridescenceOffset;
+        uniforms.specularShininess.value = settings.specularShininess;
+
+        controls.update();
+        composer.render(); // Render using the composer for post-processing
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+
+    function setupPortfolioInvite() {
+        const inviteDiv = document.createElement('div');
+        inviteDiv.id = 'moreProjectsInvite';
+        inviteDiv.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: rgba(0, 0, 0, 0.8); /* A bit darker for pop */
+        color: white;
+        padding: 12px 18px; /* Slightly bigger padding */
+        border-radius: 10px; /* More rounded corners, LA style! */
+        font-family: 'Helvetica Neue', Arial, sans-serif; /* A bit more modern font */
+        font-size: 15px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        cursor: pointer;
+        text-align: center;
+        line-height: 1.4; /* Better readability */
+        border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    `;
+        inviteDiv.innerHTML = `
+        Wanna check out more of my rad Three.js stuff? <br>
+        <a href="https://codepen.io/vainsan/pens/public?grid_type=LIST" target="_blank" style="color: #64B5F6; text-decoration: underline; font-weight: normal;">Tap here, yo!</a>
+    `;
+
+        document.body.appendChild(inviteDiv);
+
+        setTimeout(() => {
+            inviteDiv.style.opacity = 1;
+        }, 5000);
+
+        inviteDiv.addEventListener('click', () => {
+            inviteDiv.style.opacity = 0;
+            setTimeout(() => inviteDiv.remove(), 1000);
+        });
+    }
+
+    setupPortfolioInvite()
+</script>
+</body>
+</html>

@@ -1,8 +1,0 @@
-
-Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/originals/liquid-glass-react-master/liquid-glass-react-master --name glasslab-liquid-glass-react-master-liquid-glass-react-master-liquid-glass-example
-CWD: /Users/lekan/Dev/glass-projects-lab/originals/liquid-glass-react-master/liquid-glass-react-master
-----------------------------------------
-The "--name" option is deprecated (https://vercel.link/name-flag)
-Retrieving project…
-Deploying lekandigitals-projects/glasslab-liquid-glass-react-master-liquid-glass-react-master-liquid-glass-example
-Error: Resource is limited - try again in 24 hours (more than 100, code: "api-deployments-free-per-day").

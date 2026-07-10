@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Star City</title>
+    <style>
+        .overlay {
+            position: fixed;
+            bottom: 0;
+            right: -3px;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+        }
+
+        .overlay > a {
+            display: flex;
+            margin: 0 15px 12px 0;
+        }
+
+        @media screen and (max-width: 480px), screen and (max-height: 240px) {
+            .overlay {
+                transform: scale(0.5);
+                transform-origin: bottom right;
+            }
+        }
+
+        /* Hides on smaller screens, preferable in embeds */
+        @media screen and (max-height: 120px) {
+            .overlay {
+                display: none;
+            }
+        }
+    </style>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        body > svg {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .bmc {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+<svg style="background:linear-gradient(#135,#aa9,#135)" xmlns="http://www.w3.org/2000/svg">
+    <pattern height="20" id="pattern" patternUnits="userSpaceOnUse" width="20">
+        <circle r="1"/>
+    </pattern>
+    <filter id="filter">
+        <feTurbulence baseFrequency=".3"/>
+        <feColorMatrix result="s" values="0 0 0 0 1
+                               0 0 0 0 1
+                               0 0 0 0 1
+                               0 0 0 9 -4"/>
+        <feFlood result="f" y="55%"/>
+        <feTurbulence baseFrequency=".5 0" type="fractalNoise"/>
+        <feDisplacementMap in="f" scale="600"/>
+        <feComposite in="SourceAlpha" operator="in"/>
+        <feMorphology operator="dilate" radius="10"/>
+        <feColorMatrix values="0 0 0 0 0
+                               0 0 0 0 0
+                               0 0 0 0 0
+                               0 0 0 99 0"/>
+        <feComposite in="s" operator="atop"/>
+    </filter>
+    <rect fill="url(#pattern)" filter="url(#filter)" height="110%" width="110%"/>
+</svg>
+</body>
+</html>

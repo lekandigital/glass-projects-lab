@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+    <meta content="telephone=no" name="format-detection">
+    <title>Simple Masonry V2</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lightgallery.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/css/lg-zoom.css" rel="stylesheet">
+    <style>
+        :root {
+            --dark-color-h: 334.29;
+            --dark-color-s: 32.03%;
+            --dark-color-l: 30%;
+            --light-color-h: 19.2;
+            --light-color-s: 30.86%;
+            --light-color-l: 84.12%;
+            --dark-color: hsl(var(--dark-color-h), var(--dark-color-s), var(--dark-color-l));
+            --light-color: hsl(var(--light-color-h), var(--light-color-s), var(--light-color-l));
+            --bg-color: var(--dark-color);
+            --text-color: var(--light-color);
+            --resources-bg-color: hsla(var(--dark-color-h), var(--dark-color-s), calc(var(--dark-color-l) - 10%), 0.75);
+            --resources-active-color: color-mix(in srgb, var(--light-color) 75%, transparent);
+            --resources-color: var(--text-color);
+        }
+
+        *,
+        ::after,
+        ::before {
+            border-style: solid;
+            border-width: 0;
+            box-sizing: border-box;
+        }
+
+        * {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        html.no-scroll {
+            background: hsl(var(--dark-color-h), var(--dark-color-s), calc(var(--dark-color-l) - 10%));
+            scrollbar-gutter: stable;
+        }
+
+        html.no-scroll body {
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Roboto", sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .wrapper {
+            display: block;
+            margin: 3rem auto;
+            max-width: 75rem;
+            position: relative;
+            width: calc(100% - 2rem);
+        }
+
+        simple-masonry {
+            --column-count: 5;
+            --grid-gap-horizontal: 1.5rem;
+            --grid-gap-vertical: 1.5rem;
+            counter-reset: masonry-counter;
+            display: grid;
+            position: relative;
+            width: 100%;
+        }
+
+        simple-masonry + simple-masonry {
+            margin-top: calc(var(--grid-gap-vertical) * 4);
+        }
+
+        .grid-item {
+            background-color: hsla(var(--dark-color-h), var(--dark-color-s), calc(var(--dark-color-l) - 10%), .75);
+            counter-increment: masonry-counter;
+            grid-area: 1/-1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .grid-item a {
+            cursor: pointer;
+        }
+
+        .grid-item::after {
+            align-items: center;
+            background-color: hsla(var(--dark-color-h), var(--dark-color-s), calc(var(--dark-color-l) - 10%), .75);
+            border-radius: .125rem;
+            bottom: .25rem;
+            color: var(--text-color);
+            content: counter(masonry-counter);
+            display: flex;
+            font-size: .625rem;
+            height: 1.5rem;
+            justify-content: center;
+            line-height: 1.5rem;
+            position: absolute;
+            right: .25rem;
+            text-align: center;
+            width: 1.5rem;
+        }
+
+        img {
+            background-repeat: no-repeat;
+            background-size: cover;
+            border: 0;
+            color: transparent;
+            display: block;
+            font: 0/0 a;
+            height: 100%;
+            max-width: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            outline: none;
+            padding: 0;
+            position: relative;
+            text-shadow: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            vertical-align: middle;
+            width: 100%;
+        }
+
+        .lg-backdrop {
+            background-color: hsl(var(--dark-color-h), var(--dark-color-s), calc(var(--dark-color-l) - 10%));
+        }
+
+        .resources-layer {
+            bottom: 0;
+            display: block;
+            position: fixed;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .resources {
+            background: var(--resources-bg-color);
+            display: grid;
+            font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans", Arial, sans-serif;
+            font-size: .6875rem;
+            font-weight: 300;
+            grid-auto-flow: column;
+            line-height: 1.3;
+            padding: .5rem;
+            pointer-events: auto;
+        }
+
+        .resources a {
+            align-content: center;
+            display: grid;
+            justify-content: center;
+            padding: 0 .5rem;
+            place-content: center;
+            transition: color .2s ease-in-out;
+        }
+
+        .resources a,
+        .resources a:visited {
+            color: var(--resources-color);
+        }
+
+        .resources a:active,
+        .resources a:focus-visible {
+            color: var(--resources-active-color);
+        }
+
+        .resources a:focus-visible {
+            outline: none;
+        }
+
+        .resources a:not(:first-child) {
+            border-inline-start: thin solid currentColor;
+        }
+
+        @media (max-width: 75.04875em) {
+            simple-masonry {
+                --column-count: 4;
+                --grid-gap-horizontal: 1.25rem;
+                --grid-gap-vertical: 1.25rem;
+            }
+        }
+
+        @media (max-width: 51.29875em) {
+            simple-masonry {
+                --column-count: 3;
+                --grid-gap-horizontal: 1rem;
+                --grid-gap-vertical: 1rem;
+            }
+        }
+
+        @media (max-width: 36.04875em) {
+            simple-masonry {
+                --column-count: 2;
+                --grid-gap-horizontal: 0.75rem;
+                --grid-gap-vertical: 0.75rem;
+            }
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+
+            .resources a:active:not(:hover),
+            .resources a:hover {
+                color: var(--resources-active-color);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <simple-masonry data-animate-on-resize="true" data-dense-placement="true"
+                    data-gap-horizontal="--grid-gap-horizontal"
+                    data-gap-vertical="--grid-gap-vertical" data-use-column-count="true"
+                    id="test-simple-masonry-01">
+        <div class="grid-item" style="aspect-ratio:3/4;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-01.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-01" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-01-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:16/9;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-02.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-02" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-02-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:16/9;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-03.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-03" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-03-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:1/1;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-04.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-04" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-04-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-05.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-05" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-05-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-06.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-06" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-06-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-07.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-07" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-07-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:9/16;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-08.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-08" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-08-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:4/3;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-09.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-09" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-09-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-10.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-10" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-10-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:1/1;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-11.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-11" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-11-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:4/3;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-12.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-12" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-12-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:16/9;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-13.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-13" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-13-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-14.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-14" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-14-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-15.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-15" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-15-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-16.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-16" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-16-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-17.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-17" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-17-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:9/16;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-18.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-18" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-18-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:6/5;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-19.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-19" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-19-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-20.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-20" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-20-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-21.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-21" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-21-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-22.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-22" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-22-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-23.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-23" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-23-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-24.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-24" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-24-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/4;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-25.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-25" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-25-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-26.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-26" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-26-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-27.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-27" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-27-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-28.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-28" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-28-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/4;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-29.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-29" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-29-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-30.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-30" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-30-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-31.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-31" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-31-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-32.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-32" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-32-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:1/1;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-33.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-33" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-33-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:9/16;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-34.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-34" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-34-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:9/16;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-35.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-35" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-35-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/4;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-36.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-36" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-36-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:9/16;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-37.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-37" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-37-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-38.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-38" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-38-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:1/1;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-39.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-39" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-39-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:1/1;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-40.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-40" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-40-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-41.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-41" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-41-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-42.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-42" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-42-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-43.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-43" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-43-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-44.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-44" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-44-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:16/9;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-45.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-45" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-45-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:4/3;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-46.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-46" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-46-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:1/1;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-47.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-47" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-47-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:5/6;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-48.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-48" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-48-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-49.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-49" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-49-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-50.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-50" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-50-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-51.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-51" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-51-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:1/1;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-52.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-52" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-52-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:1/1;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1024-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-53.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-53" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-53-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:3/2;">
+            <a class="lightgallery" data-height="1024"
+               data-lg-size="1536-1024" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-54.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1536"><img
+                    alt="lr-demo-img-54" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-54-thumb.webp"></a>
+        </div>
+        <div class="grid-item" style="aspect-ratio:2/3;">
+            <a class="lightgallery" data-height="1536"
+               data-lg-size="1024-1536" data-src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-55.png"
+               data-sub-html="<h4>The Beauty of Imperfections</h4><p>Glitch Effect - <a href='https://codepen.io/luis-lessrain/pen/ogNKBmx' target='_top'>Glitchify CodePen</a></p>"
+               data-width="1024"><img
+                    alt="lr-demo-img-55" loading="lazy"
+                    src="https://www.lessrain.com/dev/images-2025/glitch/lr-demo-img-55-thumb.webp"></a>
+        </div>
+    </simple-masonry>
+</div>
+
+<div class="resources-layer">
+    <div class="resources">
+        <a href="https://www.lessrain.com">Less Rain GmbH</a>
+        <a href="https://codepen.io/luis-lessrain/pen/ogNKBmx">Glitchify</a>
+        <a href="https://www.lightgalleryjs.com/">lightGallery</a>
+        <a href="https://www.instagram.com/deriveddelights/">deriveddelights</a>
+    </div>
+</div>
+
+<script src="https://assets.codepen.io/573855/lr-utils.js?v=6"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/lightgallery.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.3/plugins/zoom/lg-zoom.umd.js"></script>
+<script>
+    class SimpleMasonry extends HTMLElement {
+        #columnCount = null;
+        #elementHeights = [];
+        #columnHeightsTracker = [];
+        #mutationObserver;
+        #debounceTimeout;
+        #boundHandleResize;
+        #width;
+        #isTouch;
+
+        #config = {
+            baseColumnWidth: 250,
+            densePlacement: true,
+            animateOnResize: false,
+            observeMutations: true,
+            animationDuration: 300,
+            useColumnCount: false,
+            gapHorizontal: 10,
+            gapVertical: 10
+        };
+
+        constructor() {
+            super();
+            this.#isTouch = navigator.maxTouchPoints > 0 || window.matchMedia?.("(pointer: coarse)").matches;
+            this.#boundHandleResize = this.#handleResize.bind(this);
+        }
+
+        static get observedAttributes() {
+            return [
+                "data-base-column-width",
+                "data-dense-placement",
+                "data-gap-horizontal",
+                "data-gap-vertical",
+                "data-animation-duration",
+                "data-use-column-count"
+            ];
+        }
+
+        attributeChangedCallback(name, oldValue, newValue) {
+            if (oldValue === newValue) return;
+
+            if (this.isConnected) {
+                this.#width = this.clientWidth || this.getBoundingClientRect().width;
+                this.#readAttributes();
+                this.#applyMasonryLayout(false, true);
+            }
+        }
+
+        connectedCallback() {
+            this.#readAttributes();
+            this.#initializeObservers();
+
+            // Force setting width before applying layout
+            this.#width = this.clientWidth || this.getBoundingClientRect().width;
+
+            // Ensure the layout runs after width is properly initialized
+            requestAnimationFrame(() => {
+                this.#applyMasonryLayout();
+            });
+        }
+
+        disconnectedCallback() {
+            this.destroy();
+        }
+
+        #readAttributes() {
+            const attrs = {
+                baseColumnWidth: "data-base-column-width",
+                densePlacement: "data-dense-placement",
+                animateOnResize: "data-animate-on-resize",
+                observeMutations: "data-observe-mutations",
+                animationDuration: "data-animation-duration",
+                useColumnCount: "data-use-column-count",
+                gapHorizontal: "data-gap-horizontal",
+                gapVertical: "data-gap-vertical"
+            };
+
+            for (const [key, attr] of Object.entries(attrs)) {
+                const value = this.getAttribute(attr);
+                if (value !== null) {
+                    this.#config[key] = this.#parseAttribute(key, value);
+                }
+            }
+        }
+
+        #parseAttribute(key, value) {
+            if (["baseColumnWidth", "animationDuration"].includes(key)) {
+                return parseInt(value, 10);
+            }
+
+            if (["gapHorizontal", "gapVertical"].includes(key)) {
+                return value.startsWith("--") ? value : parseInt(value, 10);
+            }
+
+            if (key === "useColumnCount") {
+                return value.startsWith("--") ? value : value === "true";
+            }
+
+            return value === "true";
+        }
+
+        #initializeObservers() {
+            if (this.#isTouch) {
+                window.addEventListener("orientationchange", this.#boundHandleResize);
+            } else {
+                window.addEventListener("resize", this.#boundHandleResize);
+            }
+
+            if (this.#config.observeMutations && !this.#mutationObserver) {
+                this.#mutationObserver = new MutationObserver(this.#handleMutations.bind(this));
+                this.#mutationObserver.observe(this, {childList: true});
+            }
+        }
+
+        #handleResize() {
+            if (this.#isTouch) {
+                this.#debouncedTouchResize();
+            } else {
+                if (this.#debounceTimeout) cancelAnimationFrame(this.#debounceTimeout);
+                this.#debounceTimeout = requestAnimationFrame(() => {
+                    if (this.clientWidth !== this.#width) {
+                        this.#applyMasonryLayout(true);
+                    }
+                });
+            }
+        }
+
+        #debouncedTouchResize() {
+            if (this.#debounceTimeout) clearTimeout(this.#debounceTimeout);
+
+            let startWidth = window.visualViewport?.width || window.innerWidth;
+            let attempts = 0;
+
+            const checkResize = () => {
+                let currentWidth = window.visualViewport?.width || window.innerWidth;
+
+                if (currentWidth !== startWidth) {
+                    this.#applyMasonryLayout(true);
+                } else if (attempts < 3) {
+                    // Stop early if width remains stable
+                    attempts++;
+                    this.#debounceTimeout = setTimeout(checkResize, 50);
+                }
+            };
+
+            this.#debounceTimeout = setTimeout(checkResize, 50);
+        }
+
+        #handleMutations(mutationsList) {
+            let layoutChanged = false;
+
+            for (const mutation of mutationsList) {
+                if (mutation.type === "childList" && (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0)) {
+                    layoutChanged = true;
+                    break;
+                }
+            }
+
+            if (layoutChanged) {
+                if (this.#debounceTimeout) cancelAnimationFrame(this.#debounceTimeout);
+                this.#debounceTimeout = requestAnimationFrame(() => {
+                    this.#applyMasonryLayout(false, true);
+                });
+            }
+        }
+
+        #applyMasonryLayout(isResize = false, isNewItem = false) {
+            const previousColumnCount = this.#columnCount;
+            this.#reset();
+            const gapHorizontal = this.#getGapValue(this.#config.gapHorizontal);
+            this.#columnCount = this.#getColumnCount(this.#config.baseColumnWidth, gapHorizontal);
+
+            if (this.#columnCount < 1) return;
+
+            const gapVertical = this.#getGapValue(this.#config.gapVertical);
+
+            if (this.#columnCount !== previousColumnCount) {
+                this.#dispatchColumnChangeEvent(this.#columnCount);
+            }
+
+            // Compute column width from stored `this.#width` (prevents reflow issues)
+            const columnWidth = Math.max(0, (this.#width + gapHorizontal) / this.#columnCount - gapHorizontal);
+
+            this.#columnHeightsTracker = new Array(this.#columnCount).fill(0);
+            this.#elementHeights.length = 0;
+
+            const children = Array.from(this.children);
+
+            let childrenLength = children.length;
+            let child, i = 0;
+
+            // First pass: Apply width (batch updates to reduce reflows)
+            for (; i < childrenLength; i++) {
+                children[i].style.width = `${columnWidth}px`;
+            }
+
+            // Force reflow before reading heights (avoids flickering)
+            this.offsetHeight;
+
+            i = 0;
+
+            // Second pass: Read heights (after styles have been applied)
+            for (; i < childrenLength; i++) {
+                this.#elementHeights[i] = children[i].clientHeight || 0;
+            }
+
+            const totalItemWidth = this.#columnCount * (columnWidth + gapHorizontal) - gapHorizontal;
+            let initialLeft = 0;
+            if (this.#columnCount > childrenLength) {
+                initialLeft = Math.max(0, (this.#width - totalItemWidth) / 2);
+            }
+
+            let nextColumn, x, y;
+            i = 0;
+
+            requestAnimationFrame(() => {
+                for (; i < childrenLength; i++) {
+                    child = children[i];
+                    nextColumn = this.#config.densePlacement ? this.#getShortestColumn() : this.#getNextColumn(i);
+                    x = Math.round(initialLeft + (columnWidth + gapHorizontal) * nextColumn);
+                    y = Math.round(this.#columnHeightsTracker[nextColumn]);
+
+                    child.style.transform = `translate(${x}px, ${y}px)`;
+                    this.#columnHeightsTracker[nextColumn] += (this.#elementHeights[i] || 0) + gapVertical;
+                }
+
+                this.style.height = `${this.#columnHeightsTracker[this.#getTallestColumn()] - gapVertical}px`;
+
+                if (!this.#isTouch) {
+                    const transitionStyle = isResize && this.#config.animateOnResize ? `transform ${this.#config.animationDuration}ms cubic-bezier(0.25, 0.1, 0.25, 1)` : "none";
+                    i = 0;
+                    for (; i < childrenLength; i++) {
+                        children[i].style.transition = transitionStyle;
+                    }
+                }
+
+                this.#dispatchLayoutCompleteEvent(children.length);
+            });
+        }
+
+        #dispatchColumnChangeEvent(columns) {
+            this.dispatchEvent(new CustomEvent("column-change", {
+                detail: {columns}
+            }));
+        }
+
+        #dispatchLayoutCompleteEvent(itemsCount) {
+            this.dispatchEvent(new CustomEvent("layout-complete", {
+                detail: {
+                    columns: this.#columnCount,
+                    items: itemsCount,
+                    containerHeight: this.style.height
+                }
+            }));
+        }
+
+        #getGapValue(gap) {
+            if (typeof gap === "string" && gap.startsWith("--")) {
+                return this.#getCssVariableValue(this, gap, true) ?? 0;
+            }
+            return parseInt(gap, 10) || 0;
+        }
+
+        #getCssVariableValue(el, varName, parseAsNumber = false) {
+            const computedStyle = window.getComputedStyle(el);
+            const value = computedStyle.getPropertyValue(varName)?.trim();
+            if (!value) return parseAsNumber ? 0 : "";
+
+            if (parseAsNumber) {
+                const match = value.match(/^([\d.]+)(px|em|rem|%)?$/);
+                if (!match) return 0;
+
+                let numericValue = parseFloat(match[1]);
+                const unit = match[2] || "px";
+
+                if (unit === "em") {
+                    numericValue *= parseFloat(computedStyle.fontSize);
+                } else if (unit === "rem") {
+                    numericValue *= parseFloat(getComputedStyle(document.documentElement).fontSize);
+                } else if (unit === "%") {
+                    numericValue = (numericValue / 100) * this.#width;
+                }
+
+                return isNaN(numericValue) ? 0 : numericValue;
+            }
+
+            return value;
+        }
+
+        #getColumnCount(baseWidth, gapHorizontal) {
+            let columnCount = this.#resolveColumnCount();
+
+            if (columnCount !== null && columnCount > 0) {
+                return Math.max(1, columnCount);
+            }
+
+            return Math.max(1, Math.floor((this.#width + gapHorizontal) / (baseWidth + gapHorizontal)));
+        }
+
+        #resolveColumnCount() {
+            if (typeof this.#config.useColumnCount === "string") {
+                return this.#getCssVariableValue(this, this.#config.useColumnCount, true);
+            } else if (this.#config.useColumnCount === true) {
+                return this.#getCssVariableValue(this, "--column-count", true);
+            }
+            return null;
+        }
+
+        #reset() {
+            this.#width = this.clientWidth;
+            this.#elementHeights.length = 0;
+            this.#columnHeightsTracker.fill(0);
+        }
+
+        /**
+         * When densePlacement is false, items are placed in columns in a round-robin order.
+         * Example (3 columns):
+         *
+         * Item Order: 1 → 2 → 3 → 4 → 5 → 6
+         *
+         * Column 1      Column 2      Column 3
+         * ---------     ---------     ---------
+         * | Item 1 |    | Item 2 |    | Item 3 |
+         * | Item 4 |    | Item 5 |    | Item 6 |
+         * ---------     ---------     ---------
+         */
+
+        #getNextColumn(index) {
+            return this.#columnHeightsTracker.length ? index % this.#columnHeightsTracker.length : 0;
+        }
+
+        /**
+         * When densePlacement is true, items fill the shortest column first.
+         * Example (3 columns, optimized layout):
+         *
+         * Column 1      Column 2      Column 3
+         * ---------     ---------     ---------
+         * | Item 1 |    | Item 2 |    | Item 3 |
+         * | Item 6 |    | Item 4 |    | Item 5 |
+         * | Item 7 |    | Item 8 |    | Item 9 |
+         * ---------     ---------     ---------
+         *
+         * Reduces vertical gaps for a more compact layout.
+         */
+
+        #getShortestColumn() {
+            if (!this.#columnHeightsTracker.length) return 0;
+            let minIndex = 0;
+            let minHeight = this.#columnHeightsTracker[0];
+            let i = 1;
+            let columnHeight;
+            const columnHeightsTrackerLength = this.#columnHeightsTracker.length;
+
+            for (; i < columnHeightsTrackerLength; i++) {
+                columnHeight = this.#columnHeightsTracker[i];
+                if (columnHeight < minHeight) {
+                    minHeight = columnHeight;
+                    minIndex = i;
+                }
+            }
+
+            return minIndex;
+        }
+
+        #getTallestColumn() {
+            if (!this.#columnHeightsTracker.length) return 0;
+            let maxIndex = 0;
+            let maxHeight = this.#columnHeightsTracker[0];
+            let i = 1;
+            let columnHeight;
+            const columnHeightsTrackerLength = this.#columnHeightsTracker.length;
+
+            for (; i < columnHeightsTrackerLength; i++) {
+                columnHeight = this.#columnHeightsTracker[i];
+                if (columnHeight > maxHeight) {
+                    maxHeight = columnHeight;
+                    maxIndex = i;
+                }
+            }
+
+            return maxIndex;
+        }
+
+        forceUpdate() {
+            this.#applyMasonryLayout(false, false);
+        }
+
+        triggerResize() {
+            this.#handleResize();
+        }
+
+        toggleAnimation(enable) {
+            this.#config.animateOnResize = enable;
+        }
+
+        setColumnCount(count) {
+            if (typeof count !== "number" || count < 1) return;
+
+            this.#config.useColumnCount = true;
+            this.#config.baseColumnWidth = Math.floor(this.#width / count);
+            this.#applyMasonryLayout(false, false);
+        }
+
+        getColumnCount() {
+            return this.#columnCount;
+        }
+
+        destroy() {
+            if (this.#config.observeMutations && this.#mutationObserver) {
+                this.#mutationObserver.disconnect();
+                this.#mutationObserver = null;
+            }
+
+            if (this.#isTouch) {
+                window.removeEventListener("orientationchange", this.#boundHandleResize);
+            } else {
+                window.removeEventListener("resize", this.#boundHandleResize);
+            }
+
+            const children = Array.from(this.children);
+
+            for (let child of children) {
+                child.style.cssText = "";
+            }
+
+            this.style.removeProperty("height");
+            this.#elementHeights.length = 0;
+            this.#columnHeightsTracker.length = 0;
+            this.#columnCount = null;
+        }
+
+    }
+
+    customElements.define("simple-masonry", SimpleMasonry);
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const masonry = document.querySelector("#test-simple-masonry-01");
+
+        if (masonry) {
+            let galleryInstance = null;
+
+            masonry.addEventListener('lgInit', (event) => {
+                galleryInstance = event.detail.instance;
+
+                // Attach scroll lock before open
+                galleryInstance.LGel.on('lgBeforeOpen', () => {
+                    document.documentElement.classList.add('no-scroll');
+                });
+
+                // Attach scroll unlock and resize cleanup after close
+                galleryInstance.LGel.on('lgAfterClose', () => {
+                    document.documentElement.classList.remove('no-scroll');
+                    window.removeEventListener('resize', handleResize);
+                    clearTimeout(resizeTimeout);
+                });
+
+                // Add resize listener only while gallery is open
+                galleryInstance.LGel.on('lgAfterOpen', () => {
+                    window.addEventListener('resize', handleResize);
+                });
+            });
+
+            window.lightGallery(masonry, {
+                selector: '.lightgallery',
+                plugins: [lgZoom],
+                zoomFromOrigin: false,
+                mode: 'lg-fade',
+                actualSize: true,
+                infiniteZoom: false,
+                mobileSettings: {
+                    controls: false,
+                    showCloseIcon: false,
+                    download: false,
+                    rotate: false
+                }
+            });
+
+            // Zoom reset
+            const resetZoomOnResize = () => {
+                if (!galleryInstance) return;
+
+                const zoomPlugin = galleryInstance.plugins.find(
+                    (plugin) => plugin instanceof lgZoom
+                );
+
+                if (zoomPlugin?.resetZoom) {
+                    zoomPlugin.resetZoom(galleryInstance.index);
+                }
+            };
+
+            let resizeTimeout;
+            const handleResize = () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(resetZoomOnResize, 0);
+            };
+        }
+
+        // === Links Validation ===
+        // https://assets.codepen.io/573855/lr-utils.js
+        // https://codepen.io/luis-lessrain/pen/pvzVozd
+        const isCodePen = document.referrer.includes("codepen.io");
+        const hostDomains = isCodePen ? ["codepen.io"] : [];
+        hostDomains.push(window.location.hostname);
+
+        const links = document.getElementsByTagName("a");
+        LR.utils.urlUtils.validateLinks(links, hostDomains, ["lightgallery"]);
+    });
+</script>
+</body>
+</html>

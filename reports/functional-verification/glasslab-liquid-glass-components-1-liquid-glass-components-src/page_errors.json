@@ -1,6 +1,0 @@
-[
-  {
-    "message": "React is not defined",
-    "stack": "ReferenceError: React is not defined\n    at http://127.0.0.1:56604/assets/index-9fbd3d78.js:17:717"
-  }
-]

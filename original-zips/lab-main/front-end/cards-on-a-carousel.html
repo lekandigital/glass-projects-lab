@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cards on a Carousel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tagesschrift&display=swap');
+    </style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Tagesschrift", system-ui;
+            background: linear-gradient(135deg, #f5e7e9, #e1c4d7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .carousel-container {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            position: relative;
+            perspective: 1500px;
+        }
+
+        .carousel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+        }
+
+        .card {
+            width: 280px;
+            height: 300px;
+            background: rgba(255, 255, 255, 1.0);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+            border: solid brown 8px;
+        }
+
+        .card:hover {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-content {
+            padding: 20px;
+            text-align: center;
+            color: #333;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+
+        .word {
+            font-size: 2em;
+            font-weight: 700;
+            color: #b71c1c;
+            margin-bottom: 8px;
+            text-transform: capitalize;
+        }
+
+        .gender {
+            font-size: 1.1em;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .meaning {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .example {
+            font-size: 1.1em;
+            color: #444;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .translation {
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                    135deg,
+                    rgba(183, 28, 28, 0.1),
+                    rgba(225, 196, 215, 0.2)
+            );
+            z-index: -1;
+            border-radius: 20px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            z-index: 10;
+        }
+
+        .controls button {
+            background: #b71c1c;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 15px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .controls button:hover {
+            background: #8e0000;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                max-width: 500px;
+                height: 550px;
+            }
+
+            .card {
+                width: 220px;
+                height: 360px;
+            }
+
+            .word {
+                font-size: 1.6em;
+            }
+
+            .gender {
+                font-size: 1em;
+            }
+
+            .meaning {
+                font-size: 1.1em;
+            }
+
+            .example,
+            .translation {
+                font-size: 0.9em;
+            }
+
+            .controls button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+                margin: 0 10px;
+            }
+
+            .controls {
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="carousel-container">
+    <div class="carousel" id="carousel">
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Amor</div>
+                    <div class="gender">Masculine</div>
+                    <div class="meaning">Love</div>
+                </div>
+                <div>
+                    <div class="example">El amor es eterno.</div>
+                    <div class="translation">Love is eternal.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Pasión</div>
+                    <div class="gender">Feminine</div>
+                    <div class="meaning">Passion</div>
+                </div>
+                <div>
+                    <div class="example">La pasión enciende el alma.</div>
+                    <div class="translation">Passion ignites the soul.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Corazón</div>
+                    <div class="gender">Masculine</div>
+                    <div class="meaning">Heart</div>
+                </div>
+                <div>
+                    <div class="example">Mi corazón late por ti.</div>
+                    <div class="translation">My heart beats for you.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Alma</div>
+                    <div class="gender">Feminine</div>
+                    <div class="meaning">Soul</div>
+                </div>
+                <div>
+                    <div class="example">Tu alma ilumina mi mundo.</div>
+                    <div class="translation">Your soul lights up my world.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Deseo</div>
+                    <div class="gender">Masculine</div>
+                    <div class="meaning">Desire</div>
+                </div>
+                <div>
+                    <div class="example">El deseo arde en mis ojos.</div>
+                    <div class="translation">Desire burns in my eyes.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Llama</div>
+                    <div class="gender">Feminine</div>
+                    <div class="meaning">Flame</div>
+                </div>
+                <div>
+                    <div class="example">La llama de nuestro amor nunca se apaga.</div>
+                    <div class="translation">The flame of our love never fades.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Sueño</div>
+                    <div class="gender">Masculine</div>
+                    <div class="meaning">Dream</div>
+                </div>
+                <div>
+                    <div class="example">Eres el sueño de mi vida.</div>
+                    <div class="translation">You are the dream of my life.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Rosa</div>
+                    <div class="gender">Feminine</div>
+                    <div class="meaning">Rose</div>
+                </div>
+                <div>
+                    <div class="example">Te di una rosa roja.</div>
+                    <div class="translation">I gave you a red rose.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Cielo</div>
+                    <div class="gender">Masculine</div>
+                    <div class="meaning">Sky</div>
+                </div>
+                <div>
+                    <div class="example">El cielo brilla con tu amor.</div>
+                    <div class="translation">The sky shines with your love.</div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <div>
+                    <div class="word">Estrella</div>
+                    <div class="gender">Feminine</div>
+                    <div class="meaning">Star</div>
+                </div>
+                <div>
+                    <div class="example">Eres mi estrella brillante.</div>
+                    <div class="translation">You are my shining star.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="controls">
+    <button class="prev" id="prev">←</button>
+    <button class="next" id="next">→</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+    const carousel = document.getElementById("carousel");
+    const cards = document.querySelectorAll(".card");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+    const carouselContainer = document.querySelector(".carousel-container");
+    const totalCards = cards.length;
+    let radius = 180; // Default radius
+    let currentAngle = 0;
+    let autoRotateInterval = null;
+    const autoRotateDelay = 800;
+
+    function positionCards(animate = false) {
+        cards.forEach((card, index) => {
+            var angle = (index / totalCards) * 360 + currentAngle;
+            const x = radius * Math.cos((angle * Math.PI) / 180);
+            const z = radius * Math.sin((angle * Math.PI) / 180);
+            if (animate) {
+                gsap.to(card, {
+                    x: x,
+                    z: z,
+                    rotationY: -angle,
+                    transformOrigin: "center center",
+                    duration: 0.8,
+                    ease: "power2.inOut"
+                });
+            } else {
+                gsap.set(card, {
+                    x: x,
+                    z: z,
+                    rotationY: -angle,
+                    transformOrigin: "center center"
+                });
+            }
+        });
+    }
+
+    cards.forEach((card, index) => {
+        gsap.from(card, {
+            opacity: 0,
+            scale: 0.5,
+            y: 100,
+            rotationX: 45,
+            delay: index * 0.1,
+            duration: 1,
+            ease: "power3.out"
+        });
+    });
+
+    setTimeout(() => positionCards(false), 1500);
+
+    function updateCarousel(direction) {
+        if (direction === "next") {
+            currentAngle -= 360 / totalCards;
+        } else if (direction === "prev") {
+            currentAngle += 360 / totalCards;
+        }
+        positionCards(true);
+    }
+
+    function pauseAutoRotation(temp = false) {
+        clearInterval(autoRotateInterval);
+        if (temp) {
+            setTimeout(startAutoRotation, 3000);
+        }
+    }
+
+    function startAutoRotation() {
+        clearInterval(autoRotateInterval);
+        autoRotateInterval = setInterval(() => {
+            updateCarousel("next");
+        }, autoRotateDelay);
+    }
+
+    // Navigation
+    nextBtn.addEventListener("click", () => {
+        pauseAutoRotation(true);
+        updateCarousel("next");
+    });
+
+    prevBtn.addEventListener("click", () => {
+        pauseAutoRotation(true);
+        updateCarousel("prev");
+    });
+
+    // Hover animation for cards
+    cards.forEach((card) => {
+        card.addEventListener("mouseenter", () => {
+            gsap.to(card, {
+                scale: 1.1,
+                z: "+=50",
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+        card.addEventListener("mouseleave", () => {
+            gsap.to(card, {
+                scale: 1,
+                z: "-=50",
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+    });
+
+    // Responsive radius adjustment
+    function adjustRadius() {
+        const newRadius = window.innerWidth <= 768 ? 300 : 400;
+        if (newRadius !== radius) {
+            radius = newRadius;
+            positionCards(true);
+        }
+    }
+
+    window.addEventListener("resize", adjustRadius);
+
+    startAutoRotation();
+
+</script>
+</body>
+</html>

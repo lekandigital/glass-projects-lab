@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Glitches in the weave</title>
+    <link href="https://fonts.googleapis.com/css?family=Medula+One" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        svg {
+            width: 100vw;
+            height: 100vh;
+            background: #40459b;
+        }
+
+        #shadow {
+            fill: #000;
+            opacity: .1;
+            filter: url(#blur);
+        }
+
+        #weave {
+            fill: url(#pattern);
+            mask: url(#mask);
+        }
+
+        linearGradient stop:nth-child(2n+2) {
+            stop-color: #e4d0d6;
+        }
+
+        linearGradient stop:nth-child(4n+1) {
+            stop-color: #fdf8fb;
+        }
+
+        linearGradient stop:nth-child(4n+3) {
+            stop-color: #ccaabf;
+        }
+
+        linearGradient#lg-run stop:nth-child(3) {
+            stop-color: #f0e6e6;
+        }
+
+        symbol {
+            fill: url(#lgh);
+            stroke: #000000;
+        }
+
+        #through :first-child {
+            fill: url(#lgv);
+        }
+
+        #run :first-child {
+            fill: url(#lgv-run);
+        }
+    </style>
+</head>
+<body>
+<svg viewBox="0 0 900 900">
+    <defs>
+        <linearGradient id="lg">
+            <stop offset="0"></stop>
+            <stop offset="0.15"></stop>
+            <stop offset="0.3"></stop>
+            <stop offset="0.44999999999999996"></stop>
+            <stop offset="0.6"></stop>
+            <stop offset="0.75"></stop>
+            <stop offset="0.9"></stop>
+        </linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" href="#lg" id="lgv" x1="15" x2="15" y1="-15"
+                        y2="85"></linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" href="#lg" id="lgh" x1="75" x2="-25" y1="15"
+                        y2="15"></linearGradient>
+        <linearGradient id="lg-run">
+            <stop offset="0"></stop>
+            <stop offset="0.15"></stop>
+            <stop offset="0.3"></stop>
+            <stop offset="0.44999999999999996"></stop>
+            <stop offset="0.6"></stop>
+            <stop offset="0.75"></stop>
+            <stop offset="0.9"></stop>
+        </linearGradient>
+        <linearGradient gradientUnits="userSpaceOnUse" href="#lg-run" id="lgv-run" x1="5" x2="15" y1="-15"
+                        y2="85"></linearGradient>
+        <rect height="28" id="hide" width="28" x="1" y="1"></rect>
+        <mask id="mask">
+            <rect height="2700" style="fill:white" width="2700" x="-900" y="-900"></rect>
+            <use href="#hide" transform="translate(60 990)"></use>
+            <use href="#hide" transform="translate(60 960)"></use>
+            <use href="#hide" transform="translate(60 930)"></use>
+            <use href="#hide" transform="translate(60 900)"></use>
+            <use href="#hide" transform="translate(60 870)"></use>
+            <use href="#hide" transform="translate(60 840)"></use>
+            <use href="#hide" transform="translate(90 810)"></use>
+            <use href="#hide" transform="translate(90 780)"></use>
+            <use href="#hide" transform="translate(120 750)"></use>
+            <use href="#hide" transform="translate(150 750)"></use>
+            <use href="#hide" transform="translate(180 720)"></use>
+            <use href="#hide" transform="translate(210 690)"></use>
+            <use href="#hide" transform="translate(240 690)"></use>
+            <use href="#hide" transform="translate(270 660)"></use>
+            <use href="#hide" transform="translate(270 630)"></use>
+            <use href="#hide" transform="translate(300 630)"></use>
+            <use href="#hide" transform="translate(300 600)"></use>
+            <use href="#hide" transform="translate(330 570)"></use>
+            <use href="#hide" transform="translate(330 540)"></use>
+            <use href="#hide" transform="translate(330 510)"></use>
+            <use href="#hide" transform="translate(300 510)"></use>
+            <use href="#hide" transform="translate(270 510)"></use>
+            <use href="#hide" transform="translate(270 450)"></use>
+            <use href="#hide" transform="translate(270 480)"></use>
+            <use href="#hide" transform="translate(270 420)"></use>
+            <use href="#hide" transform="translate(270 390)"></use>
+            <use href="#hide" transform="translate(240 360)"></use>
+            <use href="#hide" transform="translate(210 330)"></use>
+            <use href="#hide" transform="translate(210 300)"></use>
+            <use href="#hide" transform="translate(240 270)"></use>
+            <use href="#hide" transform="translate(240 240)"></use>
+            <use href="#hide" transform="translate(240 210)"></use>
+            <use href="#hide" transform="translate(270 180)"></use>
+            <use href="#hide" transform="translate(270 150)"></use>
+            <use href="#hide" transform="translate(300 120)"></use>
+            <use href="#hide" transform="translate(330 90)"></use>
+            <use href="#hide" transform="translate(360 60)"></use>
+            <use href="#hide" transform="translate(390 60)"></use>
+            <use href="#hide" transform="translate(450 60)"></use>
+            <use href="#hide" transform="translate(420 60)"></use>
+            <use href="#hide" transform="translate(480 60)"></use>
+            <use href="#hide" transform="translate(510 90)"></use>
+            <use href="#hide" transform="translate(540 90)"></use>
+            <use href="#hide" transform="translate(570 120)"></use>
+            <use href="#hide" transform="translate(600 120)"></use>
+            <use href="#hide" transform="translate(630 150)"></use>
+            <use href="#hide" transform="translate(660 180)"></use>
+            <use href="#hide" transform="translate(690 210)"></use>
+            <use href="#hide" transform="translate(690 240)"></use>
+            <use href="#hide" transform="translate(720 270)"></use>
+            <use href="#hide" transform="translate(690 300)"></use>
+            <use href="#hide" transform="translate(690 330)"></use>
+            <use href="#hide" transform="translate(660 360)"></use>
+            <use href="#hide" transform="translate(660 390)"></use>
+            <use href="#hide" transform="translate(690 420)"></use>
+            <use href="#hide" transform="translate(660 450)"></use>
+            <use href="#hide" transform="translate(660 480)"></use>
+            <use href="#hide" transform="translate(660 510)"></use>
+            <use href="#hide" transform="translate(630 540)"></use>
+            <use href="#hide" transform="translate(630 570)"></use>
+            <use href="#hide" transform="translate(630 600)"></use>
+            <use href="#hide" transform="translate(600 630)"></use>
+            <use href="#hide" transform="translate(570 630)"></use>
+            <use href="#hide" transform="translate(540 630)"></use>
+            <use href="#hide" transform="translate(510 660)"></use>
+            <use href="#hide" transform="translate(540 690)"></use>
+            <use href="#hide" transform="translate(570 720)"></use>
+            <use href="#hide" transform="translate(600 720)"></use>
+            <use href="#hide" transform="translate(630 720)"></use>
+            <use href="#hide" transform="translate(660 750)"></use>
+            <use href="#hide" transform="translate(660 780)"></use>
+            <use href="#hide" transform="translate(660 810)"></use>
+            <use href="#hide" transform="translate(690 840)"></use>
+            <use href="#hide" transform="translate(690 870)"></use>
+            <use href="#hide" transform="translate(690 900)"></use>
+            <use href="#hide" transform="translate(690 930)"></use>
+            <use href="#hide" transform="translate(720 960)"></use>
+            <use href="#hide" transform="translate(720 990)"></use>
+        </mask>
+        <filter id="blur">
+            <feGaussianBlur stdDeviation="15"></feGaussianBlur>
+        </filter>
+        <symbol id="through" viewBox="0 0 30 30">
+            <path d="m19 44c0 8 2 24 2 32h-10c0-8-2-24-2-32s2-20 2-28-2-24-2-32h10c0 8 2 24 2 32s-2 20-2 28z"></path>
+            <path d="m44 19c8 0 24 2 32 2v-10c-8 0-24-2-32-2s-20 2-28 2-24-2-32-2v10c8 0 24 2 32 2s20-2 28-2z"></path>
+        </symbol>
+        <pattern height="60" id="pattern" patternUnits="userSpaceOnUse" width="60">
+            <use height="30" href="#through" width="30"></use>
+            <use height="30" href="#through" transform="translate(30) rotate(-90 15 15)" width="30"></use>
+            <use height="30" href="#through" transform="translate(0 30) rotate(90 15 15)" width="30"></use>
+            <use height="30" href="#through" transform="translate(30 30) rotate(180 15 15)" width="30"></use>
+        </pattern>
+        <symbol id="run" viewBox="0 0 30 30">
+            <path d="m19 44c0 8 2 24 2 32h-10c0-8-2-24-2-32s2-20 2-28-2-24-2-32h10c0 8 2 24 2 32s-2 20-2 28z"></path>
+            <path d="m0 10c-6-.5-12-1-16-1v10c4 0 10 .5 16 1 6-1 6-9 0-10zm30 10c5-.5 10-1 14-1 8 0 24 2 32 2v-10c-8 0-24-2-32-2-4 0-9 .5-14 1-4 1-4 9 0 10z"></path>
+        </symbol>
+    </defs>
+    <path d="M75,1005 75,975 75,945 75,915 75,885 75,855 105,825 105,795 135,765 165,765 195,735 225,705 255,705 285,675 285,645 315,645 315,615 345,585 345,555 345,525 315,525 285,525 285,465 285,495 285,435 285,405 255,375 225,345 225,315 255,285 255,255 255,225 285,195 285,165 315,135 345,105 375,75 405,75 465,75 435,75 495,75 525,105 555,105 585,135 615,135 645,165 675,195 705,225 705,255 735,285 705,315 705,345 675,375 675,405 705,435 675,465 675,495 675,525 645,555 645,585 645,615 615,645 585,645 555,645 525,675 555,705 585,735 615,735 645,735 675,765 675,795 675,825 705,855 705,885 705,915 705,945 735,975 735,1005z"
+          id="shadow"></path>
+    <rect height="2700" id="weave" width="2700" x="-900" y="-900"></rect>
+    <use height="30" href="#run" transform="translate(60 990) rotate(3330 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(60 960) rotate(3060 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(60 930) rotate(2430 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(60 900) rotate(2520 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(60 870) rotate(2250 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(60 840) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(90 810) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(90 780) rotate(2250 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(120 750) rotate(2790 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(150 750) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(180 720) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(210 690) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(240 690) rotate(2610 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 660) rotate(2790 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 630) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(300 630) rotate(2250 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(300 600) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(330 570) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(330 540) rotate(2250 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(330 510) rotate(2520 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(300 510) rotate(2610 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 510) rotate(2340 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 450) rotate(360 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 480) rotate(2250 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 420) rotate(630 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 390) rotate(540 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(240 360) rotate(360 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(210 330) rotate(180 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(210 300) rotate(1170 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(240 270) rotate(270 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(240 240) rotate(0 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(240 210) rotate(1170 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 180) rotate(1350 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(270 150) rotate(1260 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(300 120) rotate(1260 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(330 90) rotate(1260 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(360 60) rotate(1260 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(390 60) rotate(1350 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(450 60) rotate(1170 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(420 60) rotate(1080 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(480 60) rotate(1620 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(510 90) rotate(1440 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(540 90) rotate(2070 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(570 120) rotate(2070 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(600 120) rotate(1440 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(630 150) rotate(1620 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 180) rotate(1440 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 210) rotate(2700 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 240) rotate(2790 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(720 270) rotate(1710 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 300) rotate(2610 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 330) rotate(1620 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 360) rotate(2340 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 390) rotate(1890 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 420) rotate(2250 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 450) rotate(2070 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 480) rotate(540 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 510) rotate(810 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(630 540) rotate(630 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(630 570) rotate(360 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(630 600) rotate(90 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(600 630) rotate(270 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(570 630) rotate(0 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(540 630) rotate(90 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(510 660) rotate(630 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(540 690) rotate(270 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(570 720) rotate(990 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(600 720) rotate(1080 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(630 720) rotate(1170 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 750) rotate(90 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 780) rotate(1080 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(660 810) rotate(270 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 840) rotate(990 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 870) rotate(360 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 900) rotate(810 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(690 930) rotate(540 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(720 960) rotate(5040 15 15)" width="30"></use>
+    <use height="30" href="#run" transform="translate(720 990) rotate(5310 15 15)" width="30"></use>
+</svg>
+</body>
+</html>

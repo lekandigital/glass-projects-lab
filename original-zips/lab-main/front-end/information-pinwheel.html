@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Information Pinwheel</title>
+    <style>
+        @property --i {
+            syntax: "<integer>";
+            inherits: true;
+            initial-value: 1;
+        }
+
+        @property --_t {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 1;
+        }
+
+        @property --_m {
+            syntax: "<number>";
+            inherits: true;
+            initial-value: 1;
+        }
+
+        @property --_r {
+            syntax: "<angle>";
+            inherits: true;
+            initial-value: 0deg;
+        }
+
+        section {
+            --d: 20s; /* animation duration*/
+
+            font: 20px/1.4 "Source Code Pro", Inconsolata, Menlo, monospace;
+            color: rgb(34 34 34);
+            margin: 1em;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            padding-left: 350px;
+            position: relative;
+        }
+
+        section:before {
+            content: "{";
+            font-size: 9em;
+            line-height: 1em;
+            color: #e3e2db;
+            margin: auto;
+        }
+
+        li {
+            --i: sibling-index();
+            --n: sibling-count();
+        }
+
+        a {
+            text-decoration: none;
+            border-bottom: 1px dotted;
+            color: firebrick;
+            background: conic-gradient(firebrick 0 0) bottom/100% 0% no-repeat;
+            transition: .3s;
+        }
+
+        a span {
+            position: absolute;
+            z-index: 0;
+            display: grid;
+            top: 50%;
+            left: 175px;
+            translate: -50% -50%;
+            width: 320px;
+            aspect-ratio: 1;
+            transform: rotate(var(--_r)) translate(calc(var(--_m) * 20px), calc(var(--_m) * -5px));
+            border-radius: 50%;
+            clip-path: shape(
+                    from 50% 0,
+                    arc to calc(50% + 50% * sin(calc(1turn * var(--_t) / var(--n)))) calc(50% - 50% * cos(calc(1turn * var(--_t) / var(--n)))) of 50% large cw,
+                    line to center
+            );
+            transition: --_t .5s, --_m .3s .5s, z-index 0s .5s, --_r calc(var(--d) * 100) linear calc(var(--d) * (-1 * var(--i) / var(--n)));
+            /* you can use an animation but let's try something else! */
+            @starting-style {
+                --_r: 100turn;
+            }
+        }
+
+        a span:before {
+            content: "";
+            background: var(--img) 50%/cover;
+            transform: rotate(calc(-1 * var(--_r)));
+            border-radius: 50%;
+        }
+
+        a:hover {
+            color: #fff;
+            background-size: 100% 100%;
+        }
+
+        a:hover span {
+            --_t: calc(var(--n) - 0.001);
+            z-index: 1;
+            transition: --_t .5s .3s, --_m .3s, z-index 0s, --_r calc(var(--d) * 100) linear calc(var(--d) * (-1 * var(--i) / var(--n)));
+        }
+
+        ul:has(a:hover) li:not(:has(a:hover)) {
+            opacity: .6;
+        }
+
+        ul:has(a:hover) span {
+            --_m: 0;
+            transition: --_t .5s .3s, --_m .3s, z-index 0s, --_r calc(var(--d) * 100) linear calc(var(--d) * (-1 * var(--i) / var(--n)));
+        }
+
+        span#adam {
+            --img: url('https://www.cssday.nl/pix/speakers/adam.jpg')
+        }
+
+        span#ahmad {
+            --img: url('https://www.cssday.nl/pix/speakers/ahmad.jpg')
+        }
+
+        span#amit {
+            --img: url('https://www.cssday.nl/pix/speakers/amit.jpg')
+        }
+
+        span#ana {
+            --img: url('https://www.cssday.nl/pix/speakers/ana.jpg')
+        }
+
+        span#brad {
+            --img: url('https://www.cssday.nl/pix/speakers/brad.jpg')
+        }
+
+        span#bramus {
+            --img: url('https://www.cssday.nl/pix/speakers/bramus.jpg')
+        }
+
+        span#brecht {
+            --img: url('https://www.cssday.nl/pix/speakers/brecht.jpg')
+        }
+
+        span#bruce {
+            --img: url('https://www.cssday.nl/pix/speakers/bruce.jpg')
+        }
+
+        span#chris {
+            --img: url('https://www.cssday.nl/pix/speakers/chris.jpg')
+        }
+
+        span#cyd {
+            --img: url('https://www.cssday.nl/pix/speakers/cyd.jpg')
+        }
+
+        span#hidde {
+            --img: url('https://www.cssday.nl/pix/speakers/hidde.jpg')
+        }
+
+        span#ian {
+            --img: url('https://www.cssday.nl/pix/speakers/ian.jpg')
+        }
+
+        span#john {
+            --img: url('https://www.cssday.nl/pix/speakers/john.jpg')
+        }
+
+        span#miriam {
+            --img: url('https://www.cssday.nl/pix/speakers/miriam.jpg')
+        }
+
+        span#rachel {
+            --img: url('https://www.cssday.nl/pix/speakers/rachel.jpg')
+        }
+
+        span#stephen {
+            --img: url('https://www.cssday.nl/pix/speakers/stephen.jpg')
+        }
+
+        span#tim {
+            --img: url('https://www.cssday.nl/pix/speakers/tim.jpg');
+        }
+
+
+        @supports not (d: sibling-count()) {
+            li {
+                --n: 17;
+                --si1: 0;
+                --si2: 0;
+
+                --i: calc(5 * var(--si2) + var(--si1));
+            }
+
+            li:nth-child(5n + 1) {
+                --si1: 1
+            }
+
+            li:nth-child(5n + 2) {
+                --si1: 2
+            }
+
+            li:nth-child(5n + 3) {
+                --si1: 3
+            }
+
+            li:nth-child(5n + 4) {
+                --si1: 4
+            }
+
+            li:nth-child(n + 5):nth-child(-n + 13) {
+                --si2: 1
+            }
+
+            li:nth-child(n + 10):nth-child(-n + 20) {
+                --si2: 2
+            }
+
+            li:nth-child(n + 15):nth-child(-n + 27) {
+                --si2: 3
+            }
+
+            li:nth-child(n + 20):nth-child(-n + 34) {
+                --si2: 4
+            }
+        }
+    </style>
+</head>
+<body>
+<section class="speakers" id="speakers">
+    <ul>
+        <li><a href="https://www.cssday.nl/speakers.html#stephen">Stephen Hay<span id="stephen"></span></a>: MC</li>
+        <li><a href="https://www.cssday.nl/speakers.html#hidde">Hidde de Vries<span id="hidde"></span></a>: Sustainable
+            CSS
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#bruce">Bruce Lawson<span id="bruce"></span></a>: Goose and
+            common
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#frost">Brad Frost<span id="brad"></span></a>: Design Token
+            Architecture
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#chris">Chris Coyier<span id="chris"></span></a>: Scope</li>
+        <li><a href="https://www.cssday.nl/speakers.html#miriam">Miriam Suzanne<span id="miriam"></span></a>: Mixins and
+            Functions
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#adam">Adam Argyle<span id="adam"></span></a>: The Ultimate
+            Scroller
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#frost">Ian Frost<span id="ian"></span></a>: Design Token
+            Architecture
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#brecht">Brecht De Ruyte<span id="brecht"></span></a>: Styling
+            Selects
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#amit">Amit Sheen<span id="amit"></span></a>: CSS Logic Gates
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#ahmad">Ahmad Shadeed<span id="ahmad"></span></a>: Smart layouts
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#ana">Ana Rodrigues<span id="ana"></span></a>: Refactoring CSS
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#john">John Allsopp<span id="john"></span></a>: Dao of CSS</li>
+        <li><a href="https://www.cssday.nl/speakers.html#cyd">Cyd Stumpel<span id="cyd"></span></a>: View Transitions
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#rachel">Rachel Andrew<span id="rachel"></span></a>: Multicol
+            and fragmentation
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#tim">Tim Nguyen<span id="tim"></span></a>: Form control styling
+        </li>
+        <li><a href="https://www.cssday.nl/speakers.html#bramus">Bramus Van Damme<span id="bramus"></span></a>: MC</li>
+    </ul>
+</section>
+</body>
+</html>

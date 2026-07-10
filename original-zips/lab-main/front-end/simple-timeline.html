@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple timeline</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Roboto+Mono:wght@700&family=Rosario:ital,wght@1,300..700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        @charset "UTF-8";
+        html, body, section, article {
+            display: grid;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            background: #121212;
+            color: #ededed;
+        }
+
+        .timeline {
+            /* middle align along both axes */
+            place-self: center;
+            /* limit width */
+            max-width: 50em;
+        }
+
+        .timeline article {
+            /* commonly used length value ¯\_(ツ)_/¯ */
+            --size: .625em;
+            /* timeline bar and markers */
+            --highlight: lime;
+            /* default marker */
+            --marker: radial-gradient(circle closest-side,
+            var(--highlight) calc(100% - 1px), transparent) 0 0/ 100% var(--size);
+            /* spacing between the two columns (text content and image) */
+            grid-gap: 2em;
+            /* equally sized columns */
+            grid-template-columns: 1fr 1fr;
+            /* tiny correction, avoid subpixel rounding issues */
+            margin-top: -1px;
+            background: var(--marker), linear-gradient(var(--highlight) 0 0) 50%/2px;
+            background-repeat: no-repeat;
+            /* different marker for the first item */
+        }
+
+        .timeline article:first-child {
+            --marker: linear-gradient(var(--highlight) 0 0) 50% 0/ var(--size) calc(.5 * var(--size));
+        }
+
+        .timeline article {
+            /* for the odd items */
+        }
+
+        .timeline article:nth-child(odd) img {
+            /* on the 1st row, 1st column */
+            grid-area: 1/1;
+            /* right-aligned */
+            justify-self: end;
+        }
+
+        .timeline article {
+            /* spacing in between items */
+        }
+
+        .timeline article:not(:last-child) {
+            padding-bottom: 1em;
+        }
+
+        .timeline article {
+            /* direct article children, text content box + img */
+        }
+
+        .timeline article > * {
+            border-radius: var(--size);
+        }
+
+        .timeline__content {
+            padding: 1em;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .timeline h1 {
+            margin: 0 0 var(--size);
+            color: #88d55e;
+            font: italic 1.375em/1 rosario, sans-serif;
+            text-transform: capitalize;
+        }
+
+        .timeline time {
+            font: 700 2.5em/1.25 roboto mono, monospace;
+        }
+
+        .timeline hr {
+            opacity: 0.3;
+        }
+
+        .timeline p {
+            margin: 0;
+            padding-top: 0.5em;
+            font: 1em proza libre, sans-serif;
+        }
+
+        .timeline img {
+            box-sizing: border-box;
+            border: solid 2px;
+            width: min(100%, 13em);
+            aspect-ratio: 1.3;
+            object-fit: cover;
+        }
+
+        /*# sourceMappingURL=style.css.map */
+
+    </style>
+</head>
+<body>
+<section class='timeline'>
+    <article>
+        <div class='timeline__content'>
+            <h1>Some heading</h1>
+            <time datetime='2005'>2005</time>
+            <hr/>
+            <p>Jelly cotton candy apple pie toffee soufflé tiramisu pastry cupcake lollipop. Jelly beans wafer ice cream
+                pastry topping topping gingerbread gummies. Brownie cotton candy sweet halvah oat cake.</p>
+        </div>
+        <img alt='camera on a map on a desk' src='https://images.unsplash.com/photo-1753788132128-a6198b5d2f80?w=400'/>
+    </article>
+    <article>
+        <div class='timeline__content'>
+            <h1>Some other heading</h1>
+            <time datetime='2006'>2006</time>
+            <hr/>
+            <p>Jelly-o chocolate cake sweet fruitcake soufflé. Dessert halvah gummi bears lollipop powder brownie candy
+                bear claw. Jelly-o marshmallow candy candy jujubes croissant fruitcake. Lollipop pudding brownie icing
+                halvah dessert dessert.</p>
+        </div>
+        <img alt='mountain landscape' src='https://images.unsplash.com/photo-1755371033904-21dd8a9d002b?w=400'/>
+    </article>
+</section>
+</body>
+</html>

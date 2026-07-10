@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Squircle Avatar Generator</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f0f0f0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .upload-area {
+            border: 2px dashed #ccc;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+
+        .upload-area:hover {
+            border-color: #000;
+            background: #f5f5f5;
+        }
+
+        .upload-area.drag-over {
+            border-color: #000;
+            background: #eee;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .upload-text {
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: #999;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .editor {
+            display: none;
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: move;
+        }
+
+        .controls {
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .slider-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #e0e0e0;
+            border-radius: 3px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #000;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .value {
+            font-family: 'SF Mono', Monaco, monospace;
+            background: #f0f0f0;
+            padding: 4px 12px;
+            border-radius: 4px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .presets {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .preset-btn:hover {
+            background: #f8f8f8;
+            border-color: #bbb;
+        }
+
+        .preset-btn.active {
+            background: #000;
+            color: white;
+            border-color: #000;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #000;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #333;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #000;
+            border: 1px solid #ddd;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f8f8;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .size-btn {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .size-btn:hover {
+            background: #f8f8f8;
+        }
+
+        .size-btn.active {
+            background: #000;
+            color: white;
+            border-color: #000;
+        }
+
+        .attribution {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            font-size: 12px;
+        }
+
+        .attribution a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .attribution a:hover {
+            color: #000;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Squircle Avatar</h1>
+    <p class="subtitle">Create perfect profile pictures with smooth corners</p>
+
+    <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">📷</div>
+        <div class="upload-text">Drop your image here or click to upload</div>
+        <div class="upload-hint">JPG, PNG up to 10MB</div>
+    </div>
+
+    <input accept="image/*" id="fileInput" type="file">
+
+    <div class="editor" id="editor">
+        <div class="canvas-container">
+            <canvas height="300" id="canvas" width="300"></canvas>
+        </div>
+
+        <div class="controls">
+            <div class="presets">
+                <button class="preset-btn" onclick="setShape(0)">Circle</button>
+                <button class="preset-btn active" onclick="setShape(20)">Soft</button>
+                <button class="preset-btn" onclick="setShape(40)">Medium</button>
+                <button class="preset-btn" onclick="setShape(60)">Hard</button>
+                <button class="preset-btn" onclick="setShape(100)">Square</button>
+            </div>
+
+            <div class="control-group">
+                <label>Corner Smoothness</label>
+                <div class="slider-row">
+                    <input id="shapeSlider" max="100" min="0" step="1" type="range" value="20">
+                    <span class="value" id="shapeValue">Soft</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Zoom</label>
+                <div class="slider-row">
+                    <input id="zoomSlider" max="3" min="0.5" step="0.1" type="range" value="1">
+                    <span class="value" id="zoomValue">1.0×</span>
+                </div>
+            </div>
+
+            <div class="size-options">
+                <button class="size-btn active" onclick="setSize(512)">512×512</button>
+                <button class="size-btn" onclick="setSize(256)">256×256</button>
+                <button class="size-btn" onclick="setSize(128)">128×128</button>
+                <button class="size-btn" onclick="setSize(64)">64×64</button>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-secondary" onclick="resetImage()">New Image</button>
+            <button class="btn btn-primary" onclick="downloadImage()">Download</button>
+        </div>
+    </div>
+</div>
+
+<div class="attribution">
+    <a href="https://calculatequick.com">calculatequick.com</a>
+</div>
+
+<script>
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const editor = document.getElementById('editor');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const shapeSlider = document.getElementById('shapeSlider');
+    const zoomSlider = document.getElementById('zoomSlider');
+    const shapeValue = document.getElementById('shapeValue');
+    const zoomValue = document.getElementById('zoomValue');
+
+    let img = null;
+    let offsetX = 0;
+    let offsetY = 0;
+    let zoom = 1;
+    let isDragging = false;
+    let startX, startY;
+    let outputSize = 512;
+
+    function sliderToN(sliderValue) {
+        if (sliderValue >= 99) return Infinity;
+
+        return 2 + Math.pow(sliderValue / 100, 2) * 50;
+    }
+
+    uploadArea.addEventListener('click', () => fileInput.click());
+
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('drag-over');
+    });
+
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('drag-over');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('drag-over');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) {
+            loadImage(file);
+        }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) loadImage(file);
+    });
+
+    function loadImage(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            img = new Image();
+            img.onload = () => {
+                uploadArea.style.display = 'none';
+                editor.style.display = 'block';
+                resetPosition();
+                draw();
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function resetPosition() {
+        zoom = 1;
+        zoomSlider.value = 1;
+        zoomValue.textContent = '1.0×';
+
+        shapeSlider.value = 20;
+        shapeValue.textContent = 'Soft';
+
+        const scale = Math.max(300 / img.width, 300 / img.height) * zoom;
+        offsetX = (300 - img.width * scale) / 2;
+        offsetY = (300 - img.height * scale) / 2;
+    }
+
+    function createSquirclePath(ctx, cx, cy, size, n) {
+        ctx.beginPath();
+
+        if (n === Infinity) {
+            const half = size / 2;
+            ctx.rect(cx - half, cy - half, size, size);
+        } else {
+
+            for (let t = 0; t <= Math.PI * 2; t += 0.02) {
+                const cos = Math.cos(t);
+                const sin = Math.sin(t);
+                const r = size / 2 / Math.pow(
+                    Math.pow(Math.abs(cos), n) +
+                    Math.pow(Math.abs(sin), n),
+                    1 / n
+                );
+
+                const x = cx + r * cos;
+                const y = cy + r * sin;
+
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+        }
+
+        ctx.closePath();
+    }
+
+    function draw() {
+        if (!img) return;
+
+        ctx.clearRect(0, 0, 300, 300);
+
+        ctx.save();
+
+        const sliderVal = parseFloat(shapeSlider.value);
+        const n = sliderToN(sliderVal);
+        createSquirclePath(ctx, 150, 150, 300, n);
+        ctx.clip();
+
+        const scale = Math.max(300 / img.width, 300 / img.height) * zoom;
+        ctx.drawImage(img, offsetX, offsetY, img.width * scale, img.height * scale);
+
+        ctx.restore();
+
+        ctx.strokeStyle = '#ddd';
+        ctx.lineWidth = 2;
+        createSquirclePath(ctx, 150, 150, 300, n);
+        ctx.stroke();
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        const rect = canvas.getBoundingClientRect();
+        startX = e.clientX - rect.left - offsetX;
+        startY = e.clientY - rect.top - offsetY;
+        canvas.style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const rect = canvas.getBoundingClientRect();
+        offsetX = e.clientX - rect.left - startX;
+        offsetY = e.clientY - rect.top - startY;
+        draw();
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        canvas.style.cursor = 'move';
+    });
+
+    shapeSlider.addEventListener('input', () => {
+        const val = parseFloat(shapeSlider.value);
+        if (val === 0) shapeValue.textContent = 'Circle';
+        else if (val < 30) shapeValue.textContent = 'Soft';
+        else if (val < 50) shapeValue.textContent = 'Medium';
+        else if (val < 80) shapeValue.textContent = 'Hard';
+        else if (val >= 100) shapeValue.textContent = 'Square';
+        else shapeValue.textContent = val;
+
+        document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+        draw();
+    });
+
+    zoomSlider.addEventListener('input', () => {
+        const newZoom = parseFloat(zoomSlider.value);
+        const zoomDiff = newZoom / zoom;
+        zoom = newZoom;
+        zoomValue.textContent = zoom.toFixed(1) + '×';
+
+        offsetX = 150 + (offsetX - 150) * zoomDiff;
+        offsetY = 150 + (offsetY - 150) * zoomDiff;
+
+        draw();
+    });
+
+    function setShape(sliderVal) {
+        shapeSlider.value = sliderVal;
+        const val = parseFloat(sliderVal);
+        if (val === 0) shapeValue.textContent = 'Circle';
+        else if (val < 30) shapeValue.textContent = 'Soft';
+        else if (val < 50) shapeValue.textContent = 'Medium';
+        else if (val < 80) shapeValue.textContent = 'Hard';
+        else if (val >= 100) shapeValue.textContent = 'Square';
+        else shapeValue.textContent = val;
+
+        document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        draw();
+    }
+
+    function setSize(size) {
+        outputSize = size;
+        document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
+    function resetImage() {
+        uploadArea.style.display = 'block';
+        editor.style.display = 'none';
+        fileInput.value = '';
+        img = null;
+    }
+
+    function downloadImage() {
+        const outputCanvas = document.createElement('canvas');
+        outputCanvas.width = outputSize;
+        outputCanvas.height = outputSize;
+        const outputCtx = outputCanvas.getContext('2d');
+
+        const scaleFactor = outputSize / 300;
+
+        outputCtx.clearRect(0, 0, outputSize, outputSize);
+
+        outputCtx.save();
+
+        const sliderVal = parseFloat(shapeSlider.value);
+        const n = sliderToN(sliderVal);
+        createSquirclePath(outputCtx, outputSize / 2, outputSize / 2, outputSize, n);
+        outputCtx.clip();
+
+        const scale = Math.max(300 / img.width, 300 / img.height) * zoom * scaleFactor;
+        outputCtx.drawImage(
+            img,
+            offsetX * scaleFactor,
+            offsetY * scaleFactor,
+            img.width * scale,
+            img.height * scale
+        );
+
+        outputCtx.restore();
+
+        outputCanvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `squircle-avatar-${outputSize}x${outputSize}.png`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber scroll</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+        @import url('https://fonts.cdnfonts.com/css/grids-personal-use');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #FEF2E9;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #FEF2E9;
+            overflow: hidden;
+            mask: linear-gradient(var(--degrade), transparent var(--transparent), black var(--black));
+
+            picture {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                }
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 42%, rgba(0, 0, 0, 0.67) 94%);
+                    z-index: 1;
+                }
+            }
+        }
+
+        .section {
+            position: relative;
+            width: 100%;
+            height: 100svh;
+        }
+
+        .pixel-loader {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            scale: 1.4;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            filter: contrast(0%) saturate(0%);
+        }
+
+        .pixel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0, 0, 0, 0.3) 3px,
+                    rgba(0, 0, 0, 0.3) 6px
+            ),
+            repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0, 0, 0, 0.3) 3px,
+                    rgba(0, 0, 0, 0.3) 6px
+            );
+            mix-blend-mode: multiply;
+            opacity: 1;
+        }
+
+        .content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .content-after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            mask: linear-gradient(var(--degrade2), transparent var(--transparent2), black var(--black2));
+            isolation: isolate;
+        }
+
+        .content-before {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: #1b2c30;
+            z-index: -1;
+            mask: linear-gradient(-105deg, transparent var(--transparent3), black var(--black3));
+        }
+
+        .title {
+            width: 100%;
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Grids Personal Use', sans-serif;
+
+            h1 {
+                font-size: clamp(2rem, 8vw, 6rem);
+            }
+        }
+
+        .description {
+            width: 100%;
+            height: 20%;
+            padding-inline: 20px;
+            display: flex;
+            align-items: end;
+            padding-bottom: 20px;
+
+            div {
+                width: 50%;
+            }
+
+            div:nth-of-type(1) {
+                h2 {
+                    font-size: clamp(2rem, 4vw, 3rem);
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 600;
+                    margin-bottom: 10px;
+                }
+
+                p {
+                    font-size: clamp(1rem, 2vw, 1rem);
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 400;
+                }
+            }
+
+            div:nth-last-of-type(1) {
+                display: flex;
+                align-items: center;
+                justify-content: end;
+                gap: 20px;
+                text-align: end;
+                font-family: 'Montserrat', sans-serif;
+            }
+        }
+
+        .gallery-section {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120vw;
+            height: 100svh;
+            background: #333;
+            z-index: 2;
+            mask: linear-gradient(105deg, transparent var(--transparent4), black var(--black4));
+        }
+
+        .gallery-section .images {
+            margin: auto;
+            width: 100%;
+            max-width: 1200px;
+            height: 100%;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0;
+                will-change: transform, opacity;
+            }
+        }
+
+        .pixel-loader {
+            will-change: filter, transform;
+        }
+
+        .pixel-overlay {
+            will-change: opacity;
+        }
+
+        .content-after,
+        .content-before,
+        .gallery-section {
+            will-change: filter;
+        }
+
+        .wrapper-action {
+            will-change: transform;
+        }
+
+        .futuristic-barcode {
+            --glow-color: 0, 255, 136;
+            --glow-intensity: 0.3;
+            --pulse-duration: 2s;
+            will-change: filter;
+            filter: drop-shadow(0 0 10px rgba(var(--glow-color), var(--glow-intensity)));
+            animation: barcodePulse var(--pulse-duration) ease-in-out infinite alternate;
+        }
+
+        @keyframes barcodePulse {
+            0% {
+                filter: drop-shadow(0 0 5px rgba(var(--glow-color), 0.2));
+            }
+            100% {
+                filter: drop-shadow(0 0 15px rgba(var(--glow-color), 0.6));
+            }
+        }
+
+        .futuristic-barcode rect {
+            --flicker-duration: calc(0.1s + (var(--bar-index)%2) * 0.05s);
+            will-change: opacity;
+            animation: barFlicker var(--flicker-duration) ease-in-out infinite alternate;
+        }
+
+        @keyframes barFlicker {
+            0% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .futuristic-barcode line {
+            --scan-delay: calc((var(--scan-index) - 1) * 0.5s);
+            will-change: transform, opacity;
+            animation: scanMove 3s linear infinite var(--scan-delay);
+        }
+
+        @keyframes scanMove {
+            0% {
+                transform: translateX(-120px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(120px);
+                opacity: 0;
+            }
+        }
+
+        .futuristic-barcode circle[style*="--data-index"] {
+            will-change: transform, opacity;
+            animation: dataPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes dataPulse {
+            0%, 100% {
+                r: 1;
+                opacity: 0.8;
+            }
+            50% {
+                r: 2;
+                opacity: 1;
+            }
+        }
+
+        .futuristic-barcode circle[style*="--particle-index"] {
+            --particle-delay: calc((var(--particle-index) - 1) * 0.8s);
+            will-change: transform, opacity;
+            animation: particleFloat 4s ease-in-out infinite var(--particle-delay);
+        }
+
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateY(-10px) scale(1.2);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(0px) scale(0.8);
+                opacity: 0.5;
+            }
+            75% {
+                transform: translateY(10px) scale(1.1);
+                opacity: 0.9;
+            }
+        }
+
+        .hero-barcode-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            will-change: transform, opacity, scale;
+        }
+
+        .hero-barcode {
+            --hero-glow-color: 0, 255, 136;
+            --hero-glow-intensity: 0.5;
+            --hero-pulse-duration: 3s;
+            will-change: filter;
+            filter: drop-shadow(0 0 20px rgba(var(--hero-glow-color), var(--hero-glow-intensity)));
+            animation: heroBarcodePulse var(--hero-pulse-duration) ease-in-out infinite alternate;
+        }
+
+        @keyframes heroBarcodePulse {
+            0% {
+                filter: drop-shadow(0 0 10px rgba(var(--hero-glow-color), 0.3));
+            }
+            100% {
+                filter: drop-shadow(0 0 30px rgba(var(--hero-glow-color), 0.8));
+            }
+        }
+
+        .hero-barcode rect {
+            --hero-flicker-duration: calc(0.08s + (var(--bar-index)%2) * 0.04s);
+            will-change: opacity;
+            animation: heroBarFlicker var(--hero-flicker-duration) ease-in-out infinite alternate;
+        }
+
+        @keyframes heroBarFlicker {
+            0% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .hero-barcode line {
+            --hero-scan-delay: calc((var(--scan-index) - 1) * 0.7s);
+            will-change: transform, opacity;
+            animation: heroScanMove 4s linear infinite var(--hero-scan-delay);
+        }
+
+        @keyframes heroScanMove {
+            0% {
+                transform: translateX(-200px);
+                opacity: 0;
+            }
+            15% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(200px);
+                opacity: 0;
+            }
+        }
+
+        .hero-barcode circle[style*="--data-index"] {
+            will-change: transform, opacity;
+            animation: heroDataPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes heroDataPulse {
+            0%, 100% {
+                r: 2;
+                opacity: 0.8;
+            }
+            50% {
+                r: 3;
+                opacity: 1;
+            }
+        }
+
+        .hero-barcode circle[style*="--particle-index"] {
+            --hero-particle-delay: calc((var(--particle-index) - 1) * 0.8s);
+            will-change: transform, opacity;
+            animation: heroParticleFloat 5s ease-in-out infinite var(--hero-particle-delay);
+        }
+
+        @keyframes heroParticleFloat {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateY(-15px) scale(1.3);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(0px) scale(0.9);
+                opacity: 0.6;
+            }
+            75% {
+                transform: translateY(15px) scale(1.1);
+                opacity: 0.9;
+            }
+        }
+    </style>
+</head>
+<body>
+<section class="main-section">
+    <div class="wrapper-action">
+        <div class="hero" style="--degrade: -150deg; --transparent: 100%; --black: 100%;">
+            <picture>
+                <img alt="imagen" class="pixel-loader"
+                     src="https://images.pexels.com/photos/8107822/pexels-photo-8107822.jpeg">
+            </picture>
+            <div class="pixel-overlay"></div>
+
+            <div class="hero-barcode-container">
+                <svg class="hero-barcode" height="120" viewBox="0 0 200 120" width="200"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="heroBarcodeGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+                            <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1"/>
+                            <stop offset="50%" style="stop-color:#00ffff;stop-opacity:1"/>
+                            <stop offset="100%" style="stop-color:#0088ff;stop-opacity:1"/>
+                        </linearGradient>
+                        <filter id="heroGlow">
+                            <feGaussianBlur result="coloredBlur" stdDeviation="3"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="80" style="--bar-index: 1" width="3" x="10"
+                          y="20"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="60" style="--bar-index: 2" width="2" x="15"
+                          y="30"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="100" style="--bar-index: 3" width="4" x="18"
+                          y="10"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="40" style="--bar-index: 4" width="2" x="24"
+                          y="40"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="90" style="--bar-index: 5" width="3" x="28"
+                          y="15"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="20" style="--bar-index: 6" width="2" x="33"
+                          y="50"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="70" style="--bar-index: 7" width="5" x="37"
+                          y="25"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="50" style="--bar-index: 8" width="2" x="44"
+                          y="35"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="110" style="--bar-index: 9" width="3" x="48"
+                          y="5"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="30" style="--bar-index: 10" width="2" x="53"
+                          y="45"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="80" style="--bar-index: 11" width="4" x="57"
+                          y="20"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="10" style="--bar-index: 12" width="2" x="63"
+                          y="55"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="96" style="--bar-index: 13" width="3" x="67"
+                          y="12"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="40" style="--bar-index: 14" width="2" x="72"
+                          y="40"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="84" style="--bar-index: 15" width="6" x="76"
+                          y="18"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="20" style="--bar-index: 16" width="2" x="84"
+                          y="50"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="100" style="--bar-index: 17" width="3" x="88"
+                          y="10"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="50" style="--bar-index: 18" width="2" x="93"
+                          y="35"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="76" style="--bar-index: 19" width="4" x="97"
+                          y="22"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="0" style="--bar-index: 20" width="2" x="103"
+                          y="60"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="90" style="--bar-index: 21" width="3" x="107"
+                          y="15"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="30" style="--bar-index: 22" width="2" x="112"
+                          y="45"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="70" style="--bar-index: 23" width="5" x="116"
+                          y="25"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="10" style="--bar-index: 24" width="2" x="123"
+                          y="55"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="104" style="--bar-index: 25" width="3" x="127"
+                          y="8"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="40" style="--bar-index: 26" width="2" x="132"
+                          y="40"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="80" style="--bar-index: 27" width="4" x="136"
+                          y="20"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="20" style="--bar-index: 28" width="2" x="142"
+                          y="50"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="96" style="--bar-index: 29" width="3" x="146"
+                          y="12"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="50" style="--bar-index: 30" width="2" x="151"
+                          y="35"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="84" style="--bar-index: 31" width="5" x="155"
+                          y="18"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="0" style="--bar-index: 32" width="2" x="162"
+                          y="60"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="100" style="--bar-index: 33" width="3" x="166"
+                          y="10"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="30" style="--bar-index: 34" width="2" x="171"
+                          y="45"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="70" style="--bar-index: 35" width="4" x="175"
+                          y="25"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="10" style="--bar-index: 36" width="2" x="181"
+                          y="55"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="90" style="--bar-index: 37" width="3" x="185"
+                          y="15"/>
+                    <rect fill="url(#heroBarcodeGradient)" filter="url(#heroGlow)" height="40" style="--bar-index: 38" width="2" x="190"
+                          y="40"/>
+
+                    <!-- Líneas de escaneo del hero -->
+                    <line opacity="0.8" stroke="#00ff88" stroke-width="2" style="--scan-index: 1" x1="0" x2="200" y1="60"
+                          y2="60"/>
+                    <line opacity="0.6" stroke="#00ffff" stroke-width="1" style="--scan-index: 2" x1="0" x2="200" y1="55"
+                          y2="55"/>
+                    <line opacity="0.6" stroke="#0088ff" stroke-width="1" style="--scan-index: 3" x1="0" x2="200" y1="65"
+                          y2="65"/>
+
+                    <!-- Puntos de datos del hero -->
+                    <circle cx="30" cy="60" fill="#00ff88" r="2" style="--data-index: 1"/>
+                    <circle cx="60" cy="60" fill="#00ffff" r="2" style="--data-index: 2"/>
+                    <circle cx="90" cy="60" fill="#0088ff" r="2" style="--data-index: 3"/>
+                    <circle cx="120" cy="60" fill="#00ff88" r="2" style="--data-index: 4"/>
+                    <circle cx="150" cy="60" fill="#00ffff" r="2" style="--data-index: 5"/>
+                    <circle cx="180" cy="60" fill="#0088ff" r="2" style="--data-index: 6"/>
+
+                    <!-- Efectos de partículas del hero -->
+                    <circle cx="25" cy="30" fill="#00ff88" opacity="0.7" r="1" style="--particle-index: 1"/>
+                    <circle cx="55" cy="90" fill="#00ffff" opacity="0.7" r="1" style="--particle-index: 2"/>
+                    <circle cx="85" cy="25" fill="#0088ff" opacity="0.7" r="1" style="--particle-index: 3"/>
+                    <circle cx="115" cy="95" fill="#00ff88" opacity="0.7" r="1" style="--particle-index: 4"/>
+                    <circle cx="145" cy="35" fill="#00ffff" opacity="0.7" r="1" style="--particle-index: 5"/>
+                    <circle cx="175" cy="85" fill="#0088ff" opacity="0.7" r="1" style="--particle-index: 6"/>
+                </svg>
+            </div>
+        </div>
+        <div class="content">
+            <div class="content-before" style="--transparent3: 100%; --black3: 100%;"></div>
+            <div class="content-after" style="--transparent2: 100%; --black2: 100%;">
+                <div class="title">
+                    <h1>CYBER SCAN</h1>
+                </div>
+                <div class="description">
+                    <div>
+                        <h2>Neural interface</h2>
+                        <p>Enter the cyber realm where reality dissolves into digital fragments.
+                            Advanced neural networks process visual data through pixelated matrices,
+                            creating a bridge between human consciousness and machine intelligence.
+                            The future is now, and it's beautifully chaotic.
+                        </p>
+                    </div>
+                    <div>
+                        <svg class="futuristic-barcode" height="80" viewBox="0 0 120 80" width="120"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="barcodeGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1"/>
+                                    <stop offset="50%" style="stop-color:#00ffff;stop-opacity:1"/>
+                                    <stop offset="100%" style="stop-color:#0088ff;stop-opacity:1"/>
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur result="coloredBlur" stdDeviation="2"/>
+                                    <feMerge>
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="60" style="--bar-index: 1" width="2" x="5"
+                                  y="10"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="50" style="--bar-index: 2" width="1" x="8"
+                                  y="15"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="70" style="--bar-index: 3" width="3" x="10"
+                                  y="5"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="40" style="--bar-index: 4" width="1" x="14"
+                                  y="20"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="64" style="--bar-index: 5" width="2" x="16"
+                                  y="8"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="30" style="--bar-index: 6" width="1" x="19"
+                                  y="25"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="56" style="--bar-index: 7" width="4" x="21"
+                                  y="12"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="44" style="--bar-index: 8" width="1" x="26"
+                                  y="18"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="74" style="--bar-index: 9" width="2" x="28"
+                                  y="3"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="36" style="--bar-index: 10" width="1" x="31"
+                                  y="22"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="50" style="--bar-index: 11" width="3" x="33"
+                                  y="15"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="24" style="--bar-index: 12" width="1" x="37"
+                                  y="28"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="66" style="--bar-index: 13" width="2" x="39"
+                                  y="7"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="40" style="--bar-index: 14" width="1" x="42"
+                                  y="20"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="60" style="--bar-index: 15" width="4" x="44"
+                                  y="10"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="30" style="--bar-index: 16" width="1" x="49"
+                                  y="25"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="70" style="--bar-index: 17" width="2" x="51"
+                                  y="5"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="44" style="--bar-index: 18" width="1" x="54"
+                                  y="18"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="56" style="--bar-index: 19" width="3" x="56"
+                                  y="12"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="20" style="--bar-index: 20" width="1" x="60"
+                                  y="30"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="64" style="--bar-index: 21" width="2" x="62"
+                                  y="8"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="36" style="--bar-index: 22" width="1" x="65"
+                                  y="22"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="50" style="--bar-index: 23" width="4" x="67"
+                                  y="15"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="24" style="--bar-index: 24" width="1" x="72"
+                                  y="28"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="70" style="--bar-index: 25" width="2" x="74"
+                                  y="5"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="40" style="--bar-index: 26" width="1" x="77"
+                                  y="20"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="60" style="--bar-index: 27" width="3" x="79"
+                                  y="10"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="30" style="--bar-index: 28" width="1" x="83"
+                                  y="25"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="64" style="--bar-index: 29" width="2" x="85"
+                                  y="8"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="44" style="--bar-index: 30" width="1" x="88"
+                                  y="18"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="56" style="--bar-index: 31" width="4" x="90"
+                                  y="12"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="20" style="--bar-index: 32" width="1" x="95"
+                                  y="30"/>
+                            <rect fill="url(#barcodeGradient)" filter="url(#glow)" height="70" style="--bar-index: 33" width="2" x="97"
+                                  y="5"/>
+
+                            <line opacity="0.8" stroke="#00ff88" stroke-width="1" style="--scan-index: 1" x1="0" x2="120" y1="40"
+                                  y2="40"/>
+                            <line opacity="0.6" stroke="#00ffff" stroke-width="0.5" style="--scan-index: 2" x1="0" x2="120" y1="35"
+                                  y2="35"/>
+                            <line opacity="0.6" stroke="#0088ff" stroke-width="0.5" style="--scan-index: 3" x1="0" x2="120" y1="45"
+                                  y2="45"/>
+
+                            <circle cx="20" cy="40" fill="#00ff88" r="1" style="--data-index: 1"/>
+                            <circle cx="40" cy="40" fill="#00ffff" r="1" style="--data-index: 2"/>
+                            <circle cx="60" cy="40" fill="#0088ff" r="1" style="--data-index: 3"/>
+                            <circle cx="80" cy="40" fill="#00ff88" r="1" style="--data-index: 4"/>
+                            <circle cx="100" cy="40" fill="#00ffff" r="1" style="--data-index: 5"/>
+
+                            <circle cx="15" cy="20" fill="#00ff88" opacity="0.7" r="0.5" style="--particle-index: 1"/>
+                            <circle cx="35" cy="60" fill="#00ffff" opacity="0.7" r="0.5" style="--particle-index: 2"/>
+                            <circle cx="55" cy="15" fill="#0088ff" opacity="0.7" r="0.5" style="--particle-index: 3"/>
+                            <circle cx="75" cy="65" fill="#00ff88" opacity="0.7" r="0.5" style="--particle-index: 4"/>
+                            <circle cx="95" cy="25" fill="#00ffff" opacity="0.7" r="0.5" style="--particle-index: 5"/>
+                        </svg>
+                        initiate connection
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="gallery-section" style="--transparent4: 100%; --black4: 100%;">
+        <div class="images">
+            <picture>
+                <img alt="imagen" loading="lazy"
+                     src="https://images.pexels.com/photos/8108093/pexels-photo-8108093.jpeg">
+            </picture>
+            <picture>
+                <img alt="imagen" loading="lazy"
+                     src="https://images.pexels.com/photos/18152964/pexels-photo-18152964.jpeg">
+            </picture>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const lenis = new Lenis();
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        const mainSection = document.querySelector('.wrapper-action');
+        const hero = document.querySelector('.hero');
+        const content = document.querySelector('.content-after');
+        const contentBefore = document.querySelector('.content-before');
+        const gallerySection = document.querySelector('.gallery-section');
+        const images = document.querySelectorAll('.gallery-section .images img');
+        const barcode = document.querySelector('.futuristic-barcode');
+        const barcodeBars = document.querySelectorAll('.futuristic-barcode rect[style*="--bar-index"]');
+        const dataPoints = document.querySelectorAll('.futuristic-barcode circle[style*="--data-index"]');
+        const particles = document.querySelectorAll('.futuristic-barcode circle[style*="--particle-index"]');
+        const heroBarcode = document.querySelector('.hero-barcode');
+        const heroBarcodeContainer = document.querySelector('.hero-barcode-container');
+        const heroImage = document.querySelector('.pixel-loader');
+
+        const precargarImagenes = () => {
+            images.forEach(img => {
+                const newImg = new Image();
+                newImg.src = img.src;
+            });
+        };
+
+        precargarImagenes();
+
+        const extraerColoresDominantes = (imagen) => {
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                    canvas.width = 200;
+                    canvas.height = 200;
+                    ctx.drawImage(img, 0, 0, 200, 200);
+
+                    const imageData = ctx.getImageData(0, 0, 200, 200);
+                    const data = imageData.data;
+                    const colorCounts = {};
+                    const colorSamples = [];
+
+                    for (let i = 0; i < data.length; i += 4) {
+                        const r = data[i];
+                        const g = data[i + 1];
+                        const b = data[i + 2];
+                        const a = data[i + 3];
+
+                        if (a < 100 || (r < 30 && g < 30 && b < 30)) continue;
+
+                        if (r > 240 && g > 240 && b > 240) continue;
+
+                        const roundedR = Math.round(r / 10) * 10;
+                        const roundedG = Math.round(g / 10) * 10;
+                        const roundedB = Math.round(b / 10) * 10;
+
+                        const colorKey = `${roundedR},${roundedG},${roundedB}`;
+                        colorCounts[colorKey] = (colorCounts[colorKey] || 0) + 1;
+
+                        colorSamples.push({r, g, b, a});
+                    }
+
+                    const sortedColors = Object.entries(colorCounts)
+                        .sort(([, a], [, b]) => b - a)
+                        .slice(0, 6)
+                        .map(([color]) => {
+                            const [r, g, b] = color.split(',').map(Number);
+                            return {r, g, b, key: color};
+                        });
+
+                    const filteredColors = [];
+                    const usedColors = new Set();
+
+                    for (const color of sortedColors) {
+                        let isSimilar = false;
+                        for (const usedColor of usedColors) {
+                            const distance = Math.sqrt(
+                                Math.pow(color.r - usedColor.r, 2) +
+                                Math.pow(color.g - usedColor.g, 2) +
+                                Math.pow(color.b - usedColor.b, 2)
+                            );
+                            if (distance < 50) {
+                                isSimilar = true;
+                                break;
+                            }
+                        }
+
+                        if (!isSimilar) {
+                            filteredColors.push(color);
+                            usedColors.add(color);
+                            if (filteredColors.length >= 3) break;
+                        }
+                    }
+
+                    const finalColors = filteredColors.map(color => {
+                        const hsl = rgbToHsl(color.r, color.g, color.b);
+                        const enhancedHsl = {
+                            h: hsl.h,
+                            s: Math.min(100, hsl.s * 1.2),
+                            l: Math.max(20, Math.min(80, hsl.l))
+                        };
+                        const enhancedRgb = hslToRgb(enhancedHsl.h, enhancedHsl.s, enhancedHsl.l);
+                        return `rgb(${Math.round(enhancedRgb.r)},${Math.round(enhancedRgb.g)},${Math.round(enhancedRgb.b)})`;
+                    });
+
+                    while (finalColors.length < 3) {
+                        const defaultColors = ['#00ff88', '#00ffff', '#0088ff', '#ff6b6b', '#4ecdc4', '#45b7d1'];
+                        finalColors.push(defaultColors[finalColors.length]);
+                    }
+
+                    resolve(finalColors.slice(0, 3));
+                };
+
+                img.src = imagen.src;
+            });
+        };
+
+        const rgbToHsl = (r, g, b) => {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+                switch (max) {
+                    case r:
+                        h = (g - b) / d + (g < b ? 6 : 0);
+                        break;
+                    case g:
+                        h = (b - r) / d + 2;
+                        break;
+                    case b:
+                        h = (r - g) / d + 4;
+                        break;
+                }
+                h /= 6;
+            }
+
+            return {
+                h: h * 360,
+                s: s * 100,
+                l: l * 100
+            };
+        };
+
+        const hslToRgb = (h, s, l) => {
+            h /= 360;
+            s /= 100;
+            l /= 100;
+
+            const hue2rgb = (p, q, t) => {
+                if (t < 0) t += 1;
+                if (t > 1) t -= 1;
+                if (t < 1 / 6) return p + (q - p) * 6 * t;
+                if (t < 1 / 2) return q;
+                if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                return p;
+            };
+
+            let r, g, b;
+
+            if (s === 0) {
+                r = g = b = l;
+            } else {
+                const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                const p = 2 * l - q;
+                r = hue2rgb(p, q, h + 1 / 3);
+                g = hue2rgb(p, q, h);
+                b = hue2rgb(p, q, h - 1 / 3);
+            }
+
+            return {
+                r: Math.round(r * 255),
+                g: Math.round(g * 255),
+                b: Math.round(b * 255)
+            };
+        };
+
+        const aplicarColoresAlHero = async () => {
+            if (!heroImage || !heroBarcode) return;
+
+            try {
+                const colores = await extraerColoresDominantes(heroImage);
+                console.log('Colores extraídos:', colores);
+
+                const crearVariaciones = (color) => {
+                    const rgb = color.match(/\d+/g).map(Number);
+                    const [r, g, b] = rgb;
+
+                    return {
+                        original: color,
+                        light: `rgb(${Math.min(255, r + 30)},${Math.min(255, g + 30)},${Math.min(255, b + 30)})`,
+                        dark: `rgb(${Math.max(0, r - 30)},${Math.max(0, g - 30)},${Math.max(0, b - 30)})`,
+                        vibrant: `rgb(${Math.min(255, Math.round(r * 1.2))},${Math.min(255, Math.round(g * 1.2))},${Math.min(255, Math.round(b * 1.2))})`
+                    };
+                };
+
+                const variaciones = colores.map(crearVariaciones);
+
+                const gradient = heroBarcode.querySelector('#heroBarcodeGradient');
+                if (gradient) {
+                    const stops = gradient.querySelectorAll('stop');
+                    stops[0].setAttribute('stop-color', variaciones[0]?.original || '#00ff88');
+                    stops[1].setAttribute('stop-color', variaciones[1]?.vibrant || '#00ffff');
+                    stops[2].setAttribute('stop-color', variaciones[2]?.original || '#0088ff');
+
+                    stops.forEach(stop => {
+                        stop.style.transition = 'stop-color 0.5s ease-in-out';
+                    });
+                }
+
+                const scanLines = heroBarcode.querySelectorAll('line[style*="--scan-index"]');
+                scanLines.forEach((line, index) => {
+                    const colorIndex = index % colores.length;
+                    const variation = index === 0 ? 'vibrant' : index === 1 ? 'light' : 'original';
+                    line.setAttribute('stroke', variaciones[colorIndex]?.[variation] || colores[colorIndex] || '#00ff88');
+                    line.style.transition = 'stroke 0.5s ease-in-out';
+                });
+
+                const dataPoints = heroBarcode.querySelectorAll('circle[style*="--data-index"]');
+                dataPoints.forEach((point, index) => {
+                    const colorIndex = index % colores.length;
+                    const variation = index % 2 === 0 ? 'vibrant' : 'light';
+                    point.setAttribute('fill', variaciones[colorIndex]?.[variation] || colores[colorIndex] || '#00ff88');
+                    point.style.transition = 'fill 0.5s ease-in-out';
+                });
+
+                const particles = heroBarcode.querySelectorAll('circle[style*="--particle-index"]');
+                particles.forEach((particle, index) => {
+                    const colorIndex = index % colores.length;
+                    const variations = ['original', 'light', 'vibrant', 'dark'];
+                    const variation = variations[index % variations.length];
+                    particle.setAttribute('fill', variaciones[colorIndex]?.[variation] || colores[colorIndex] || '#00ff88');
+                    particle.style.transition = 'fill 0.5s ease-in-out';
+                });
+
+                const heroBarcodeElement = heroBarcode;
+                if (heroBarcodeElement) {
+                    const mainColor = colores[0] || '#00ff88';
+                    const rgbValues = mainColor.match(/\d+/g);
+                    if (rgbValues && rgbValues.length >= 3) {
+                        const [r, g, b] = rgbValues.map(Number);
+                        heroBarcodeElement.style.setProperty('--hero-glow-color', `${r}, ${g}, ${b}`);
+                    }
+                }
+
+                console.log('Colores aplicados exitosamente al código de barras del hero');
+
+            } catch (error) {
+                console.log('No se pudieron extraer colores de la imagen, usando colores por defecto:', error);
+            }
+        };
+
+
+        const observarCambiosEnHero = () => {
+            if (!heroImage) return;
+
+
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                        console.log('Imagen del hero cambiada, actualizando colores...');
+                        setTimeout(() => {
+                            aplicarColoresAlHero();
+                        }, 500);
+                    }
+                });
+            });
+
+            observer.observe(heroImage, {
+                attributes: true,
+                attributeFilter: ['src']
+            });
+
+
+            const styleObserver = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' &&
+                        (mutation.attributeName === 'style' || mutation.attributeName === 'class')) {
+                        console.log('Estilo del hero cambiado, actualizando colores...');
+                        setTimeout(() => {
+                            aplicarColoresAlHero();
+                        }, 300);
+                    }
+                });
+            });
+
+            styleObserver.observe(heroImage, {
+                attributes: true,
+                attributeFilter: ['style', 'class']
+            });
+        };
+
+
+        const animarCodigoBarras = () => {
+            if (!barcode) return;
+
+
+            gsap.fromTo(barcode,
+                {
+                    scale: 0,
+                    rotation: 180,
+                    opacity: 0
+                },
+                {
+                    scale: 1,
+                    rotation: 0,
+                    opacity: 1,
+                    duration: 1.5,
+                    ease: "back.out(1.7)",
+                    delay: 0.5
+                }
+            );
+
+
+            gsap.fromTo(barcodeBars,
+                {
+                    scaleY: 0,
+                    transformOrigin: "center bottom"
+                },
+                {
+                    scaleY: 1,
+                    duration: 0.8,
+                    stagger: 0.05,
+                    ease: "power2.out",
+                    delay: 1.2
+                }
+            );
+
+
+            gsap.fromTo(dataPoints,
+                {
+                    scale: 0,
+                    opacity: 0
+                },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.6,
+                    stagger: 0.1,
+                    ease: "elastic.out(1, 0.3)",
+                    delay: 1.8
+                }
+            );
+
+
+            gsap.fromTo(particles,
+                {
+                    scale: 0,
+                    opacity: 0,
+                    y: 0
+                },
+                {
+                    scale: 1,
+                    opacity: 0.7,
+                    y: -20,
+                    duration: 1,
+                    stagger: 0.2,
+                    ease: "power2.out",
+                    delay: 2.2
+                }
+            );
+
+
+            gsap.to(barcode, {
+                filter: "drop-shadow(0 0 20px rgba(0, 255, 136, 0.8))",
+                duration: 2,
+                ease: "power2.inOut",
+                yoyo: true,
+                repeat: -1,
+                delay: 2.5
+            });
+
+
+            gsap.to(barcodeBars, {
+                opacity: 0.3,
+                duration: 0.1,
+                stagger: {
+                    amount: 0.5,
+                    from: "random"
+                },
+                ease: "power2.inOut",
+                yoyo: true,
+                repeat: -1,
+                delay: 3
+            });
+        };
+
+
+        animarCodigoBarras();
+
+
+        if (barcode) {
+            barcode.addEventListener('mouseenter', () => {
+                gsap.to(barcode, {
+                    scale: 1.1,
+                    filter: "drop-shadow(0 0 25px rgba(0, 255, 136, 1))",
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+
+                gsap.to(particles, {
+                    scale: 1.5,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            barcode.addEventListener('mouseleave', () => {
+                gsap.to(barcode, {
+                    scale: 1,
+                    filter: "drop-shadow(0 0 10px rgba(0, 255, 136, 0.3))",
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+
+                gsap.to(particles, {
+                    scale: 1,
+                    duration: 0.3,
+                    ease: "power2.out"
+                });
+            });
+
+            barcode.addEventListener('click', () => {
+                gsap.to(barcodeBars, {
+                    scaleY: 0.1,
+                    duration: 0.1,
+                    stagger: 0.02,
+                    ease: "power2.inOut",
+                    yoyo: true,
+                    repeat: 1
+                });
+
+                gsap.to(dataPoints, {
+                    scale: 2,
+                    duration: 0.2,
+                    ease: "power2.out",
+                    yoyo: true,
+                    repeat: 1
+                });
+
+                gsap.to(particles, {
+                    scale: 3,
+                    opacity: 1,
+                    duration: 0.3,
+                    ease: "power2.out",
+                    yoyo: true,
+                    repeat: 1
+                });
+            });
+        }
+
+        gsap.to(hero, {
+            '--black': '0%',
+            '--transparent': '0%',
+            '--degrade': '-90deg',
+            duration: 2,
+            ease: 'power2.out',
+        });
+
+        gsap.to('.pixel-loader', {
+            filter: 'contrast(100%) saturate(100%)',
+            scale: 1,
+            duration: 2,
+            ease: 'power2.out',
+        });
+
+        gsap.to('.pixel-overlay', {
+            opacity: 0,
+            duration: 2,
+            ease: 'power2.out',
+            delay: 1
+        });
+
+        aplicarColoresAlHero();
+
+        observarCambiosEnHero();
+
+        gsap.fromTo(heroBarcodeContainer,
+            {
+                opacity: 0,
+                scale: 0,
+                rotation: 45,
+                y: 50
+            },
+            {
+                opacity: 1,
+                scale: 1,
+                rotation: 0,
+                y: 0,
+                duration: 2,
+                ease: "back.out(1.7)",
+                delay: 1.5
+            }
+        );
+
+        const heroBars = heroBarcode?.querySelectorAll('rect[style*="--bar-index"]');
+        if (heroBars) {
+            gsap.fromTo(heroBars,
+                {
+                    scaleY: 0,
+                    transformOrigin: "center bottom"
+                },
+                {
+                    scaleY: 1,
+                    duration: 1.2,
+                    stagger: 0.03,
+                    ease: "power2.out",
+                    delay: 3.2
+                }
+            );
+        }
+
+        const heroDataPoints = heroBarcode?.querySelectorAll('circle[style*="--data-index"]');
+        if (heroDataPoints) {
+            gsap.fromTo(heroDataPoints,
+                {
+                    scale: 0,
+                    opacity: 0
+                },
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "elastic.out(1, 0.3)",
+                    delay: 4
+                }
+            );
+        }
+
+        const heroParticles = heroBarcode?.querySelectorAll('circle[style*="--particle-index"]');
+        if (heroParticles) {
+            gsap.fromTo(heroParticles,
+                {
+                    scale: 0,
+                    opacity: 0,
+                    y: 0
+                },
+                {
+                    scale: 1,
+                    opacity: 0.7,
+                    y: -30,
+                    duration: 1.5,
+                    stagger: 0.3,
+                    ease: "power2.out",
+                    delay: 4.5
+                }
+            );
+        }
+
+        gsap.to(heroBarcode, {
+            filter: "drop-shadow(0 0 40px rgba(0, 255, 136, 1))",
+            duration: 3,
+            ease: "power2.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 5
+        });
+
+        const mostrarGaleria = () => {
+            if (gallerySection.classList.contains('animated')) return;
+
+            gallerySection.classList.add('animated');
+
+            const imagesLoaded = Array.from(images).every(img => img.complete);
+
+            if (imagesLoaded) {
+                animarImagenes();
+            } else {
+                const loadPromises = Array.from(images).map(img => {
+                    return new Promise(resolve => {
+                        if (img.complete) {
+                            resolve();
+                        } else {
+                            img.onload = resolve;
+                            img.onerror = resolve;
+                        }
+                    });
+                });
+
+                Promise.all(loadPromises).then(() => {
+                    animarImagenes();
+                });
+            }
+        };
+
+        const animarImagenes = () => {
+            gsap.fromTo(images,
+                {
+                    x: 100,
+                    opacity: 0,
+                },
+                {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1.5,
+                    stagger: 0.3,
+                    ease: 'power2.out',
+                    delay: 0.2
+                }
+            );
+        };
+
+        const ocultarGaleria = () => {
+            if (!gallerySection.classList.contains('animated')) return;
+
+            gallerySection.classList.remove('animated');
+            gsap.to(images, {
+                opacity: 0,
+                x: 100,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'power2.in'
+            });
+        };
+
+        ScrollTrigger.create({
+            trigger: '.main-section',
+            start: 'top top',
+            end: `+=${window.innerHeight * 3}px`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1,
+            onUpdate: (self) => {
+                const progress = self.progress;
+
+                if (progress < 0.2) {
+                    const scale = 1 - (progress * 0.8);
+                    gsap.to(mainSection, {scale});
+                } else {
+                    gsap.to(mainSection, {scale: 0.8});
+                }
+
+                if (progress > 0.3) {
+                    gsap.to(content, {
+                        '--degrade2': '0deg',
+                        '--transparent2': '0%',
+                        '--black2': '0%',
+                        duration: 1.5,
+                        ease: 'power2.out',
+                    });
+                } else {
+                    gsap.to(content, {
+                        '--degrade2': '-150deg',
+                        '--transparent2': '100%',
+                        '--black2': '100%',
+                        duration: 1.5,
+                        ease: 'power2.out',
+                    });
+                }
+
+                if (progress > 0.6) {
+                    gsap.to(contentBefore, {
+                        '--transparent3': '0%',
+                        '--black3': '0%',
+                        duration: 2,
+                        ease: 'power2.out',
+                    });
+                } else {
+                    gsap.to(contentBefore, {
+                        '--transparent3': '100%',
+                        '--black3': '100%',
+                        duration: 2,
+                        ease: 'power2.out',
+                    });
+                }
+
+                if (progress > 0.85) {
+                    gsap.to(gallerySection, {
+                        '--transparent4': '0%',
+                        '--black4': '0%',
+                        duration: 2,
+                        ease: 'power2.out',
+                    });
+                } else {
+                    gsap.to(gallerySection, {
+                        '--transparent4': '100%',
+                        '--black4': '100%',
+                        duration: 2,
+                        ease: 'power2.out',
+                    });
+                }
+
+                if (progress > 0.9) {
+                    mostrarGaleria();
+                } else {
+                    ocultarGaleria();
+                }
+            },
+        });
+    });
+</script>
+</body>
+</html>

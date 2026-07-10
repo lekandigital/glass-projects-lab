@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conic-gradient</title>
+    <style>
+        :root {
+            --items: 144;
+            --rows: 8;
+            --n: calc(var(--items) / var(--rows));
+        }
+
+        @media (orientation: portrait) {
+            :root {
+                --rows: 24;
+                --n: calc(var(--items) / var(--rows));
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .container {
+            display: grid;
+            place-content: center;
+            grid-template-columns: repeat(var(--n), 1fr);
+            background: coral;
+            min-height: 100vh;
+            gap: 0rem;
+        }
+
+        .container > div {
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+        }
+
+        .tl {
+            border-top-left-radius: 0;
+        }
+
+        .tr {
+            border-top-right-radius: 0;
+        }
+
+        .br {
+            border-bottom-right-radius: 0;
+        }
+
+        .bl {
+            border-bottom-left-radius: 0;
+        }
+
+        .circle-1 {
+            background: conic-gradient(steelblue 0, steelblue 75%, transparent 75%);
+        }
+
+        .circle-2 {
+            background: conic-gradient(from 90deg, steelblue 0, steelblue 75%, transparent 75%);
+        }
+
+        .circle-3 {
+            background: conic-gradient(from 180deg, steelblue 0, steelblue 75%, transparent 75%);
+        }
+
+        .circle-4 {
+            background: conic-gradient(from 270deg, steelblue 0, steelblue 75%, transparent 75%);
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="container"></div>
+<script>
+    const container = document.getElementById('container');
+    const createDiv = () => {
+        const div = document.createElement("div");
+        div.classList.add(`circle-${Math.ceil(Math.random() * 4)}`);
+        return div;
+    };
+    const divs = Array.from({length: 144}, createDiv);
+    divs.forEach(div => container.appendChild(div));
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Spec - Photo Gallery</title>
+
+    <style>
+        /* Box sizing rules */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* Prevent font size inflation */
+        html {
+            -moz-text-size-adjust: none;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+
+        /* Remove default margin in favour of better control in authored CSS */
+        body, h1, h2, h3, h4, p,
+        figure, blockquote, dl, dd {
+            margin-block-end: 0;
+            margin-block-start: 0;
+        }
+
+        /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+        ul[role='list'],
+        ol[role='list'] {
+            list-style: none;
+        }
+
+        /* Set core body defaults */
+        body {
+            min-height: 100vh;
+            line-height: 1.3; /* Modified from 1.5 */
+            margin: unset;
+        }
+
+        /* Set shorter line heights on headings and interactive elements */
+        h1, h2, h3, h4,
+        button, input, label {
+            line-height: 1.1;
+        }
+
+        /* Balance text wrapping on headings */
+        h1, h2,
+        h3, h4 {
+            text-wrap: balance;
+        }
+
+        /* A elements that don't have a class get default styles */
+        a:not([class]) {
+            text-decoration-skip-ink: auto;
+            color: currentColor;
+        }
+
+        /* Make images easier to work with */
+        img,
+        picture {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Inherit fonts for inputs and buttons */
+        input, button,
+        textarea, select {
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        /* Make sure textareas without a rows attribute are not tiny */
+        textarea:not([rows]) {
+            min-height: 10em;
+        }
+
+        /* Anything that has been anchored to should have extra scroll margin */
+        :target {
+            scroll-margin-block: 5ex;
+        }
+    </style>
+    <style>
+        :root {
+            /* Colors */
+            --color-dark: hsl(0, 0%, 13%);
+            --color-dark-lighten: hsl(0, 0%, 23%);
+            --color-dark-darken: hsl(0, 0%, 3%);
+            --color-dark-90: hsla(0, 0%, 13%, 0.90);
+            --color-dark-75: hsla(0, 0%, 13%, 0.75);
+            --color-dark-50: hsla(0, 0%, 13%, 0.50);
+            --color-dark-25: hsla(0, 0%, 13%, 0.25);
+            --color-dark-10: hsla(0, 0%, 13%, 0.10);
+
+            --color-light: hsl(60, 21%, 93%);
+            --color-light-lighten: hsl(60, 21%, 95%);
+            --color-light-darken: hsl(60, 21%, 99%);
+            --color-light-90: hsla(60, 21%, 93%, 0.90);
+            --color-light-75: hsla(60, 21%, 93%, 0.75);
+            --color-light-50: hsla(60, 21%, 93%, 0.50);
+            --color-light-25: hsla(60, 21%, 93%, 0.25);
+            --color-light-10: hsla(60, 21%, 93%, 0.10);
+
+            --color-accent: hsl(0, 68%, 61%);
+            --color-accent-lighten: hsl(0, 68%, 66%);
+            --color-accent-darken: hsl(0, 68%, 55%);
+            --color-accent-90: hsla(0, 68%, 61%, 0.90);
+            --color-accent-75: hsla(0, 68%, 61%, 0.75);
+            --color-accent-50: hsla(0, 68%, 61%, 0.50);
+            --color-accent-25: hsla(0, 68%, 61%, 0.25);
+            --color-accent-10: hsla(0, 68%, 61%, 0.10);
+
+            /* Texture */
+            --texture-noise: url('https://assets.codepen.io/2153413//noise.png');
+            --texture-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%236c6c6c' fill-opacity='0.2'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
+            /* Borders */
+            --border-dashed: dashed 2px var(--color-dark);
+
+            /* Animation */
+            --anim-springy-soft: ;
+            --anim-springy-hard: ;
+            --anim-thud-soft: linear(0, 1 44.7%, 0.898 51.8%, 0.874 55.1%, 0.866 58.4%, 0.888 64.3%, 1 77.4%, 0.98 84.5%, 1);
+            --anim-thud-hard: linear(0, 0.234 11.8%, 0.403 18.4%, 0.624 24.7%, 0.999 33.3%, 0.76 39.9%, 0.705 42.6%, 0.687 45.2%, 0.703 47.7%, 0.753 50.3%, 0.999 57.7%, 0.89 61.8%, 0.865 63.6%, 0.857 65.3%, 0.865 67%, 0.887 68.8%, 0.999 74.5%, 0.957 77.5%, 0.944 80.2%, 0.954 82.7%, 1 88.2%, 0.988 91.9%, 1);
+            --anim-overshoot-soft: linear(0, -0.004 4.9%, -0.02 9.4%, -0.124 26.4%, -0.126 30.5%, -0.104 34.1%, -0.027 38.8%, 0.108 43.1%, 0.299 47%, 0.817 55.2%, 0.97 59.1%, 1.071 63.4%, 1.118 67.7%, 1.127 72.6%, 1.108 77.2%, 1.019 90.7%, 1.004 95.2%, 1);
+            --anim-overshoot-hard: ;
+            --anim-snap: linear(0, 0.115 2.2%, 0.877 9.4%, 1.016 11.9%, 1.081 14.7%, 1.088 16%, 1.084 17.5%, 1.013 25.3%, 0.993 30.8%, 1.001 46.8%, 1);
+            /* Generated from: https://easingwizard.com/ */
+
+            /* Shadows */
+            --shadow-color: 0deg 0% 0%;
+            --shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.1),
+            0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.1),
+            1px 2px 2.5px -2.5px hsl(var(--shadow-color) / 0.1);
+            --shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.11),
+            0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.11),
+            2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.11),
+            5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.11);
+            --shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.1),
+            1.5px 2.9px 3.7px -0.4px hsl(var(--shadow-color) / 0.1),
+            2.7px 5.4px 6.8px -0.7px hsl(var(--shadow-color) / 0.1),
+            4.5px 8.9px 11.2px -1.1px hsl(var(--shadow-color) / 0.1),
+            7.1px 14.3px 18px -1.4px hsl(var(--shadow-color) / 0.1),
+            11.2px 22.3px 28.1px -1.8px hsl(var(--shadow-color) / 0.1),
+            17px 33.9px 42.7px -2.1px hsl(var(--shadow-color) / 0.1),
+            25px 50px 62.9px -2.5px hsl(var(--shadow-color) / 0.1);
+            /* Generated from: https://www.joshwcomeau.com/shadow-palette/ */
+
+
+            /* Typography */
+            --step--2: clamp(0.6944rem, 0.6856rem + 0.0444vw, 0.72rem);
+            --step--1: clamp(0.8333rem, 0.8101rem + 0.1159vw, 0.9rem);
+            --step-0: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+            --step-1: clamp(1.2rem, 1.1283rem + 0.3587vw, 1.4063rem);
+            --step-2: clamp(1.44rem, 1.3295rem + 0.5527vw, 1.7578rem);
+            --step-3: clamp(1.728rem, 1.5648rem + 0.8161vw, 2.1973rem);
+            --step-4: clamp(2.0736rem, 1.8395rem + 1.1704vw, 2.7466rem);
+            --step-5: clamp(2.4883rem, 2.1597rem + 1.6433vw, 3.4332rem);
+            /* Generated from: https://utopia.fyi */
+
+            --font-base: 'AtkinsonHyperlegibleNext', "FallbackFont", sans-serif;
+            --font-headers: 'RecursiveCasual', "FallbackFont", sans-serif;
+            --font-code: 'AtkinsonHyperlegibleMono', "FallbackFont", sans-serif;
+
+            --font-normal: 400;
+            --font-bold: 700;
+        }
+
+        @font-face {
+            font-family: 'AtkinsonHyperlegibleMono';
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            src: url('https://assets.codepen.io/2153413/AtkinsonHyperlegibleMono-Regular.woff2') format('woff2');
+        }
+
+        @font-face {
+            font-family: 'AtkinsonHyperlegibleNext';
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            src: url('https://assets.codepen.io/2153413/AtkinsonHyperlegibleNext-Regular.woff2') format('woff2');
+        }
+
+        @font-face {
+            font-family: 'AtkinsonHyperlegibleNext';
+            font-display: swap;
+            font-style: normal;
+            font-weight: 700;
+            src: url('https://assets.codepen.io/2153413/AtkinsonHyperlegibleNext-Bold.woff2') format('woff2');
+        }
+
+        @font-face {
+            font-family: 'RecursiveCasual';
+            font-display: swap;
+            font-style: normal;
+            font-weight: 700;
+            /* src: url('RecursiveCasual-Bold.woff2') format('woff2'); */
+            src: url('https://assets.codepen.io/2153413/Recursive-Bold.woff2') format('woff2');
+        }
+    </style>
+    <style>
+        /* Base Styles */
+        body {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #f0f0e8;
+            background-image: var(--texture-noise);
+            font-family: var(--font-base);
+            font-size: var(--step-0);
+            color: var(--color-dark);
+
+            &::after {
+                position: absolute;
+                content: '';
+                inset: 0;
+                background-image: var(--texture-grid);
+                opacity: .8;
+                z-index: -10;
+            }
+        }
+
+        main {
+            display: flex;
+            position: relative;
+            /* flex-direction: column; */
+            gap: 1em;
+            padding: 1em;
+            align-self: center;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            flex-grow: 1;
+            flex-wrap: wrap;
+
+            section {
+                display: flex;
+                flex-direction: column;
+                background: var(--color-light-50);
+                padding: 1em;
+                border: solid 1px var(--color-dark-25);
+                width: fit-content;
+                border-radius: .5em;
+            }
+
+            .wide {
+                width: 100%;
+                flex-grow: grow;
+            }
+        }
+
+        /* Main Block Styling */
+
+        h1, h2, h3, h4, h5, h6, strong, button, summary {
+            font-family: var(--font-headers);
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: var(--step-5);
+        }
+
+        h2 {
+            font-size: var(--step-4);
+        }
+
+        h3 {
+            font-size: var(--step-3);
+        }
+
+        h4 {
+            font-size: var(--step-2);
+        }
+
+        h5 {
+            font-size: var(--step-1);
+        }
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: .3ex;
+            text-decoration-thickness: 2px;
+            text-decoration-color: var(--color-accent);
+            /* font-size: initial; */
+
+            &:hover {
+                text-underline-offset: .4ex;
+            }
+        }
+
+        article {
+            p + h2, p + h3 {
+                margin-top: .75em;
+            }
+        }
+
+        code {
+            /* display: inline-block; */
+            background: var(--color-dark-10);
+            color: var(--color-darker);
+            border-radius: .25em;
+            padding: .1em .2em;
+            border: 1px dashed var(--color-dark);
+            white-space: nowrap;
+            font-family: var(--font-code);
+            outline: 3px var(--color-dark-10) solid;
+            font-size: var(--step--1);
+        }
+
+        time {
+            display: inline-block;
+        }
+
+        p, a, em {
+            font-family: var(--font-base);
+            max-width: 60ch;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        em {
+            color: var(--color-accent);
+            font-style: normal;
+        }
+
+        ul:not([class]) {
+            padding-inline-start: 1em;
+            /* padding: 1.5em; */
+
+            li {
+                padding: unset;
+                /* padding-left: 1.5em; */
+                margin-bottom: .5em;
+
+                &::marker {
+                    color: var(--color-accent);
+                }
+            }
+        }
+
+        header {
+            border: unset;
+            position: relative;
+            padding: 1em 1em 0em 1em;
+            border-left: solid var(--color-accent) .5em;
+
+            h1 {
+                position: relative;
+                display: inline-block;
+                margin: unset;
+                padding: unset;
+                text-shadow: -2px 2px var(--color-dark-25);
+            }
+
+            p {
+                line-height: 1;
+            }
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: var(--color-light);
+            /* font-size: var(--step--1); */
+        }
+
+        details {
+            margin-top: 1em;
+            --duration: .2s;
+
+            interpolate-size: allow-keywords;
+
+            summary {
+                font-size: var(--step-1);
+            }
+
+            &::details-content {
+                opacity: 0;
+                block-size: 0;
+                overflow-y: clip;
+                transition: content-visibility var(--duration) allow-discrete,
+                opacity var(--duration),
+                block-size var(--duration);
+                transition-timing-function: ease-in-out;
+            }
+
+            &[open]::details-content {
+                opacity: 1;
+                block-size: auto;
+            }
+        }
+
+        .headsup-supports {
+            position: absolute;
+            display: none;
+            flex-direction: column;
+            gap: 1em;
+            background-color: var(--color-dark-90);
+            background-image: var(--texture-noise);
+            width: 100%;
+            height: 100%;
+            place-content: center;
+            place-items: center;
+            backdrop-filter: blur(1px);
+            color: var(--color-light);
+            font-size: var(--step-1);
+            z-index: 100;
+            padding: 1em;
+
+            p {
+                text-align: left;
+            }
+
+            li {
+                font-size: var(--step-0);
+            }
+
+            code {
+                background: var(--color-light-10);
+                border-color: var(--color-light);
+                outline-color: var(--color-light-10);
+            }
+        }
+
+        .headsup {
+            position: relative;
+            display: none;
+            flex-direction: column;
+
+            p {
+                text-align: center;
+                padding: .5em .75em;
+                min-width: 100%;
+                color: var(--color-light);
+                background: var(--color-dark-lighten);
+                background-image: var(--texture-noise);
+                box-shadow: 0px 4px var(--color-dark-50);
+
+                code {
+                    background: var(--color-light-10);
+                    border-color: var(--color-light);
+                    outline-color: --color;
+                }
+            }
+
+            p:first-of-type {
+                background-color: var(--color-dark);
+                min-width: 100%;
+            }
+
+        }
+
+        .button-stack {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: calc(100% - 2em);
+            gap: .5em;
+            position: fixed;
+            bottom: 1em;
+            left: 1em;
+            z-index: 1000;
+            /* margin: 1em; */
+
+        }
+
+        button {
+            background-color: var(--color-accent);
+            background-image: var(--texture-noise);
+            color: var(--color-light);
+            padding: .5em 1em;
+            width: fit-content;
+            border: unset;
+            border-radius: .5em;
+            position: relative;
+            /* margin: 1em; */
+            box-shadow: -2px 2px var(--color-dark-50);
+            border: solid 1px var(--color-accent-lighten);
+            will-change: translate;
+            transition: translate .2s;
+            transition-timing-function: var(--anim-snap);
+
+            &:hover {
+                background-color: var(--color-accent-lighten);
+                border: solid 1px var(--color-accent);
+                cursor: pointer;
+                box-shadow: none;
+                translate: -2px 2px;
+            }
+        }
+
+        /* Experiment Notes Sidebar */
+        .experiment-notes {
+            width: 100%;
+            height: 100%;
+            max-width: unset;
+            max-height: unset;
+            /* block-size: 100dvh;
+            max-block-size: 100%; */
+            background: transparent;
+            border: unset;
+            padding: unset;
+            /* position: relative; */
+            transition: display .5s allow-discrete,
+            overlay .5s allow-discrete;
+
+            .dialog-sidebar {
+                position: absolute;
+                inset: 0;
+                width: fit-content;
+                min-width: 300px;
+                width: 40%;
+                max-width: 50ch;
+                /* height: 100; */
+                display: flex;
+                flex-direction: column;
+                overflow-y: scroll;
+                translate: calc(-100%) 0;
+                background: var(--color-light);
+                background-image: var(--texture-noise);
+                border-right: solid .5em var(--color-accent);
+                transition: translate .2s ease-in-out;
+                z-index: 10;
+
+                p:not(:first-of-type) {
+                    margin-top: .5em;
+                }
+
+                section {
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3em;
+                    padding: 1em;
+                    justify-content: space-between;
+                }
+
+                footer {
+                    background-color: var(--color-dark);
+                    background-image: var(--texture-noise);
+                    padding: 1em;
+                    font-size: var(--step--1);
+                }
+
+                button {
+                    position: absolute;
+                    top: 1em;
+                    z-index: 100;
+                    right: 1em;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40px' height='40px' viewbox='0 0 40 40'%3E%3Cpath d='M 10,10 L 30,30 M 30,10 L 10,30' stroke='white' stroke-width='4' stroke-linecap='butt' /%3E%3C/svg%3E");
+                    background-size: 100%;
+                    height: auto;
+                    aspect-ratio: 1 / 1;
+                    width: 1em;
+                }
+            }
+
+            &::backdrop {
+                opacity: 0;
+                transition: opacity .1s ease;
+                background-color: rgba(34, 34, 34, 0.7);
+                background-image: var(--texture-noise);
+
+                backdrop-filter: blur(5px);
+                /* opacity: .5; */
+            }
+
+            &[open] {
+                &, &::backdrop {
+                    opacity: 1;
+                }
+
+                & .dialog-sidebar {
+                    translate: 0;
+                    transform: translateX(0);
+                }
+
+                .experiment-notes-button {
+                    translate: 200px 0em;
+                }
+            }
+
+            @starting-style {
+                &[open],
+                &[open]::backdrop {
+                    opacity: 0;
+                }
+
+                &[open] > .dialog-sidebar {
+                    translate: -100% 0;
+                }
+            }
+        }
+
+        /* Settings Popover */
+        #settings {
+            position: fixed;
+            bottom: 1em;
+            right: 1em;
+            background-color: var(--color-light);
+            background-image: var(--texture-noise);
+            border: solid 2px var(--color-dark);
+            border-left: solid var(--color-accent) .25em;
+            box-shadow: -5px 5px 0px var(--color-dark-50);
+            /* border-radius: .25em; */
+            padding: 2em;
+        }
+
+        [popover] {
+            &, &::backdrop {
+                transition: display 0.5s allow-discrete,
+                overlay 0.5s allow-discrete,
+                opacity 0.5s,
+                transform 0.5s;
+
+                /* Exit Stage To */
+                opacity: 0;
+            }
+
+            /* On Stage */
+
+            &:popover-open {
+                opacity: 1;
+
+                &::backdrop {
+                    opacity: 0.5;
+                }
+            }
+
+            /* Enter Stage From */
+            @starting-style {
+                &:popover-open,
+                &:popover-open::backdrop {
+                    opacity: 0;
+                }
+
+                &:popover-open {
+                    transform: translateY(10px);
+                }
+            }
+
+            &::backdrop {
+                /* background-color: black; */
+            }
+        }
+
+        .credit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            margin: 0;
+            margin-top: .5em;
+            padding: 0;
+            list-style: none;
+
+            li {
+                display: flex;
+                flex-direction: column;
+
+                a {
+                    max-width: fit-content;
+                }
+
+                p {
+                    margin-top: .25em;
+                    font-size: var(--step--1);
+                }
+            }
+        }
+    </style>
+    <style>
+        @supports not selector(::scroll-marker) {
+            .headsup-supports {
+                display: flex;
+            }
+        }
+
+        .carousel {
+            position: relative;
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            scroll-snap-type: x mandatory;
+            scroll-snap-stop: always;
+            scroll-behavior: smooth;
+            display: grid;
+            grid-auto-columns: 100%;
+            grid-auto-flow: column;
+            gap: 1em;
+            padding: 1em;
+            inline-size: 700px;
+            background-color: var(--color-dark);
+            background-image: var(--texture-noise);
+            border: solid 2px var(--color-dark);
+            border-radius: 1em 0em 1em 1em;
+            box-shadow: var(--shadow-elevation-medium);
+            anchor-name: --carousel;
+            scroll-marker-group: after;
+
+            &::scroll-marker-group {
+                position: absolute;
+                position-anchor: --carousel;
+                position-area: y-start span-left;
+                display: grid;
+                grid-auto-flow: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0.75em;
+                padding: 1em 1em 0.25em 1em;
+                background: var(--color-dark-lighten);
+                background-image: var(--texture-noise);
+                border-radius: 1em 1em 0em 0em;
+                box-shadow: var(--shadow-elevation-medium);
+            }
+
+            & .card::scroll-marker {
+                content: attr(data-flag) / attr(data-flag-alt);
+                width: 1em;
+                aspect-ratio: 1 / 1;
+                cursor: pointer;
+                font-size: var(--step-2);
+                text-decoration: none;
+                opacity: 0.15;
+                transition: scale 0.2s var(--anim-thud-hard), opacity 0.1s ease-in-out;
+            }
+
+            & .card::scroll-marker:hover {
+                opacity: 0.8;
+            }
+
+            & .card::scroll-marker:target-current {
+                opacity: 1;
+                scale: 1.5;
+            }
+        }
+
+        .card {
+            position: relative;
+            overflow: hidden;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+            container-type: scroll-state;
+            display: flex;
+            flex-direction: column;
+            max-height: 350px;
+            border: solid 2px var(--color-dark-lighten);
+            border-radius: 0.5em;
+
+            h2 {
+                position: fixed;
+                position-anchor: --carousel;
+                position-area: top span-right;
+                translate: 0px 0px;
+                opacity: 1;
+                z-index: -1;
+                transition: opacity 0.1s ease-in-out,
+                translate 0.3s var(--anim-overshoot-soft);
+            }
+        }
+
+        .carousel-vertical {
+            position: relative;
+            overflow-y: auto;
+            overscroll-behavior-y: contain;
+            scroll-snap-type: y mandatory;
+            display: grid;
+            grid-auto-flow: row;
+            grid-auto-rows: 100%;
+            gap: 1em;
+            height: 100%;
+            border-radius: 0.5em;
+            anchor-name: --carousel-vertical;
+            scroll-marker-group: before;
+
+            &::scroll-marker-group {
+                position: absolute;
+                position-anchor: --carousel;
+                position-area: span-all span-right;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5em;
+                padding: 0.5em 0.4em 0.5em 0.4em;
+                z-index: 10;
+            }
+
+            & figure::scroll-marker {
+                content: " " / "test";
+                width: 0.75em;
+                aspect-ratio: 1 / 1;
+                cursor: pointer;
+                background-color: var(--color-light-50);
+                background-image: var(--texture-noise);
+                outline: 1px solid var(--color-dark-50);
+                outline-offset: 0px;
+                border-radius: 50%;
+                box-shadow: var(--shadow-elevation-medium);
+                transition: all 0.2s ease-in-out;
+            }
+
+            & figure::scroll-marker:target-current {
+                background-color: var(--color-accent);
+                outline-width: 2px;
+                outline-offset: -3px;
+                box-shadow: var(--shadow-elevation-high);
+                scale: 1.5;
+            }
+        }
+
+        figure {
+            position: relative;
+            scroll-snap-align: center;
+            scroll-snap-stop: always;
+            container-type: scroll-state;
+            width: 100%;
+            height: 100%;
+            margin: unset;
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
+
+            & img {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: bottom;
+                opacity: 1;
+                transition: opacity 0.5s ease-in-out;
+            }
+
+            & figcaption {
+                position: fixed;
+                position-anchor: --carousel;
+                position-area: bottom center;
+                width: 45ch;
+                max-width: 100%;
+                top: 0.5em;
+                text-align: center;
+                translate: 0px 0px;
+                opacity: 1;
+                transition: translate 0.2s ease-in-out, opacity 0.2s ease-in-out;
+            }
+        }
+
+        /* Scroll State Controls - This bit broke my brain 🤯 */
+        .carousel {
+            @container not scroll-state(snapped: x) {
+                interactivity: inert;
+
+                @container not scroll-state(snapped: inline) {
+                    interactivity: inert;
+
+                    & figure {
+                        opacity: 0;
+                    }
+                }
+
+                & h2 {
+                    translate: 0% 100px;
+                    opacity: 0;
+                }
+            }
+        }
+
+        .carousel-vertical {
+            @container not scroll-state(snapped: y) {
+                /* interactivity: ; */
+                & figcaption {
+                    opacity: 0;
+                    translate: 0px -100px;
+                }
+
+                & img {
+                    opacity: 0.1;
+                }
+            }
+        }
+
+    </style>
+</head>
+<body>
+<!-- Experiment Title & Support Check -->
+<div class="headsup-supports">
+    <p>🚨 This uses experimental CSS which isn't supported by your browser yet 🚨</p>
+    <ul>
+        <li><code>::scroll-marker</code> , from Chrome 135. Please visit this blog article on <a
+                href="https://developer.chrome.com/blog/carousels-with-css" rel="noopener noreferrer" target="_blank">Carousels
+            with CSS</a> to learn more.
+        </li>
+        <li><code>position-anchor</code> , from Chrome 125. <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/position-anchor" rel="noopener noreferrer"
+                target="_blank">MDN Docs</a> to learn more.
+        </li>
+    </ul>
+</div>
+
+<header>
+    <h1>CSS Carousel Spec - Photo Gallery</h1>
+    <p>Entry for CodePenChallenge April #3, 2025 - Card Carousel</p>
+</header>
+<!-- Experiment Title & Support Check -->
+
+<!-- Experiment Start -->
+<main>
+    <div class="carousel">
+        <div class="card" data-flag="🇮🇸" data-flag-alt="Flag of Iceland">
+            <h2>Iceland</h2>
+            <div class="carousel-vertical">
+                <figure>
+                    <img alt="A steel ship rusting away on a beach, with a mountain rising up behind it."
+                         src="https://assets.codepen.io/2153413/iceland1.jpg">
+                    <figcaption>Garðar BA 64, shipwrecked in the Westfjords of Iceland. This steel ship dates back to
+                        1912.
+                    </figcaption>
+                </figure>
+                <figure>
+                    <img alt="A curved waterfall split into three. The sky is grey with a thick cloud."
+                         src="https://assets.codepen.io/2153413/iceland2.jpg">
+                    <figcaption>Goðafoss, A 12m curved waterfall in the North of the country.</figcaption>
+                </figure>
+                <figure>
+                    <img alt="The pride rainbow colours painted in a long strip along a street, with shops on either side."
+                         src="https://assets.codepen.io/2153413/iceland3.jpg">
+                    <figcaption>Skólavörðustígur Rainbow Street, Reykjavík.</figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="card" data-flag="🇭🇰" data-flag-alt="Flag of Hong Kong">
+            <h2>Hong Kong</h2>
+            <div class="carousel-vertical">
+                <figure>
+                    <img alt="A deep orange sun setting, with a hazy sky. There are a few boats in the water."
+                         src="https://assets.codepen.io/2153413/hongkong1.jpg">
+                    <figcaption>Looking out towards Lantau Island as the sun sets, from Cheung Chau Island.</figcaption>
+                </figure>
+                <figure>
+                    <img alt="A stone path with steps up ahead, passing through a forest."
+                         src="https://assets.codepen.io/2153413/hongkong2.jpg">
+                    <figcaption>Hiking through a trail at Pat Sin Leng Country Park 🥾</figcaption>
+                </figure>
+                <figure>
+                    <img alt="Bamboo poles being used to create a structure for an event. "
+                         src="https://assets.codepen.io/2153413/hongkong3.jpg">
+                    <figcaption>Bamboo scaffolding being setup ahead of an event in Fanling Wai.</figcaption>
+                </figure>
+                <figure>
+                    <img alt="A variety of fishing trawlers mored up to wooden platforms,"
+                         src="https://assets.codepen.io/2153413/hongkong4.jpg">
+                    <figcaption>Trawlers moored up in the fishing town of Tai O.</figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="card" data-flag="🇸🇪" data-flag-alt="Flag of Sweden">
+            <h2>Sweden</h2>
+            <figure>
+                <img alt="Tree covered low-laying islands scattered in the water, viewed from a rocky and tree covered high vantage point."
+                     src="https://assets.codepen.io/2153413/sweden1.jpg">
+                <figcaption>View from the top of Skuleskogen National Park, along the coast of the Baltic Sea.
+                </figcaption>
+            </figure>
+        </div>
+        <div class="card" data-flag="🇵🇹" data-flag-alt="Flag of Portugal">
+            <h2>Portugal</h2>
+            <div class="carousel-vertical">
+                <figure>
+                    <img alt="Rocky cliffs around the ended, with the atlantic ocean off into the horizon. The sky is clear."
+                         src="https://assets.codepen.io/2153413/portugal1.jpg">
+                    <figcaption>Looking out at the Atlantic Ocean from the cliffs near Cascais.</figcaption>
+                </figure>
+                <figure>
+                    <img alt="A lush and varied vegitation found within a roofed botanical garden. There is a stone path in the middle that leads of to different parts of the building."
+                         src="https://assets.codepen.io/2153413/portugal2.jpg">
+                    <figcaption>Estufa Fria botanical garden in Lisbon.</figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="card" data-flag="🇳🇴" data-flag-alt="Flag of Norway">
+            <h2>Norway</h2>
+            <div class="carousel-vertical">
+                <figure>
+                    <img alt="A fully wooden Stave church and graveyard. The sky is mostly clear and blue, with a tree covered hill in the background."
+                         src="https://assets.codepen.io/2153413/norway1.jpg">
+                    <figcaption>Heddal Stave Church, The largest stave church in Norway which is constructed entirely
+                        out of wood.
+                    </figcaption>
+                </figure>
+                <figure>
+                    <img alt="Houses on stilts, against the edge of a river. The houses are wooden and of various colours."
+                         src="https://assets.codepen.io/2153413/norway2.jpg">
+                    <figcaption>Colourful houses along the Nidelva River in Trondheim.</figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Experiment End -->
+
+<!-- Lab Notes & Settings -->
+<div class="button-stack">
+    <button class="experiment-notes-button" onclick="experimentDialog.showModal()">About</button>
+</div>
+
+<dialog class="experiment-notes" closedby="any" id="experimentDialog">
+    <div class="dialog-sidebar">
+        <button onclick="experimentDialog.close()"></button>
+        <section>
+            <article>
+                <h2>About</h2>
+                <p>Recently I was looking at the <a href="https://chrome.dev/carousel/" rel="noopener noreferrer"
+                                                    target="_blank">CSS Carousel Gallery</a> site by <a
+                        href="https://nerdy.dev/" rel="noopener noreferrer" target="_blank">Adam Argyle</a>, and figured
+                    now would be as good a time as any to give this new CSS feature a spin.</p>
+                <p>I figured you can't go wrong with a photo gallery right? The primary thing I wanted to build out was
+                    a two-way carousel, a carousel-within-a-carousel... Per-country collections make up the
+                    horizontal-carousel, and a vertical-carousel for photos within that set. Say carousel one more time
+                    🙃.</p>
+                <p>Another thing I got to experiment with was <code>position-anchor</code> and
+                    <code>position-area</code>, which allows us to link and position an element separate to it's parent
+                    container. This was very cool!</p>
+
+                <h3>Any Problems?</h3>
+                <p>I ran into a bit of a wall when it came to dropping the opacity for the next card.</p>
+                <p>I wanted the image to have around .2 opacity, while fully hiding the location title and description.
+                    I ended up in a rats nest of selectors trying to target it, to then only break the vertical-carousel
+                    in some way 😅.</p>
+                <p>I also ended up breaking the natural fall-back for browsers that don't support these features yet,
+                    well, kinda. The scrolling still works - but the text ends up in all the wrong places. With a bit of
+                    extra work I could probably improve the non-supporting browsers, but for now I'm just sticking up a
+                    warning banner.</p>
+                <p>While I think there are a lot of cool things to be achieved with CSS Carousels... This probably isn't
+                    one of them. While fun to do and to push the limits a bit, I wouldn't recommend implementing
+                    something like this for a photo gallery. Its overly clunky, and it's not a particularly good way to
+                    view the images either.</p>
+                <p>I'm happy I got to test it though.</p>
+            </article>
+            <article>
+                <h2>Credits</h2>
+                <ul class="credit-list">
+                    <li>
+                        <a href="https://nerdy.dev/" rel="noopener noreferrer" target="_blank">Adam Argyle</a>
+                        <p>This <a href="https://developer.chrome.com/blog/carousels-with-css" rel="noopener noreferrer"
+                                   target="_blank">blog post</a> explaining the new feature set.</p>
+                        <p>The amazing <a href="https://chrome.dev/carousel/" rel="noopener noreferrer" target="_blank">CSS
+                            Carousel Gallery</a>, full of cool demos that showcase the capabilities of CSS Carousels.
+                        </p>
+                    </li>
+                    <li>
+                        <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"
+                           rel="noopener noreferrer" target="_blank">MDN Web Docs</a>
+                        <p>Used throughout when I got stuck, but it was especially handy when I wanted to better
+                            understand <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_anchor_positioning"
+                                          rel="noopener noreferrer" target="_blank">CSS anchor positioning</a>.</p>
+                    </li>
+                </ul>
+            </article>
+        </section>
+        <footer>
+            <p>April 2025, Christian Alder</p>
+            <p><a href="https://bsky.app/profile/hejchristian.com" rel="noopener noreferrer" target="_blank">Bluesky</a>
+                | <a href="https://mastodon.social/@hejchristian" rel="noopener noreferrer" target="_blank">Mastodon</a>
+            </p>
+        </footer>
+    </div>
+</dialog>
+<!-- Lab Notes & Settings -->
+
+<script>
+    experimentDialog.addEventListener("click", ({target: dialog}) => {
+        if (dialog.nodeName === "DIALOG") {
+            dialog.close("dismiss");
+        }
+    });
+</script>
+</body>
+</html>

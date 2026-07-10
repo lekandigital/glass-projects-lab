@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chromatic Aberration Effect</title>
+
+    <style>
+        body {
+            display: grid;
+            margin: 0;
+            height: 100vh;
+            background: #000;
+        }
+
+        div {
+            grid-area: 1/1;
+        }
+
+        .tri {
+            --s: 1;
+            display: grid;
+            place-self: center;
+            transform: rotate(calc(var(--k) * 1turn)) translatey(calc(3em + 8px));
+        }
+
+        .tri:nth-child(2n) {
+            --s: -1;
+        }
+
+        @keyframes s {
+            to {
+                scale: 0;
+            }
+        }
+
+        @keyframes r {
+            to {
+                rotate: calc(var(--oa) + var(--s) * 1turn / 3);
+            }
+        }
+
+        .lyr {
+            --o: calc(var(--c) - .5 * (var(--m) - 1));
+            --oa: calc(var(--o) * 5deg);
+            padding: 3em;
+            rotate: var(--oa);
+            background: currentcolor;
+            color: hsl(calc(var(--c) / var(--m) * 360), 100%, 50%);
+            clip-path: polygon(50% 0%, 93.30127% 75%, 6.69873% 75%);
+            mix-blend-mode: screen;
+            animation: s 1s ease-in infinite alternate, r 2s cubic-bezier(calc(.75 + var(--o) * .1), 0, calc(.25 - var(--o) * .1), 1) infinite;
+            animation-delay: calc(var(--k) * -2 * 1s);
+        }
+
+        @supports (background: conic-gradient(red, tan)) {
+            .lyr {
+                background: conic-gradient(from 150deg at 50% 0, currentcolor 0% 60deg, transparent 0);
+            }
+        }
+    </style>
+</head>
+<body>
+<style>body { --m: 3 }.lyr:nth-child(1) { --c: 0 }.lyr:nth-child(2) { --c: 1 }.lyr:nth-child(3) { --c: 2 }
+</style>
+<div class="tri" style="--k: 0">
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+</div>
+<div class="tri" style="--k: 0.167">
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+</div>
+<div class="tri" style="--k: 0.333">
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+</div>
+<div class="tri" style="--k: 0.5">
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+</div>
+<div class="tri" style="--k: 0.667">
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+</div>
+<div class="tri" style="--k: 0.833">
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+    <div class="lyr"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Drag separator image color</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300..700&family=Victor+Mono:wght@100..700&display=swap"
+          rel="stylesheet">
+    <style>
+        * {
+            box-sizing: inherit;
+            margin: 0;
+            padding: 0;
+            color: inherit;
+            font: inherit;
+        }
+
+        html, body, figure, div {
+            display: grid;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            --hl: 0;
+            grid-template-rows: 1fr auto;
+            container-type: inline-size;
+            background: #22242a;
+            color: #7b849c;
+            font: round(clamp(0.75em, 2.5vmin, 1.25em), 1px)/1.25 jura, trebuchet ms, sans-serif;
+        }
+
+        svg {
+            position: fixed;
+        }
+
+        figure, [type=range] {
+            --r: 5/ 3;
+            --w: min(100cqw - 3em - .5em, 1200px);
+            grid-area: 1/1;
+            place-self: center;
+        }
+
+        figure {
+            width: var(--w);
+            filter: url(#comp) drop-shadow(2px 2px 5px #000);
+        }
+
+        img {
+            width: 100%;
+            aspect-ratio: var(--r);
+            object-fit: cover;
+            object-position: 50% 41%;
+            mask: linear-gradient(90deg, red calc(var(--p) * 1%), rgba(0, 0, 0, 0.5) 0);
+        }
+
+        [type=range] {
+            /* allow styling in WebKit browsers */
+        }
+
+        [type=range], [type=range]::-webkit-slider-thumb {
+            appearance: none;
+        }
+
+        [type=range] {
+            /* position of thumb vertical midline */
+            --pos: calc(1.5em +
+            var(--p) / 100 * (100% - 3em));
+            /* ensure it's on top of figure; without z-index,
+             * its thumb shows up on top of the figure element...
+             * but its background is painted underneath 🙀 */
+            z-index: 1;
+            width: calc(var(--w) + 3em);
+            height: calc(var(--w) / (var(--r)));
+            opacity: calc(1 - 0.625 * (1 - var(--hl)));
+            /* vertical split line coincides with thumb vertical midline */
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0) calc(var(--pos) - 0.5 * 2px), currentcolor 0 calc(var(--pos) + 0.5 * 2px), rgba(0, 0, 0, 0) 0) 0 0/100% calc(50% - 1.5em) space;
+            color: #ededed;
+            /* some kind of :hover/ :focus extra style */
+            filter: drop-shadow(1px 0 2px rgba(0, 0, 0, var(--hov, 1)));
+            /* allow click through to images & right click context menu */
+            pointer-events: none;
+            /* style thumb cross-browser */
+        }
+
+        [type=range]::-webkit-slider-thumb {
+            /* full area coverage gradient */
+            --full: linear-gradient(red 0 0);
+            /* set explicitly as it's content-box in Firefox &
+             * we want border & padding subtracted from dims */
+            box-sizing: border-box;
+            /* highlight thumb boundary */
+            border: solid 2px currentcolor;
+            /* create space between lateral ◀ ▶ tips & border */
+            /* precisely ½ of width of a background-size
+             * rectangle minus a border width */
+            padding: calc(0.63em + -1 * 2px);
+            /* set both width & height to same value here as
+             * aspect-ratio fails in Firefox for slider thumbs */
+            width: 3em;
+            height: 3em;
+            border-radius: 50%; /* make round */
+            background: repeating-conic-gradient(from 60deg, currentcolor 0% 60deg, rgba(0, 0, 0, 0) 0% 50%) 0/42% space border-box;
+            /* mask out padding area containing half backgrounds
+             * not covered by border; border area + content-box
+             * remain visible; out of the ▶◀ ▶◀ bg pattern,
+             * the outer triangles are masked out, leaving ◀ ▶ */
+            mask: var(--full) content-box, var(--full) padding-box exclude, var(--full);
+            /* make it clickable as slider was made unclickable
+             * to allow for click through to images and context
+             * menu on them */
+            pointer-events: auto;
+            /* proper resize cursor */
+            cursor: ew-resize;
+        }
+
+        [type=range]::-moz-range-thumb {
+            /* full area coverage gradient */
+            --full: linear-gradient(red 0 0);
+            /* set explicitly as it's content-box in Firefox &
+             * we want border & padding subtracted from dims */
+            box-sizing: border-box;
+            /* highlight thumb boundary */
+            border: solid 2px currentcolor;
+            /* create space between lateral ◀ ▶ tips & border */
+            /* precisely ½ of width of a background-size
+             * rectangle minus a border width */
+            padding: calc(0.63em + -1 * 2px);
+            /* set both width & height to same value here as
+             * aspect-ratio fails in Firefox for slider thumbs */
+            width: 3em;
+            height: 3em;
+            border-radius: 50%; /* make round */
+            background: repeating-conic-gradient(from 60deg, currentcolor 0% 60deg, rgba(0, 0, 0, 0) 0% 50%) 0/42% space border-box;
+            /* mask out padding area containing half backgrounds
+             * not covered by border; border area + content-box
+             * remain visible; out of the ▶◀ ▶◀ bg pattern,
+             * the outer triangles are masked out, leaving ◀ ▶ */
+            mask: var(--full) content-box, var(--full) padding-box exclude, var(--full);
+            /* make it clickable as slider was made unclickable
+             * to allow for click through to images and context
+             * menu on them */
+            pointer-events: auto;
+            /* proper resize cursor */
+            cursor: ew-resize;
+        }
+
+        figure:hover + [type=range], [type=range]:hover, [type=range]:focus {
+            --hl: 1;
+        }
+
+        [type=range]:focus {
+            outline: none;
+        }
+
+        [role=group] {
+            grid-template-columns: auto 1fr;
+            grid-gap: 0.5rem 0.75em;
+            padding: 0.5em;
+            background: #1b1d22;
+        }
+
+        [id=lbl] {
+            grid-area: 1/1/span 2;
+            rotate: 0.5turn;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-weight: 600;
+        }
+
+        code {
+            --prc: calc(var(--hl) * 100%);
+            grid-column: 2;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            font-family: victor mono, ubuntu mono, consolas, monaco, monospace;
+        }
+
+        code:last-child::after {
+            display: inline-block;
+            padding-left: 1ch;
+            content: " /* complementary */";
+        }
+
+        code:hover, code:focus-within {
+            --hl: 1;
+        }
+
+        label, output {
+            color: color-mix(in srgb, var(--c, #f5886b) var(--prc), currentcolor);
+        }
+
+        [type=color] {
+            margin: 0 0.25em;
+            border: solid 1px currentcolor;
+            width: 1lh;
+            height: 1lh;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0);
+            color: rgba(170, 170, 170, var(--hl));
+            filter: drop-shadow(2px 2px 5px #000);
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        [type=color]::-webkit-color-swatch-wrapper {
+            padding: 3px;
+        }
+
+        [type=color]::-webkit-color-swatch {
+            border: solid 1px currentcolor;
+            border-radius: 50%;
+        }
+
+        [type=color]::-moz-color-swatch {
+            border: solid 1px currentcolor;
+            border-radius: 50%;
+        }
+
+        [type=color]:focus {
+            outline: none;
+        }
+
+        output {
+            --c: #f1c972;
+        }
+
+        output::after {
+            content: ";";
+        }
+
+        /*# sourceMappingURL=style.css.map */
+    </style>
+</head>
+<body style="--p: 50">
+<svg aria-hidden="true" height="0" width="0">
+    <filter color-interpolation-filters="sRGB" height="1" id="comp" width="1" x="0" y="0">
+        <feComponentTransfer result="full">
+            <feFuncA tableValues="1" type="discrete"></feFuncA>
+        </feComponentTransfer>
+        <feColorMatrix values="0 0  0 0 0
+		                      0 0  0 0 0
+													0 0  0 0 0
+												  4 1 -6 0 0"></feColorMatrix>
+        <feComponentTransfer result="leaf">
+            <feFuncA tableValues="0 0 0 1 1" type="table"></feFuncA>
+        </feComponentTransfer>
+        <feFlood flood-color="var(--c0)" result="red"></feFlood>
+        <feBlend in="full" mode="luminosity"></feBlend>
+        <feComposite in2="leaf" operator="in" result="face"></feComposite>
+        <feFlood flood-color="white"></feFlood>
+        <feBlend in="red" mode="exclusion"></feBlend>
+        <feBlend in="full" mode="luminosity"></feBlend>
+        <feBlend in="face" result="comp"></feBlend>
+        <feComponentTransfer in="SourceGraphic">
+            <feFuncA tableValues="0 1 0" type="discrete"></feFuncA>
+        </feComponentTransfer>
+        <feComposite in="comp" operator="in"></feComposite>
+        <feBlend in2="full"></feBlend>
+    </filter>
+</svg>
+<figure><img
+        src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+</figure>
+<input id="p" type="range"/>
+<div aria-labelledby="lbl" role="group">
+    <div id="lbl">palette</div>
+    <code class="c"><label for="c0">--c0:</label><input id="c0" type="color" value="#00cf00"/>
+        <output for="c0">rgb(0, 207, 0)</output>
+    </code><code class="c"><label for="c1">--c1:</label><input id="c1" type="color" value="#ff30ff"/>
+    <output for="c1">rgb(255, 48, 255)</output>
+</code></div>
+
+<script>
+    const S = document.body.style;
+
+    function hex2rgb(hex) {
+        return hex.slice(1).split(/(?=(?:..)*$)/).map(c => parseInt(c, 16))
+    }
+
+    function rgb2hex(rgb) {
+        return `#${rgb.map(c => c.toString(16).padStart(2, '0')).join('')}`
+    }
+
+    function setValue(v, i) {
+        S.setProperty(`--c${i}`, document.querySelector(`output[for='c${i}']`).textContent = `rgb(${v.join(', ')})`)
+    }
+
+    function updatePalette(_e) {
+        let i = +_e.id[1], v = hex2rgb(_e.value);
+
+        setValue(v, i);
+        document.getElementById(`c${i = 1 - i}`).value = rgb2hex(v = v.map(c => 255 - c));
+        setValue(v, i);
+    }
+
+    addEventListener('input', e => {
+        let _t = e.target;
+
+        switch (_t.type) {
+            case 'color':
+                updatePalette(_t);
+                break;
+            case 'range':
+                S.setProperty(`--${_t.id}`, +_t.value);
+                break
+        }
+    });
+
+    updatePalette(document.getElementById('c0'))
+</script>
+</body>
+</html>

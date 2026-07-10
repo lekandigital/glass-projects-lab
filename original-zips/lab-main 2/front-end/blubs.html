@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blubs</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    // speed coded
+    const canvas = document.createElement('canvas')
+    const c = canvas.getContext('2d')
+
+    canvas.width = innerWidth
+    canvas.height = innerHeight
+    document.body.append(canvas)
+
+    const r = n => Math.random() * n
+    let HAS_HIT = false
+
+    function wob(idx, sx, sy) {
+        let x = r(innerWidth)
+        let vx = r(2) - 1
+        let vy = -(r(10) + 1)
+        let grav = 0.01 + Math.random() * 0.1
+        let points = []
+        let rez = 100
+        let step = (Math.PI * 2) / rez
+        let t = 0
+        let rad = r(50) + 50
+        let y = innerHeight + rad + 20
+        let col = ~~(r(105) + 150)
+        let colR = col
+        let colD = col
+
+        let rinc = r(.02) - .01
+        let rot = 0
+
+        if (sx) {
+            x = sx
+            let tt = r(7)
+            vx = Math.cos(tt) * 3
+            vy = Math.sin(tt) * 3
+            rad *= r(0.4) + 0.1
+        }
+        if (sy) y = sy
+
+        for (let i = 0; i < rez; i++) {
+            let spikes = r(10) + 2
+            let R = rad + spikes
+            points.push([Math.cos(t) * R, Math.sin(t) * R])
+            t += step
+        }
+
+        return {
+            draw() {
+                x += vx
+                y += vy
+                vy += grav
+
+                if (y > innerHeight + rad + 20) {
+                    if (r(1) < .5) {
+                        ws[idx] = {
+                            draw() {
+                            }
+                        }
+                    }
+                    ws[idx] = wob(idx)
+
+                }
+
+                const dx = mx - x
+                const dy = my - y
+                const dst = Math.sqrt(dx * dx + dy * dy)
+
+                c.save()
+                c.strokeStyle = '#444'
+                c.fillStyle = `rgb(${colR}, ${col}, ${col})`
+                colR += (colD - colR) / 12
+
+                if (dst < rad) {
+                    colD = 255
+                    HAS_HIT = true
+                    if (down) {
+                        ws[idx] = {
+                            draw() {
+                            }
+                        }
+                        let num = ~~(3 + r(10))
+                        requestAnimationFrame(() => {
+                            for (let i = 0; i < num; i++) {
+                                ws.push(wob(ws.length, x, y))
+                            }
+                        });
+                        down = false;
+                    }
+                }
+
+                c.translate(x, y)
+                c.rotate(rot)
+                rot += rinc
+                c.beginPath()
+                for (let i = 0; i < rez; i++) {
+                    let pnt = points[i]
+                    if (i === 0) {
+                        c.moveTo(pnt[0], pnt[1])
+                    } else {
+                        c.lineTo(pnt[0], pnt[1])
+                    }
+                }
+                c.closePath()
+                c.fill()
+                c.stroke()
+                c.restore()
+            }
+        }
+    }
+
+    let ws = []
+    const NUM = 10
+    for (let i = 0; i < NUM; i++) {
+        ws.push(wob(i))
+    }
+
+    let mx = 0,
+        my = 0,
+        down = false
+
+    onpointerdown = e => {
+        down = true
+    }
+    onpointermove = e => {
+        mx = e.clientX
+        my = e.clientY
+    }
+    onpointerup = e => {
+        down = false
+    }
+
+    onresize = e => {
+        canvas.width = innerWidth
+        canvas.height = innerHeight
+        c.fillStyle = 'rgba(0, 0, 0, 1)'
+        c.fillRect(0, 0, innerWidth, innerHeight)
+    }
+
+    function loop() {
+        c.fillStyle = 'rgba(0, 0, 0, 0.1)'
+        c.fillRect(0, 0, innerWidth, innerHeight)
+
+        for (let i = 0; i < ws.length; i++) {
+            ws[i].draw()
+        }
+
+        document.body.style.cursor = HAS_HIT ? 'pointer' : ''
+        HAS_HIT = false
+
+        requestAnimationFrame(loop)
+    }
+
+    loop()
+</script>
+</body>
+</html>
