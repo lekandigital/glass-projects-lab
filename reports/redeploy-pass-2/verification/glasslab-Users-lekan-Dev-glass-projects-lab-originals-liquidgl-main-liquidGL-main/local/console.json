@@ -1,0 +1,126 @@
+[
+  {
+    "type": "debug",
+    "text": "#1 0ms Starting document clone with size 1440x900 scrolled to 0,0"
+  },
+  {
+    "type": "log",
+    "text": "liquidGL ready! liquidGLLens"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x13c00532400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x13c0053a200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x13c0053a200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x13c0053a200]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  },
+  {
+    "type": "debug",
+    "text": "#1 102ms Document cloned, element located at 0,0 with size 1440x5366 using computed rendering"
+  },
+  {
+    "type": "debug",
+    "text": "#1 102ms Starting DOM parsing"
+  },
+  {
+    "type": "debug",
+    "text": "#1 109ms Added image data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22currentColor%22%20style%3D%22transition%3A%20all%3B%20--fg%3A%20%23333%3B%20--bg%3A%20%23f0f0f0%3B%20-webkit-writing-mode%3A%20hori"
+  },
+  {
+    "type": "debug",
+    "text": "#1 111ms Added image http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp"
+  },
+  {
+    "type": "debug",
+    "text": "#1 113ms Added image data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22currentColor%22%20style%3D%22transition%3A%20all%3B%20--fg%3A%20%23333%3B%20--bg%3A%20%23f0f0f0%3B%20-webkit-writing-mode%3A%20hori"
+  },
+  {
+    "type": "debug",
+    "text": "#1 118ms Added image data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22currentColor%22%20style%3D%22transition%3A%20all%3B%20--fg%3A%20%23333%3B%20--bg%3A%20%23f0f0f0%3B%20-webkit-writing-mode%3A%20hori"
+  },
+  {
+    "type": "debug",
+    "text": "#1 119ms Added image http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp"
+  },
+  {
+    "type": "debug",
+    "text": "#1 120ms Added image data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22currentColor%22%20style%3D%22transition%3A%20all%3B%20--fg%3A%20%23333%3B%20--bg%3A%20%23f0f0f0%3B%20-webkit-writing-mode%3A%20hori"
+  },
+  {
+    "type": "debug",
+    "text": "#1 120ms Added image http://localhost:7466/assets/naughtyduk-logo.svg"
+  },
+  {
+    "type": "debug",
+    "text": "#1 120ms Starting renderer for element at 0,0 with size 1440x5366"
+  },
+  {
+    "type": "debug",
+    "text": "#1 120ms Canvas renderer initialized (1440x5366) with scale NaN"
+  },
+  {
+    "type": "debug",
+    "text": "#1 172ms Finished rendering"
+  },
+  {
+    "type": "debug",
+    "text": "#2 0ms Starting document clone with size 1440x900 scrolled to 0,0"
+  },
+  {
+    "type": "debug",
+    "text": "#2 76ms Document cloned, element located at 0,0 with size 1440x5366 using computed rendering"
+  },
+  {
+    "type": "debug",
+    "text": "#2 76ms Starting DOM parsing"
+  },
+  {
+    "type": "debug",
+    "text": "#2 77ms Added image data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22currentColor%22%20style%3D%22transition%3A%20all%3B%20--fg%3A%20%23333%3B%20--bg%3A%20%23f0f0f0%3B%20-webkit-writing-mode%3A%20hori"
+  },
+  {
+    "type": "debug",
+    "text": "#2 78ms Added image http://localhost:7466/assets/liquid-bkg-_0001_Comp-183.webp"
+  },
+  {
+    "type": "debug",
+    "text": "#2 80ms Added image data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22currentColor%22%20style%3D%22transition%3A%20all%3B%20--fg%3A%20%23333%3B%20--bg%3A%20%23f0f0f0%3B%20-webkit-writing-mode%3A%20hori"
+  },
+  {
+    "type": "debug",
+    "text": "#2 85ms Added image data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22currentColor%22%20style%3D%22transition%3A%20all%3B%20--fg%3A%20%23333%3B%20--bg%3A%20%23f0f0f0%3B%20-webkit-writing-mode%3A%20hori"
+  },
+  {
+    "type": "debug",
+    "text": "#2 85ms Added image http://localhost:7466/assets/liquid-bkg-_0002_Comp-163.webp"
+  },
+  {
+    "type": "debug",
+    "text": "#2 86ms Added image data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22currentColor%22%20style%3D%22transition%3A%20all%3B%20--fg%3A%20%23333%3B%20--bg%3A%20%23f0f0f0%3B%20-webkit-writing-mode%3A%20hori"
+  },
+  {
+    "type": "debug",
+    "text": "#2 86ms Added image http://localhost:7466/assets/naughtyduk-logo.svg"
+  },
+  {
+    "type": "debug",
+    "text": "#2 87ms Starting renderer for element at 0,0 with size 1440x5366"
+  },
+  {
+    "type": "debug",
+    "text": "#2 102ms Canvas renderer initialized (1440x5366) with scale 1.52664927320164"
+  },
+  {
+    "type": "debug",
+    "text": "#2 141ms Finished rendering"
+  }
+]

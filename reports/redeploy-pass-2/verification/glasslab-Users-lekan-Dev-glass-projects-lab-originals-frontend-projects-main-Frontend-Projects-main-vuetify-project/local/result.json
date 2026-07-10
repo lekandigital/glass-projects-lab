@@ -1,0 +1,8 @@
+{
+  "projectId": "glasslab-Users-lekan-Dev-glass-projects-lab-originals-frontend-projects-main-Frontend-Projects-main-vuetify-project",
+  "isProduction": false,
+  "success": false,
+  "reason": "Page errors: Failed to resolve module specifier \"@/plugins\". Relative references must start with either \"/\", \"./\", or \"../\".",
+  "diffScore": 0,
+  "timestamp": "2026-07-10T05:39:55.913Z"
+}

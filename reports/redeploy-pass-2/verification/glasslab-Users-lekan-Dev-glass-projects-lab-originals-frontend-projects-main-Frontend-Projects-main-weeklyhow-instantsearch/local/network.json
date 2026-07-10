@@ -1,0 +1,14 @@
+[
+  {
+    "url": "http://localhost:4379/",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:4379/src/index.tsx",
+    "status": 200
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/instantsearch.css@8/themes/satellite-min.css",
+    "status": 200
+  }
+]

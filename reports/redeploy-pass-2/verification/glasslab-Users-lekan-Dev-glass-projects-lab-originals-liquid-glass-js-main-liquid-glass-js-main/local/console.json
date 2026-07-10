@@ -1,0 +1,74 @@
+[
+  {
+    "type": "log",
+    "text": "Capturing page snapshot..."
+  },
+  {
+    "type": "debug",
+    "text": "#1 0ms Starting document clone with size 1440x900 scrolled to 0,0"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x10c004dc600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x10c004dea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x10c004dea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+  },
+  {
+    "type": "warning",
+    "text": "[.WebGL-0x10c004dea00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+  },
+  {
+    "type": "debug",
+    "text": "#1 304ms Document cloned, element located at 0,0 with size 1440x5230 using computed rendering"
+  },
+  {
+    "type": "debug",
+    "text": "#1 304ms Starting DOM parsing"
+  },
+  {
+    "type": "debug",
+    "text": "#1 319ms Added image https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=300&fit=crop"
+  },
+  {
+    "type": "debug",
+    "text": "#1 320ms Added image https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop"
+  },
+  {
+    "type": "debug",
+    "text": "#1 321ms Added image https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&h=400&fit=crop"
+  },
+  {
+    "type": "debug",
+    "text": "#1 321ms Added image https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop"
+  },
+  {
+    "type": "debug",
+    "text": "#1 321ms Added image https://images.unsplash.com/photo-1511884642898-4c92249e20b6?w=800&h=400&fit=crop"
+  },
+  {
+    "type": "debug",
+    "text": "#1 322ms Added image https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=400&fit=crop"
+  },
+  {
+    "type": "debug",
+    "text": "#1 328ms Starting renderer for element at 0,0 with size 1440x5230"
+  },
+  {
+    "type": "debug",
+    "text": "#1 331ms Canvas renderer initialized (1440x5230) with scale 1"
+  },
+  {
+    "type": "debug",
+    "text": "#1 363ms Finished rendering"
+  },
+  {
+    "type": "log",
+    "text": "Page snapshot captured"
+  }
+]

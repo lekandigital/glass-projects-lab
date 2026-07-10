@@ -1,0 +1,8 @@
+{
+  "projectId": "glasslab-Users-lekan-Dev-glass-projects-lab-originals-liquidgl-main-liquidGL-main",
+  "isProduction": false,
+  "success": false,
+  "reason": "Navigation or execution failed: page.goto: Timeout 15000ms exceeded.\nCall log:\n  - navigating to \"http://localhost:7466/\", waiting until \"networkidle\"\n",
+  "diffScore": 0,
+  "timestamp": "2026-07-10T05:39:24.344Z"
+}

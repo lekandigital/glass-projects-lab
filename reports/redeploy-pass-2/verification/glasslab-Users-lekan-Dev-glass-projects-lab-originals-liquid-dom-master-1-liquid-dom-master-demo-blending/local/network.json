@@ -1,0 +1,10 @@
+[
+  {
+    "url": "http://localhost:5480/",
+    "status": 200
+  },
+  {
+    "url": "http://localhost:5480/src/main.tsx",
+    "status": 200
+  }
+]
