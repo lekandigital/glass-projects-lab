@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cosine Squiggles</title>
+
+    <style>
+        :root {
+
+        }
+
+        html * {
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            background-color: #222;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        canvas#squiggles {
+            /*   outline: 1px solid lime; */
+        }
+
+        #legend {
+            position: fixed;
+            left: 1rem;
+            top: 1rem;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        button {
+            padding: 0.5rem 1.25rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: .5rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<canvas id="squiggles"></canvas>
+<div id="legend">
+    <h2>Total squiggles: <span id="total-squiggles"></span></h2>
+    <button onclick="addSquiggle();">Add Squiggle</button>
+</div>
+
+<script>
+    console.clear();
+
+    const canvas = $('canvas#squiggles');
+    const ctx = canvas.getContext('2d');
+
+    resizeCanvas();
+
+    const STARTING_SQUIGGLES = 5;
+    let SPEED = 2;
+    let SIZE = 10;
+
+    let buttonHue = 0;
+
+    let squiggles = [];
+
+    for (let i = 0; i < STARTING_SQUIGGLES; i++) {
+        addSquiggle();
+    }
+
+    function animate() {
+        ctx.fillStyle = '#11111102';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        squiggles.forEach(s => {
+            // console.log(canvas.width, s.x, s.size);
+            s.h = getSquiggleColor(s.y);
+            s.color = `hsl(${s.h}, ${s.s}%, ${s.l}%)`;
+            if (s.x - s.size > canvas.width) {
+                s.x = s.size * -1;
+                s.y = Math.floor(Math.random() * canvas.height);
+                if (s.y > canvas.height) {
+                    s.y = s.size * -1;
+                }
+            } else {
+                s.x += s.speed;
+            }
+            s.y += Math.cos(s.radians * 0.1) * 2;
+            s.radians += s.oscillation;
+            drawSquiggle(s);
+        })
+
+        updateButtonColor();
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    addEventListener('resize', resizeCanvas);
+
+    function updateButtonColor() {
+        buttonHue++;
+        const buttonColor = `hsl(${buttonHue}, 75%, 60%)`;
+        $('button').style.backgroundColor = buttonColor;
+    }
+
+    function getSquiggleColor(y) {
+        return Math.floor(y / (canvas.height / 100)) * 3.6;
+    }
+
+    function drawSquiggle(s) {
+        ctx.beginPath();
+        ctx.fillStyle = s.color;
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+    }
+
+    function addSquiggle() {
+        const x = -25;
+        const y = Math.random() * canvas.height
+        const h = getSquiggleColor(y);
+        const s = Math.floor(Math.random() * 15 + 60);
+        const l = Math.floor(Math.random() * 10 + 50);
+        const speed = Math.random() * 2 + 1;
+        squiggles.push({
+            x,
+            y,
+            h,
+            s,
+            l,
+            color: `hsl(${h}, ${s}%, ${l}%)`,
+            size: SIZE,
+            speed,
+            radians: 0,
+            oscillation: Math.random() * 0.5 + 1
+        });
+        $("#total-squiggles").textContent = squiggles.length;
+    }
+
+    function resizeCanvas() {
+        // canvas.style.width = window.innerWidth > 600 + 64 ? '600px' : 'calc(100% - 4rem)';
+        // canvas.width = canvas.getBoundingClientRect().width;
+        // canvas.height = canvas.getBoundingClientRect().width;
+        // canvas.style.aspectRatio = '1/1';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    function $(selector) {
+        return document.querySelector(selector);
+    }
+
+    function $$(selector) {
+        return Array.from(document.querySelectorAll(selector));
+    }
+</script>
+</body>
+</html>

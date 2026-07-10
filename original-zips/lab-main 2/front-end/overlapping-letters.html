@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&display=swap" rel="stylesheet">
+    <title>Overlapping letters</title>
+    <style>
+        [overlap-text] {
+            text-transform: uppercase;
+            letter-spacing: -0.25ch;
+            text-shadow: 1px 1px 0.25ch black;
+            display: flex;
+
+            > span {
+                z-index: calc(var(--m, 1) * var(--i, 1));
+                min-width: 0.25ch
+            }
+
+            &[overlap-text="front"] {
+                --m: 1
+            }
+
+            &[overlap-text="back" ] {
+                --m: -1
+            }
+
+            &[overlap-text="alter"] > span:nth-child(even) {
+                --m: -1
+            }
+        }
+
+        html {
+            color-scheme: dark
+        }
+
+        body {
+            margin: 0;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: "Bowlby One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: clamp(2rem, 10vw + 1vw, 12rem);
+        }
+    </style>
+</head>
+<body>
+<div overlap-text="front">Overlap front</div>
+<div overlap-text="back">OVerlap Back</div>
+<div overlap-text="alter">OVerlap Alter</div>
+
+<script>
+    document.querySelectorAll("[overlap-text]").forEach(e => e.innerHTML = [...e.innerText].map((c, i) => `<span style="--i:${i}">${c}</span>`).join(""))
+</script>
+</body>
+</html>

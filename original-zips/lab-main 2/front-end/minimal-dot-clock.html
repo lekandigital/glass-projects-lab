@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minimal Dot Clock</title>
+
+    <style>@import url(https://fonts.bunny.net/css?family=roboto-mono:100,700);
+
+    @layer base, demo;
+
+    @layer demo {
+        :root {
+            --time-display: none;
+        }
+
+        :root:has(input#toggle-time:checked) {
+            --time-display: block;
+        }
+
+        .clock {
+            --clock-radius: clamp(120px, 15vw, 340px);
+
+            /* toggle time display. 0 = no display, 1 = show time */
+            --time-clr: light-dark(rgba(0 0 0 / .5), rgba(255 255 255 / .35));
+
+
+            --dot-radius: 10px;
+            --dot-bg: light-dark(rgba(0 0 0 / .5), rgba(255 255 255 / .6)); /* inactive dots */
+            --dot-opacity: .2; /* inactive dots */
+
+            --dot-hours-clr: rgb(0, 105, 168);
+            --dot-mins-clr: rgb(0, 188, 255);
+            --dot-secs-clr: rgb(251, 44, 54);
+
+            --dot-hours-w: clamp(7px, 1vw, 16px);
+            --dot-mins-w: clamp(5px, .75vw, 12px);
+            --dot-secs-w: clamp(5px, .75vw, 12px);
+
+            --dot-hours-h: clamp(20px, 5vw, 60px);
+            --dot-mins-h: clamp(10px, 2vw, 25px);
+            --dot-secs-h: var(--dot-secs-w); /* maintains the circle */
+
+            --dot-hours-ratio: 1/4;
+            --dot-mins-ratio: 1/3;
+            --dot-secs-ratio: 1/1;
+
+            width: calc(var(--clock-radius) * 2);
+            height: calc(var(--clock-radius) * 2);
+
+            border-radius: 50%;
+            position: relative;
+            display: grid;
+            place-items: center;
+
+            & > * {
+                grid-area: 1/1;
+            }
+        }
+
+        /* display time in center */
+        .time {
+            display: var(--time-display);
+            color: var(--time-clr);
+            font-size: clamp(2rem, 3.5vw + .45rem, 4rem);
+            font-family: 'Roboto Mono', monospace;
+
+
+        }
+
+        .dot {
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: var(--dot-w, 16px);
+            height: var(--dot-h, 16px);
+            border-radius: var(--dot-radius);
+            background-color: var(--dot-bg);
+            opacity: var(--dot-opacity);
+            /*transition: all ease-in-out 0ms;*/ /* removed transition as this unsyncs the change from the time display and is distracting */
+        }
+
+        /* define dot colors etc per time type */
+        .seconds {
+            --dot-opacity: 0;
+            --dot-w: var(--dot-secs-w);
+            --dot-h: var(--dot-secs-h);
+
+            & > .dot {
+                /*scale :0;*/
+                --dot-bg: var(--dot-secs-clr);
+            }
+
+            & > .dot.active {
+                --dot-opacity: 1;
+            }
+
+            /*
+            & > .dot:has(+.dot+.dot+.active){
+          --dot-opacity: .15;
+            }
+
+            & > .dot:has(+.dot+.active){
+          --dot-opacity: .35;
+            }
+
+            & > .dot:has(+.active){
+          --dot-opacity: .5;
+            }
+            */
+        }
+
+        .minutes {
+            --dot-w: var(--dot-mins-w);
+            --dot-h: var(--dot-mins-h);
+
+            & > .dot:nth-child(5n + 1) {
+                --dot-opacity: 0;
+            }
+
+            & > .dot.active {
+                --dot-bg: var(--dot-mins-clr);
+                --dot-opacity: 1;
+            }
+
+            /*
+            & > .dot:has(~.active){
+                --dot-bg: var(--dot-mins-clr);
+          --dot-opacity: .25;
+            }
+            */
+        }
+
+        .hours {
+            --dot-w: var(--dot-hours-w);
+            --dot-h: var(--dot-hours-h);
+
+            & > .dot.active {
+                --dot-bg: var(--dot-hours-clr);
+                --dot-opacity: 1;
+            }
+
+            /*
+            & > .dot:has(~.active){
+          --dot-bg: var(--dot-hours-clr);
+          --dot-opacity: .25;
+            }
+            */
+        }
+    }
+
+    /* general styling not relevant for this demo */
+    @layer base {
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            color-scheme: light dark;
+            --bg-dark: rgb(10, 10, 10);
+            --bg-light: rgb(248, 244, 238);
+            --txt-light: rgb(10, 10, 10);
+            --txt-dark: rgb(245, 245, 245);
+        );
+            --line-light: rgba(0 0 0 / .25);
+            --line-dark: rgba(255 255 255 / .25);
+
+            --clr-bg: light-dark(var(--bg-light), var(--bg-dark));
+            --clr-txt: light-dark(var(--txt-light), var(--txt-dark));
+            --clr-lines: light-dark(var(--line-light), var(--line-dark));
+        }
+
+        body {
+            background-color: var(--clr-bg);
+            color: var(--clr-txt);
+            min-height: 100svh;
+            margin: 0;
+            padding: 2rem;
+            font-family: "Jura", sans-serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            display: grid;
+            place-items: center;
+            gap: 2rem;
+
+            & > * {
+                /*outline: 1px dashed red;*/
+            }
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        .controls {
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            translate: -50% 0;
+            display: grid;
+            gap: 1rem;
+            font-size: .7rem;
+            padding: 0.25em .75em 0.25em 0.25em;
+            border-radius: 5px;
+            border: 1px solid var(--clr-lines);
+        }
+
+        .controls > label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .msg-supports {
+            font-size: 0.8rem;
+            /*
+        @supports (animation-timeline: scroll()) {
+                display: none;
+            }
+        @supports (order:sibling-index()) {
+                display: none;
+            }
+        @supports (x: attr(x type(*))) {
+                display: none;
+            }
+        */
+        }
+    }
+    </style>
+</head>
+<body>
+<div class="controls">
+    <label for="toggle-time">
+        <input checked id="toggle-time" type="checkbox">
+        Toggle time display
+    </label>
+</div>
+<div class="clock" id="clock">
+    <div class="ring hours"></div>
+    <div class="ring minutes"></div>
+    <div class="ring seconds"></div>
+    <div class="time" id="time"
+</div>
+</div>
+
+<script>
+    console.clear();
+
+    const clock = document.getElementById('clock');
+
+    const rings = {
+        hours: {el: clock.querySelector('.hours'), numbers: 12},
+        minutes: {el: clock.querySelector('.minutes'), numbers: 60},
+        seconds: {el: clock.querySelector('.seconds'), numbers: 60},
+    };
+
+    Object.entries(rings).forEach(([key, item]) => {
+        item.el.innerHTML = ''; // clear existing dots
+
+        for (let i = 0; i < item.numbers; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+
+            const angle = (360 / item.numbers) * i;
+
+            // rotate the dot around the center, then push inwards by radius to base align
+            dot.style.transform = `
+      rotate(${angle}deg)
+      translateY(calc((var(--clock-radius) + var(--dot-h) * .5) * -1))
+    `;
+
+            item.el.appendChild(dot);
+        }
+    });
+
+
+    // store previous active time types so we can check values so that we only update if changed
+    const prevActive = {
+        hours: null,
+        minutes: null,
+        seconds: null
+    };
+
+    function updateClock() {
+        const now = new Date();
+
+        const current = {
+            hours: now.getHours() % 12,
+            minutes: now.getMinutes(),
+            seconds: now.getSeconds()
+        };
+
+        // Loop through each time unit
+        for (const unit in current) {
+            const value = current[unit];
+            const ring = rings[unit].el;
+
+            if (prevActive[unit] !== value) {
+                // Remove previously active dot (if any)
+                if (prevActive[unit] !== null) {
+                    ring.children[prevActive[unit]].classList.remove('active');
+                }
+
+                // Add new active dot
+                ring.children[value].classList.add('active');
+                prevActive[unit] = value;
+            }
+        }
+
+        // --- update numerical display ---
+        const timeDiv = document.getElementById('time');
+        const displayHours = now.getHours().toString().padStart(2, '0');
+        const displayMinutes = current.minutes.toString().padStart(2, '0');
+        const displaySeconds = current.seconds.toString().padStart(2, '0');
+        timeDiv.textContent = `${displayHours}:${displayMinutes}:${displaySeconds}`;
+
+        requestAnimationFrame(updateClock);
+    }
+
+    updateClock();
+</script>
+</body>
+</html>

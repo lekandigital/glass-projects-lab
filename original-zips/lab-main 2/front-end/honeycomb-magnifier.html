@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Honeycomb Magnifier</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+</head>
+<body>
+<script>
+    let params = {
+        hexSize: 16,
+        magnifier: {
+            radius: 300,
+            zoom: 5
+        },
+        forceField: {
+            enabled: true,
+            strength: 6,
+            friction: 0.9,
+            restoreSpeed: 0.03
+        },
+        livingHexagons: false,
+        smoothMagnifier: true,
+        smoothFactorMin: 0.001,
+        smoothFactorMax: 0.16,
+        backgroundColor: [102, 204, 255]
+    };
+
+    let cols, rows;
+    let palette = [];
+    let colorsGrid = [];
+    let hexGrid = [];
+    let lastUpdateTime = 0;
+    const updateInterval = 500;
+
+    let smoothedMouse = {x: 0, y: 0};
+    let lastMouse = {x: 0, y: 0};
+    let mouseSpeed = 0;
+
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+        noStroke();
+        palette = [
+            color(255, 102, 102),
+            color(255, 204, 0),
+            color(102, 204, 255),
+            color(51, 153, 102),
+            color(204, 102, 153),
+            color(153, 51, 153),
+            color(255, 153, 51)
+        ];
+        setupGUI();
+        calculateGrid();
+        generateColors();
+        smoothedMouse.x = mouseX;
+        smoothedMouse.y = mouseY;
+    }
+
+    function windowResized() {
+        resizeCanvas(windowWidth, windowHeight);
+        calculateGrid();
+        generateColors();
+    }
+
+    function setupGUI() {
+        const gui = new dat.GUI();
+
+        const hexFolder = gui.addFolder('Hexagon Settings');
+        hexFolder.add(params, 'hexSize', 10, 100).step(1).name('Hexagon Size').onChange(() => {
+            calculateGrid();
+            generateColors();
+        });
+        hexFolder.add({randomizePalette: () => generateColors()}, 'randomizePalette').name('New Colors');
+        hexFolder.add(params, 'livingHexagons').name('Living Hexagons');
+
+        const magnifierFolder = gui.addFolder('Magnifier Settings');
+        magnifierFolder.add(params.magnifier, 'radius', 50, 300).step(1).name('Magnifier Radius');
+        magnifierFolder.add(params.magnifier, 'zoom', 1, 5).step(0.1).name('Zoom Factor');
+
+        const smoothFolder = gui.addFolder('Smooth Magnifier Settings');
+        smoothFolder.add(params, 'smoothMagnifier').name('Enable Smooth Magnifier');
+        smoothFolder.add(params, 'smoothFactorMin', 0.001, 0.1).step(0.001).name('Min Smoothing');
+        smoothFolder.add(params, 'smoothFactorMax', 0.01, 0.2).step(0.001).name('Max Smoothing');
+
+
+        const forceFolder = gui.addFolder('Force Field Settings');
+        forceFolder.add(params.forceField, 'enabled').name('Enable Force Field');
+        forceFolder.add(params.forceField, 'strength', 0, 20).step(0.1).name('Force Strength');
+        forceFolder.add(params.forceField, 'friction', 0.5, 1).step(0.01).name('Friction');
+        forceFolder.add(params.forceField, 'restoreSpeed', 0.01, 0.2).step(0.01).name('Restore Speed');
+        forceFolder.open();
+
+        gui.addColor(params, 'backgroundColor').name('Background Color');
+
+        gui.add({
+            fullscreen: () => {
+                if (!document.fullscreenElement) {
+                    document.body.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        }, 'fullscreen').name('Fullscreen');
+
+
+        hexFolder.open();
+        magnifierFolder.open();
+        smoothFolder.open();
+    }
+
+    function calculateGrid() {
+        cols = ceil(width / (params.hexSize * 1.5)) + 1;
+        rows = ceil(height / (params.hexSize * sqrt(3))) + 1;
+        hexGrid = [];
+        for (let i = 0; i < cols; i++) {
+            hexGrid[i] = [];
+            for (let j = 0; j < rows; j++) {
+                let x = i * params.hexSize * 1.5;
+                let y = j * params.hexSize * sqrt(3);
+                if (i % 2 === 1) y += params.hexSize * sqrt(3) / 2;
+                hexGrid[i][j] = {
+                    pos: createVector(x, y),
+                    vel: createVector(0, 0)
+                };
+            }
+        }
+    }
+
+    function generateColors() {
+        colorsGrid = [];
+        for (let i = 0; i < cols; i++) {
+            colorsGrid[i] = [];
+            for (let j = 0; j < rows; j++) {
+                colorsGrid[i][j] = random(palette);
+            }
+        }
+    }
+
+    function updateLivingHexagons() {
+        if (millis() - lastUpdateTime > updateInterval) {
+            for (let i = 0; i < cols; i++) {
+                for (let j = 0; j < rows; j++) {
+                    if (random() < 0.1) {
+                        colorsGrid[i][j] = random(palette);
+                    }
+                }
+            }
+            lastUpdateTime = millis();
+        }
+    }
+
+    function updateSmoothedMouse() {
+        let dx = mouseX - lastMouse.x;
+        let dy = mouseY - lastMouse.y;
+        mouseSpeed = sqrt(dx * dx + dy * dy);
+
+        let smoothing = map(mouseSpeed, 0, 100, params.smoothFactorMax, params.smoothFactorMin, true);
+        smoothedMouse.x = lerp(smoothedMouse.x, mouseX, smoothing);
+        smoothedMouse.y = lerp(smoothedMouse.y, mouseY, smoothing);
+
+        lastMouse.x = mouseX;
+        lastMouse.y = mouseY;
+    }
+
+    function draw() {
+        background(params.backgroundColor);
+
+        if (params.livingHexagons) {
+            updateLivingHexagons();
+        }
+
+        if (params.smoothMagnifier) {
+            updateSmoothedMouse();
+        } else {
+            smoothedMouse.x = mouseX;
+            smoothedMouse.y = mouseY;
+        }
+
+        for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+                let hex = hexGrid[i][j];
+                let targetX = i * params.hexSize * 1.5;
+                let targetY = j * params.hexSize * sqrt(3);
+                if (i % 2 === 1) targetY += params.hexSize * sqrt(3) / 2;
+
+                let d = dist(smoothedMouse.x, smoothedMouse.y, hex.pos.x, hex.pos.y);
+
+                if (params.forceField.enabled && d < params.magnifier.radius) {
+                    let force = p5.Vector.sub(hex.pos, createVector(smoothedMouse.x, smoothedMouse.y));
+                    force.setMag(map(d, 0, params.magnifier.radius, params.forceField.strength, 0));
+                    hex.vel.add(force);
+                }
+
+                let restore = createVector(targetX, targetY).sub(hex.pos);
+                hex.vel.add(restore.mult(params.forceField.restoreSpeed));
+                hex.vel.mult(params.forceField.friction);
+                hex.pos.add(hex.vel);
+            }
+        }
+
+        let hexagons = [];
+        for (let i = 0; i < cols; i++) {
+            for (let j = 0; j < rows; j++) {
+                let hex = hexGrid[i][j];
+                let d = dist(smoothedMouse.x, smoothedMouse.y, hex.pos.x, hex.pos.y);
+                hexagons.push({x: hex.pos.x, y: hex.pos.y, d, color: colorsGrid[i][j]});
+            }
+        }
+
+        hexagons.sort((a, b) => b.d - a.d);
+
+        for (let hex of hexagons) {
+            let scaleFactor = 1;
+            if (hex.d < params.magnifier.radius) {
+                scaleFactor = map(hex.d, 0, params.magnifier.radius, params.magnifier.zoom, 1);
+            }
+
+            fill(hex.color);
+            drawHexagon(hex.x, hex.y, params.hexSize * scaleFactor);
+        }
+    }
+
+
+    function drawHexagon(x, y, s) {
+        beginShape();
+        for (let a = 0; a < TWO_PI; a += PI / 3) {
+            let vx = x + cos(a) * s;
+            let vy = y + sin(a) * s;
+            vertex(vx, vy);
+        }
+        endShape(CLOSE);
+    }
+</script>
+</body>
+</html>

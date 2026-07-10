@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Masonry Gallery + Lazy Loading</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .wrapper {
+            background-color: black;
+            padding: 0.5rem;
+        }
+
+        .gallery {
+            column-count: 1;
+            column-gap: 0.5rem;
+            list-style-type: none;
+
+            & li {
+                break-inside: avoid;
+                min-height: 30vmin;
+                margin-bottom: 0.5rem;
+                background-color: #222;
+
+                & img {
+                    display: block;
+                    width: 100%;
+                    object-fit: cover;
+                    filter: grayscale(100%);
+                    transition: opacity 0.3s;
+                }
+            }
+        }
+
+
+        @media (width > 500px) {
+            .gallery {
+                columns: 2;
+            }
+        }
+
+        @media (width > 900px) {
+            .gallery {
+                columns: 3;
+            }
+        }
+    </style>
+</head>
+<body>
+<script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+<script defer src='https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js'></script>
+
+<div class='wrapper'>
+    <div class='gallery' x-data>
+        <template :key='i' x-for='i in 300'>
+            <li x-data='observeImages' x-intersect.margin.200px.once='loadImage'>
+                <img x-ref='img'>
+            </li>
+        </template>
+    </div>
+</div>
+
+<script>
+    function registerComponent() {
+        Alpine.data('observeImages', function () {
+            return {
+                random(min, max) {
+                    return Math.floor(min + Math.random() * (max - min));
+                },
+                loadImage() {
+                    const id = this.random(100, 1000);
+                    const width = this.random(300, 600);
+                    const height = this.random(200, 500);
+                    const img = this.$refs.img;
+
+                    img.width = width;
+                    img.height = height;
+                    img.src = `https://picsum.photos/seed/${id}/600/400`;
+
+                    img.style.opacity = 0;
+                    img.addEventListener('load', () => img.style.opacity = 1, false);
+                },
+            }
+        });
+    }
+
+    document.addEventListener('alpine:init', registerComponent, false);
+</script>
+</body>
+</html>

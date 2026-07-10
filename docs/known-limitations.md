@@ -1,3 +1,0 @@
-# Known-limitations
-
-Documentation placeholder.

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@100..900&family=Oswald:wght@200..700&display=swap"
+          rel="stylesheet">
+    <title>Stacked wave dividers</title>
+
+    <style>
+        article:nth-of-type(n + 2) {
+            padding-top: 4em;
+            clip-path: polygon(0% 2em, 5% 2.618em, 10% 3.176em, 15% 3.618em, 20% 3.902em, 25% 4em, 30% 3.902em, 35% 3.618em, 40% 3.176em, 45% 2.618em, 50% 2em, 55% 1.382em, 60% 0.824em, 65% 0.382em, 70% 0.098em, 75% 0em, 80% 0.098em, 85% 0.382em, 90% 0.824em, 95% 1.382em, 100% 2em, 100% 100%, 0 100%);
+        }
+
+        article:nth-last-of-type(n + 2) {
+            margin-bottom: -4em;
+            padding-bottom: 4em;
+        }
+
+        /* non-essential prettifying and layout */
+        * {
+            margin: 0;
+        }
+
+        html {
+            background: #212121;
+        }
+
+        body {
+            display: grid;
+        }
+
+        article {
+            --p: 0;
+            --perc-p: calc(var(--p) * 100%);
+            justify-self: center;
+            display: flex;
+            width: clamp(320px, 100%, 75em);
+            background: color-mix(in srgb, #023047 var(--perc-p), #ededed);
+            color: color-mix(in srgb, #ededed var(--perc-p), #023047);
+            font: 300 clamp(0.625em, 2vw, 1.25em) oswald, sans-serif;
+        }
+
+        article:nth-of-type(2n) {
+            --p: 1;
+        }
+
+        article::after {
+            flex: 1 2 35%;
+            order: calc(2 * (1 - var(--p)) + 1);
+            margin: -4em 0;
+            margin-bottom: inherit;
+            background: var(--img) 50%/cover;
+            content: "";
+        }
+
+        section, aside {
+            display: grid;
+            grid-gap: 0.5em;
+            margin: calc(var(--p) * -1em) 0 0;
+            padding: 0.5em;
+        }
+
+        :not(:last-of-type) > section, :not(:last-of-type) > aside {
+            margin-bottom: calc((var(--p) - 1) * 2em);
+        }
+
+        section {
+            flex: 1 1 50%;
+            order: 2;
+        }
+
+        h2 {
+            text-shadow: 1px 1px 2px;
+            text-transform: uppercase;
+        }
+
+        a {
+            justify-self: start;
+            border: solid 2px;
+            padding: 0 0.5em 0.25em;
+            background: color-mix(in srgb, #126782 var(--perc-p), #8ecae6);
+            color: inherit;
+            text-decoration: none;
+            transition: box-shadow 0.3s;
+        }
+
+        a:focus {
+            outline: none;
+        }
+
+        a:is(:hover, :focus) {
+            box-shadow: 2px 2px;
+        }
+
+        aside {
+            order: calc(2 * var(--p) + 1);
+            place-content: center;
+            color: color-mix(in srgb, #fd9e02 var(--perc-p), #7d4600);
+            font-family: exo;
+        }
+
+        .item {
+            display: grid;
+            place-items: center;
+        }
+
+        .item span {
+            font-size: 2.5em;
+        }
+
+        /*# sourceMappingURL=style.css.map */
+
+    </style>
+</head>
+<body>
+<style>article {
+    --img: url(https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?w=2072)
+}</style>
+<article>
+    <section><h2>digital marketing</h2>
+        <p>Tiramisu jelly-o bear claw pie dessert. Tootsie roll chupa chups tootsie roll sugar plum lemon drops tootsie
+            roll brownie bonbon tart. Cookie candy canes dragée ice cream chocolate cake.</p>
+        <p>Icing liquorice gingerbread bear claw halvah liquorice tootsie roll dragée. Wafer jujubes bonbon liquorice
+            chocolate bar donut apple pie croissant. Macaroon muffin gingerbread cake jujubes cotton candy.</p>
+        <p>Croissant chupa chups cake chocolate bar cake muffin candy tootsie roll. Gingerbread cheesecake wafer sweet
+            roll powder lemon drops marzipan dessert. Lemon drops candy cake chupa chups candy canes wafer powder.</p><a
+                href="#">our marketing services</a></section>
+    <aside>
+        <div class="item"><span>200+</span>marzipan log</div>
+        <div class="item"><span>5.3m</span>marzipan log</div>
+        <div class="item"><span>70%</span>marzipan log</div>
+    </aside>
+</article>
+<article>
+    <section><h2>digital marketing</h2>
+        <p>Tiramisu jelly-o bear claw pie dessert. Tootsie roll chupa chups tootsie roll sugar plum lemon drops tootsie
+            roll brownie bonbon tart. Cookie candy canes dragée ice cream chocolate cake.</p>
+        <p>Icing liquorice gingerbread bear claw halvah liquorice tootsie roll dragée. Wafer jujubes bonbon liquorice
+            chocolate bar donut apple pie croissant. Macaroon muffin gingerbread cake jujubes cotton candy.</p>
+        <p>Croissant chupa chups cake chocolate bar cake muffin candy tootsie roll. Gingerbread cheesecake wafer sweet
+            roll powder lemon drops marzipan dessert. Lemon drops candy cake chupa chups candy canes wafer powder.</p><a
+                href="#">our marketing services</a></section>
+    <aside>
+        <div class="item"><span>200+</span>marzipan log</div>
+        <div class="item"><span>5.3m</span>marzipan log</div>
+        <div class="item"><span>70%</span>marzipan log</div>
+    </aside>
+</article>
+<article>
+    <section><h2>digital marketing</h2>
+        <p>Tiramisu jelly-o bear claw pie dessert. Tootsie roll chupa chups tootsie roll sugar plum lemon drops tootsie
+            roll brownie bonbon tart. Cookie candy canes dragée ice cream chocolate cake.</p>
+        <p>Icing liquorice gingerbread bear claw halvah liquorice tootsie roll dragée. Wafer jujubes bonbon liquorice
+            chocolate bar donut apple pie croissant. Macaroon muffin gingerbread cake jujubes cotton candy.</p>
+        <p>Croissant chupa chups cake chocolate bar cake muffin candy tootsie roll. Gingerbread cheesecake wafer sweet
+            roll powder lemon drops marzipan dessert. Lemon drops candy cake chupa chups candy canes wafer powder.</p><a
+                href="#">our marketing services</a></section>
+    <aside>
+        <div class="item"><span>200+</span>marzipan log</div>
+        <div class="item"><span>5.3m</span>marzipan log</div>
+        <div class="item"><span>70%</span>marzipan log</div>
+    </aside>
+</article>
+</body>
+</html>

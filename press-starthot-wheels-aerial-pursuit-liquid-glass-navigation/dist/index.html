@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Press Start - Hot Wheels Aerial Pursuit ( liquid glass navigation )</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <div id="gsapWrapper">
+    <div id="gsapBody">
+
+        <div class="youTubeWrapper">
+            <div class="youTube" id="youTubePursuit1">
+
+                <div id="buttonWrapper">
+                    <div id="buttonW">
+                        <div id="button">
+                            <ul><li></li><li></li><li></li></ul>
+                            <ul><li></li><li></li><li></li></ul>
+                            <ul><li></li><li></li><li></li></ul>
+                            <ul><li></li></ul>
+                            START
+                        </div>
+                    </div>
+                </div>
+
+                <svg id="pursuit1" viewBox="0 0 300 170" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+
+                    <use href="#consolePath" fill="#161616" stroke="#222222" stroke-width="2" stroke-opacity="1" filter="url(#innerShadow) url(#shadow)" />
+
+                    <g id="displayScreen" style="mask: url(#mask);">
+                        <g id="roadWrapper">
+                            <use id="useTrack" href="#trackWrapper" />
+                            <g id="road" fill="#FFFFFF" stroke="none">
+                                <use href="#roadPath" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="square" stroke-linejoin="bevel" stroke-dasharray="140, 12, 6, 12" />
+                            </g>
+                            <use id="car1" class="car" href="#carRed" />
+                            <use id="car2" class="car" href="#carYellow" />
+
+                        </g>
+                    </g>
+
+                    <g id="searchlights" style="mask: url(#searchlightsMask);">
+                        <rect fill="#111111" fill-opacity="0.9" stroke="none" x="0" y="0" width="300" height="170" ry="6" />
+                    </g>
+
+                    <g id="startButton">
+
+                        <use id="startButtonBg" href="#maskPath" fill="#222222" stroke="none" />
+
+                        <g id="introCars" stroke="none" style="mask: url(#mask);">
+                            <use href="#introRoad" />
+                            <g stroke="none" fill-opacity="0.75" filter="url(#blur15)">
+                                <path fill="url(#carMotionBlurRed)" d="M 21,156 C 56,124 93,96 141,82 97,107 63,153 32,171 22,169 22,162 21,156 Z" />
+                                <path fill="url(#carMotionBlurYellow)" d="m 102,158 c 7,-46 38,-74 69,-83 -32,27 -38,63 -51,90 -10,3 -17,-1 -18,-7 z" />
+                            </g>
+                            <g fill="none" stroke="url(#carMotionBlurWhite)" filter="url(#blur10)">
+                                <path d="M 27,168 C 68,136 88,109 129,88 89,111 65,142 28,169"/>
+                                <path d="m 113,166 c 20,-57 22,-68 55,-89 -34,20 -39,50 -53,89" />
+                            </g>
+                            <use href="#helicopter" stroke="none" />
+                            <use href="#carRed" transform="matrix(-0.47098349,-0.58928044,0.60310264,-0.50199923,63.552506,279.935)" />
+                            <use href="#carYellow" transform="matrix(-0.7357733,-0.17323377,0.22470472,-0.65800909,208.94066,224.65462)" />
+                        </g>
+
+                    </g>
+
+                    <use id="displayScreenBorder" href="#maskPath" fill="none" stroke="#222222" stroke-width="5"  />
+
+                    <g id="controlPanelMenu" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.6">
+
+                        <g id="btRed" class="cBt" stroke="red" style="mask: url(#btRedMask)">
+                            <use class="cBtB" href="#btRedPath" fill="url(#lGradRed)" />
+                            <use class="cBtS" fill="none" stroke="red" stroke-dasharray="45 20"  href="#btRedPath" />
+                            <use class="cBtI" href="#steeringWheel" />
+                        </g>
+                        <g id="btYellow" class="cBt" stroke="yellow" style="mask: url(#btYellowMask)">
+                            <use class="cBtB" href="#btYellowPath" fill="url(#lGradYellow)" />
+                            <use class="cBtS" fill="none" stroke="yellow" stroke-dasharray="45 20" href="#btYellowPath" />
+                            <use class="cBtI" href="#steeringWheel" transform="translate(360)"> />
+                        </g>
+
+                        <g id="btLeft" class="cBt" stroke="#FFFFFF" style="mask: url(#btLeftMask)">
+                            <use class="cBtB" href="#btLeftPath" fill="url(#lGradLeftRight)" />
+                            <use class="cBtS" fill="none" stroke-dasharray="30 30" href="#btLeftPath" />
+                            <use class="cBtI" href="#arrow" />
+                        </g>
+                        
+                        <g id="btRight" class="cBt" stroke="#FFFFFF" style="mask: url(#btRightMask)">
+                            <use class="cBtB" href="#btRightPath" fill="url(#lGradLeftRight)" />
+                            <use class="cBtS" fill="none" stroke-dasharray="30 30" href="#btRightPath" />
+                            <use class="cBtI" href="#arrow2" />
+                        </g>
+
+                        <g id="btWhite" class="cBt" style="mask: url(#btWhiteMask)">
+                            <use class="cBtB" href="#btWhitePath" fill="url(#lGradWhite)"  />
+                            <use class="cBtS" fill="none" stroke-dasharray="45 20" href="#btWhitePath" />
+                            <path class="cBtI" stroke="none" d="m -20.9,147.7 c -2.6,1.3 -4.1,-0.7 -4.1,-0.7 -0.2,-1.2 -1,-2 -3,-2 v -1 h 6 c 1,0 1,-1 0,-1 h -12 c -1,0 -1,1 0,1 h 5 v 1 c -6,1 -8,6 -3,7 l -1,2 h -1 c -1,0 -1,1 0,1 h 9 c 1,0 1,-1 0,-1 h -1.5 l -1,-2 c 1.2,-0.4 2.5,-1 2.5,-2 1.2,-0.1 3.1,-0.2 4.8,-1.3 0.6,-0.4 0,-1 -0.7,-1 z m -6.6,6.3 H -32 l 1,-2 h 2.5 z m 0.5,-3.7 c -1.8,0.5 -3.1,0.6 -5.2,0.3 -2.2,-0.5 -0.7,-5 5.2,-4.4 0.6,1.5 1.1,2.6 0,4.1 z" />
+                        </g>
+
+                        <g id="btExit" class="cBt" style="mask: url(#btExitMask)">
+                            <use class="cBtB" href="#btExitPath" fill="url(#lGradLeftRight)" />
+                            <use class="cBtS" fill="none" stroke-dasharray="20 20" href="#btExitPath" />
+                        </g>
+
+                    </g>
+
+                </svg>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" role="none" width="0" width="0" style="position:absolute; z-index:5;">
+
+    <defs>
+
+        <path id="tile4" d="M 25,1.96 48.27,14.91 V 41.75 L 25,54.7 1.73,41.75 V 14.91 L 25,1.96" />
+        <pattern id="tiles4" fill="#181818" fill-opacity="0.6" stroke="#222222" viewBox="0 0 50 85" width="50%" height="100%">
+            <use xlink:href="#tile4" transform="translate(0,-28.33)" />
+            <use xlink:href="#tile4" transform="translate(0,57.14455)" />
+            <use xlink:href="#tile4" transform="translate(25,14.371)" />
+            <use xlink:href="#tile4" transform="translate(-25.057191,14.371461)" />
+        </pattern>
+
+
+        <g id="consolePath"><path d="M -29,-10 H 329 C 346,-10 360,4 360,21 V 149 C 360,166 346,180 329,180 H -29 c -17,0 -31,-14 -31,-31 V 21 C -60,4 -46,-10 -29,-10 Z" /></g>
+        <path id="btRedPath" d="m -30,0 c -11,0 -20,9 -20,20 v 14 c 0,3 3,6 6,6 h 28 c 3,0 6,-3 6,-6 V 6 c 0,-3 -3,-6 -6,-6 z" />
+        <path id="btYellowPath" d="m 330,0 c 11,0 20,9 20,20 v 14 c 0,3 -3,6 -6,6 h -28 c -3,0 -6,-3 -6,-6 V 6 c 0,-3 3,-6 6,-6 z" />
+        <circle id="btLeftPath" cx="-30" cy="85" r="20" />
+        <circle id="btRightPath" cx="330" cy="85" r="20" />
+        <path id="btWhitePath" d="m -30,169.9 c -11,0 -20,-9 -20,-20 v -14 c 0,-3 3,-6 6,-6 h 28 c 3,0 6,3 6,6 v 28 c 0,3 -3,6 -6,6 z" />
+        <path id="btExitPath" d="m 321.7,167.6 8.3,-8.3 8.3,8.3 c 0.7,0.7 1.8,0.7 2.4,-0 l 6.9,-6.9 c 0.7,-0.7 0.7,-1.8 0,-2.4 L 339.3,150 l 8.3,-8.3 c 0.7,-0.7 0.7,-1.8 0,-2.4 l -6.9,-6.9 c -0.7,-0.7 -1.8,-0.7 -2.4,-0 L 330,140.7 l -8.3,-8.3 c -0.7,-0.7 -1.8,-0.7 -2.4,0 l -6.9,6.9 c -0.7,0.7 -0.7,1.8 0,2.4 l 8.3,8.3 -8.3,8.3 c -0.7,0.7 -0.7,1.8 0,2.4 l 6.9,6.9 c 0.7,0.7 1.8,0.7 2.4,-0 z" />
+
+        <mask id="btRedMask"><use href="#btRedPath" fill="#FFFFFF" /></mask>
+        <mask id="btYellowMask"><use href="#btYellowPath" fill="#FFFFFF" /></mask>
+        <mask id="btLeftMask"><use href="#btLeftPath" fill="#FFFFFF" /></mask>
+        <mask id="btRightMask"><use href="#btRightPath" fill="#FFFFFF" /></mask>
+        <mask id="btWhiteMask"><use href="#btWhitePath" fill="#FFFFFF" /></mask>
+        <mask id="btExitMask"><use href="#btExitPath" fill="#FFFFFF" /></mask>
+
+        <mask id="searchlightsMask">
+            <rect fill="#FFFFFF" stroke="none" x="0" y="0" width="300" height="170" ry="6" />
+            <g id="car1Sl"><use id="sl1" href="#searchlight" fill="url(#rGradientLight)" stroke="none" /></g>
+            <g id="car2Sl"><use id="sl2" href="#searchlight" fill="url(#rGradientLight)" stroke="none" /></g>
+        </mask>
+
+        <linearGradient id="introRoadGradient" gradientTransform="rotate(15)">
+            <stop offset="0" stop-color="#d82c04" />
+            <stop offset="1" stop-color="#f2790c" />
+        </linearGradient>
+
+        <filter id="shadow"><feDropShadow dx="3" dy="3" stdDeviation="5" /></filter>
+        <filter id="shadow10"><feDropShadow dx="3" dy="3" stdDeviation="10" /></filter>
+  
+        <filter id="innerShadow"  color-interpolation-filters='sRGB' x='0' y='0' width='1' height='1'>
+            <feTurbulence type='fractalNoise' baseFrequency='.9713' numOctaves='4'/>
+            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="0" xChannelSelector="R" yChannelSelector="G" />
+            <feBlend in2='SourceGraphic'/>
+        </filter>
+
+        <filter id="roadShadow"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="darkred" flood-opacity="0.5" /></filter>
+        <linearGradient id="carMotionBlurRed" gradientTransform="rotate(-45)"><stop offset="0.2" stop-color="#ff0000" stop-opacity="0.4" /><stop offset="0.6" stop-color="#ff0000" stop-opacity="0" /></linearGradient>
+        <linearGradient id="carMotionBlurYellow" gradientTransform="rotate(-45)"><stop offset="0.2" stop-color="#ffff00" stop-opacity="0.4" /><stop offset="0.6" stop-color="#ffff00" stop-opacity="0" /></linearGradient>
+        <linearGradient id="carMotionBlurWhite" gradientTransform="rotate(-45)"><stop offset="0.2" stop-color="#ffffff" stop-opacity="0.4" /><stop offset="0.6" stop-color="#ffffff" stop-opacity="0" /></linearGradient>
+        <filter id="glass" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">  
+            <feDisplacementMap in="SourceGraphic" scale="20" xChannelSelector="A" yChannelSelector="R" result="goo" />
+            <feGaussianBlur in="goo" stdDeviation="3" />
+        </filter>
+        <filter id="mozGlass" x="-10%" y="-10%" width="120%" height="120%"><feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G" /></filter>
+        <filter id="blur05" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur in="SourceGraphic" stdDeviation="0.5" /></filter>
+        <filter id="blur10" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur in="SourceGraphic" stdDeviation="1" /></filter>
+        <filter id="blur15" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur in="SourceGraphic" stdDeviation="1.5" /></filter>
+
+
+        <path id="roadPath" d="M 150,358 V -188" />
+
+        <path id="floor" stroke="none" d="M 380,0 V 170 H -80 V 0 Z" />
+
+        <g id="track" stroke="none">
+            <path fill="#da3304" d="M 51,-20 V 190 H 61 V -20 Z" />
+            <path fill="#FFFFFF" fill-opacity="0.5" d="m 51,-20 v 210 h 2 V -20 Z" />
+            <path fill="#ee640c" d="M 240,-20 V 190 H 60 V -20 Z" />
+            <path fill="#f79b2a" d="m 239,-20 v 210 h 10 V -20 Z" />
+            <path fill="#FFFFFF" fill-opacity="0.5" d="m 247,-20 v 210 h 2 V -20 Z" />
+        </g>
+
+        <g id="introRoad" stroke="none">
+            <rect x="0" y="0" width="300" height="170" fill="url(#introRoadGradient)" /><!-- orange -->
+            <g fill="#d92e04" fill-opacity="0.3" stroke="none">
+                <path d="M -2,68.000002 H 302 V 108 H -2 Z" />
+                <path d="m 210,77 h 92 v 15 h -92 z" />
+                <path style="opacity:0.8" d="M 198,84 H 302 V 99 H 198 Z" />
+                <path d="m 230,95 h 72 v 15 h -72 z" />
+                <path style="opacity:0.8" d="m 162,103 h 140 v 15 H 162 Z" />
+                <text x="149" y="225" fill-opacity="1" stroke="none" style="font-size:31px;font-family:Arial;">ikrProjects</text>
+            </g>
+            <g filter="url(#roadShadow)" style="box-shadow: 0 0 15px 6px inset #000000">
+                <path fill="#fba921" stroke="none" d="m -2,25 v 19 c 94,6 137,12 189,20 34,6 62,13 115,27 V 73 C 241,65 218,67 186,61 140,51 113,43 -2,25 Z" />
+                <path fill="#ee640c" stroke="none" d="M 302,54 C 238,58 212,64 184,62 152,61 129,53 -2,49 v 19 c 84,-6 135,-6 186,-2 27,2 57,2 118,7 z" />
+                <path fill="#fba921" stroke="none" d="M 302,35 C 247,47 212,62 183,63 116,67 90,62 -2,73 V 96 C 72,79 130,68 184,67 c 38,0 73,-9 118,-13 z" />
+                <path fill="#ee640c" stroke="none" d="M 302,17 C 245,41 211,58 179,64 115,76 93,75 -2,104 v 39 C 108,81 118,81 180,69 211,62 246,53 302,35 Z" />
+                <path fill="#fba921" stroke="none" d="M 302,-1 C 245,31 208,55 179,66 106,92 107,81 -2,156 v 16 H 53 C 117,95 129,88 180,70 208,59 250,46 302,17 Z" />
+                <path fill="#ee640c" stroke="none" d="M 278,-2 C 149,98 128,62 79,172 h 57 C 145,53 211,67 302,-2 Z" />
+            </g>
+        </g>
+        
+        <g id="trackWrapper" fill="url(#tiles4)">
+            <use href="#floor" />
+            <use href="#floor" transform="translate(0,-170)" />
+            <use href="#track" />
+            <use href="#track" transform="translate(0,-170)" />
+        </g>
+
+        <g id="carRed" fill="#ca0000"><use href="#car" /></g>
+        <g id="carYellow" fill="#DFDF00"><use href="#car" /></g>
+        <g id="car" stroke="none">
+            <path d="m 130,79 3,-1 v 11 c 0,7 -1.9,15.8 -1,20 l 3,14 c 1,2 14,2 15,2 1,0 14,0 15,-2 l 3,-14 c 0,-6 -1,-13 -1,-20 V 78 l 3,1 v -2 l -3,-1 v -9 c 1,-2 1,-4 1,-6 0,-14 -12,-16 -18,-16 -5,0 -18,1 -18,16 0,2 0,4 1,6 v 9 l -3,1 z" />
+            <path fill="#000000" d="m 135.3,86.9 c 0.1,9.1 0.2,15.8 3.4,17.4 l -0.1,-8 c 0,-8.4 -1.4,-15.7 -3.4,-19.6 0,3.4 0.1,6.8 0.1,10.2 z m 0.5,-36.7 c 2.6,-0.1 5,-0.9 5.3,-3.7 -1.9,0.9 -3.3,1.5 -5.3,3.7 z m 2.2,27.5 c 0.6,1.5 1.2,2.7 2.8,2.7 h 18.4 c 1.5,0 2.2,-1.2 2.8,-2.7 0,0 1.1,-5.9 1.1,-6.1 0,-9.3 -26.3,-9.3 -26.3,0 0,0 0.8,4.1 1.2,6.1 z m 1.9,30.4 c 0.4,2.2 0.7,4.4 1.1,6.6 0.4,2.3 4.2,4.1 9.1,4.3 4.9,-0.2 8.7,-2 9.1,-4.3 l 1.1,-6.6 c 0,-1.1 -0.9,-2 -2.1,-2 H 142 c -1.2,0 -2.1,0.9 -2.1,2 z M 159,46.5 c 0.4,2.8 2.8,3.6 5.4,3.7 -1.5,-1.7 -3.3,-3 -5.4,-3.7 z m 2.3,57.8 c 3.2,-1.8 3.4,-8.3 3.4,-17.4 V 76.6 c -2,4 -3.4,11.3 -3.4,19.6 0,2.7 0,5.4 0,8.1 z" />
+            <path fill="#FFFFFF" d="M 146.5,45.2 145,45.5 V 65 l 1.5,-0.2 z m -3,0.5 -1.5,0.5 v 19.6 l 1.5,-0.5 z m 0.2,34.7 v 25.7 h 1.5 V 80.4 Z m 3,0 v 25.7 h 1.5 V 80.4 Z M 142,116.6 v 8.1 l 1.5,0.1 v -7.3 z m 3,1.6 v 6.6 l 1.5,0.1 v -6.3 z" />
+        </g>
+
+        <path id="steeringWheel" stroke="none" d="m -30,13.1 c -3.9,0 -7,3.1 -7,7 0,3.9 3.1,7 7,7 3.9,0 7,-3.1 7,-7 0,-3.9 -3.1,-7 -7,-7 z m 5.2,4.3 c 1.4,2.5 -11.7,2.2 -10.5,0 2.3,-4.4 8.4,-4.1 10.5,0 z m -8.2,3.2 2.2,2.2 c -0.2,0.7 -0.2,3.2 -1.4,2.7 -1.4,-0.6 -2.5,-1.7 -3.2,-3.1 -0.4,-1.1 1.7,-1.5 2.4,-1.8 z m 6,0 c 0.7,0.4 2.8,0.6 2.4,1.8 -0.6,1.4 -1.7,2.5 -3.2,3.1 -1.2,0.4 -1.3,-2 -1.4,-2.7 z" />
+        <path id="arrow" stroke="none" d="m -31.6,84.8 4,-4 c 0.6,-0.6 -0.6,-1.8 -1.2,-1.2 l -4.8,4.8 c -0.2,0.2 -0.2,0.6 0,0.8 l 4.8,4.8 c 0.6,0.6 1.8,-0.6 1.2,-1.2 z" />
+        <path id="arrow2" stroke="none" d="m 331.5,84.7 -4,-4 c -0.6,-0.6 0.6,-1.8 1.2,-1.2 l 4.8,4.8 c 0.2,0.2 0.2,0.6 0,0.8 l -4.8,4.8 c -0.6,0.6 -1.8,-0.6 -1.2,-1.2 z" />
+
+        <g id="helicopter">
+            <path fill="#770000" d="m 177,13 -47,8 h -4 v 0 l -30,2 h 30 v 2 h 1 l -1,8 c -5,-1 -7,-2 -10,-2 -14,0 -17,17 -7,21 l -4,4 c -3,0 -2,-1 -3,-1 0,0 -4,-1 -2,2 l 20,4 c 3,-2 1,-2 1,-2 L 118,59 122,55 l 6,1 6,8 c -1,0 -3,-1 -4,-2 -5,0 3,4 3,4 h 15 c 4,-4 -1,-2 -3,-2 l -8,-8 c 4,-4 6,-8 3,-12 l 16,1 2,11 h 1 V 45 h 7 l -7,-2 2,-10 c 0,0 -1,-1 -2,0 l -3,10 -19,-4 c -2,-2 -2,-3 -7,-5 l -1,-9 h 1 v -2 l 54,-10 z m -58,42 -3,4 -9,-2 3,-4 z m 12,1 h 4 l 7,8 h -5 c -2,-2 -6,-8 -6,-8 z" />
+            <path fill="#550000" d="m 117,32 c -13,0 -13,12 -12,12 1,-1 2,-3 3,-2 C 110,43 111,36 117,32 Z m 3,1 c -2,0 -7,5 -8,10 C 114,44 112,46 113,47 l 6,1 c 7,-9 3,-15 1,-15 z  m 6,5 c 0,2 -1,6 -4,10 L 126,49 c 2,-1 4,-10 4,-10 0,0 -2,-1 -4,-1 z m -22,8 c 8,5 22,7 33,8 0,0 2,-1 2,-2 -4,2 -26,-3 -34,-6 -1,-1 -1,-1 -1,0 z" />
+        </g>
+        <path id="searchlight" stroke="0" d="M -80,-119 H 380 V 284 H -80 Z" />
+
+        <linearGradient id="lGradientLight">
+            <stop offset="0" stop-color="#000000" stop-opacity="0.9" />
+            <stop offset="0.4" stop-color="#000000" stop-opacity="0.7" />
+            <stop offset="0.85" stop-color="#000000" stop-opacity="0.3" />
+            <stop offset="0.95" stop-color="#000000" stop-opacity="0" />
+        </linearGradient>
+
+        <radialGradient id="lGradRed" cx="80%" cy="80%" r="100%">
+            <stop offset="0%" stop-color="#FF0000" stop-opacity="0.7" />
+            <stop offset="100%" stop-color="#FF0000" stop-opacity="0" />
+        </radialGradient>
+
+        <radialGradient id="lGradYellow" cx="20%" cy="80%" r="100%">
+            <stop offset="0%" stop-color="#FFFF00" stop-opacity="0.6" />
+            <stop offset="100%" stop-color="#FFFF00" stop-opacity="0" />
+        </radialGradient>
+
+        
+        <radialGradient id="lGradLeftRight" cx="50%" cy="50%" r="100%">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.5" />
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+        </radialGradient>
+
+        <radialGradient id="lGradWhite" cx="80%" cy="20%" r="100%">
+            <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.5" />
+            <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0" />
+        </radialGradient>
+
+        <radialGradient id="rGradientLight" xlink:href="#lGradientLight"
+            cx="150" fx="150" cy="85" fy="85" r="80" gradientUnits="userSpaceOnUse" />
+
+        <mask id="mask">
+            <rect x="0" y="0" width="300" height="170" ry="6"/>
+            <use href="#maskPath" fill="#FFFFFF"  />
+        </mask>
+        <rect id="maskPath" x="0" y="0" width="300" height="170" ry="6" />
+        
+
+    </defs>
+
+</svg>
+
+<div id="tileWrapper"></div>
+    <script src='https://unpkg.com/gsap@3/dist/gsap.min.js'></script><script  src="./script.js"></script>
+
+  </body>
+  
+</html>

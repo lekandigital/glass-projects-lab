@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic Interactive Text Effects</title>
+
+    <style>
+        @font-face {
+            font-family: "Slack";
+            src: url("https://img.blacklead.work/Slack-Light.otf") format("opentype");
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --margin: 2rem;
+            --gap: 2rem;
+            --column-width: calc((100vw - var(--margin) * 2 - var(--gap)) / 2);
+        }
+
+        body {
+            font-family: "Slack", "Georgia", serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            height: 100vh;
+            cursor: crosshair;
+            font-weight: 300;
+        }
+
+        .container {
+            display: flex;
+            padding: var(--margin);
+            gap: var(--gap);
+            height: 100vh;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .container.single-column {
+            justify-content: center;
+        }
+
+        .column {
+            width: var(--column-width);
+            height: 100%;
+            flex-shrink: 0;
+            position: relative;
+            padding: 0 20px;
+            overflow: visible;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .single-column .column#column1 {
+            transform: translateX(calc(var(--column-width) / 2 + var(--gap) / 2));
+        }
+
+        .single-column .column#column2 {
+            opacity: 0;
+            transform: translateY(100vh) translateX(calc(var(--column-width) / 2 + var(--gap) / 2));
+            pointer-events: none;
+        }
+
+        .column-content {
+            position: relative;
+            width: 100%;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .column.no-transform * {
+            transform: none !important;
+        }
+
+        p {
+            margin: 1.5em 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 100%;
+        }
+
+        p.drop-cap .line:first-child .word:first-child::first-letter {
+            font-size: 4em;
+            line-height: 1;
+            float: left;
+            margin: 0 0.1em 0 0;
+            color: #ff6b6b;
+            transition: all 0.3s ease;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .word {
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+            position: relative;
+            margin: 0 0.2em;
+            transform-origin: center;
+        }
+
+        .word:hover {
+            color: #ff6b6b;
+            transform: scale(1.05) !important;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+            z-index: 10;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .word.magnetic {
+            transition: all 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+        }
+
+        .word::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: radial-gradient(
+                    circle,
+                    rgba(255, 107, 107, 0.1) 0%,
+                    transparent 70%
+            );
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            pointer-events: none;
+        }
+
+        .word:hover::before {
+            opacity: 1;
+            animation: pulse 1s infinite;
+        }
+
+        .word.special:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background-size: 300% 300%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 2s ease infinite;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .line {
+            display: block;
+            white-space: nowrap;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .line.glitch {
+            position: relative;
+        }
+
+        .line.glitch::before,
+        .line.glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        .line.glitch::before {
+            color: #ff0040;
+            mix-blend-mode: screen;
+            animation: glitch-1 0.8s infinite linear alternate-reverse;
+        }
+
+        .line.glitch::after {
+            color: #00ffff;
+            mix-blend-mode: screen;
+            animation: glitch-2 0.7s infinite linear alternate-reverse;
+        }
+
+        .text {
+            display: inline-block;
+        }
+
+        .left-space {
+            margin-left: 0.25em;
+        }
+
+        .right-space {
+            margin-right: 0.25em;
+        }
+
+        .gradient-overlay {
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 100px;
+            z-index: 15;
+            pointer-events: none;
+        }
+
+        .gradient-overlay.top {
+            top: 0;
+            background: linear-gradient(to bottom, #0a0a0a, transparent);
+        }
+
+        .gradient-overlay.bottom {
+            bottom: 0;
+            background: linear-gradient(to top, #0a0a0a, transparent);
+        }
+
+        .instructions {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .instructions:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.05);
+        }
+
+        .effect-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            z-index: 200;
+        }
+
+        .effect-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 107, 107, 0.2);
+            border: 1px solid rgba(255, 107, 107, 0.4);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .effect-number:hover {
+            background: rgba(255, 107, 107, 0.4);
+            border-color: rgba(255, 107, 107, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .effect-number.active {
+            background: #ff6b6b;
+            border-color: #ff6b6b;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+            transform: scale(1.1);
+        }
+
+        .intensity-mini {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 15px;
+            padding-left: 15px;
+            border-left: 1px solid rgba(255, 107, 107, 0.3);
+        }
+
+        .intensity-mini label {
+            color: #ccc;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .intensity-mini input {
+            width: 80px;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 107, 107, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .intensity-mini input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
+        }
+
+        .intensity-mini input::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ff6b6b;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
+        }
+
+        .mouse-follower {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(
+                    circle,
+                    rgba(255, 107, 107, 0.8) 0%,
+                    transparent 70%
+            );
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            transition: transform 0.1s ease;
+            mix-blend-mode: screen;
+        }
+
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 107, 107, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes glitch-1 {
+            0% {
+                transform: translateX(-0.5px) skew(0deg);
+                opacity: 0.95;
+            }
+            20% {
+                transform: translateX(-1px) skew(0.5deg);
+                opacity: 0.8;
+            }
+            40% {
+                transform: translateX(0.5px) skew(-0.3deg);
+                opacity: 0.85;
+            }
+            60% {
+                transform: translateX(-0.8px) skew(0.3deg);
+                opacity: 0.7;
+            }
+            80% {
+                transform: translateX(0.8px) skew(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateX(0px) skew(0deg);
+                opacity: 0.95;
+            }
+        }
+
+        @keyframes glitch-2 {
+            0% {
+                transform: translateX(0.5px) skew(0deg);
+                opacity: 0.9;
+            }
+            25% {
+                transform: translateX(1px) skew(-0.5deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateX(-0.5px) skew(0.3deg);
+                opacity: 0.8;
+            }
+            75% {
+                transform: translateX(0.8px) skew(-0.3deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateX(0px) skew(0deg);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="mouse-follower"></div>
+<div class="gradient-overlay top"></div>
+<div class="gradient-overlay bottom"></div>
+
+<div class="effect-controls">
+    <div class="effect-number active" data-effect="zigzag" title="ZigZag">
+        1
+    </div>
+    <div class="effect-number" data-effect="orbital" title="Orbital">2</div>
+    <div class="effect-number" data-effect="spiral" title="Spiral">3</div>
+    <div class="effect-number" data-effect="glitch" title="Glitch">G</div>
+
+    <div class="intensity-mini">
+        <label>Power: <span id="intensity-value">15</span></label>
+        <input id="intensity-slider" max="50" min="5" type="range" value="15"/>
+    </div>
+</div>
+
+<div class="instructions">
+    Scroll with mouse wheel or swipe<br/>
+    to create organic wave effects<br/>
+    <small
+    >Hover over words for magic<br/>
+        Move cursor near words for magnetic pull<br/>
+        Press 1,2,3 or G for different effects</small
+    >
+</div>
+
+<div class="container">
+    <div class="column" id="column1">
+        <div class="column-content">
+            <p>
+                The universe is an extraordinary tapestry of cosmic phenomena, where
+                galaxies spiral through the vast darkness like luminous pinwheels.
+                Each star is a nuclear furnace, burning bright across billions of
+                years, creating the very elements that make life possible. Scientists
+                estimate there are over two trillion galaxies in the observable
+                universe.
+            </p>
+
+            <p>
+                Deep within these cosmic structures, black holes warp space and time
+                itself, creating gravitational wells so intense that not even light
+                can escape their grasp. These enigmatic objects challenge our
+                understanding of physics and continue to reveal secrets about the
+                fundamental nature of reality.
+            </p>
+
+            <p>
+                Quantum mechanics reveals that at the smallest scales, particles exist
+                in multiple states simultaneously until observed. This phenomenon,
+                known as superposition, has led to revolutionary technologies like
+                quantum computing and has profound implications for our understanding
+                of consciousness and observation.
+            </p>
+
+            <p>
+                The search for extraterrestrial life continues to captivate scientists
+                and the public alike. With thousands of exoplanets discovered orbiting
+                distant stars, many within the habitable zone where liquid water could
+                exist, the possibility of finding life beyond Earth becomes
+                increasingly plausible with each passing year.
+            </p>
+        </div>
+    </div>
+
+    <div class="column" id="column2">
+        <div class="column-content">
+            <p>
+                Artificial intelligence is reshaping the landscape of human knowledge
+                and capability. Machine learning algorithms can now recognize patterns
+                in data that would take humans centuries to identify, leading to
+                breakthroughs in medicine, climate science, and space exploration.
+            </p>
+
+            <p>
+                The human brain contains approximately 86 billion neurons, each
+                connected to thousands of others, creating a network more complex than
+                any supercomputer ever built. This biological marvel processes
+                information, generates consciousness, and creates the rich inner world
+                of human experience through mechanisms we are only beginning to
+                understand.
+            </p>
+
+            <p>
+                Climate change represents one of the most pressing challenges of our
+                time, requiring unprecedented global cooperation and innovation.
+                Scientists are developing revolutionary technologies like carbon
+                capture, renewable energy systems, and sustainable materials to
+                address this planetary crisis.
+            </p>
+
+            <p>
+                The concept of time remains one of physics' greatest mysteries.
+                Einstein showed us that time is relative, flowing differently
+                depending on gravity and velocity. This understanding has practical
+                applications in GPS satellites and opens doors to theoretical
+                possibilities like time dilation and the exploration of temporal
+                paradoxes.
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const mouseFollower = document.querySelector(".mouse-follower");
+    let mouseX = 0,
+        mouseY = 0;
+    let followerX = 0,
+        followerY = 0;
+
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function updateMouseFollower() {
+        followerX += (mouseX - followerX) * 0.1;
+        followerY += (mouseY - followerY) * 0.1;
+
+        mouseFollower.style.left = followerX - 10 + "px";
+        mouseFollower.style.top = followerY - 10 + "px";
+
+        requestAnimationFrame(updateMouseFollower);
+    }
+
+    updateMouseFollower();
+
+    function createParticle() {
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * window.innerWidth + "px";
+        particle.style.animationDelay = Math.random() * 2 + "s";
+        particle.style.animationDuration = Math.random() * 4 + 4 + "s";
+        document.body.appendChild(particle);
+
+        setTimeout(() => {
+            particle.remove();
+        }, 8000);
+    }
+
+    setInterval(createParticle, 1000);
+
+    class MagneticWords {
+        constructor() {
+            this.mouseX = 0;
+            this.mouseY = 0;
+            this.words = [];
+            this.magneticRadius = 120;
+            this.magneticStrength = 0.4;
+            this.smoothing = 0.15;
+
+            this.init();
+        }
+
+        init() {
+            document.addEventListener("mousemove", (e) => {
+                this.mouseX = e.clientX;
+                this.mouseY = e.clientY;
+                this.updateWords();
+            });
+
+            document.addEventListener("mouseleave", () => {
+                this.resetWords();
+            });
+
+            this.updateWordsList();
+
+            setInterval(() => this.updateWordsList(), 2000);
+        }
+
+        updateWordsList() {
+            this.words = Array.from(document.querySelectorAll(".word")).map((word) => ({
+                element: word,
+                originalTransform: "",
+                bounds: null,
+                currentX: 0,
+                currentY: 0,
+                targetX: 0,
+                targetY: 0,
+            }));
+        }
+
+        updateWords() {
+            this.words.forEach((wordData) => {
+                const word = wordData.element;
+                const rect = word.getBoundingClientRect();
+                const wordCenterX = rect.left + rect.width / 2;
+                const wordCenterY = rect.top + rect.height / 2;
+
+                const deltaX = this.mouseX - wordCenterX;
+                const deltaY = this.mouseY - wordCenterY;
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                if (distance < this.magneticRadius) {
+                    const force = (this.magneticRadius - distance) / this.magneticRadius;
+                    wordData.targetX = deltaX * force * this.magneticStrength;
+                    wordData.targetY = deltaY * force * this.magneticStrength;
+
+                    word.classList.add("magnetic");
+                    word.style.zIndex = Math.floor(force * 100);
+                } else {
+                    wordData.targetX = 0;
+                    wordData.targetY = 0;
+                    word.classList.remove("magnetic");
+                    word.style.zIndex = "";
+                }
+
+                wordData.currentX +=
+                    (wordData.targetX - wordData.currentX) * this.smoothing;
+                wordData.currentY +=
+                    (wordData.targetY - wordData.currentY) * this.smoothing;
+
+                if (distance > this.magneticRadius * 1.2) {
+                    word.classList.remove("magnetic");
+                    word.style.removeProperty("--hover-opacity");
+                }
+
+                const currentTransform = word.style.transform || "";
+                const waveMatch = currentTransform.match(/translateX\([^)]+\)/);
+                const waveTransform = waveMatch ? waveMatch[0] : "";
+
+                const magneticDistance = Math.sqrt(
+                    wordData.currentX * wordData.currentX +
+                    wordData.currentY * wordData.currentY
+                );
+                const scale = 1 + (magneticDistance / 100) * 0.1;
+
+                word.style.transform = `${waveTransform} translate(${wordData.currentX}px, ${wordData.currentY}px) scale(${scale})`;
+            });
+        }
+
+        resetWords() {
+            this.words.forEach((wordData) => {
+                const word = wordData.element;
+                word.classList.remove("magnetic");
+                wordData.currentX = 0;
+                wordData.currentY = 0;
+                wordData.targetX = 0;
+                wordData.targetY = 0;
+
+                const currentTransform = word.style.transform || "";
+                const waveMatch = currentTransform.match(/translateX\([^)]+\)/);
+                const waveTransform = waveMatch ? waveMatch[0] : "";
+
+                word.style.transform = waveTransform;
+                word.style.zIndex = "";
+
+                word.style.removeProperty("--hover-opacity");
+                word.blur();
+            });
+        }
+    }
+
+    const magneticWords = new MagneticWords();
+
+    class EffectManager {
+        constructor() {
+            this.currentEffect = "zigzag";
+            this.previousEffect = "zigzag";
+            this.intensity = 15;
+            this.columns = [];
+            this.time = 0;
+            this.transitionProgress = 1.0;
+            this.transitionDuration = 800;
+            this.transitionStartTime = 0;
+
+            this.init();
+        }
+
+        init() {
+            this.bindControls();
+            this.startTime();
+            this.updateColumnLayout();
+        }
+
+        bindControls() {
+            document.querySelectorAll(".effect-number").forEach((button) => {
+                button.addEventListener("click", () => {
+                    this.setEffect(button.dataset.effect);
+                    this.updateActiveButton(button);
+                });
+            });
+
+            document.addEventListener("keydown", (e) => {
+                const key = e.key.toLowerCase();
+                let effect = null;
+
+                if (key === "1") {
+                    effect = "zigzag";
+                } else if (key === "2") {
+                    effect = "orbital";
+                } else if (key === "3") {
+                    effect = "spiral";
+                } else if (key === "g") {
+                    effect = "glitch";
+                }
+
+                if (effect) {
+                    this.setEffect(effect);
+                    const button = document.querySelector(`[data-effect="${effect}"]`);
+                    this.updateActiveButton(button);
+                }
+            });
+
+            const slider = document.getElementById("intensity-slider");
+            const valueDisplay = document.getElementById("intensity-value");
+
+            slider.addEventListener("input", (e) => {
+                this.intensity = parseInt(e.target.value);
+                valueDisplay.textContent = this.intensity;
+            });
+        }
+
+        updateActiveButton(activeButton) {
+            document.querySelectorAll(".effect-number").forEach((btn) => {
+                btn.classList.remove("active");
+            });
+            if (activeButton) {
+                activeButton.classList.add("active");
+            }
+        }
+
+        setEffect(effect) {
+            if (effect !== this.currentEffect) {
+                this.previousEffect = this.currentEffect;
+                this.currentEffect = effect;
+                this.transitionProgress = 0.0;
+                this.transitionStartTime = this.time;
+
+                this.updateColumnLayout();
+            }
+        }
+
+        updateColumnLayout() {
+            const container = document.querySelector(".container");
+
+            if (this.currentEffect === "spiral") {
+                container.classList.add("single-column");
+            } else {
+                container.classList.remove("single-column");
+            }
+        }
+
+        addColumn(column) {
+            this.columns.push(column);
+        }
+
+        startTime() {
+            const updateTime = () => {
+                this.time += 16;
+
+                if (this.transitionProgress < 1.0) {
+                    const elapsed = this.time - this.transitionStartTime;
+                    this.transitionProgress = Math.min(
+                        1.0,
+                        elapsed / this.transitionDuration
+                    );
+
+                    this.transitionProgress = this.easeInOutCubic(this.transitionProgress);
+                }
+
+                requestAnimationFrame(updateTime);
+            };
+            updateTime();
+        }
+
+        easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        getEffectCurve(effect, y, t, isReverse = false, delta = 0) {
+            const intensity = this.intensity + Math.abs(delta) * 0.08;
+            t = t * 0.0005;
+
+            switch (effect) {
+                case "spiral":
+                    const spiralRadius = y * intensity * 0.5;
+                    const spiralAngle = y * Math.PI * 4 + t;
+                    return Math.cos(spiralAngle) * spiralRadius;
+
+                case "zigzag":
+                    const zigzagPhase = (y * 8 + t * 0.01) % 2;
+                    return (
+                        (zigzagPhase < 1 ? zigzagPhase : 2 - zigzagPhase) * intensity * 2 -
+                        intensity
+                    );
+
+                case "orbital":
+                    const orbitRadius = intensity * 0.8;
+                    const orbitSpeed = t * 0.002 + y * Math.PI * 2;
+                    return Math.cos(orbitSpeed) * orbitRadius * Math.sin(y * Math.PI);
+
+                case "glitch":
+                    const glitchFreq = t * 0.006;
+                    const randomOffset = (Math.random() - 0.5) * intensity * 0.2;
+                    const digitalNoise =
+                        Math.sin(y * Math.PI * 25 + glitchFreq) * intensity * 0.3;
+                    const digitalNoise2 =
+                        Math.cos(y * Math.PI * 15 + glitchFreq * 1.2) * intensity * 0.15;
+                    const jumpEffect =
+                        Math.floor(glitchFreq * 6) % 8 === 0 ? intensity * 1 : 0;
+                    const microGlitch =
+                        Math.sin(y * Math.PI * 60 + glitchFreq * 2.5) * intensity * 0.08;
+                    return (
+                        digitalNoise + digitalNoise2 + randomOffset + jumpEffect + microGlitch
+                    );
+
+                default:
+                    return Math.sin(y * Math.PI * 2 + t) * intensity;
+            }
+        }
+
+        getCurve(y, t, isReverse = false, delta = 0) {
+            if (this.transitionProgress >= 1.0) {
+                return this.getEffectCurve(this.currentEffect, y, t, isReverse, delta);
+            } else {
+                const previousCurve = this.getEffectCurve(
+                    this.previousEffect,
+                    y,
+                    t,
+                    isReverse,
+                    delta
+                );
+                const currentCurve = this.getEffectCurve(
+                    this.currentEffect,
+                    y,
+                    t,
+                    isReverse,
+                    delta
+                );
+
+                return (
+                    previousCurve * (1 - this.transitionProgress) +
+                    currentCurve * this.transitionProgress
+                );
+            }
+        }
+    }
+
+    const effectManager = new EffectManager();
+
+    document.addEventListener("mousemove", (e) => {
+        window.mouseY = e.clientY;
+    });
+
+    const Utils = {
+        lineBreak: function (text, max, container) {
+            const getTotalWidth = (el) =>
+                Array.from(el.children).reduce(
+                    (acc, child) => acc + child.getBoundingClientRect().width,
+                    0
+                );
+
+            const createNewLine = () => {
+                const line = document.createElement("span");
+                line.classList.add("line");
+                return line;
+            };
+
+            const words = text.split(/\s/).map((w, i) => {
+                const span = document.createElement("span");
+                span.classList.add("word");
+
+                const specialWords = [
+                    "universe",
+                    "quantum",
+                    "consciousness",
+                    "artificial",
+                    "intelligence",
+                    "mystery",
+                    "gravity",
+                    "time",
+                    "space",
+                ];
+                if (
+                    specialWords.some((special) =>
+                        w.toLowerCase().includes(special.toLowerCase())
+                    )
+                ) {
+                    span.classList.add("special");
+                }
+
+                span.innerHTML = (i > 0 ? " " : "") + w;
+                return span;
+            });
+
+            container.innerHTML = "";
+            words.forEach((word) => container.appendChild(word));
+
+            const adjustedMax = max - 40;
+
+            if (getTotalWidth(container) > adjustedMax) {
+                container.innerHTML = "";
+                let currentLine = createNewLine();
+                container.appendChild(currentLine);
+
+                words.forEach((word) => {
+                    currentLine.appendChild(word);
+                    if (getTotalWidth(currentLine) > adjustedMax) {
+                        currentLine.removeChild(word);
+                        currentLine = createNewLine();
+                        currentLine.appendChild(word);
+                        container.appendChild(currentLine);
+                    }
+                });
+            } else {
+                const line = createNewLine();
+                words.forEach((word) => line.appendChild(word));
+                container.innerHTML = "";
+                container.appendChild(line);
+            }
+
+            Array.from(container.querySelectorAll(".line")).forEach((line) => {
+                if (line.innerText.trim()) {
+                    line.innerHTML = `<span class="text">${line.innerHTML}</span>`;
+                } else {
+                    line.remove();
+                }
+            });
+        },
+
+        getStyleNumber: function (el, property) {
+            return Number(getComputedStyle(el)[property].replace("px", ""));
+        },
+    };
+
+    class SmartText {
+        constructor(options) {
+            this.el = options.el;
+            this.text = this.el.innerText;
+            this.init();
+        }
+
+        init() {
+            this.applyLineBreaks();
+        }
+
+        applyLineBreaks() {
+            const parentWidth = this.el.parentElement?.clientWidth ?? window.innerWidth;
+            const maxWidth = Math.min(parentWidth * 0.9, parentWidth - 60);
+            Utils.lineBreak(this.text, maxWidth, this.el);
+        }
+    }
+
+    class Column {
+        constructor(options) {
+            this.el = options.el;
+            this.reverse = options.reverse || false;
+
+            this.scroll = {
+                ease: 0.05,
+                current: 0,
+                target: 0,
+                last: 0,
+            };
+
+            this.touch = {prev: 0, start: 0};
+            this.speed = {t: 1, c: 1};
+            this.defaultSpeed = 0.5;
+            this.target = 0;
+            this.height = 0;
+            this.direction = "";
+
+            this.content = this.el.querySelector(".column-content");
+            this.paragraphs = Array.from(this.content.querySelectorAll("p"));
+
+            this.init();
+        }
+
+        init() {
+            this.bindEvents();
+            this.resize();
+            this.render();
+        }
+
+        bindEvents() {
+            window.addEventListener("resize", () => this.resize());
+            window.addEventListener("wheel", (e) => this.wheel(e));
+            document.addEventListener("touchstart", (e) => this.touchstart(e));
+            document.addEventListener("touchmove", (e) => this.touchmove(e));
+            document.addEventListener("touchend", (e) => this.touchend(e));
+        }
+
+        wheel(e) {
+            let delta = e.wheelDeltaY || -1 * e.deltaY;
+            delta *= 0.5;
+            this.scroll.target += -delta;
+        }
+
+        touchstart(e) {
+            this.touch.prev = this.scroll.current;
+            this.touch.start = e.touches[0].clientY;
+        }
+
+        touchend(e) {
+            this.target = 0;
+        }
+
+        touchmove(e) {
+            const y = e.touches ? e.touches[0].clientY : e.clientY;
+            const distance = (this.touch.start - y) * 2;
+            this.scroll.target = this.touch.prev + distance;
+        }
+
+        splitText() {
+            this.splits = [];
+            const paragraphs = Array.from(this.content.querySelectorAll("p"));
+
+            paragraphs.forEach((item, index) => {
+                item.classList.add("smart-text");
+                if (Math.random() > 0.7) {
+                    item.classList.add("drop-cap");
+                }
+                this.splits.push(new SmartText({el: item}));
+            });
+        }
+
+        updateChilds() {
+            const h = this.content.scrollHeight;
+            const ratio = h / this.winH;
+
+            if (ratio < 3) {
+                const copies = Math.min(Math.ceil((3 * this.winH) / h), 5);
+                for (let i = 0; i < copies; i++) {
+                    Array.from(this.content.children).forEach((item) => {
+                        const clone = item.cloneNode(true);
+                        this.content.appendChild(clone);
+                    });
+                }
+            }
+        }
+
+        resize() {
+            this.winW = window.innerWidth;
+            this.winH = window.innerHeight;
+
+            this.content.innerHTML = "";
+            this.paragraphs.forEach((item) => {
+                const clone = item.cloneNode(true);
+                this.content.appendChild(clone);
+            });
+
+            this.splitText();
+            this.updateChilds();
+
+            this.scroll.target = 0;
+            this.scroll.current = 0;
+            this.speed.t = 0;
+            this.speed.c = 0;
+            this.paused = true;
+
+            this.el.classList.add("no-transform");
+
+            this.items = Array.from(this.content.children).map((item, i) => {
+                const data = {el: item};
+                data.width = data.el.clientWidth;
+                data.height = data.el.clientHeight;
+                data.left = data.el.offsetLeft;
+                data.top = data.el.offsetTop;
+                data.bounds = data.el.getBoundingClientRect();
+                data.y = 0;
+                data.extra = 0;
+
+                data.lines = Array.from(data.el.querySelectorAll(".line")).map(
+                    (line, j) => {
+                        return {
+                            el: line,
+                            height: line.clientHeight,
+                            top: line.offsetTop,
+                            bounds: line.getBoundingClientRect(),
+                        };
+                    }
+                );
+
+                return data;
+            });
+
+            this.height = this.content.scrollHeight;
+            this.speed.t = this.defaultSpeed;
+            this.el.classList.remove("no-transform");
+            this.paused = false;
+        }
+
+        curve(y, t = 0) {
+            return effectManager.getCurve(y, t, this.reverse, this.delta);
+        }
+
+        updateElements(scroll, t) {
+            if (this.items && this.items.length > 0) {
+                const isReverse = this.reverse;
+
+                this.items.forEach((item, j) => {
+                    item.isBefore = item.y + item.bounds.top > this.winH;
+                    item.isAfter = item.y + item.bounds.top + item.bounds.height < 0;
+
+                    if (!isReverse) {
+                        if (this.direction === "up" && item.isBefore) {
+                            item.extra -= this.height;
+                            item.isBefore = false;
+                            item.isAfter = false;
+                        }
+                        if (this.direction === "down" && item.isAfter) {
+                            item.extra += this.height;
+                            item.isBefore = false;
+                            item.isAfter = false;
+                        }
+                        item.y = -scroll + item.extra;
+                    } else {
+                        if (this.direction === "down" && item.isBefore) {
+                            item.extra -= this.height;
+                            item.isBefore = false;
+                            item.isAfter = false;
+                        }
+                        if (this.direction === "up" && item.isAfter) {
+                            item.extra += this.height;
+                            item.isBefore = false;
+                            item.isAfter = false;
+                        }
+                        item.y = scroll + item.extra;
+                    }
+
+                    item.lines.forEach((line, k) => {
+                        const posY = line.top + item.y;
+                        const progress = Math.min(Math.max(0, posY / this.winH), 1);
+                        const x = this.curve(progress, t);
+
+                        let additionalTransform = "";
+
+                        const applyEffectTransform = (effect, intensity) => {
+                            if (effect === "3d") {
+                                const depth =
+                                    Math.sin(progress * Math.PI * 2 + t * 0.0005) * 0.5 + 0.5;
+                                const scale = 0.8 + depth * 0.4 * intensity;
+                                const perspective = depth * 50 * intensity;
+                                return ` scale(${scale}) translateZ(${perspective}px)`;
+                            } else if (effect === "spiral") {
+                                const rotation = progress * 360 + t * 0.05;
+                                return ` rotate(${rotation * intensity}deg)`;
+                            } else if (effect === "orbital") {
+                                const orbitY =
+                                    Math.sin(t * 0.002 + progress * Math.PI * 2) * 10 * intensity;
+                                return ` translateY(${orbitY}px)`;
+                            } else if (effect === "glitch") {
+                                const glitchScale = 1 + (Math.random() - 0.5) * 0.03 * intensity;
+                                const glitchRotate = (Math.random() - 0.5) * intensity * 0.2;
+                                const glitchSkew = (Math.random() - 0.5) * intensity * 0.15;
+                                return ` scale(${glitchScale}) rotate(${glitchRotate}deg) skew(${glitchSkew}deg)`;
+                            }
+                            return "";
+                        };
+
+                        if (effectManager.transitionProgress >= 1.0) {
+                            additionalTransform = applyEffectTransform(
+                                effectManager.currentEffect,
+                                1.0
+                            );
+                        } else {
+                            const prevTransform = applyEffectTransform(
+                                effectManager.previousEffect,
+                                1 - effectManager.transitionProgress
+                            );
+                            const currTransform = applyEffectTransform(
+                                effectManager.currentEffect,
+                                effectManager.transitionProgress
+                            );
+                            additionalTransform = prevTransform + currTransform;
+                        }
+
+                        if (
+                            effectManager.currentEffect === "glitch" ||
+                            (effectManager.transitionProgress < 1.0 &&
+                                (effectManager.currentEffect === "glitch" ||
+                                    effectManager.previousEffect === "glitch"))
+                        ) {
+                            line.el.classList.add("glitch");
+                            line.el.setAttribute("data-text", line.el.textContent);
+                        } else {
+                            line.el.classList.remove("glitch");
+                            line.el.removeAttribute("data-text");
+                        }
+
+                        line.el.style.transform = `translateX(${x}px)${additionalTransform}`;
+                    });
+
+                    item.el.style.transform = `translateY(${item.y}px)`;
+                });
+            }
+        }
+
+        render(t) {
+            if (this.destroyed) return;
+
+            if (!this.paused) {
+                if (this.start === undefined) {
+                    this.start = t;
+                }
+
+                const elapsed = t - this.start;
+                this.speed.c += (this.speed.t - this.speed.c) * 0.05;
+                this.scroll.target += this.speed.c;
+                this.scroll.current +=
+                    (this.scroll.target - this.scroll.current) * this.scroll.ease;
+                this.delta = this.scroll.target - this.scroll.current;
+
+                if (this.scroll.current > this.scroll.last) {
+                    this.direction = "down";
+                    this.speed.t = this.defaultSpeed;
+                } else if (this.scroll.current < this.scroll.last) {
+                    this.direction = "up";
+                    this.speed.t = -this.defaultSpeed;
+                }
+
+                this.updateElements(this.scroll.current, elapsed);
+                this.scroll.last = this.scroll.current;
+            }
+
+            requestAnimationFrame((t) => this.render(t));
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const column1 = new Column({
+            el: document.getElementById("column1"),
+            reverse: false,
+        });
+
+        const column2 = new Column({
+            el: document.getElementById("column2"),
+            reverse: true,
+        });
+
+        effectManager.addColumn(column1);
+        effectManager.addColumn(column2);
+    });
+
+</script>
+</body>
+</html>

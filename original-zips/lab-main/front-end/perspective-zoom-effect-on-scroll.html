@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Perspective Zoom Effect on Scroll</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+          rel="stylesheet">
+
+    <script>
+        !function (a) {
+            var b = /iPhone/i, c = /iPod/i, d = /iPad/i, e = /(?=.*\bAndroid\b)(?=.*\bMobile\b)/i, f = /Android/i,
+                g = /(?=.*\bAndroid\b)(?=.*\bSD4930UR\b)/i,
+                h = /(?=.*\bAndroid\b)(?=.*\b(?:KFOT|KFTT|KFJWI|KFJWA|KFSOWI|KFTHWI|KFTHWA|KFAPWI|KFAPWA|KFARWI|KFASWI|KFSAWI|KFSAWA)\b)/i,
+                i = /Windows Phone/i, j = /(?=.*\bWindows\b)(?=.*\bARM\b)/i, k = /BlackBerry/i, l = /BB10/i,
+                m = /Opera Mini/i, n = /(CriOS|Chrome)(?=.*\bMobile\b)/i, o = /(?=.*\bFirefox\b)(?=.*\bMobile\b)/i,
+                p = new RegExp("(?:Nexus 7|BNTV250|Kindle Fire|Silk|GT-P1000)", "i"), q = function (a, b) {
+                    return a.test(b)
+                }, r = function (a) {
+                    var r = a || navigator.userAgent, s = r.split("[FBAN");
+                    if ("undefined" != typeof s[1] && (r = s[0]), s = r.split("Twitter"), "undefined" != typeof s[1] && (r = s[0]), this.apple = {
+                        phone: q(b, r),
+                        ipod: q(c, r),
+                        tablet: !q(b, r) && q(d, r),
+                        device: q(b, r) || q(c, r) || q(d, r)
+                    }, this.amazon = {
+                        phone: q(g, r),
+                        tablet: !q(g, r) && q(h, r),
+                        device: q(g, r) || q(h, r)
+                    }, this.android = {
+                        phone: q(g, r) || q(e, r),
+                        tablet: !q(g, r) && !q(e, r) && (q(h, r) || q(f, r)),
+                        device: q(g, r) || q(h, r) || q(e, r) || q(f, r)
+                    }, this.windows = {
+                        phone: q(i, r),
+                        tablet: q(j, r),
+                        device: q(i, r) || q(j, r)
+                    }, this.other = {
+                        blackberry: q(k, r),
+                        blackberry10: q(l, r),
+                        opera: q(m, r),
+                        firefox: q(o, r),
+                        chrome: q(n, r),
+                        device: q(k, r) || q(l, r) || q(m, r) || q(o, r) || q(n, r)
+                    }, this.seven_inch = q(p, r), this.any = this.apple.device || this.android.device || this.windows.device || this.other.device || this.seven_inch, this.phone = this.apple.phone || this.android.phone || this.windows.phone, this.tablet = this.apple.tablet || this.android.tablet || this.windows.tablet, "undefined" == typeof window) return this
+                }, s = function () {
+                    var a = new r;
+                    return a.Class = r, a
+                };
+            "undefined" != typeof module && module.exports && "undefined" == typeof window ? module.exports = r : "undefined" != typeof module && module.exports && "undefined" != typeof window ? module.exports = s() : "function" == typeof define && define.amd ? define("isMobile", [], a.isMobile = s()) : a.isMobile = s()
+        }(this);
+        isMobile.any || document.querySelector('html').classList.add('is-desktop');
+    </script>
+
+    <style>
+        :root {
+            --color-black: hsla(0, 0%, 12%, 100%);
+            --color-white: hsla(0, 0%, 100%, 100%);
+            --color-purple: hsla(278, 100%, 75%, 100%);
+        }
+
+        body {
+            background-color: var(--color-black);
+            color: var(--color-white);
+            font-family: "Roboto", sans-serif;
+            font-optical-sizing: auto;
+        }
+
+        main {
+            margin: 0;
+        }
+
+        .heading {
+            font-size: clamp(3.125rem, 3.464vw + 2.229rem, 5rem);
+            line-height: clamp(4.688rem, 3.349vw + 3.821rem, 6.5rem);
+            margin: 6.25rem 0;
+            text-align: center;
+            opacity: 0.1;
+            position: absolute;
+            left: 50%;
+            margin: 0;
+            top: 50%;
+            transform: translate3d(-50%, -50%, -2000px);
+            white-space: nowrap;
+        }
+
+        .zoom-container {
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            perspective: 100svh;
+            width: 100vw;
+        }
+
+        .zoom-item {
+            position: absolute;
+            transform-origin: center center;
+        }
+
+        .zoom-item[data-layer="3"] {
+            opacity: 0.6;
+            z-index: 3;
+        }
+
+        .zoom-item[data-layer="2"] {
+            opacity: 0.4;
+            z-index: 2;
+        }
+
+        .zoom-item[data-layer="1"] {
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .zoom-item:nth-child(2) {
+            left: 15vw;
+            top: 21%;
+            width: 11.5vw;
+        }
+
+        .zoom-item:nth-child(3) {
+            left: 29%;
+            top: 15%;
+            width: 9.2vw;
+        }
+
+        .zoom-item:nth-child(4) {
+            left: 36%;
+            top: 3%;
+            width: 11.5vw;
+        }
+
+        .zoom-item:nth-child(5) {
+            right: 30%;
+            top: 11%;
+            width: 7.6vw;
+        }
+
+        .zoom-item:nth-child(6) {
+            bottom: auto;
+            right: 7%;
+            top: 28%;
+            width: 13.2vw;
+        }
+
+        .zoom-item:nth-child(7) {
+            bottom: 32%;
+            right: 3.5%;
+            width: 4.7vw;
+        }
+
+        .zoom-item:nth-child(8) {
+            bottom: 13.5%;
+            left: 16%;
+            width: 10.5vw;
+        }
+
+        .zoom-item:nth-child(9) {
+            bottom: 24%;
+            left: 29%;
+            width: 5.9vw;
+        }
+
+        .zoom-item:nth-child(10) {
+            bottom: 46%;
+            left: 7.5%;
+            top: auto;
+            width: 5.2vw;
+        }
+
+        .zoom-item:nth-child(11) {
+            bottom: 5.5%;
+            right: 15%;
+            width: 15vw;
+        }
+
+        .zoom-item:nth-child(12) {
+            bottom: 10.5%;
+            left: auto;
+            right: 38%;
+            width: 8.3vw;
+        }
+
+        .zoom-item:nth-child(13) {
+            right: 4%;
+            top: 5%;
+            width: 6.1vw;
+        }
+
+        .zoom-item:not(.heading) {
+            max-height: 300px;
+            max-width: 300px;
+        }
+
+        .zoom-item img {
+            width: 100%;
+        }
+
+        /*# sourceMappingURL=style.css.map */
+
+    </style>
+</head>
+<body>
+<main>
+    <div class="zoom-container">
+        <h1 class="heading">Perspective Zoom Effect<br/>on Scroll</h1>
+        <div class="zoom-item" data-layer="2">
+            <img alt="" src="https://assets.codepen.io/204808/eugene-chystiakov-W6FESrD-M50-unsplash.jpg">
+        </div>
+        <div class="zoom-item" data-layer="2">
+            <img alt="" src="https://assets.codepen.io/204808/hendo-wang-DsGeUBaJPwc-unsplash.jpg"/>
+        </div>
+        <div class="zoom-item" data-layer="1">
+            <img alt="" src="https://assets.codepen.io/204808/taylor-sondgeroth-ltsKOg_q_Gc-unsplash.jpg"/>
+        </div>
+        <div class="zoom-item" data-layer="2">
+            <img alt="" src="https://assets.codepen.io/204808/shayna-douglas-w2tG22s8hEc-unsplash.jpg"/>
+        </div>
+        <div class="zoom-item" data-layer="3">
+            <img alt="" src="https://assets.codepen.io/204808/samantha-fortney-o8CA1Kj8TJU-unsplash.jpg"/>
+        </div>
+        <div class="zoom-item" data-layer="1">
+            <img alt="" src="https://assets.codepen.io/204808/jakub-dziubak-wvXG_7ebZ18-unsplash.jpg"/>
+        </div>
+        <div class="zoom-item" data-layer="3">
+            <img alt="" src="https://assets.codepen.io/204808/golden-retriever-3.png"/>
+        </div>
+        <div class="zoom-item" data-layer="3">
+            <img alt="" src="https://assets.codepen.io/204808/golden-retriever-2.png"/>
+        </div>
+        <div class="zoom-item" data-layer="1">
+            <img alt="" src="https://assets.codepen.io/204808/golden-retriever-1.png"/>
+        </div>
+        <div class="zoom-item" data-layer="3">
+            <img alt="" src="https://assets.codepen.io/204808/richard-brutyo-Sg3XwuEpybU.jpg"/>
+        </div>
+        <div class="zoom-item" data-layer="2">
+            <img alt="" src="https://assets.codepen.io/204808/berkay-gumustekin-ngqyo2AYYnE.jpg"/>
+        </div>
+        <div class="zoom-item" data-layer="1">
+            <img alt="" src="https://assets.codepen.io/204808/zach-shup-R6SdnJnLJEg.jpg"/>
+        </div>
+    </div>
+
+    <section class="section-stick min-h-screen bg-black flex justify-center items-center text-white">
+        <p class="opacity-reveal text-7xl text-center w-3/5">If you’re lucky, a Golden Retriever will come into your
+            life, steal your heart, and change everything.</p>
+    </section>
+</main>
+
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/ScrollSmoother.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://unpkg.com/gsap@3/dist/SplitText.min.js"></script>
+<script>
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+    ScrollSmoother.create({
+        smooth: 1,
+        effects: true,
+        normalizeScroll: true
+    });
+
+    gsap
+        .timeline({
+            scrollTrigger: {
+                trigger: ".zoom-container",
+                start: "top top",
+                end: "+=150%",
+                pin: true,
+                // markers: true,
+                scrub: 1
+            }
+        })
+        .to(
+            ".zoom-item[data-layer='3']",
+            {
+                opacity: 1,
+                z: 800,
+                ease: "power1.inOut"
+            },
+            0
+        )
+        .to(
+            ".zoom-item[data-layer='2']",
+            {
+                opacity: 1,
+                z: 600,
+                ease: "power1.inOut"
+            },
+            0
+        )
+        .to(
+            ".zoom-item[data-layer='1']",
+            {
+                opacity: 1,
+                z: 400,
+                ease: "power1.inOut"
+            },
+            0
+        )
+        .to(
+            ".heading",
+            {
+                opacity: 1,
+                z: 50,
+                ease: "power1.inOut"
+            },
+            0
+        );
+
+    const splitLetters = SplitText.create(
+        document.querySelector(".opacity-reveal")
+    );
+    gsap.set(splitLetters.chars, {opacity: "0.2"});
+
+    gsap
+        .timeline({
+            scrollTrigger: {
+                trigger: ".section-stick",
+                pin: true,
+                start: "center center",
+                end: "+=1500",
+                // markers: true,
+                scrub: 1
+            }
+        })
+        .to(splitLetters.chars, {
+            opacity: "1",
+            duration: 1,
+            ease: "none",
+            stagger: 1
+        })
+        .to({}, {duration: 10})
+        .to(".opacity-reveal", {
+            opacity: "0",
+            scale: 1.2,
+            duration: 50
+        });
+
+</script>
+</body>
+</html>

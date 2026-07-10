@@ -1,8 +1,0 @@
-
-Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-apple-liquid-glass-experiments-1-apple-liquid-glass-experiments-src --name glasslab-apple-liquid-glass-experiments-1-apple-liquid-glass-experiments-src
-CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-apple-liquid-glass-experiments-1-apple-liquid-glass-experiments-src
-----------------------------------------
-The "--name" option is deprecated (https://vercel.link/name-flag)
-Retrieving project…
-Deploying lekandigitals-projects/glasslab-apple-liquid-glass-experiments-1-apple-liquid-glass-experiments-src
-Error: You have been creating deployments at a very fast pace. Please retry in 5 minutes.

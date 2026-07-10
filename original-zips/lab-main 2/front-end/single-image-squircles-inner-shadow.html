@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Single images squircles + inner shadow</title>
+    <style>html, body {
+        display: grid
+    }
+
+    html {
+        min-height: 100%
+    }
+
+    body {
+        grid-gap: 1em;
+        grid-template-columns: repeat(auto-fit, min(15em, 100%));
+        place-content: center;
+        background: #a53860
+    }
+
+    svg[aria-hidden='true'][height='0'] {
+        position: absolute
+    }
+
+    img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        filter: url(#squircle) url(#shadow) url(#smooth)
+    }</style>
+</head>
+<body>
+<svg aria-hidden="true" height="0" width="0">
+    <filter id="squircle" primitiveUnits="objectBoundingBox">
+        <feGaussianBlur stdDeviation="0.2"></feGaussianBlur>
+        <feComponentTransfer>
+            <feFuncA tableValues="0 1" type="discrete"></feFuncA>
+        </feComponentTransfer>
+        <feComposite in="SourceGraphic" operator="in"></feComposite>
+    </filter>
+    <filter id="shadow"><!-- SourceAlpha because Firefox bug-->
+        <feGaussianBlur in="SourceAlpha" stdDeviation="8"></feGaussianBlur>
+        <feOffset dx="6" dy="8"></feOffset>
+        <feComposite in="SourceAlpha" operator="out"></feComposite>
+        <feBlend in2="SourceGraphic" mode="multiply"></feBlend>
+    </filter>
+    <filter id="smooth">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="8"></feGaussianBlur>
+        <feComponentTransfer>
+            <feFuncA tableValues="-8 7" type="table"></feFuncA>
+        </feComponentTransfer>
+        <feComposite in="SourceGraphic" operator="in"></feComposite>
+    </filter>
+</svg>
+<img src="https://images.unsplash.com/photo-1736230990003-a98eea26ea1f?w=800"/><img
+        src="https://images.unsplash.com/photo-1739323006029-2d8452a47df6?w=800"/><img
+        src="https://images.unsplash.com/photo-1739370143123-20f486557a00?w=800"/><img
+        src="https://images.unsplash.com/photo-1738236013982-9449791344de?w=800"/><img
+        src="https://images.unsplash.com/photo-1737227817817-a6010e39bfa6?w=800"/><img
+        src="https://images.unsplash.com/photo-1738848392298-cf0b62edc750?w=800"/><img
+        src="https://images.unsplash.com/photo-1736117024365-c36ccb9f843d?w=800"/><img
+        src="https://images.unsplash.com/photo-1739437455408-66aab68b5c0d?w=800"/><img
+        src="https://images.unsplash.com/photo-1734613876170-079f67aa0d15?w=800"/><img
+        src="https://images.unsplash.com/photo-1735534151807-17f107a64cf6?w=800"/><img
+        src="https://images.unsplash.com/photo-1737701586572-e67432dbcd42?w=800"/><img
+        src="https://images.unsplash.com/photo-1737461114281-7b8ef86b0112?w=800"/>
+</body>
+</html>

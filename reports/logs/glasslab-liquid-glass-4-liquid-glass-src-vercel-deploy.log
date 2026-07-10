@@ -1,8 +1,0 @@
-
-Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-4-liquid-glass-src --name glasslab-liquid-glass-4-liquid-glass-src
-CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-4-liquid-glass-src
-----------------------------------------
-The "--name" option is deprecated (https://vercel.link/name-flag)
-Retrieving project…
-Deploying lekandigitals-projects/glasslab-liquid-glass-4-liquid-glass-src
-Error: You have been creating deployments at a very fast pace. Please retry in 5 minutes.

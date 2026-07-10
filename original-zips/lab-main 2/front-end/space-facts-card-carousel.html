@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Space Facts Card Carousel</title>
+    <style>
+        body {
+            background-image: url(https://i.postimg.cc/Gtcs55SP/photo-1506318137071-a8e063b4bec0.avif);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+        }
+
+        .slider {
+            position: relative;
+            margin-top: 100px;
+            width: 100%;
+            height: 370px;
+            overflow: hidden;
+        }
+
+        .item {
+            position: absolute;
+            width: 200px;
+            height: 320px;
+            text-align: justify;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            transition: 0.5s;
+            left: calc(50% - 110px);
+            top: 0;
+        }
+
+        #next {
+            position: absolute;
+            right: 50px;
+            top: 40%;
+        }
+
+        #prev {
+            position: absolute;
+            left: 50px;
+            top: 40%;
+        }
+
+        #prev,
+        #next {
+            color: #fff;
+            background: none;
+            border: none;
+            font-size: xxx-large;
+            font-family: monospace;
+            font-weight: bold;
+            opacity: 0.5;
+            transition: opacity 0.5s;
+        }
+
+        #prev:hover,
+        #next:hover {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="slider">
+    <div class="item">
+        <h1>Space Fact 1</h1>
+        Jupiter protects Earth - its gravity acts like a cosmic shield, deflecting comets and asteroids.🌠
+    </div>
+    <div class="item">
+        <h1>Space Fact 2</h1>
+        Stars "beat" like hearts - they pulsate, expanding and contracting as they burn fuel.⭐
+    </div>
+    <div class="item">
+        <h1>Space Fact 3</h1>
+        Galaxies can "eat" each other - the Milky Way is currently consuming the Sagittarius Dwarf Galaxy.🌌
+    </div>
+    <div class="item ">
+        <h1>Space Fact 4</h1>
+        Space smells like seared steak - astronauts describe a metallic/grilled odor after spacewalks.👩‍🚀
+    </div>
+    <div class="item ">
+        <h1>Space Fact 5</h1>
+        Astronauts grow taller in space - spines stretch up to 2 inches without gravity's compression.🚀
+    </div>
+    <div class="item ">
+        <h1>Space Fact 6</h1>
+        Space has its own "internet" - neutron stars beam signals like cosmic radio towers.🪐
+    </div>
+    <div class="item ">
+        <h1>Space Fact 7</h1>
+        There's an alcohol cloud in space - in Aquila, containing enough ethanol for 400 septillion drinks.🍷
+    </div>
+    <div class="item ">
+        <h1>Space Fact 8</h1>
+        Your body contains stardust - atoms of heavy elements like calcium were forged in supernovae.✨
+    </div>
+    <div class="item ">
+        <h1>Space Fact 9</h1>
+        Black holes can "sing" - they create sound waves when consuming matter, but humans can't hear them.🎤
+    </div>
+    <button id="next">&gt;</button>
+    <button id="prev">&lt;</button>
+</div>
+
+<script>
+    let items = document.querySelectorAll(".slider .item");
+    let active = 3;
+
+    function loadShow() {
+        items[active].style.transform = `none`;
+        items[active].style.zIndex = 1;
+        items[active].style.filter = "none";
+        items[active].style.opacity = 1;
+        // show after
+        let stt = 0;
+        for (var i = active + 1; i < items.length; i++) {
+            stt++;
+            items[i].style.transform = `translateX(${120 * stt}px) scale(${
+                1 - 0.2 * stt
+            }) perspective(16px) rotateY(-1deg)`;
+            items[i].style.zIndex = -stt;
+            items[i].style.filter = "blur(5px)";
+            items[i].style.opacity = stt > 2 ? 0 : 0.6;
+        }
+        stt = 0;
+        for (var i = active - 1; i >= 0; i--) {
+            stt++;
+            items[i].style.transform = `translateX(${-120 * stt}px) scale(${
+                1 - 0.2 * stt
+            }) perspective(16px) rotateY(1deg)`;
+            items[i].style.zIndex = -stt;
+            items[i].style.filter = "blur(5px)";
+            items[i].style.opacity = stt > 2 ? 0 : 0.6;
+        }
+    }
+
+    loadShow();
+    let next = document.getElementById("next");
+    let prev = document.getElementById("prev");
+    next.onclick = function () {
+        active = active + 1 < items.length ? active + 1 : active;
+        loadShow();
+    };
+    prev.onclick = function () {
+        active = active - 1 >= 0 ? active - 1 : active;
+        loadShow();
+    };
+
+</script>
+</body>
+</html>
