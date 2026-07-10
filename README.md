@@ -1,10 +1,10 @@
 # Glass Projects Lab
 
-Live gallery: https://glasslab-gallery.vercel.app
+Live gallery: https://projects-glass-attempt-two-chi.vercel.app
 GitHub repository: https://github.com/lekandigital/glass-projects-lab
 
 ## Documentation Links
-- [Live Gallery](https://glasslab-gallery.vercel.app)
+- [Live Gallery](https://projects-glass-attempt-two-chi.vercel.app)
 - [All Deployments](docs/deployments.md)
 - [All References](docs/references.md)
 
