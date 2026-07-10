@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analog Clock</title>
+
+    <style>
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-block-size: 100vh;
+            display: grid;
+            place-content: center;
+            background: hsl(202, 6%, 75%);
+        }
+
+        .clock {
+            --clock-frame: 20rem;
+            --total-count: 12;
+            inline-size: var(--clock-frame);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: grid;
+            grid-template-areas: "stack";
+            position: relative;
+            background: hsl(193 12 86) radial-gradient(
+                    70% 70% at 30% 20%,
+                    #fff 10%,
+                    40%,
+                    hsl(206, 12%, 88%),
+                    hsla(203, 7%, 76%, 0.7)
+            );
+
+            box-shadow: 0 -1px 1px 0px hsla(201, 23%, 96%, 0.7),
+            0 -3px 1px 2px hsl(200, 9%, 22%), 0 3px 1px 1.5px hsl(200, 9%, 24%),
+            0 7px 4px 0px #0005 inset, 0 -1px 0 0.5px hsl(200, 13%, 96%) inset,
+            0 -6px 6px 0.5px #0004 inset;
+            outline: 2.25px solid hsl(202, 8%, 16%);
+            outline-offset: 3.5px;
+        }
+
+        .clock::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            z-index: -1;
+            outline: 3px solid #c1cbd1;
+            outline-offset: 0px;
+            box-shadow: 0 18px 10px #0003, 0 26px 16px #0003;
+        }
+
+        .clock > * {
+            grid-area: stack;
+            border-radius: inherit;
+            display: grid;
+            place-content: center;
+        }
+
+        .tick {
+            position: absolute;
+            width: 0.125rem;
+            height: 0.45rem;
+            offset-path: circle(calc(50% - 0.25rem) at center);
+            offset-distance: calc(100% * (var(--i) / 60) - 25%);
+            offset-anchor: top;
+        }
+
+        .tick:not(:nth-child(5n + 1)) {
+            background: #666;
+        }
+
+        .tick:nth-child(5n + 1) {
+            background: #262626;
+            height: 0.85rem;
+            width: 0.2rem;
+        }
+
+        .number {
+            --number-size: 2rem;
+            position: absolute;
+            display: inline-grid;
+            place-content: center;
+            width: var(--number-size);
+            aspect-ratio: 1;
+
+            font: 600 1.75rem system-ui;
+            offset-path: circle(
+                    calc((50% - 1.25rem) - (var(--number-size)) / 2) at center
+            );
+            offset-distance: calc(100% * var(--index) / var(--total-count) - 25%);
+            offset-rotate: 0deg;
+            offset-anchor: auto;
+        }
+
+        .center-pin {
+            place-self: center;
+            width: 2rem;
+            height: 2rem;
+            background: #262626;
+            box-shadow: 0 3px 4px 0 #0006;
+            z-index: 2;
+        }
+
+        .hand {
+            position: absolute;
+            width: var(--hand-width);
+            height: var(--hand-height);
+            offset-path: circle(0% at center);
+            offset-anchor: 50% 100%;
+            offset-rotate: var(--rotation);
+            will-change: offset-rotate;
+            box-shadow: 1px 0px 3px #0004;
+        }
+
+        .hand:where(.minute, .hour) {
+            --hand-width: 0.325rem;
+            background: #262626;
+            border-top-left-radius: 100%;
+            border-top-right-radius: 100%;
+        }
+
+        .hand.hour {
+            --hand-height: 7.125rem;
+        }
+
+        .hand.minute {
+            --hand-height: 8.5rem;
+        }
+
+        .hand.second {
+            --hand-height: 9.125rem;
+            --hand-width: 0.15rem;
+            background: hsl(210, 80%, 47%);
+        }
+
+    </style>
+</head>
+<body>
+<figure class="clock" role="img">
+    <div class="ticks"></div>
+    <div class="numbers">
+        <span class="number" style="--index: 0">12</span>
+        <span class="number" style="--index: 1">1</span>
+        <span class="number" style="--index: 2">2</span>
+        <span class="number" style="--index: 3">3</span>
+        <span class="number" style="--index: 4">4</span>
+        <span class="number" style="--index: 5">5</span>
+        <span class="number" style="--index: 6">6</span>
+        <span class="number" style="--index: 7">7</span>
+        <span class="number" style="--index: 8">8</span>
+        <span class="number" style="--index: 9">9</span>
+        <span class="number" style="--index: 10">10</span>
+        <span class="number" style="--index: 11">11</span>
+    </div>
+    <div class="center-pin"></div>
+    <div class="hands">
+        <span class="hand hour"></span>
+        <span class="hand minute"></span>
+        <span class="hand second"></span>
+    </div>
+</figure>
+
+<script>
+    const createTicks = (containerSelector, count = 60) => {
+        const container = document.querySelector(containerSelector);
+        const fragment = new DocumentFragment();
+
+        const ticks = Array.from({length: count}, (_, i) => {
+            const tick = Object.assign(document.createElement("span"), {
+                className: "tick",
+                style: `--i: ${i}`
+            });
+            return tick;
+        });
+
+        fragment.append(...ticks);
+        container.append(fragment);
+    };
+
+    const updateClock = () => {
+        const hands = Object.fromEntries(
+            [".hour", ".minute", ".second"].map((type) => [
+                type.slice(1),
+                document.querySelector(`.hand${type}`)
+            ])
+        );
+
+        const now = new Date();
+        const [hours, minutes, seconds] = [
+            now.getHours() % 12,
+            now.getMinutes(),
+            now.getSeconds()
+        ];
+
+        const rotations = {
+            hour: ((hours + minutes / 60 + seconds / 3600) / 12) * 360,
+            minute: ((minutes + seconds / 60) / 60) * 360,
+            second: (seconds / 60) * 360
+        };
+
+        Object.entries(rotations).forEach(([hand, deg]) => {
+            hands[hand]?.style.setProperty("--rotation", `${deg}deg`);
+        });
+
+        requestAnimationFrame(updateClock);
+    };
+
+    const initClock = () => {
+        createTicks(".ticks");
+        updateClock();
+    };
+
+    document.addEventListener("DOMContentLoaded", initClock);
+
+</script>
+</body>
+</html>

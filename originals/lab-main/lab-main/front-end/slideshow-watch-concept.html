@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slideshow - Watch Concept</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            --primary: #fff;
+            --secondary: #2e2d2d;
+            --frost: rgba(255, 255, 255, 0.4);
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            background-color: var(--primary);
+            overflow: hidden;
+            transition: all 1s ease-in-out;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-color: rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+        }
+
+        .card {
+            height: 200px;
+            max-width: 80vw;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: var(--frost);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            background-color: var(--primary);
+        }
+
+        #title {
+            font-weight: 400;
+            font-family: "Cinzel", serif;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .image {
+            overflow: hidden;
+        }
+
+        #slide {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .dots {
+            width: 100%;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            display: inline-block;
+            border-radius: 50%;
+            background-color: var(--frost);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .active {
+            background-color: var(--primary);
+        }
+
+        @keyframes slidein {
+            from {
+                transform: translateX(-3000px);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @media (width >= 48rem) {
+            #title {
+                font-size: 2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="content">
+        <h1 id="title">Title</h1>
+    </div>
+    <div class="image">
+        <img alt="Photo of Paul Cuoco from Unsplash"
+             id="slide" src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>
+    </div>
+</div>
+<div class="dots">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+</div>
+
+<script>
+    const collection = [
+        {
+            title: "Elegance",
+            imageUrl:
+                "https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            imageAlt: "Photo of Paul Cuoco from Unsplash"
+        },
+        {
+            title: "Mechanics",
+            imageUrl:
+                "https://images.unsplash.com/photo-1548171838-1fd4cb4ab854?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            imageAlt: "Photo of Bence Balla-Schottner from Unsplash"
+        },
+        {
+            title: "Adventure",
+            imageUrl:
+                "https://images.unsplash.com/photo-1620421895918-b4e8c86648fb?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            imageAlt: "Photo of Paul Cuoco from Unsplash"
+        }
+    ];
+
+    const slideEl = document.getElementById("slide");
+    const dots = document.getElementsByClassName("dot");
+    const titleEl = document.getElementById("title");
+    let current = 0;
+
+    function getCurrentSlide(n) {
+        current = n;
+        slideEl.src = collection[n].imageUrl;
+        slideEl.alt = collection[n].imageAlt;
+        titleEl.textContent = collection[n].title;
+
+        slideEl.style.animation = "none";
+        void slideEl.offsetWidth;
+        slideEl.style.animation = "slidein 0.5s ease-in-out forwards";
+
+        document.body.style.background = `url(${collection[n].imageUrl})`;
+        document.body.style.backgroundPosition = "center";
+        document.body.style.backgroundSize = "cover";
+
+        Array.from(dots).forEach((dot, index) => {
+            if (index === n) {
+                dot.classList.add("active");
+            } else {
+                dot.classList.remove("active");
+            }
+        });
+    }
+
+    Array.from(dots).forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            getCurrentSlide(index);
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        getCurrentSlide(current);
+
+        setInterval(() => {
+            current = (current + 1) % collection.length;
+            getCurrentSlide(current);
+        }, 4000);
+    });
+
+</script>
+</body>
+</html>

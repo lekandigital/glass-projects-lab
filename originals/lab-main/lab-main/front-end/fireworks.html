@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fireworks</title>
+
+    <style>
+        body {
+            height: 100dvh;
+            margin: 0;
+            background-image: linear-gradient(black, midnightblue);
+        }
+
+        div {
+            width: calc(.25em + 1.25em * var(--size));
+            height: calc(.25em + 1.25em * var(--size));
+            background-color: hsl(calc(var(--color) * 360) 100% 50%);
+
+            position: fixed;
+            top: -1.5em;
+            left: calc(3em + (100% - 6em) * var(--posX));
+            z-index: 99999;
+
+            animation: confettoValt calc(3s + 2s * var(--duration)) calc(var(--delay) * 3s) linear;
+        }
+
+        @keyframes confettoValt {
+            100% {
+                transform: translateY(calc(100vh + 3em)) perspective(20em) rotateY(calc(2turn + 4turn * var(--rotateY))) translatez(calc(1em + 3em * var(--turn))) rotateX(calc(2turn + 4turn * var(--rotateX))) rotateZ(calc(2turn + 4turn * var(--rotateZ)));
+            }
+        }
+    </style>
+</head>
+<body>
+<button>pop</button>
+</body>
+
+<script>
+    function partyPopper() {
+        const deBody = document.body;
+
+        for (let i = 0; i < 100; i++) {
+            const confetto = document.createElement("div");
+
+            const posX = Math.random();
+            const delay = Math.random();
+            const color = Math.random();
+            const size = Math.random();
+            const duration = Math.random();
+            const turn = Math.random();
+            const rotateX = Math.random();
+            const rotateY = Math.random();
+            const rotateZ = Math.random();
+
+            confetto.style.setProperty("--posX", posX);
+            confetto.style.setProperty("--delay", delay);
+            confetto.style.setProperty("--color", color);
+            confetto.style.setProperty("--size", size);
+            confetto.style.setProperty("--duration", duration);
+            confetto.style.setProperty("--turn", turn);
+            confetto.style.setProperty("--rotateX", rotateX);
+            confetto.style.setProperty("--rotateY", rotateY);
+            confetto.style.setProperty("--rotateZ", rotateZ);
+
+            confetto.addEventListener("animationend", verwijderConfetto);
+
+            deBody.appendChild(confetto);
+        }
+
+        function verwijderConfetto(e) {
+            console.log("snik");
+            e.target.remove();
+        }
+    }
+
+
+    const popButton = document.querySelector("button");
+
+    popButton.addEventListener("click", popperdepop);
+
+    function popperdepop() {
+        partyPopper();
+    }
+
+
+</script>
+</html>

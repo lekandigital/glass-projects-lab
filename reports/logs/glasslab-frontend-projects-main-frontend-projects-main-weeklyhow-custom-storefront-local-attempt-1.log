@@ -1,0 +1,16 @@
+Running: npm run build
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront/Frontend-Projects-main/weeklyhow-custom-storefront
+----------------------------------------
+
+> hello-world@0.0.0 build
+> shopify hydrogen build
+
+
+🏗️  Building in production mode...
+📦 Worker built: 394.451ms
+   dist/worker/index.js  0.20 MB
+
+Heads up: Shopify stores have a number of standard routes that aren’t set up yet.
+Some functionality and backlinks might not work as expected until these are created or redirects are set up.
+This build is missing 17 routes. For more details, run `npx shopify hydrogen check routes`.
+

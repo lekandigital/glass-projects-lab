@@ -1,0 +1,11 @@
+.DS_Store
+**/node_modules/
+**/.vercel/
+**/.next/
+**/dist/
+**/build/
+**/coverage/
+**/.env
+**/.env.*
+!**/.env.example
+zips/

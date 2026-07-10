@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Only straight lines</title>
+
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background: ivory;
+            margin: 0;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/2.0.3/p5.min.js"></script>
+<script>
+    let w;
+    let ptOld;
+    let pt;
+    let t = 0;
+    let curves = 0;
+
+    function setup() {
+        cnv = createCanvas(windowWidth, windowHeight);
+        background(235);
+        strokeWeight(0.5);
+        stroke(0, 0, 0, 20);
+        ptOld = {x: mouseX, y: mouseY};
+        pt = {x: mouseX - 1, y: mouseY - 1};
+    }
+
+    function draw() {
+        t += random(0.008, 0.012);
+        defPoint();
+        if (pt.x - ptOld.x != 0) {
+            m = (pt.y - ptOld.y) / (pt.x - ptOld.x);
+        } else {
+            m = (pt.y - ptOld.y) / (pt.x - ptOld.x + 0.0001);
+        }
+        x1 = 0;
+        y1 = m * (x1 - pt.x) + pt.y;
+        x2 = width;
+        y2 = m * (x2 - pt.x) + pt.y;
+        if (abs(m) > 0 && abs(m) < 10000 && t > 0.12) {
+            line(x1, y1, x2, y2);
+        }
+        ptOld = {x: pt.x, y: pt.y};
+    }
+
+    function defPoint() {
+        if (curves === 0) {
+            pt = {x: mouseX, y: mouseY};
+        } else if (curves === 1) {
+            r = min(width, height) / 3;
+            pt = {x: width / 2 + r * cos(t), y: height / 2 + r * sin(t)};
+        } else if (curves === 2) {
+            r = min(width, height) / 3;
+            pt = {x: int(t * 100) % width, y: height / 2 + r * sin(t)};
+        } else if (curves === 3) {
+            r = min(width, height) / 3;
+            pt = {x: width / 2 + r * sin(t) * cos(t), y: height / 2 + r * sin(t)};
+        } else if (curves === 4) {
+            r = min(width, height) / 3;
+            pt = {
+                x: width / 2 + r * sin(t) * cos(t),
+                y: height / 2 + r * sin(t) * sin(t / 2)
+            };
+        } else if (curves === 5) {
+            //butterflyish
+            r = min(width, height) / 3;
+            pt = {
+                x: width / 2 + r * sin(t) * cos(t / 3) * sin(t / 4),
+                y: height / 2 + r * sin(t) * sin(t / 2)
+            };
+        } else if (curves === 6) {
+            r = min(width, height) / 3;
+            pt = {
+                x: width / 2 + r * sin(t) * cos(t / 3) * sin(t / 4),
+                y: height / 2 + r * sin(t / 3) * cos(t / 2)
+            };
+        } else if (curves === 7) {
+            r = int(t * 100) % int(width / 2);
+            pt = {x: width / 2 + r * sin(t), y: height / 2 + r * cos(t)};
+        } else if (curves === 8) {
+            r = (int(t * 100) % int(width * 4)) / 10;
+            pt = {x: width / 2 + r * sin(t), y: height / 2 + r * cos(t)};
+        } else if (curves === 9) {
+            r = min(width, height) / 3;
+            rand = random(0, 2 * PI);
+            pt = {x: width / 2 + r * sin(rand), y: height / 2 + r * cos(rand)};
+        }
+    }
+
+    function keyPressed() {
+        if (keyCode === 32) {
+            background(235);
+        }
+        if (keyCode === 83) {
+            save(cnv, "lines", "png");
+        }
+    }
+
+    function mousePressed() {
+        background(235);
+        curves = (curves + 1) % 10;
+        t = 0;
+    }
+
+</script>
+</body>
+</html>

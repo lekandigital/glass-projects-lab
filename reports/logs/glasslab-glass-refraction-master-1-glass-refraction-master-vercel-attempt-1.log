@@ -1,0 +1,34 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-glass-refraction-master-1-glass-refraction-master
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-glass-refraction-master-1-glass-refraction-master
+----------------------------------------
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-glass-refraction-master-1-glass-refraction-master (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-glass-refraction-master-1-glass-refraction-master
+Uploading [--------------------] (0.0B/49KB)
+Uploading [======--------------] (16.0KB/49KB)
+Uploading [=============-------] (32.0KB/49KB)
+Uploading [===================-] (48.0KB/49KB)
+Uploading [====================] (49.0KB/49KB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-glass-refraction-master-1-glass-refraction-master/7SxviojvTVkCZvxoJqSStq5Nw39Z [2s]
+Production: https://glasslab-glass-refraction-master-1-glass-refraction-1tyatec2m.vercel.app [2s]
+https://glasslab-glass-refraction-master-1-glass-refraction-1tyatec2m.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 26 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+Building: Build Completed in /vercel/output [45ms]
+Building: Deploying outputs...
+[2K[1A[2K[GProduction: https://glasslab-glass-refraction-master-1-glass-refraction-1tyatec2m.vercel.app [8s]
+Completing...
+Aliased: https://glasslab-glass-refraction-master-1.vercel.app [8s]

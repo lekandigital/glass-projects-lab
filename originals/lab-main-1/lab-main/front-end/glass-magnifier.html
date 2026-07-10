@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Glass Magnifier</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        .page-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 2px, transparent 2px), radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 80px 80px, 40px 40px;
+            animation: gridMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            top: 10%;
+            left: 5%;
+            background: rgba(255, 107, 107, 0.15);
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 70%;
+            right: 10%;
+            background: rgba(78, 205, 196, 0.15);
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 70%;
+            background: rgba(69, 183, 209, 0.15);
+            animation-delay: 4s;
+        }
+
+        .text-content {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+        }
+
+        .main-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #fff, #e0e0e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .effect-label {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        /* Glass Magnifier Effect */
+        .glass-magnifier {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            pointer-events: none;
+            transition: all 0.1s ease-out;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .glass-magnifier::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.3) 100%);
+            z-index: -1;
+        }
+
+        .magnified-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .glass-reflection {
+            position: absolute;
+            top: 15%;
+            left: 15%;
+            width: 35%;
+            height: 35%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+            border-radius: 50%;
+            filter: blur(1px);
+            z-index: 10;
+        }
+
+        .cursor-glow {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 40%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999;
+            transition: all 0.2s ease-out;
+            opacity: 0;
+        }
+
+        /* Magnification indicator */
+        .magnification-indicator {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        /* Instructions */
+        .instructions {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+            max-width: 200px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+            z-index: 1001;
+        }
+
+        .instructions:hover {
+            opacity: 1;
+        }
+
+        /* Animaciones */
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(80px, 80px);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) scale(1);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-20px) scale(1.1);
+                opacity: 1;
+            }
+        }
+
+        /* Estados activos */
+        body.magnifier-active .glass-magnifier {
+            opacity: 1;
+        }
+
+        body.magnifier-active .cursor-glow {
+            opacity: 1;
+        }
+
+        body.magnifier-active .magnification-indicator {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .glass-magnifier {
+                width: 120px;
+                height: 120px;
+            }
+
+            .instructions,
+            .magnification-indicator {
+                display: none;
+            }
+
+            body {
+                cursor: auto;
+            }
+
+            .glass-magnifier,
+            .cursor-glow {
+                display: none;
+            }
+        }
+
+        /*# sourceMappingURL=style.css.map */
+
+    </style>
+</head>
+<body>
+<div class="grid-pattern"></div>
+<div class="floating-elements">
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+</div>
+
+<div class="cursor-glow"></div>
+<div class="glass-magnifier">
+    <div class="magnified-content"></div>
+    <div class="glass-reflection"></div>
+</div>
+
+<div class="page-content">
+    <div class="text-content">
+        <div class="effect-label">Glass Magnifier Effect</div>
+        <h1 class="main-title">Interactive Design</h1>
+        <p class="subtitle">Experience the power of CSS magnification</p>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-item">
+            <h3>Precision Optics</h3>
+            <p>Advanced CSS transforms create pixel-perfect magnification with realistic glass distortion effects</p>
+        </div>
+        <div class="feature-item">
+            <h3>Real-time Rendering</h3>
+            <p>Dynamic content capture and 2x magnification powered by modern browser capabilities</p>
+        </div>
+        <div class="feature-item">
+            <h3>Glass Morphism</h3>
+            <p>Authentic glass appearance with backdrop blur, reflections, and subtle light refraction</p>
+        </div>
+        <div class="feature-item">
+            <h3>Smooth Performance</h3>
+            <p>Optimized rendering pipeline maintains 60fps during continuous cursor movement and updates</p>
+        </div>
+        <div class="feature-item">
+            <h3>Interactive Focus</h3>
+            <p>Precise focal point tracking ensures the magnified content matches cursor position exactly</p>
+        </div>
+        <div class="feature-item">
+            <h3>Visual Feedback</h3>
+            <p>Subtle glow effects and smooth transitions provide intuitive user experience and engagement</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const glassMagnifier = document.querySelector(".glass-magnifier");
+    const magnifiedContent = document.querySelector(".magnified-content");
+    const cursorGlow = document.querySelector(".cursor-glow");
+    const body = document.body;
+    let mouseX = 0;
+    let mouseY = 0;
+    let isActive = false;
+
+    function updateMagnifiedContent() {
+        magnifiedContent.innerHTML = "";
+
+        const viewport = document.createElement("div");
+        viewport.style.position = "absolute";
+        viewport.style.top = "0";
+        viewport.style.left = "0";
+        viewport.style.width = "100%";
+        viewport.style.height = "100%";
+        viewport.style.overflow = "hidden";
+        viewport.style.borderRadius = "50%";
+
+        const magnifiedView = document.createElement("div");
+        magnifiedView.style.position = "absolute";
+        magnifiedView.style.width = "100vw";
+        magnifiedView.style.height = "100vh";
+
+        const centerX = 75;
+        const centerY = 75;
+        const magnification = 2;
+        magnifiedView.style.left = `${centerX - mouseX * magnification}px`;
+        magnifiedView.style.top = `${centerY - mouseY * magnification}px`;
+        magnifiedView.style.transform = `scale(${magnification})`;
+        magnifiedView.style.transformOrigin = "0 0";
+
+        magnifiedView.innerHTML = `
+                <div style="
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                "></div>
+
+                <div style="
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-image:
+                        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px),
+                        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 1px, transparent 1px);
+                    background-size: 80px 80px, 40px 40px;
+                "></div>
+
+                ${document.querySelector(".floating-elements").outerHTML}
+                ${document.querySelector(".page-content").outerHTML}
+            `;
+        viewport.appendChild(magnifiedView);
+        magnifiedContent.appendChild(viewport);
+    }
+
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        glassMagnifier.style.left = mouseX - 75 + "px";
+        glassMagnifier.style.top = mouseY - 75 + "px";
+
+        cursorGlow.style.left = mouseX - 100 + "px";
+        cursorGlow.style.top = mouseY - 100 + "px";
+
+        updateMagnifiedContent();
+        if (!isActive) {
+            body.classList.add("magnifier-active");
+            isActive = true;
+        }
+    });
+
+    document.addEventListener("mouseleave", () => {
+        body.classList.remove("magnifier-active");
+        isActive = false;
+    });
+    document.addEventListener("mouseenter", () => {
+        if (mouseX !== 0 || mouseY !== 0) {
+            body.classList.add("magnifier-active");
+            isActive = true;
+        }
+    });
+
+    document.addEventListener("click", (e) => {
+        const ripple = document.createElement("div");
+        ripple.style.position = "fixed";
+        ripple.style.left = e.clientX - 25 + "px";
+        ripple.style.top = e.clientY - 25 + "px";
+        ripple.style.width = "50px";
+        ripple.style.height = "50px";
+        ripple.style.background = "rgba(255, 255, 255, 0.3)";
+        ripple.style.borderRadius = "50%";
+        ripple.style.transform = "scale(0)";
+        ripple.style.animation = "rippleEffect 0.6s ease-out forwards";
+        ripple.style.pointerEvents = "none";
+        ripple.style.zIndex = "1001";
+        document.body.appendChild(ripple);
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+
+    const style = document.createElement("style");
+    style.textContent = `
+            @keyframes rippleEffect {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+    document.head.appendChild(style);
+
+</script>
+</body>
+</html>

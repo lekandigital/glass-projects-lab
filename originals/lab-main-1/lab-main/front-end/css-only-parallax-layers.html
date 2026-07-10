@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>CSS Only Parallax Layers</title>
+
+    <style>
+        /*
+
+A really nice CSS Reset by Andy Bell
+https://piccalil.li/blog/a-more-modern-css-reset/
+
+*/
+
+        /* Box sizing rules */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        /* Prevent font size inflation */
+        html {
+            -moz-text-size-adjust: none;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+        }
+
+        /* Remove default margin in favour of better control in authored CSS */
+        body, h1, h2, h3, h4, p,
+        figure, blockquote, dl, dd {
+            margin-block-end: 0;
+        }
+
+        /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+        ul[role='list'],
+        ol[role='list'] {
+            list-style: none;
+        }
+
+        /* Set core body defaults */
+        body {
+            min-height: 100vh;
+            line-height: 1.5;
+            margin: unset;
+        }
+
+        /* Set shorter line heights on headings and interactive elements */
+        h1, h2, h3, h4,
+        button, input, label {
+            line-height: 1.1;
+        }
+
+        /* Balance text wrapping on headings */
+        h1, h2,
+        h3, h4 {
+            text-wrap: balance;
+        }
+
+        /* A elements that don't have a class get default styles */
+        a:not([class]) {
+            text-decoration-skip-ink: auto;
+            color: currentColor;
+        }
+
+        /* Make images easier to work with */
+        img,
+        picture {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Inherit fonts for inputs and buttons */
+        input, button,
+        textarea, select {
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        /* Make sure textareas without a rows attribute are not tiny */
+        textarea:not([rows]) {
+            min-height: 10em;
+        }
+
+        /* Anything that has been anchored to should have extra scroll margin */
+        :target {
+            scroll-margin-block: 5ex;
+        }
+    </style>
+    <style>
+        :root {
+            /* Colors */
+            --color-dark: #222;
+            --color-darker: #111;
+            --color-dark-translucent: hsla(0, 0%, 13%, 0.2);
+            --color-light: hsl(60, 21%, 93%);
+            --color-lighter: hsl(60, 21%, 95%);
+            --color-lightest: hsl(60, 21%, 99%);
+            --color-accent: hsl(0, 68%, 61%);
+            --color-accent-lighter: hsl(0, 68%, 71%);
+            --color-accent-darker: hsl(0, 68%, 51%);
+            --color-accent-translucent: hsl(0, 68%, 61%, 0.2);
+
+            /* Texture */
+            --texture-noise: url(https://assets.codepen.io/2153413/noise.png);
+            --texture-grid: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%236c6c6c' fill-opacity='0.2'%3E%3Cpath opacity='.5' d='M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15v-9H0v-1h15V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h9V0h1v15h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9h4v1h-4v9zm-1 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm9-10v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-10 0v-9h-9v9h9zm-9-10h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9zm10 0h9v-9h-9v9z'/%3E%3Cpath d='M6 5V0H5v5H0v1h5v94h1V6h94V5H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+
+            /* Borders */
+            --border-dashed: dashed 2px var(--color-dark);
+
+            /* Animation */
+            --anim-springy-soft: ;
+            --anim-springy-hard: ;
+            --anim-thud-soft: linear(0, 1 44.7%, 0.898 51.8%, 0.874 55.1%, 0.866 58.4%, 0.888 64.3%, 1 77.4%, 0.98 84.5%, 1);
+            --anim-thud-hard: linear(0, 0.234 11.8%, 0.403 18.4%, 0.624 24.7%, 0.999 33.3%, 0.76 39.9%, 0.705 42.6%, 0.687 45.2%, 0.703 47.7%, 0.753 50.3%, 0.999 57.7%, 0.89 61.8%, 0.865 63.6%, 0.857 65.3%, 0.865 67%, 0.887 68.8%, 0.999 74.5%, 0.957 77.5%, 0.944 80.2%, 0.954 82.7%, 1 88.2%, 0.988 91.9%, 1);
+            --anim-overshoot-soft: linear(0, -0.004 4.9%, -0.02 9.4%, -0.124 26.4%, -0.126 30.5%, -0.104 34.1%, -0.027 38.8%, 0.108 43.1%, 0.299 47%, 0.817 55.2%, 0.97 59.1%, 1.071 63.4%, 1.118 67.7%, 1.127 72.6%, 1.108 77.2%, 1.019 90.7%, 1.004 95.2%, 1);
+            --anim-overshoot-hard: ;
+            /* Generated from: https://easingwizard.com/ */
+
+            /* Shadows */
+            --shadow-color: 0deg 0% 0%;
+            --shadow-elevation-low: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.1),
+            0.4px 0.8px 1px -1.2px hsl(var(--shadow-color) / 0.1),
+            1px 2px 2.5px -2.5px hsl(var(--shadow-color) / 0.1);
+            --shadow-elevation-medium: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.11),
+            0.8px 1.6px 2px -0.8px hsl(var(--shadow-color) / 0.11),
+            2.1px 4.1px 5.2px -1.7px hsl(var(--shadow-color) / 0.11),
+            5px 10px 12.6px -2.5px hsl(var(--shadow-color) / 0.11);
+            --shadow-elevation-high: 0.3px 0.5px 0.7px hsl(var(--shadow-color) / 0.1),
+            1.5px 2.9px 3.7px -0.4px hsl(var(--shadow-color) / 0.1),
+            2.7px 5.4px 6.8px -0.7px hsl(var(--shadow-color) / 0.1),
+            4.5px 8.9px 11.2px -1.1px hsl(var(--shadow-color) / 0.1),
+            7.1px 14.3px 18px -1.4px hsl(var(--shadow-color) / 0.1),
+            11.2px 22.3px 28.1px -1.8px hsl(var(--shadow-color) / 0.1),
+            17px 33.9px 42.7px -2.1px hsl(var(--shadow-color) / 0.1),
+            25px 50px 62.9px -2.5px hsl(var(--shadow-color) / 0.1);
+            /* Generated from: https://www.joshwcomeau.com/shadow-palette/ */
+
+            /* Typography */
+            --step--2: clamp(0.6944rem, 0.6856rem + 0.0444vw, 0.72rem);
+            --step--1: clamp(0.8333rem, 0.8101rem + 0.1159vw, 0.9rem);
+            --step-0: clamp(1rem, 0.9565rem + 0.2174vw, 1.125rem);
+            --step-1: clamp(1.2rem, 1.1283rem + 0.3587vw, 1.4063rem);
+            --step-2: clamp(1.44rem, 1.3295rem + 0.5527vw, 1.7578rem);
+            --step-3: clamp(1.728rem, 1.5648rem + 0.8161vw, 2.1973rem);
+            --step-4: clamp(2.0736rem, 1.8395rem + 1.1704vw, 2.7466rem);
+            --step-5: clamp(2.4883rem, 2.1597rem + 1.6433vw, 3.4332rem);
+            /* Generated from: https://utopia.fyi */
+
+            --font-base: 'iAMono', "FallbackFont", sans-serif;
+            --font-headers: 'Archimotov', "FallbackFont", sans-serif;
+
+            --font-normal: 400;
+            --font-bold: 700;
+            --font-superbold: 900;
+        }
+
+        @font-face {
+            font-family: 'iAMono';
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            src: url('https://assets.codepen.io/2153413/iAWriterMonoS-Regular.woff2') format('woff2');
+        }
+
+        @font-face {
+            font-family: 'Archimotov';
+            font-display: swap;
+            font-style: normal;
+            font-weight: 400;
+            src: url('https://assets.codepen.io/2153413/Demoarchimotov01Black-8MD5g.otf') format('woff2');
+        }
+    </style>
+    <style>
+        /* Now, some base styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            background: #f0f0e8;
+            background-image: var(--texture-noise);
+
+            font-size: var(--step-0);
+            font-family: var(--font-base);
+
+
+            &::after {
+                position: absolute;
+                content: '';
+                inset: 0;
+                width: 100%;
+                background-image: var(--texture-grid);
+                opacity: .8;
+                z-index: -10;
+            }
+
+            color: var(--color-dark);
+            position: relative;
+        }
+
+        ::backdrop {
+            background: var(--color-dark);
+            backdrop-filter: blur(5px);
+            opacity: .5;
+        }
+
+        .content-grid {
+            --padding-inline: 1rem;
+            --content-max-width: 700px;
+            --breakout-max-width: 1200px;
+
+            --breakout-size: calc(
+                    (var(--breakout-max-width) - var(--content-max-width)) / 2
+            );
+
+            display: grid;
+            grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(
+      100% - (var(--padding-inline) * 2),
+      var(--content-max-width)
+    )
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
+        }
+
+        .content-grid > :not(.breakout, .full-width),
+        .full-width > :not(.breakout, .full-width) {
+            grid-column: content;
+        }
+
+        .content-grid > .breakout {
+            grid-column: breakout;
+        }
+
+        .content-grid > .full-width {
+            grid-column: full-width;
+            background: var(--color-dark);
+            background-image: var(--texture-noise);
+            color: var(--color-light);
+            padding: 1em;
+            /*   min-height: 50vh; */
+            place-content: center;
+            display: flex;
+            grid-template-columns: inherit;
+        }
+
+        .flow > * + * {
+            margin-top: var(--flow-spacing, 5em);
+        }
+
+        body > * {
+            grid-column: content;
+        }
+
+        /* Main Block Styling */
+        header {
+            /* position: absolute; */
+            /* opacity: .05;
+            position: absolute; */
+            padding-bottom: 2em;
+            border-bottom: var(--border-dashed);
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            /* font-size: var(--step--1); */
+
+            padding-top: 2em;
+            border-top: var(--border-dashed);
+        }
+
+        .my-footer {
+            display: flex;
+            flex-direction: column;
+            background: var(--color-dark);
+            background-image: var(--texture-noise);
+            color: var(--color-light);
+            font-size: var(--step--1);
+            place-items: center;
+            padding: 1em 0em;
+
+            p {
+                /*     flex-grow: 1; */
+                margin: unset;
+            }
+        }
+
+        a {
+            text-decoration: underline;
+            text-underline-offset: .3ex;
+            text-decoration-thickness: 2px;
+            text-decoration-color: var(--color-accent);
+
+            &:hover {
+                text-underline-offset: .4ex;
+            }
+        }
+
+        code {
+            display: inline-block;
+            background: var(--color-dark-translucent);
+            color: var(--color-darker);
+            border-radius: .2em;
+            padding: .0em .2em;
+            /* margin: 0em -.5em; */
+            box-sizing: border-box;
+            border: 1px dashed var(--color-dark);
+            font-size: var(--step--1);
+        }
+
+        h1, h2, h3, h4, h5, h6, strong {
+            font-family: var(--font-headers);
+        }
+
+        h1 {
+            font-size: var(--step-5);
+        }
+
+        h2 {
+            font-size: var(--step-4);
+        }
+
+        h3 {
+            font-size: var(--step-3);
+        }
+
+        h4 {
+            font-size: var(--step-2);
+        }
+
+        h5 {
+            font-size: var(--step-1);
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        button {
+            padding: .5em 1em;
+            border: dashed 1px var(--color-dark);
+            border-radius: .2em;
+
+            &:hover {
+                cursor: pointer;
+                background: var(--color-dark);
+                color: var(--color-light);
+                fill: var(--color-light);
+            }
+
+            &:disabled {
+                opacity: .4;
+                pointer-events: none;
+            }
+
+            svg {
+                width: 1em;
+                height: 1em;
+                vertical-align: -0.125em;
+            }
+        }
+
+        time {
+            display: inline-block;
+        }
+
+        p {
+            max-width: 60ch;
+        }
+
+        ul {
+            padding: 1.5em;
+
+            li {
+                /* padding-left: 1.5em; */
+                margin-bottom: .5em;
+
+                &::marker {
+                    color: var(--color-accent);
+                }
+            }
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+            gap: 1em;
+            flex-flow: wrap;
+
+            .cell {
+
+                p {
+                    background: var(--color-dark);
+                    background-image: var(--texture-noise);
+                    color: var(--color-light);
+                    padding: .25em 1em;
+                    border-radius: .2em;
+                    margin-top: unset;
+                    min-width: 100%;
+                    z-index: 2;
+                }
+
+                img {
+                    width: auto;
+                }
+
+                .framed {
+                    border: dashed 2px var(--color-dark);
+                    border-radius: 0em 0em .5em .5em;
+                    border-top: unset;
+                }
+            }
+
+            .cell-wide {
+                grid-column: 1 / -1;
+            }
+        }
+
+        main {
+            flex-grow: 1;
+        }
+    </style>
+    <style>
+        section {
+            margin: 30vh 0 50vh 0;
+        }
+
+        /* Animations, from -100% so we get a nice amount of motion on both sides */
+        @keyframes anim-parallax-y {
+            from {
+                transform: translateY(calc(-100% * var(--offset) * var(--multiplier)));
+            }
+            to {
+                transform: translateY(calc(100% * var(--offset) * var(--multiplier)));
+            }
+        }
+
+        @keyframes anim-parallax-x {
+            from {
+                transform: translateX(calc(-100% * var(--offset) * var(--multiplier)));
+            }
+            to {
+                transform: translateX(calc(100% * var(--offset) * var(--multiplier)));
+            }
+        }
+
+        /* Base frame setup */
+        .frame {
+            --multiplier: 1;
+
+            position: relative;
+            width: 100%;
+            height: auto;
+
+            background: var(--color-light);
+            background-image: var(--texture-noise);
+            border-radius: .5em;
+
+            /* If you comment this out, you can get a better visual for how the layers are behaving */
+            overflow: clip;
+
+            img {
+                position: absolute;
+                inset: 0;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        /* Wrapping the animation with a supports to check browser compatibility */
+        /* Attach these classes to the frame, so the animation gets applied to every img within. */
+        @supports (animation-timeline: view()) {
+            .parallax-y {
+                img {
+                    /* Removing the prefers-reduced-motion for the demo, but it's a good idea to have this wrapped around animations for sites in production */
+                    /* @media(prefers-reduced-motion: no-preference) { */
+                    animation: anim-parallax-y linear forwards;
+                    animation-timeline: view();
+                    animation-range: entry 0% exit 100%;
+                    /* } */
+                }
+            }
+        }
+
+        @supports (animation-timeline: view()) {
+            .parallax-x {
+                img {
+                    /* @media(prefers-reduced-motion: no-preference) { */
+                    animation: anim-parallax-x linear forwards;
+                    animation-timeline: view();
+                    animation-range: entry 0% exit 100%;
+                    /* } */
+                }
+            }
+        }
+
+        /* A little message for folks that can't see the parralax */
+        @supports not (animation-timeline: view()) {
+            .supports {
+                display: block;
+                text-align: center;
+                padding: .5em;
+                margin: 0 auto;
+                font-size: var(--step--2);
+
+                &::after {
+                    content: "🚫 Sorry, animation-timeline: view() isn't supported in your browser.";
+                }
+            }
+        }
+
+        /* Some basic helper classes */
+        .frame-a4 {
+            aspect-ratio: 1.414 / 1;
+        }
+
+        .frame-square {
+            aspect-ratio: 1 / 1;
+        }
+
+        .rays {
+            mix-blend-mode: color-dodge;
+        }
+
+        .filter-mutedGreen {
+            filter: sepia(100%) hue-rotate(100deg) saturate(50%);
+        }
+
+        .filter-softSepia {
+            filter: sepia(20%);
+        }
+
+        .filter-blue {
+            filter: sepia(100%) hue-rotate(180deg) saturate(300%);
+        }
+    </style>
+</head>
+<body>
+<header class="content-grid">
+    <h1>Parallax Layers (CSS ONLY)</h1>
+    <p>Expanding upon my <a href="https://codepen.io/HejChristian/pen/ZYEqoXd" rel="noopener noreferrer"
+                            target="_blank">other parallax experiment</a>, now with zero-JavaScript! CSS
+        scroll-driven animations are doing all the work here 🥳</p>
+    <p>✅ JS-Free Parallax</p>
+    <p>✅ Works with multiple frames out of the box (without having to re-work my JS function)</p>
+    <p>✅ Better performance as it's just CSS </p>
+    <p>🚫 Sorry Firefox & Safari users, <a href="https://caniuse.com/?search=animation-timeline"
+                                          rel="noopener noreferrer"
+                                          target="_blank">animation-timeline</a> doesn't work there (Can be
+        enabled for FF)</p>
+    <p>This is another effect that depends on scrolling over the designs, so I've increased the margins a bit so you
+        should be able to see it fully.</p>
+    <p>TL;DR: Scroll.</p>
+</header>
+<main class="content-grid">
+    <section>
+        <p>Dino Scene, 13 base layers + rays</p>
+        <!-- I've decided not to inline the SVG as we don't need to manipulate the SVGs themselves via CSS -->
+        <div aria-label="Multi-layered scene depicting dinosaurs in a jungle setting."
+             class="frame frame-a4 filter-mutedGreen parallax-y"
+             role="img" style="--multiplier: .5">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer10.svg" style="--offset:1">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer9.svg" style="--offset:0.9">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer8.svg" style="--offset:0.8">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer7.svg" style="--offset:0.7">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer6.3.svg" style="--offset:0.6">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer6.2.svg" style="--offset:0.6">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer6.1.svg" style="--offset:0.6">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer5.svg" style="--offset:0.5">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer4.2.svg" style="--offset:0.4">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer4.1.svg" style="--offset:0.4">
+            <img alt="" class="rays" src="https://assets.codepen.io/2153413/godrays.png" style="--offset:0">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer3.svg" style="--offset:0.2">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer2.svg" style="--offset:0.1">
+            <img alt="" src="https://assets.codepen.io/2153413/dino-layer1.svg" style="--offset:0">
+        </div>
+        <p class="supports"></p>
+    </section>
+    <section>
+        <p>Tian Tan Buddha, 8 layers (Horizontal Parallax)</p>
+        <div aria-label="Multi-layered scene depicting an the Tian Tan Buddha statue in Hong Kong. A giant sculpture of Buddha, sitting on top of hill."
+             class="frame frame-square filter-softSepia parallax-x"
+             role="img"
+             style="--multiplier: 2">
+            <img alt="" src="https://assets.codepen.io/2153413/buddha-layer4.3.svg" style="--offset:0.1">
+            <img alt="" src="https://assets.codepen.io/2153413/buddha-layer4.2.svg" style="--offset:0.09">
+            <img alt="" src="https://assets.codepen.io/2153413/buddha-layer4.1.svg" style="--offset:0.08">
+            <img alt="" src="https://assets.codepen.io/2153413/buddha-layer3.svg" style="--offset:0.075">
+            <img alt="" src="https://assets.codepen.io/2153413/buddha-layer2.3.svg" style="--offset:0.05">
+            <img alt="" src="https://assets.codepen.io/2153413/buddha-layer2.2.svg" style="--offset:0.049">
+            <img alt="" src="https://assets.codepen.io/2153413/buddha-layer2.1.svg" style="--offset:0.025">
+            <img alt="" src="https://assets.codepen.io/2153413/buddha-layer1.svg" style="--offset:0">
+        </div>
+        <p class="supports"></p>
+    </section>
+    <section>
+        <p>Manta Ray Scene, 5 layers</p>
+        <div aria-label="Multi-layered scene depicting an underwater scene of some fish and Manta Ray. Set within the outline of a Manta Ray."
+             class="frame frame-square filter-blue parallax-y"
+             role="img"
+             style="--multiplier: 2">
+            <img alt="" src="https://assets.codepen.io/2153413/manta-layer5.svg" style="--offset:0.1">
+            <img alt="" src="https://assets.codepen.io/2153413/manta-layer4.svg" style="--offset:0.075">
+            <img alt="" src="https://assets.codepen.io/2153413/manta-layer3.svg" style="--offset:0.05">
+            <img alt="" src="https://assets.codepen.io/2153413/manta-layer2.svg" style="--offset:0.025">
+            <img alt="" src="https://assets.codepen.io/2153413/manta-layer1.svg" style="--offset:0">
+        </div>
+        <p class="supports"></p>
+    </section>
+</main>
+<footer class="content-grid">
+    <h2>Credits</h2>
+    <ul>
+        <li><a href="https://alistairshepherd.uk" rel="noopener noreferrer" target="_blank">Alistair Shepherd</a> - For
+            the great <a href="https://alistairshepherd.uk/writing/parallax-svg-landscape-1/" rel="noopener noreferrer"
+                         target="_blank">Parallax SVG guide</a> that got me going.
+        </li>
+        <li><a href="https://codepen.io/germanfrelo" rel="noopener noreferrer" target="_blank">Germán Freixinós</a> -
+            For the hint about CSS scroll-driven animations.
+        </li>
+        <li><a href="https://www.magicpattern.design" rel="noopener noreferrer" target="_blank">MagicPattern</a> - For
+            the <a href="https://www.magicpattern.design/tools/god-rays-generator" rel="noopener noreferrer"
+                   target="_blank">God Rays Generator</a>, used as an extra layer between the dino SVGs.
+        </li>
+    </ul>
+</footer>
+<div class="my-footer">
+    <p>March 2025, Christian Alder</p>
+    <p><a href="https://bsky.app/profile/hejchristian.com" rel="noopener noreferrer" target="_blank">Bluesky</a> | <a
+            href="https://mastodon.social/@hejchristian" rel="noopener noreferrer" target="_blank">Mastodon</a></p>
+</div>
+</body>
+</html>

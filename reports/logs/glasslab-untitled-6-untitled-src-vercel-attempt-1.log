@@ -1,0 +1,26 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-untitled-6-untitled-src --name glasslab-untitled-6-untitled-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-untitled-6-untitled-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-untitled-6-untitled-src (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-untitled-6-untitled-src
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-untitled-6-untitled-src/BMSRhHLDvJg9nNbDsLxxHmsK6YSK [6s]
+Production: https://glasslab-untitled-6-untitled-g6xxujqcl-lekandigitals-projects.vercel.app [6s]
+https://glasslab-untitled-6-untitled-g6xxujqcl-lekandigitals-projects.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 4 deployment files...
+[2K[1A[2K[GProduction: https://glasslab-untitled-6-untitled-g6xxujqcl-lekandigitals-projects.vercel.app [10s]
+Completing...
+Aliased: https://glasslab-untitled-6-untitled-src.vercel.app [10s]

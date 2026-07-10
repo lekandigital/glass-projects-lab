@@ -1,0 +1,32 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src
+----------------------------------------
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src
+Uploading [--------------------] (0.0B/28.4KB)
+Uploading [=====---------------] (7.5KB/28.4KB)
+Uploading [==============------] (20.2KB/28.4KB)
+Uploading [===================-] (27.2KB/28.4KB)
+Uploading [====================] (28.4KB/28.4KB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src/21ZfoexxAh6dJUrWr8mWkCjEpXkL [2s]
+Production: https://glasslab-cross-browser-liquid-toggle-drag-tap-cross-ca5h8nfvd.vercel.app [2s]
+https://glasslab-cross-browser-liquid-toggle-drag-tap-cross-ca5h8nfvd.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 5 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+[2K[1A[2K[GProduction: https://glasslab-cross-browser-liquid-toggle-drag-tap-cross-ca5h8nfvd.vercel.app [5s]
+Completing...
+Aliased: https://glasslab-cross-browser-liquid-toggl.vercel.app [5s]

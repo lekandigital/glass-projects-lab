@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Alphabet Soup Word Builder</title>
+
+    <style>
+        :root {
+            --primary: #dd5e36;
+            --primary-dark: #ba4722;
+            --primary-light: #ff7b59;
+            --secondary: #61a8ff;
+            --secondary-dark: #4389e3;
+            --accent: #ffce56;
+            --success: #4caf50;
+            --error: #f44336;
+            --soup-color: #ffca7a;
+            --soup-shadow: #e6b663;
+            --bowl-color: #f8f8f8;
+            --letter-color: #ffffff;
+            --text: #333333;
+            --text-light: #777777;
+            --background: #f5f5f5;
+            --steam: rgba(255, 255, 255, 0.7);
+            --glow-color: rgba(221, 94, 54, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .alphabet-soup-game {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            position: relative;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .game-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .soup-bowl {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1/1;
+        }
+
+        .plate-shadow {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            filter: blur(10px);
+            z-index: 1;
+        }
+
+        .plate {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .bowl-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1),
+            0 5px 15px rgba(0, 0, 0, 0.05),
+            inset 0 -5px 15px rgba(0, 0, 0, 0.05);
+            background: white;
+            z-index: 3;
+        }
+
+        .soup {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 50%;
+            background-color: var(--soup-color);
+            box-shadow: inset 0 -10px 20px var(--soup-shadow),
+            inset 0 10px 20px rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .bowl-highlight {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 80%;
+            height: 40%;
+            transform: translateX(-50%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .steam-container {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .steam {
+            position: absolute;
+            width: 8px;
+            background: linear-gradient(to top, transparent, var(--steam));
+            border-radius: 50%;
+            animation: steam 4s infinite ease-out;
+            opacity: 0;
+        }
+
+        @keyframes steam {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(1);
+                filter: blur(2px);
+            }
+            30% {
+                opacity: 0.5;
+            }
+            70% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scale(3);
+                filter: blur(6px);
+            }
+        }
+
+        .spoon-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: none;
+        }
+
+        .spoon {
+            position: absolute;
+            transform-origin: center;
+        }
+
+        .spoon-handle {
+            position: absolute;
+            width: 12px;
+            height: 150px;
+            background: linear-gradient(to right, #d2c0a5, #eadbc8, #d2c0a5);
+            border-radius: 5px;
+            transform-origin: top center;
+            bottom: -150px;
+            left: -6px;
+        }
+
+        .spoon-head {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: linear-gradient(to right, #e0d1bc, #f5eee4, #e0d1bc);
+            border-radius: 50%;
+            top: -30px;
+            left: -20px;
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .letter {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--primary);
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .letter:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 0 12px var(--glow-color);
+            transform: translateY(-2px);
+        }
+
+        .letter-points {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            font-size: 10px;
+            font-weight: normal;
+            color: var(--text-light);
+        }
+
+        .letter.selected {
+            background-color: var(--primary);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 15px var(--glow-color);
+        }
+
+        .letter.selected .letter-points {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .letter .ripple {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+            transform: scale(0);
+            animation: ripple 0.6s ease-out;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: var(--primary);
+            border-radius: 50%;
+            width: 8px;
+            height: 8px;
+            animation: particle-fade 1s forwards ease-out;
+        }
+
+        @keyframes particle-fade {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty));
+            }
+        }
+
+        .word-builder {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .word-display {
+            width: 100%;
+            min-height: 60px;
+            background-color: white;
+            border-radius: 30px;
+            padding: 15px 25px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .word-display.valid {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .word-display.invalid {
+            background-color: var(--error);
+            color: white;
+        }
+
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stir-btn {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .stir-btn:hover {
+            background-color: var(--secondary-dark);
+        }
+
+        .submit-btn {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background-color: #43a047;
+        }
+
+        .clear-btn {
+            background-color: var(--error);
+            color: white;
+        }
+
+        .clear-btn:hover {
+            background-color: #e53935;
+        }
+
+        .score-board {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+        }
+
+        .score-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .score-header h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .score-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .word-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+            padding: 5px;
+        }
+
+        .word-item {
+            background-color: #f5f5f5;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .word-item-points {
+            background-color: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .instructions-panel {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .instructions-panel h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .instructions-panel ol {
+            padding-left: 25px;
+        }
+
+        .instructions-panel li {
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        .message-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 90%;
+            max-width: 400px;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .message {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: message-fade 2s forwards;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .message.success {
+            background-color: var(--success);
+        }
+
+        .message.error {
+            background-color: var(--error);
+        }
+
+        .message.checking {
+            background-color: var(--secondary);
+        }
+
+        @keyframes message-fade {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            20% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            80% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
+
+        .attribution {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .alphabet-soup-game {
+                padding: 15px;
+                gap: 20px;
+            }
+
+            .game-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .soup-bowl {
+                max-width: 400px;
+            }
+
+            .letter {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .alphabet-soup-game {
+                padding: 10px;
+                gap: 15px;
+            }
+
+            .game-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .soup-bowl {
+                max-width: 300px;
+            }
+
+            .letter {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            .word-display {
+                min-height: 50px;
+                font-size: 1.3rem;
+                padding: 10px 20px;
+            }
+
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .control-buttons {
+                gap: 10px;
+            }
+
+            .score-header h3, .instructions-panel h3 {
+                font-size: 1.1rem;
+            }
+
+            .score-display {
+                font-size: 1.1rem;
+            }
+
+            .word-list {
+                max-height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="alphabet-soup-game">
+    <div class="game-header">
+        <h2>Alphabet Soup Word Builder</h2>
+        <p class="subtitle">Find hidden words in the soup and rack up points!</p>
+    </div>
+
+    <div class="game-container">
+        <div class="soup-bowl" id="soupBowl">
+            <div class="plate-shadow"></div>
+            <div class="plate"></div>
+            <div class="bowl-container">
+                <div class="soup" id="soupContainer">
+                </div>
+                <div class="bowl-highlight"></div>
+                <div class="steam-container" id="steamContainer"></div>
+            </div>
+            <div class="spoon-container" id="spoonContainer">
+                <div class="spoon">
+                    <div class="spoon-handle"></div>
+                    <div class="spoon-head"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="word-builder">
+            <div class="word-display" id="wordDisplay"></div>
+            <div class="control-buttons">
+                <button class="btn stir-btn" id="stirBtn">
+                    <svg height="18" viewBox="0 0 24 24" width="18">
+                        <path d="M19,10C19,11.38 16.88,12.5 15.5,12.5C14.12,12.5 12.75,11.38 12.75,10H11.25C11.25,11.38 9.88,12.5 8.5,12.5C7.12,12.5 5,11.38 5,10H4.25C4.09,10.64 4,11.31 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12C20,11.31 19.91,10.64 19.75,10H19M12,4C9.04,4 6.45,5.61 5.08,8H18.92C17.55,5.61 14.96,4 12,4M22,10A10,10 0 0,1 12,20A10,10 0 0,1 2,10A10,10 0 0,1 12,0A10,10 0 0,1 22,10M12,2A8,8 0 0,0 4,10H20A8,8 0 0,0 12,2Z"
+                              fill="currentColor"/>
+                    </svg>
+                    Stir Soup
+                </button>
+                <button class="btn submit-btn" id="submitBtn">
+                    <svg height="18" viewBox="0 0 24 24" width="18">
+                        <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" fill="currentColor"/>
+                    </svg>
+                    Submit Word
+                </button>
+                <button class="btn clear-btn" id="clearBtn">
+                    <svg height="18" viewBox="0 0 24 24" width="18">
+                        <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+                              fill="currentColor"/>
+                    </svg>
+                    Clear
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="score-board">
+        <div class="score-header">
+            <h3>Found Words</h3>
+            <div class="score-display">Score: <span id="scoreValue">0</span></div>
+        </div>
+        <div class="word-list" id="wordList">
+        </div>
+    </div>
+
+    <div class="instructions-panel">
+        <h3>How to Play:</h3>
+        <ol>
+            <li>Click and drag in the soup to stir and reveal letters</li>
+            <li>Click letters to spell words (3+ letters)</li>
+            <li>Submit words to earn points based on letter values</li>
+            <li>Find as many words as possible!</li>
+        </ol>
+    </div>
+
+    <div class="message-container" id="messageContainer"></div>
+    <div class="particles-container" id="particles-container"></div>
+</div>
+
+<div class="attribution">Created by <a href="https://calculatequick.com">CalculateQuick.com</a> for CodePen Challenge:
+    Alphabet Soup (May 2025)
+</div>
+</body>
+
+<script>
+    document.write('<script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"><\/script>');
+    document.write('<script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"><\/script>');
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const soupContainer = document.getElementById('soupContainer');
+        const wordDisplay = document.getElementById('wordDisplay');
+        const scoreValue = document.getElementById('scoreValue');
+        const wordList = document.getElementById('wordList');
+        const messageContainer = document.getElementById('messageContainer');
+        const submitBtn = document.getElementById('submitBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const stirBtn = document.getElementById('stirBtn');
+        const spoonContainer = document.getElementById('spoonContainer');
+        const steamContainer = document.getElementById('steamContainer');
+        const particlesContainer = document.getElementById('particles-container');
+
+        const CONFIG = {
+            totalLetters: 36,
+            minWordLength: 3,
+            stirDuration: 2000,
+            soupColor: '#ffca7a',
+            letterSize: 35,
+            letterFrequency: {
+                'A': 9, 'B': 2, 'C': 2, 'D': 4, 'E': 12, 'F': 2, 'G': 3, 'H': 2, 'I': 9,
+                'J': 1, 'K': 1, 'L': 4, 'M': 2, 'N': 6, 'O': 8, 'P': 2, 'Q': 1, 'R': 6,
+                'S': 4, 'T': 6, 'U': 4, 'V': 2, 'W': 2, 'X': 1, 'Y': 2, 'Z': 1
+            },
+            letterPoints: {
+                'A': 1, 'B': 3, 'C': 3, 'D': 2, 'E': 1, 'F': 4, 'G': 2, 'H': 4, 'I': 1,
+                'J': 8, 'K': 5, 'L': 1, 'M': 3, 'N': 1, 'O': 1, 'P': 3, 'Q': 10, 'R': 1,
+                'S': 1, 'T': 1, 'U': 1, 'V': 4, 'W': 4, 'X': 8, 'Y': 4, 'Z': 10
+            },
+            dictionaryApiUrl: 'https://api.dictionaryapi.dev/api/v2/entries/en/'
+        };
+
+        const gameState = {
+            score: 0,
+            foundWords: [],
+            selectedLetters: [],
+            isStirring: false,
+            isSpooning: false,
+            soupBounds: null,
+            letters: [],
+            mousePosition: {x: 0, y: 0},
+            lastPosition: {x: 0, y: 0},
+            validationCache: {}
+        };
+
+        let engine, world, letters = [];
+
+        function initGame() {
+            updateSoupBounds();
+            generateSteam();
+            setupPhysics();
+            generateLetters();
+            setupEventListeners();
+            Matter.Runner.run(engine);
+
+            setTimeout(() => {
+                stirSoup(true);
+            }, 500);
+        }
+
+        function updateSoupBounds() {
+            const rect = soupContainer.getBoundingClientRect();
+            gameState.soupBounds = {
+                width: rect.width,
+                height: rect.height,
+                centerX: rect.width / 2,
+                centerY: rect.height / 2,
+                radius: Math.min(rect.width, rect.height) / 2 - 10
+            };
+        }
+
+        function generateSteam() {
+            for (let i = 0; i < 8; i++) {
+                const steam = document.createElement('div');
+                steam.className = 'steam';
+                steam.style.left = `${10 + (i * 12)}%`;
+                steam.style.height = `${30 + Math.random() * 20}px`;
+                steam.style.animationDelay = `${Math.random() * 4}s`;
+                steamContainer.appendChild(steam);
+            }
+        }
+
+        function setupPhysics() {
+            engine = Matter.Engine.create({
+                enableSleeping: false,
+                constraintIterations: 2
+            });
+            world = engine.world;
+
+            engine.world.gravity.y = 0;
+            engine.world.gravity.x = 0;
+
+            const bowlRadius = gameState.soupBounds.radius;
+            const bowlCenter = {
+                x: gameState.soupBounds.centerX,
+                y: gameState.soupBounds.centerY
+            };
+
+            const segments = 36;
+            const segmentAngle = (2 * Math.PI) / segments;
+
+            for (let i = 0; i < segments; i++) {
+                const angle1 = i * segmentAngle;
+                const angle2 = (i + 1) * segmentAngle;
+
+                const x1 = bowlCenter.x + bowlRadius * Math.cos(angle1);
+                const y1 = bowlCenter.y + bowlRadius * Math.sin(angle1);
+                const x2 = bowlCenter.x + bowlRadius * Math.cos(angle2);
+                const y2 = bowlCenter.y + bowlRadius * Math.sin(angle2);
+
+                const segment = Matter.Bodies.rectangle(
+                    (x1 + x2) / 2,
+                    (y1 + y2) / 2,
+                    Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)),
+                    10,
+                    {
+                        angle: Math.atan2(y2 - y1, x2 - x1),
+                        isStatic: true,
+                        render: {visible: false},
+                        collisionFilter: {group: 1}
+                    }
+                );
+
+                Matter.Composite.add(world, segment);
+            }
+        }
+
+        function generateLetters() {
+            gameState.letters.forEach(letter => {
+                if (letter.body) {
+                    Matter.Composite.remove(world, letter.body);
+                }
+                if (letter.element && letter.element.parentNode) {
+                    letter.element.parentNode.removeChild(letter.element);
+                }
+            });
+
+            gameState.letters = [];
+            gameState.selectedLetters = [];
+            updateWordDisplay();
+
+            let letterPool = [];
+            for (const [letter, frequency] of Object.entries(CONFIG.letterFrequency)) {
+                const adjustedFreq = Math.max(1, Math.ceil(frequency / 3));
+                for (let i = 0; i < adjustedFreq; i++) {
+                    letterPool.push(letter);
+                }
+            }
+
+            shuffleArray(letterPool);
+            letterPool = letterPool.slice(0, CONFIG.totalLetters);
+
+            const bowlCenter = {
+                x: gameState.soupBounds.centerX,
+                y: gameState.soupBounds.centerY
+            };
+
+            letterPool.forEach((letter, index) => {
+                const element = document.createElement('div');
+                element.className = 'letter';
+                element.innerHTML = `${letter}<span class="letter-points">${CONFIG.letterPoints[letter]}</span>`;
+                soupContainer.appendChild(element);
+
+                const body = Matter.Bodies.rectangle(
+                    bowlCenter.x,
+                    bowlCenter.y,
+                    CONFIG.letterSize,
+                    CONFIG.letterSize,
+                    {
+                        restitution: 0.6,
+                        friction: 0.001,
+                        frictionAir: 0.05,
+                        frictionStatic: 0.2,
+                        density: 0.001
+                    }
+                );
+
+                Matter.Body.setVelocity(body, {
+                    x: (Math.random() - 0.5) * 2,
+                    y: (Math.random() - 0.5) * 2
+                });
+
+                Matter.Composite.add(world, body);
+
+                gameState.letters.push({
+                    letter: letter,
+                    points: CONFIG.letterPoints[letter],
+                    body: body,
+                    element: element,
+                    selected: false
+                });
+
+                element.addEventListener('click', () => {
+                    if (gameState.isStirring) return;
+
+                    // Add ripple effect
+                    createRippleEffect(element);
+
+                    selectLetter(index);
+                });
+            });
+        }
+
+        function createRippleEffect(element) {
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+
+            element.appendChild(ripple);
+
+            setTimeout(() => {
+                if (ripple.parentNode) {
+                    ripple.parentNode.removeChild(ripple);
+                }
+            }, 600);
+        }
+
+        function createParticles(x, y, count = 20, colors = ['#4caf50', '#ff7b59', '#ffce56']) {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+
+                const size = 4 + Math.random() * 8;
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = (Math.random() - 0.5) * 200 - 50;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.backgroundColor = color;
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+                particle.style.setProperty('--tx', `${tx}px`);
+                particle.style.setProperty('--ty', `${ty}px`);
+
+                particlesContainer.appendChild(particle);
+
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 1000);
+            }
+        }
+
+        function updateLetterPositions() {
+            gameState.letters.forEach(letterObj => {
+                const pos = letterObj.body.position;
+                const angle = letterObj.body.angle;
+
+                letterObj.element.style.left = `${pos.x - CONFIG.letterSize / 2}px`;
+                letterObj.element.style.top = `${pos.y - CONFIG.letterSize / 2}px`;
+                letterObj.element.style.transform = `rotate(${angle}rad)`;
+            });
+        }
+
+        function selectLetter(index) {
+            const letterObj = gameState.letters[index];
+
+            if (letterObj.selected) {
+                const selectedIndex = gameState.selectedLetters.indexOf(letterObj);
+                if (selectedIndex !== -1) {
+                    const removed = gameState.selectedLetters.splice(selectedIndex);
+                    removed.forEach(l => {
+                        l.selected = false;
+                        l.element.classList.remove('selected');
+                    });
+                }
+            } else {
+                letterObj.selected = true;
+                letterObj.element.classList.add('selected');
+                gameState.selectedLetters.push(letterObj);
+            }
+
+            updateWordDisplay();
+        }
+
+        function updateWordDisplay() {
+            const word = gameState.selectedLetters.map(l => l.letter).join('');
+            wordDisplay.textContent = word;
+
+            if (word.length >= CONFIG.minWordLength) {
+                if (word in gameState.validationCache) {
+                    if (gameState.validationCache[word] && !gameState.foundWords.includes(word)) {
+                        wordDisplay.classList.add('valid');
+                        wordDisplay.classList.remove('invalid');
+                    } else {
+                        wordDisplay.classList.add('invalid');
+                        wordDisplay.classList.remove('valid');
+                    }
+                } else {
+                    wordDisplay.classList.remove('valid', 'invalid');
+                }
+            } else {
+                wordDisplay.classList.remove('valid', 'invalid');
+            }
+        }
+
+        function validateWord(word) {
+            if (word in gameState.validationCache) {
+                return Promise.resolve(gameState.validationCache[word]);
+            }
+
+            return fetch(`${CONFIG.dictionaryApiUrl}${word.toLowerCase()}`)
+                .then(response => {
+                    if (response.ok) {
+                        gameState.validationCache[word] = true;
+                        if (!gameState.foundWords.includes(word)) {
+                            wordDisplay.classList.add('valid');
+                            wordDisplay.classList.remove('invalid');
+                        } else {
+                            wordDisplay.classList.add('invalid');
+                            wordDisplay.classList.remove('valid');
+                        }
+                        return true;
+                    } else {
+                        gameState.validationCache[word] = false;
+                        wordDisplay.classList.add('invalid');
+                        wordDisplay.classList.remove('valid');
+                        return false;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error validating word:', error);
+                    gameState.validationCache[word] = true;
+                    if (!gameState.foundWords.includes(word)) {
+                        wordDisplay.classList.add('valid');
+                        wordDisplay.classList.remove('invalid');
+                    }
+                    return true;
+                });
+        }
+
+        function submitWord() {
+            const word = gameState.selectedLetters.map(l => l.letter).join('');
+
+            if (word.length < CONFIG.minWordLength) {
+                showMessage('Words must be at least 3 letters long!', 'error');
+                return;
+            }
+
+            if (gameState.foundWords.includes(word)) {
+                showMessage('You already found this word!', 'error');
+                return;
+            }
+
+            showMessage(`Checking "${word}"...`, 'checking');
+
+            const validateAndSubmit = () => {
+                if (word in gameState.validationCache) {
+                    if (gameState.validationCache[word]) {
+                        addWordToScore(word);
+                    } else {
+                        showMessage('Not a valid word!', 'error');
+                    }
+                } else {
+                    validateWord(word).then(isValid => {
+                        if (isValid) {
+                            addWordToScore(word);
+                        } else {
+                            showMessage('Not a valid word!', 'error');
+                        }
+                    });
+                }
+            };
+
+            validateAndSubmit();
+        }
+
+        function addWordToScore(word) {
+            let wordPoints = gameState.selectedLetters.reduce((sum, l) => sum + l.points, 0);
+
+            if (word.length >= 5) wordPoints += 3;
+            if (word.length >= 7) wordPoints += 5;
+
+            gameState.score += wordPoints;
+            gameState.foundWords.push(word);
+
+            scoreValue.textContent = gameState.score;
+
+            const wordItem = document.createElement('div');
+            wordItem.className = 'word-item';
+            wordItem.innerHTML = `
+            <span>${word}</span>
+            <span class="word-item-points">${wordPoints}</span>
+        `;
+            wordList.appendChild(wordItem);
+
+            showMessage(`+${wordPoints} points!`, 'success');
+
+            // Add particle burst
+            const rect = wordDisplay.getBoundingClientRect();
+            createParticles(
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2,
+                30,
+                ['#4caf50', '#ffca7a', '#dd5e36']
+            );
+
+            clearSelection();
+
+            animateWordSuccess(word);
+        }
+
+        function clearSelection() {
+            gameState.selectedLetters.forEach(l => {
+                l.selected = false;
+                l.element.classList.remove('selected');
+            });
+            gameState.selectedLetters = [];
+            updateWordDisplay();
+        }
+
+        function stirSoup(initialStir = false) {
+            if (gameState.isStirring) return;
+            gameState.isStirring = true;
+
+            clearSelection();
+
+            spoonContainer.style.display = 'block';
+
+            const bowlCenter = {
+                x: gameState.soupBounds.centerX,
+                y: gameState.soupBounds.centerY
+            };
+
+            const spoonElement = spoonContainer.querySelector('.spoon');
+            const duration = initialStir ? 1500 : CONFIG.stirDuration;
+
+            spoonElement.style.left = `${bowlCenter.x}px`;
+            spoonElement.style.top = `${bowlCenter.y}px`;
+
+            const spoonAnimation = anime({
+                targets: spoonElement,
+                translateX: [
+                    {value: bowlCenter.x * 0.5, duration: duration * 0.25},
+                    {value: -bowlCenter.x * 0.5, duration: duration * 0.5},
+                    {value: 0, duration: duration * 0.25}
+                ],
+                translateY: [
+                    {value: -bowlCenter.y * 0.5, duration: duration * 0.25},
+                    {value: bowlCenter.y * 0.5, duration: duration * 0.5},
+                    {value: 0, duration: duration * 0.25}
+                ],
+                rotate: [
+                    {value: '0deg', duration: 0},
+                    {value: '180deg', duration: duration * 0.25},
+                    {value: '360deg', duration: duration * 0.5},
+                    {value: '540deg', duration: duration * 0.25}
+                ],
+                easing: 'easeInOutSine',
+                begin: function () {
+                    spoonElement.style.transformOrigin = 'center';
+                }
+            });
+
+            const interval = setInterval(() => {
+                const spoonPos = {
+                    x: parseFloat(spoonElement.style.left) + parseFloat(spoonElement.style.translateX || 0),
+                    y: parseFloat(spoonElement.style.top) + parseFloat(spoonElement.style.translateY || 0)
+                };
+
+                gameState.letters.forEach(letterObj => {
+                    const body = letterObj.body;
+                    const pos = body.position;
+
+                    const dx = pos.x - spoonPos.x;
+                    const dy = pos.y - spoonPos.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        const force = 0.002 * (1 - distance / 100);
+                        const angle = Math.atan2(dy, dx);
+
+                        Matter.Body.applyForce(body, pos, {
+                            x: Math.cos(angle) * force,
+                            y: Math.sin(angle) * force
+                        });
+                    }
+
+                    Matter.Body.applyForce(body, pos, {
+                        x: (Math.random() - 0.5) * 0.0002,
+                        y: (Math.random() - 0.5) * 0.0002
+                    });
+                });
+            }, 50);
+
+            setTimeout(() => {
+                clearInterval(interval);
+                gameState.isStirring = false;
+                spoonContainer.style.display = 'none';
+            }, duration);
+        }
+
+        function handleSoupInteraction(e) {
+            if (gameState.isStirring) return;
+
+            const rect = soupContainer.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            const dx = x - gameState.lastPosition.x;
+            const dy = y - gameState.lastPosition.y;
+
+            gameState.lastPosition = {x, y};
+            gameState.mousePosition = {x, y};
+
+            if (!gameState.isSpooning) {
+                spoonContainer.style.display = 'block';
+                gameState.isSpooning = true;
+            }
+
+            const spoonElement = spoonContainer.querySelector('.spoon');
+
+            spoonElement.style.left = `${x}px`;
+            spoonElement.style.top = `${y}px`;
+
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+            spoonElement.style.transform = `rotate(${angle}deg)`;
+
+            gameState.letters.forEach(letterObj => {
+                const body = letterObj.body;
+                const pos = body.position;
+
+                const dx = pos.x - x;
+                const dy = pos.y - y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 80) {
+                    const force = 0.001 * (1 - distance / 80);
+                    const angle = Math.atan2(dy, dx);
+
+                    Matter.Body.applyForce(body, pos, {
+                        x: Math.cos(angle) * force + (e.movementX || 0) * 0.00015,
+                        y: Math.sin(angle) * force + (e.movementY || 0) * 0.00015
+                    });
+                }
+            });
+        }
+
+        function startSoupInteraction(e) {
+            if (gameState.isStirring) return;
+
+            const rect = soupContainer.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            gameState.lastPosition = {x, y};
+            gameState.mousePosition = {x, y};
+
+            spoonContainer.style.display = 'block';
+            gameState.isSpooning = true;
+
+            const spoonElement = spoonContainer.querySelector('.spoon');
+            spoonElement.style.left = `${x}px`;
+            spoonElement.style.top = `${y}px`;
+        }
+
+        function endSoupInteraction() {
+            if (gameState.isSpooning) {
+                spoonContainer.style.display = 'none';
+                gameState.isSpooning = false;
+            }
+        }
+
+        function showMessage(text, type = 'default') {
+            const message = document.createElement('div');
+            message.className = `message ${type}`;
+            message.textContent = text;
+            messageContainer.appendChild(message);
+
+            setTimeout(() => {
+                if (message.parentNode) {
+                    message.parentNode.removeChild(message);
+                }
+            }, 2000);
+        }
+
+        function animateWordSuccess(word) {
+            anime({
+                targets: wordDisplay,
+                backgroundColor: [
+                    {value: '#4caf50', duration: 0},
+                    {value: '#2e7d32', duration: 500},
+                    {value: '#4caf50', duration: 500}
+                ],
+                scale: [
+                    {value: 1, duration: 0},
+                    {value: 1.1, duration: 300},
+                    {value: 1, duration: 300}
+                ],
+                easing: 'easeInOutQuad'
+            });
+
+            anime({
+                targets: soupContainer,
+                boxShadow: [
+                    {value: 'inset 0 0 20px rgba(76, 175, 80, 0.5)', duration: 300},
+                    {value: 'inset 0 0 0 rgba(76, 175, 80, 0)', duration: 700}
+                ],
+                easing: 'easeOutQuad'
+            });
+        }
+
+        function setupEventListeners() {
+            submitBtn.addEventListener('click', submitWord);
+            clearBtn.addEventListener('click', clearSelection);
+            stirBtn.addEventListener('click', () => stirSoup());
+
+            soupContainer.addEventListener('mousedown', (e) => {
+                startSoupInteraction(e);
+            });
+
+            soupContainer.addEventListener('mousemove', (e) => {
+                if (gameState.isSpooning) {
+                    handleSoupInteraction(e);
+                }
+            });
+
+            document.addEventListener('mouseup', endSoupInteraction);
+
+            soupContainer.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                startSoupInteraction(e);
+            });
+
+            soupContainer.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (gameState.isSpooning) {
+                    handleSoupInteraction(e);
+                }
+            });
+
+            document.addEventListener('touchend', (e) => {
+                endSoupInteraction();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    submitBtn.click();
+                } else if (e.key === 'Escape') {
+                    clearBtn.click();
+                } else if (e.key === ' ') {
+                    e.preventDefault();
+                    stirBtn.click();
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                updateSoupBounds();
+            });
+
+            function gameLoop() {
+                updateLetterPositions();
+                requestAnimationFrame(gameLoop);
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function precacheCommonWords() {
+            const commonWords = [
+                "THE", "AND", "THAT", "HAVE", "FOR", "NOT", "WITH", "YOU",
+                "THIS", "BUT", "HIS", "FROM", "SAY", "HER", "SHE", "WILL",
+                "ONE", "ALL", "WOULD", "THERE", "THEIR", "WHAT", "OUT", "ABOUT",
+                "WHO", "GET", "WHICH", "WHEN", "MAKE", "CAN", "LIKE", "TIME",
+                "JUST", "HIM", "KNOW", "TAKE", "PEOPLE", "INTO", "YEAR", "YOUR",
+                "GOOD", "SOME", "COULD", "THEM", "SEE", "OTHER", "THAN", "THEN",
+                "NOW", "LOOK", "ONLY", "COME", "ITS", "OVER", "THINK", "ALSO",
+                "BACK", "AFTER", "USE", "TWO", "HOW", "OUR", "WORK", "FIRST",
+                "WELL", "WAY", "EVEN", "NEW", "WANT", "ANY", "THESE", "GIVE",
+                "DAY", "MOST", "PUT", "CAT", "DOG", "PET", "HAT", "BAT", "RAT",
+                "CAR", "BAR", "JAR", "FAR", "PAR", "WAR", "MAN", "FAN", "PAN",
+                "CAN", "TAN", "BAN", "MAT", "SAT", "FAT", "EAT", "SET", "NET",
+                "PET", "WET", "JET", "GET", "LET", "BET", "BIG", "PIG", "FIG",
+                "DIG", "RIG", "WIG", "BUG", "RUG", "JUG", "MUG", "HUG", "TAG",
+                "BAG", "LAG", "SAG", "WAG", "RAG", "MOP", "TOP", "HOP", "POP",
+                "COP", "BOP", "RED", "BED", "FED", "LED", "WED", "TEN", "PEN",
+                "MEN", "DEN", "HEN", "HOT", "POT", "LOT", "ROT", "NOT", "TOT",
+                "FIT", "HIT", "BIT", "SIT", "PIT", "LIT", "SUN", "RUN", "FUN",
+                "BUN", "GUN", "NUN", "CUP", "SUP", "PUP", "MAP", "LAP", "NAP",
+                "TAP", "SAP", "GAP", "AIR", "FAIR", "HAIR", "PAIR", "CHAIR",
+                "ARM", "FARM", "HARM", "CHARM", "ART", "CART", "PART", "DART",
+                "MART", "EAR", "FEAR", "DEAR", "NEAR", "YEAR", "CLEAR", "EGG",
+                "LEG", "PEG", "BEG", "KEG", "ICE", "DICE", "MICE", "NICE", "RICE",
+                "VICE", "ILL", "FILL", "HILL", "KILL", "MILL", "PILL", "STILL",
+                "INK", "PINK", "SINK", "LINK", "WINK", "MINK", "RINK", "OIL",
+                "BOIL", "COIL", "FOIL", "SOIL", "TOIL", "SPOIL", "OLD", "BOLD",
+                "COLD", "FOLD", "GOLD", "HOLD", "MOLD", "SOLD", "TOLD",
+                "SOUP", "FOOD", "BOWL", "COOK", "SPOON", "STIR", "MEAL", "EAT"
+            ];
+
+            commonWords.forEach(word => {
+                gameState.validationCache[word] = true;
+            });
+        }
+
+        precacheCommonWords();
+        initGame();
+    });
+</script>
+</html>

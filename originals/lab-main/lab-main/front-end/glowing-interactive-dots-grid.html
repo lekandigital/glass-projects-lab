@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Glowing Interactive Dots Grid</title>
+
+    <style>
+        /* ------------------------- Variables ------------------------------------------- */
+        :root {
+            --color-light: var(--color-neutral-200);
+            --color-dark: var(--color-neutral-800);
+            --color-primary: #ff4c24;
+            --color-neutral-100: #ffffff;
+            --color-neutral-200: #efeeec;
+            --color-neutral-300: #e3e1de;
+            --color-neutral-400: #cbc8c5;
+            --color-neutral-500: #818180;
+            --color-neutral-600: #2c2c2c;
+            --color-neutral-700: #1f1f1f;
+            --color-neutral-800: #131313;
+            --color-neutral-900: #000000;
+            --color-white: var(--color-neutral-100);
+            --color-black: var(--color-neutral-900);
+            --color-error: var(--color-primary);
+            --color-success: #0ba954;
+            --cubic-default: cubic-bezier(0.65, 0.05, 0, 1);
+            --duration-default: 0.735s;
+            --animation-default: var(--duration-default) var(--cubic-default);
+            --gap: 2em;
+            --section-padding: calc(3.5em + (var(--gap) * 2));
+            --container-padding: 2em;
+            --header-height: calc(1.5em + (var(--gap) * 2));
+            --footer-height: calc(2.785em + (var(--gap) * 2));
+        }
+
+        /* Tablet */
+        @media screen and (max-width: 991px) {
+            :root {
+                --container-padding: 1.5em;
+            }
+        }
+
+        /* Mobile Landscape */
+        @media screen and (max-width: 767px) {
+            :root {
+                --container-padding: 1em;
+            }
+        }
+
+        /* Mobile Portrait */
+        @media screen and (max-width: 479px) {
+            :root {
+            }
+        }
+
+        /* ------------------------- Scaling System by Osmo [https://osmo.supply/] -------------------------  */
+
+        /* Desktop */
+        :root {
+            --size-unit: 16; /* body font-size in design - no px */
+            --size-container-ideal: 1440; /* screen-size in design - no px */
+            --size-container-min: 992px;
+            --size-container-max: 1920px;
+            --size-container: clamp(var(--size-container-min), 100vw, var(--size-container-max));
+            --size-font: calc(var(--size-container) / (var(--size-container-ideal) / var(--size-unit)));
+        }
+
+        /* Tablet */
+        @media screen and (max-width: 991px) {
+            :root {
+                --size-container-ideal: 834; /* screen-size in design - no px */
+                --size-container-min: 768px;
+                --size-container-max: 991px;
+            }
+        }
+
+        /* Mobile Landscape */
+        @media screen and (max-width: 767px) {
+            :root {
+                --size-container-ideal: 390; /* screen-size in design - no px */
+                --size-container-min: 480px;
+                --size-container-max: 767px;
+            }
+        }
+
+        /* Mobile Portrait */
+        @media screen and (max-width: 479px) {
+            :root {
+                --size-container-ideal: 390; /* screen-size in design - no px */
+                --size-container-min: 320px;
+                --size-container-max: 479px;
+            }
+        }
+
+
+        /* ------------------------- Hide Scrollbar -------------------------------------------------- */
+
+        body ::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Chrome, Safari, Opera */
+        body {
+            -ms-overflow-style: none;
+        }
+
+        /* IE & Edge */
+        html {
+            scrollbar-width: none;
+        }
+
+        /* Firefox */
+
+        /* ------------------------- Reset -------------------------------------------------- */
+
+        *,
+        *:after,
+        *:before {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: initial;
+        }
+
+        html,
+        body {
+            -webkit-font-smoothing: antialiased;
+        }
+
+        svg {
+            max-width: none;
+            height: auto;
+            box-sizing: border-box;
+            vertical-align: middle;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        /* Selection */
+        ::selection {
+            background-color: var(--color-primary);
+            color: var(--color-dark);
+            text-shadow: none;
+        }
+
+        ::-moz-selection {
+            background-color: var(--color-primary);
+            color: var(--color-dark);
+            text-shadow: none;
+        }
+    </style>
+
+    <style>
+        body {
+            background-color: #08342a;
+            color: var(--color-light);
+            font-size: 1vw;
+            margin: 0;
+            padding: 0;
+            overscroll-behavior: none;
+            min-height: 100%;
+            cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b239d7aeb290a31ac5_cursor-default%402x.svg") 2 0,
+            auto;
+        }
+
+        a,
+        button {
+            cursor: url("https://cdn.prod.website-files.com/6708f85ff3d3cba6aff436fb/671251b212e6b71494aa67ff_cursor-pointer%402x.svg") 12 0,
+            pointer;
+        }
+
+        .section-resource {
+            padding: 4em;
+            justify-content: center;
+            align-items: center;
+            height: 100svh;
+            display: flex;
+            position: relative;
+        }
+
+        .osmo-icon__link {
+            color: currentColor;
+            text-decoration: none;
+            position: absolute;
+        }
+
+        .osmo-icon-svg {
+            width: 10em;
+        }
+
+        .dots-wrap {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .dots-container {
+            grid-column-gap: 2em;
+            grid-row-gap: 2em;
+            pointer-events: none;
+            flex-flow: wrap;
+            grid-template-rows: auto;
+            grid-template-columns: 1fr;
+            grid-auto-columns: 1fr;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            position: absolute;
+            inset: 0em;
+        }
+
+        .dot {
+            will-change: transform, background-color;
+            transform-origin: center;
+            background-color: #245e51;
+            border-radius: 50%;
+            width: 1em;
+            height: 1em;
+            position: relative;
+            transform: translate(0);
+        }
+
+        .osmo-credits {
+            z-index: 999;
+            pointer-events: none;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 4em;
+            padding: 1em;
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+
+        .osmo-credits__p {
+            pointer-events: auto;
+            color: #efeeec80;
+            text-align: center;
+            margin: 0;
+            font-family: PP Neue Montreal, Arial, sans-serif;
+            font-size: 1.125em;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        .osmo-credits__p-a {
+            color: #efeeec;
+        }
+
+        @font-face {
+            font-family: 'PP Neue Montreal';
+            src: url('https://cdn.prod.website-files.com/6819ed8312518f61b84824df/6819ed8312518f61b84825ba_PPNeueMontreal-Medium.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
+</head>
+<body>
+<section class="section-resource">
+    <div class="dots-wrap">
+        <div class="dots-container" data-dots-container-init="">
+            <div class="dot"></div>
+        </div>
+    </div>
+    <a class="osmo-icon__link w-inline-block" href="https://osmo.supply/" target="_blank">
+        <svg class="osmo-icon-svg" fill="none" viewbox="0 0 160 160" width="100%" xmlns="http://www.w3.org/2000/svg">
+            <path d="M94.8284 53.8578C92.3086 56.3776 88 54.593 88 51.0294V0H72V59.9999C72 66.6273 66.6274 71.9999 60 71.9999H0V87.9999H51.0294C54.5931 87.9999 56.3777 92.3085 53.8579 94.8283L18.3431 130.343L29.6569 141.657L65.1717 106.142C67.684 103.63 71.9745 105.396 72 108.939V160L88.0001 160L88 99.9999C88 93.3725 93.3726 87.9999 100 87.9999H160V71.9999H108.939C105.407 71.9745 103.64 67.7091 106.12 65.1938L106.142 65.1716L141.657 29.6568L130.343 18.3432L94.8284 53.8578Z"
+                  fill="currentColor"></path>
+        </svg>
+    </a>
+</section>
+<div class="osmo-credits">
+    <p class="osmo-credits__p">Resource by <a class="osmo-credits__p-a"
+                                              href="https://www.osmo.supply?utm_source=codepen&utm_medium=pen&utm_campaign=glowing-interactive-dots-grid"
+                                              target="_blank">Osmo</a>
+    </p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+
+<script>
+    gsap.registerPlugin(InertiaPlugin);
+
+    function initGlowingInteractiveDotsGrid() {
+        document.querySelectorAll('[data-dots-container-init]').forEach(container => {
+            const colors = {base: "#245E51", active: "#A8FF51"};
+            const threshold = 150;
+            const speedThreshold = 100;
+            const shockRadius = 250;
+            const shockPower = 5;
+            const maxSpeed = 5000;
+            const centerHole = true;
+
+            let dots = [];
+            let dotCenters = [];
+
+            function buildGrid() {
+                container.innerHTML = "";
+                dots = [];
+                dotCenters = [];
+
+                const style = getComputedStyle(container);
+                const dotPx = parseFloat(style.fontSize);
+                const gapPx = dotPx * 2;
+                const contW = container.clientWidth;
+                const contH = container.clientHeight;
+
+                const cols = Math.floor((contW + gapPx) / (dotPx + gapPx));
+                const rows = Math.floor((contH + gapPx) / (dotPx + gapPx));
+                const total = cols * rows;
+
+                const holeCols = centerHole ? (cols % 2 === 0 ? 4 : 5) : 0;
+                const holeRows = centerHole ? (rows % 2 === 0 ? 4 : 5) : 0;
+                const startCol = (cols - holeCols) / 2;
+                const startRow = (rows - holeRows) / 2;
+
+                for (let i = 0; i < total; i++) {
+                    const row = Math.floor(i / cols);
+                    const col = i % cols;
+                    const isHole = centerHole &&
+                        row >= startRow && row < startRow + holeRows &&
+                        col >= startCol && col < startCol + holeCols;
+
+                    const d = document.createElement("div");
+                    d.classList.add("dot");
+
+                    if (isHole) {
+                        d.style.visibility = "hidden";
+                        d._isHole = true;
+                    } else {
+                        gsap.set(d, {x: 0, y: 0, backgroundColor: colors.base});
+                        d._inertiaApplied = false;
+                    }
+
+                    container.appendChild(d);
+                    dots.push(d);
+                }
+
+                requestAnimationFrame(() => {
+                    dotCenters = dots
+                        .filter(d => !d._isHole)
+                        .map(d => {
+                            const r = d.getBoundingClientRect();
+                            return {
+                                el: d,
+                                x: r.left + window.scrollX + r.width / 2,
+                                y: r.top + window.scrollY + r.height / 2
+                            };
+                        });
+                });
+            }
+
+            window.addEventListener("resize", buildGrid);
+            buildGrid();
+
+            let lastTime = 0, lastX = 0, lastY = 0;
+
+            window.addEventListener("mousemove", e => {
+                const now = performance.now();
+                const dt = now - lastTime || 16;
+                let dx = e.pageX - lastX;
+                let dy = e.pageY - lastY;
+                let vx = dx / dt * 1000;
+                let vy = dy / dt * 1000;
+                let speed = Math.hypot(vx, vy);
+
+                if (speed > maxSpeed) {
+                    const scale = maxSpeed / speed;
+                    vx *= scale;
+                    vy *= scale;
+                    speed = maxSpeed;
+                }
+
+                lastTime = now;
+                lastX = e.pageX;
+                lastY = e.pageY;
+
+                requestAnimationFrame(() => {
+                    dotCenters.forEach(({el, x, y}) => {
+                        const dist = Math.hypot(x - e.pageX, y - e.pageY);
+                        const t = Math.max(0, 1 - dist / threshold);
+                        const col = gsap.utils.interpolate(colors.base, colors.active, t);
+                        gsap.set(el, {backgroundColor: col});
+
+                        if (speed > speedThreshold && dist < threshold && !el._inertiaApplied) {
+                            el._inertiaApplied = true;
+                            const pushX = (x - e.pageX) + vx * 0.005;
+                            const pushY = (y - e.pageY) + vy * 0.005;
+
+                            gsap.to(el, {
+                                inertia: {x: pushX, y: pushY, resistance: 750},
+                                onComplete() {
+                                    gsap.to(el, {
+                                        x: 0,
+                                        y: 0,
+                                        duration: 1.5,
+                                        ease: "elastic.out(1,0.75)"
+                                    });
+                                    el._inertiaApplied = false;
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+
+            window.addEventListener("click", e => {
+                dotCenters.forEach(({el, x, y}) => {
+                    const dist = Math.hypot(x - e.pageX, y - e.pageY);
+                    if (dist < shockRadius && !el._inertiaApplied) {
+                        el._inertiaApplied = true;
+                        const falloff = Math.max(0, 1 - dist / shockRadius);
+                        const pushX = (x - e.pageX) * shockPower * falloff;
+                        const pushY = (y - e.pageY) * shockPower * falloff;
+
+                        gsap.to(el, {
+                            inertia: {x: pushX, y: pushY, resistance: 750},
+                            onComplete() {
+                                gsap.to(el, {
+                                    x: 0,
+                                    y: 0,
+                                    duration: 1.5,
+                                    ease: "elastic.out(1,0.75)"
+                                });
+                                el._inertiaApplied = false;
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    }
+
+    // Initialize Glowing Interactive Dots Grid
+    document.addEventListener('DOMContentLoaded', function () {
+        initGlowingInteractiveDotsGrid();
+    });
+</script>
+</body>
+</html>

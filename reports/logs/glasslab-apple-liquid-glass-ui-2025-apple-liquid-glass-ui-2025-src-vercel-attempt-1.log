@@ -1,0 +1,34 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src --name glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src
+Uploading [--------------------] (0.0B/7KB)
+Uploading [==========----------] (3.6KB/7KB)
+Uploading [=============-------] (4.7KB/7KB)
+Uploading [====================] (7.0KB/7KB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src/8siWQfvdqf4Uc5nvAcG1KPn4mTzo [2s]
+Production: https://glasslab-apple-liquid-glass-ui-2025-apple-liquid-4xh19hw3y.vercel.app [2s]
+https://glasslab-apple-liquid-glass-ui-2025-apple-liquid-4xh19hw3y.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 4 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+Building: Build Completed in /vercel/output [40ms]
+Building: Deploying outputs...
+[2K[1A[2K[GProduction: https://glasslab-apple-liquid-glass-ui-2025-apple-liquid-4xh19hw3y.vercel.app [5s]
+Completing...
+Aliased: https://glasslab-apple-liquid-glass-ui-2025.vercel.app [5s]

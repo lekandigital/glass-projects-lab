@@ -1,0 +1,34 @@
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-css-glass-main-css-glass-main
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-css-glass-main-css-glass-main
+----------------------------------------
+Loading scopes…
+Searching for existing projects…
+> No framework detected. Default Project Settings:
+
+- Build Command: `npm run vercel-build` or `npm run build`
+- Development Command: None
+- Install Command: `yarn install`, `pnpm install`, `npm install`, or `bun install`
+- Output Directory: `public` if it exists, or `.`
+Linked to lekandigitals-projects/glasslab-css-glass-main-css-glass-main (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-css-glass-main-css-glass-main
+Uploading [--------------------] (0.0B/4.5MB)
+Uploading [=====---------------] (1.1MB/4.5MB)
+Uploading [==========----------] (2.3MB/4.5MB)
+Uploading [===============-----] (3.4MB/4.5MB)
+Uploading [====================] (4.5MB/4.5MB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-css-glass-main-css-glass-main/Fdh52JXxHrpsZQfndrJVqMU8aP9h [6s]
+Production: https://glasslab-css-glass-main-css-glass-main-m8vdb43dj.vercel.app [6s]
+https://glasslab-css-glass-main-css-glass-main-m8vdb43dj.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 76 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+Building: Build Completed in /vercel/output [110ms]
+Building: Deploying outputs...
+[2K[1A[2K[GProduction: https://glasslab-css-glass-main-css-glass-main-m8vdb43dj.vercel.app [7s]
+Completing...
+Aliased: https://glasslab-css-glass-main-css-glass-m.vercel.app [7s]
