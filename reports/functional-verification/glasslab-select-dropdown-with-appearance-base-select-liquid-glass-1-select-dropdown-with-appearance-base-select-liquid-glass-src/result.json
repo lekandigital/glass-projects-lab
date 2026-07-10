@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-select-dropdown-with-appearance-base-select-liquid-glass-1-select-dropdown-with-appearance-base-select-liquid-glass-src",
+  "url": "http://127.0.0.1:50930",
+  "status_code": 200,
+  "title": "Select Dropdown With Appearance Base Select Liquid Glass 1 Select Dropdown With Appearance Base Select Liquid Glass Src",
+  "html_length": 9248,
+  "body_text_length": 115,
+  "visible_element_count": 12,
+  "canvas_count": 0,
+  "svg_count": 2,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgb(0, 0, 0)",
+    "fontFamily": "Avenir, sans-serif",
+    "backgroundImage": "none",
+    "margin": "0px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "DIV",
+    "id": "gsapBody",
+    "className": "",
+    "width": "1440px",
+    "height": "900px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "0px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 1,
+  "interaction_diff_score": 573.0074937983569,
+  "final_status": "broken-local-render"
+}

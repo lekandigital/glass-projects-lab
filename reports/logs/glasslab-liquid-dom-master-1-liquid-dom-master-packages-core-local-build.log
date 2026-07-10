@@ -1,0 +1,146 @@
+
+Running: pnpm install
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-dom-master-1-liquid-dom-master-packages-core
+----------------------------------------
+Scope: all 13 workspace projects
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +332
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 332, reused 330, downloaded 0, added 331
+Progress: resolved 332, reused 330, downloaded 0, added 332, done
+
+devDependencies:
++ @changesets/cli 2.31.0
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: esbuild@0.27.7.                                     │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 1.5s using pnpm v10.33.0
+
+Running: pnpm run build
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-dom-master-1-liquid-dom-master-packages-core
+----------------------------------------
+
+> liquid-dom@ build /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-dom-master-1-liquid-dom-master-packages-core
+> pnpm -r build
+
+Scope: 12 of 13 workspace projects
+packages/layout build$ tsup
+packages/layout build: CLI Building entry: {"index":"src/index.ts","animation":"src/animation.ts","dom":"src/dom.ts"}
+packages/layout build: CLI Using tsconfig: tsconfig.json
+packages/layout build: CLI tsup v8.5.1
+packages/layout build: CLI Using tsup config: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-dom-master-1-liquid-dom-master-packages-core/packages/layout/tsup.config.ts
+packages/layout build: CLI Target: es2022
+packages/layout build: CLI Cleaning output folder
+packages/layout build: ESM Build start
+packages/layout build: CJS Build start
+packages/layout build: ESM dist/index.js              5.98 KB
+packages/layout build: ESM dist/chunk-I3UOQREZ.js     24.77 KB
+packages/layout build: ESM dist/dom.js                6.39 KB
+packages/layout build: ESM dist/animation.js          15.65 KB
+packages/layout build: ESM dist/chunk-I3UOQREZ.js.map 50.62 KB
+packages/layout build: ESM dist/dom.js.map            11.63 KB
+packages/layout build: ESM dist/index.js.map          11.04 KB
+packages/layout build: ESM dist/animation.js.map      31.94 KB
+packages/layout build: ESM ⚡️ Build success in 12ms
+packages/layout build: CJS dist/index.cjs         31.50 KB
+packages/layout build: CJS dist/animation.cjs     16.82 KB
+packages/layout build: CJS dist/dom.cjs           14.06 KB
+packages/layout build: CJS dist/index.cjs.map     62.49 KB
+packages/layout build: CJS dist/animation.cjs.map 32.01 KB
+packages/layout build: CJS dist/dom.cjs.map       48.45 KB
+packages/layout build: CJS ⚡️ Build success in 13ms
+packages/layout build: DTS Build start
+packages/layout build: DTS ⚡️ Build success in 805ms
+packages/layout build: DTS dist/index.d.ts             1.78 KB
+packages/layout build: DTS dist/animation.d.ts         4.10 KB
+packages/layout build: DTS dist/dom.d.ts               1.14 KB
+packages/layout build: DTS dist/layouts-BPaNnZlx.d.ts  10.42 KB
+packages/layout build: DTS dist/index.d.cts            1.78 KB
+packages/layout build: DTS dist/animation.d.cts        4.10 KB
+packages/layout build: DTS dist/dom.d.cts              1.14 KB
+packages/layout build: DTS dist/layouts-BPaNnZlx.d.cts 10.42 KB
+packages/layout build: Done
+demo/three-layout build$ tsc -b && vite build
+packages/core build$ tsup
+packages/core build: CLI Building entry: {"index":"src/index.ts","layout":"src/layout.ts"}
+packages/core build: CLI Using tsconfig: tsconfig.json
+packages/core build: CLI tsup v8.5.1
+packages/core build: CLI Using tsup config: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-dom-master-1-liquid-dom-master-packages-core/packages/core/tsup.config.ts
+packages/core build: CLI Target: es2022
+packages/core build: CLI Cleaning output folder
+packages/core build: ESM Build start
+packages/core build: CJS Build start
+packages/core build: CJS dist/index.cjs      180.49 KB
+packages/core build: CJS dist/layout.cjs     48.65 KB
+packages/core build: CJS dist/layout.cjs.map 116.10 KB
+packages/core build: CJS dist/index.cjs.map  326.27 KB
+packages/core build: CJS ⚡️ Build success in 24ms
+packages/core build: ESM dist/index.js              144.40 KB
+packages/core build: ESM dist/layout.js             26.80 KB
+packages/core build: ESM dist/chunk-QAAGGT74.js     36.94 KB
+packages/core build: ESM dist/layout.js.map         56.27 KB
+packages/core build: ESM dist/chunk-QAAGGT74.js.map 74.01 KB
+packages/core build: ESM dist/index.js.map          252.47 KB
+packages/core build: ESM ⚡️ Build success in 24ms
+packages/core build: DTS Build start
+packages/core build: DTS ⚡️ Build success in 706ms
+packages/core build: DTS dist/index.d.ts            12.57 KB
+packages/core build: DTS dist/layout.d.ts           14.48 KB
+packages/core build: DTS dist/events-BwRQf25A.d.ts  23.24 KB
+packages/core build: DTS dist/index.d.cts           12.58 KB
+packages/core build: DTS dist/layout.d.cts          14.48 KB
+packages/core build: DTS dist/events-BwRQf25A.d.cts 23.24 KB
+packages/core build: Done
+demo/three-layout build: vite v8.0.10 building client environment for production...
+demo/three-layout build: [2K
+demo/three-layout build: transforming...✓ 30 modules transformed.
+demo/three-layout build: rendering chunks...
+demo/three-layout build: computing gzip size...
+demo/three-layout build: dist/index.html                                          0.50 kB │ gzip:   0.32 kB
+demo/three-layout build: dist/assets/droid_sans_regular.typeface-C0hZ-1th.json  319.89 kB │ gzip: 103.60 kB
+demo/three-layout build: dist/assets/index-CoK9TgjF.css                           0.50 kB │ gzip:   0.30 kB
+demo/three-layout build: dist/assets/index-B8eYSyTz.js                          589.36 kB │ gzip: 153.89 kB
+demo/three-layout build: ✓ built in 346ms
+demo/three-layout build: [plugin builtin:vite-reporter] 
+demo/three-layout build: (!) Some chunks are larger than 500 kB after minification. Consider:
+demo/three-layout build: - Using dynamic import() to code-split the application
+demo/three-layout build: - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+demo/three-layout build: - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+demo/three-layout build: Done
+packages/react build$ tsup
+packages/three build$ tsup
+packages/react build: CLI Building entry: {"index":"src/index.ts"}
+packages/react build: CLI Using tsconfig: tsconfig.json
+packages/react build: CLI tsup v8.5.1
+packages/react build: CLI Using tsup config: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-dom-master-1-liquid-dom-master-packages-core/packages/react/tsup.config.ts
+packages/react build: CLI Target: es2022
+packages/react build: CLI Cleaning output folder
+packages/react build: ESM Build start
+packages/react build: CJS Build start
+packages/react build: CJS dist/index.cjs     30.87 KB
+packages/react build: CJS dist/index.cjs.map 53.70 KB
+packages/react build: CJS ⚡️ Build success in 11ms
+packages/react build: ESM dist/index.js     28.11 KB
+packages/react build: ESM dist/index.js.map 52.68 KB
+packages/react build: ESM ⚡️ Build success in 11ms
+packages/three build: CLI Building entry: {"index":"src/index.ts"}
+packages/three build: CLI Using tsconfig: tsconfig.json
+packages/three build: CLI tsup v8.5.1
+packages/three build: CLI Using tsup config: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-dom-master-1-liquid-dom-master-packages-core/packages/three/tsup.config.ts
+packages/three build: CLI Target: es2022
+packages/three build: CLI Cleaning output folder
+packages/three build: ESM Build start
+packages/three build: CJS Build start
+packages/three build: CJS dist/index.cjs     6.45 KB
+packages/three build: CJS dist/index.cjs.map 11.13 KB
+packages/three build: CJS ⚡️ Build success in 7ms
+packages/three build: ESM dist/index.js     5.15 KB
+packages/three build: ESM dist/index.js.map 11.11 KB
+packages/three build: ESM ⚡️ Build success in 7ms
+packages/react build: DTS Build start

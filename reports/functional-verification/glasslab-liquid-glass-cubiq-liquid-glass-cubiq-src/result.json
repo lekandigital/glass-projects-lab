@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-liquid-glass-cubiq-liquid-glass-cubiq-src",
+  "url": "http://127.0.0.1:50822",
+  "status_code": 200,
+  "title": "Liquid Glass Cubiq Liquid Glass Cubiq Src",
+  "html_length": 46875,
+  "body_text_length": 14,
+  "visible_element_count": 15,
+  "canvas_count": 0,
+  "svg_count": 8,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgb(2, 6, 23)",
+    "fontFamily": "Manrope, sans-serif",
+    "backgroundImage": "url(\"https://i.ibb.co/ZpTYhmfq/tulip.jpg\")",
+    "margin": "0px",
+    "display": "grid"
+  },
+  "primary_style": {
+    "tagName": "H1",
+    "id": "",
+    "className": "",
+    "width": "468.188px",
+    "height": "408px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "0px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 600.3987976991205,
+  "final_status": "verified-functional"
+}

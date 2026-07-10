@@ -1,0 +1,38 @@
+[
+  {
+    "url": "http://127.0.0.1:50822/",
+    "status": 200,
+    "content_type": "text/html",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50822/style.css",
+    "status": 200,
+    "content_type": "text/css",
+    "failed": false
+  },
+  {
+    "url": "http://127.0.0.1:50822/script.js",
+    "status": 200,
+    "content_type": "text/javascript",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Manrope",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/manrope/v20/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk79FN_C-bnTfc7AGrY.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://i.ibb.co/ZpTYhmfq/tulip.jpg",
+    "status": 200,
+    "content_type": "image/jpeg",
+    "failed": false
+  }
+]

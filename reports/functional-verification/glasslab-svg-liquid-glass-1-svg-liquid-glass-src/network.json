@@ -1,0 +1,63 @@
+[
+  {
+    "url": "http://127.0.0.1:50847/",
+    "status": 200,
+    "headers": {
+      "content-length": "377",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 04:40:00 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:50847/src/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "432",
+      "date": "Fri, 10 Jul 2026 04:40:00 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:50847/src/main.jsx",
+    "status": 200,
+    "headers": {
+      "content-length": "4019",
+      "date": "Fri, 10 Jul 2026 04:40:00 GMT",
+      "content-type": "application/octet-stream",
+      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "application/octet-stream"
+  },
+  {
+    "url": "https://i0.wp.com/mrmacintosh.com/wp-content/uploads/2025/06/Screenshot-2025-06-09-at-3.49.32%E2%80%AFPM.png?resize=1024%2C1015&ssl=1",
+    "status": 200,
+    "headers": {
+      "etag": "\"5a961786b19b5424\"",
+      "x-bytes-saved": "2241874",
+      "x-content-type-options": "nosniff",
+      "access-control-allow-methods": "GET, HEAD",
+      "expires": "Thu, 04 Nov 2027 06:55:42 GMT",
+      "alt-svc": "clear",
+      "server-timing": "a8c-cdn, dc;desc=jfk, cache;desc=HIT;dur=1.0",
+      "date": "Fri, 10 Jul 2026 04:40:00 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Mon, 03 Nov 2025 18:55:42 GMT",
+      "vary": "Accept",
+      "link": "<https://mrmacintosh.com/wp-content/uploads/2025/06/Screenshot-2025-06-09-at-3.49.32%E2%80%AFPM.png>; rel=\"canonical\"",
+      "cache-control": "public, max-age=63115200",
+      "timing-allow-origin": "*",
+      "x-nc": "HIT jfk 21",
+      "access-control-allow-origin": "*",
+      "content-length": "686756",
+      "server": "nginx"
+    },
+    "content_type": "image/webp"
+  }
+]
