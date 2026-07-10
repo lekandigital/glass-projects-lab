@@ -511,10 +511,10 @@
   },
   "glasslab-glass-like-css-1-glass-like-css-src": {
     "local_build": "success",
-    "local_render": "pending",
+    "local_render": "success",
     "production_deploy": "pending",
     "production_render": "pending",
-    "interaction": "pending",
+    "interaction": "success",
     "final_status": "pending",
     "previous_state": {
       "local_build": "success",
@@ -525,7 +525,7 @@
     }
   },
   "glasslab-liquid-glass-cubiq-liquid-glass-cubiq-src": {
-    "local_build": "pending",
+    "local_build": "success",
     "local_render": "pending",
     "production_deploy": "pending",
     "production_render": "pending",
