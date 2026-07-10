@@ -1,24 +1,24 @@
 [
   {
-    "url": "http://127.0.0.1:50455/",
+    "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/",
     "status": 200,
-    "content_type": "text/html",
+    "content_type": "text/html; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50455/assets/index-C5Uk72q6.css",
+    "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/assets/index-CJebgv0A.css",
     "status": 200,
-    "content_type": "text/css",
+    "content_type": "text/css; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50455/assets/index-BfnSoal4.js",
+    "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/assets/index-DamoTuTO.js",
     "status": 200,
-    "content_type": "text/javascript",
+    "content_type": "application/javascript; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50455/assets/primeicons-C6QP2o4f.woff2",
+    "url": "https://glasslab-frontend-projects-main-fro-ten.vercel.app/assets/primeicons-C6QP2o4f.woff2",
     "status": 200,
     "content_type": "font/woff2",
     "failed": false

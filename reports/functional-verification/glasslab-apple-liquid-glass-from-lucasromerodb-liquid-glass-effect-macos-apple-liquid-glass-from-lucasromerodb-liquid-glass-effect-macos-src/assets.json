@@ -1,18 +1,12 @@
 [
   {
-    "url": "http://127.0.0.1:50157/",
+    "url": "https://glasslab-apple-liquid-glass-from-lu.vercel.app/",
     "status": 200,
-    "content_type": "text/html",
+    "content_type": "text/html; charset=utf-8",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50157/style.css",
-    "status": 200,
-    "content_type": "text/css",
-    "failed": false
-  },
-  {
-    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/notes.png",
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/books.png",
     "status": 200,
     "content_type": "image/png",
     "failed": false
@@ -30,7 +24,13 @@
     "failed": false
   },
   {
-    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/books.png",
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/notes.png",
+    "status": 200,
+    "content_type": "image/png",
+    "failed": false
+  },
+  {
+    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/safari.png",
     "status": 200,
     "content_type": "image/png",
     "failed": false
@@ -42,9 +42,9 @@
     "failed": false
   },
   {
-    "url": "https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/safari.png",
+    "url": "https://glasslab-apple-liquid-glass-from-lu.vercel.app/style.css",
     "status": 200,
-    "content_type": "image/png",
+    "content_type": "text/css; charset=utf-8",
     "failed": false
   },
   {

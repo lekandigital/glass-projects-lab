@@ -108,6 +108,27 @@ def main(args):
         framework = cand['framework']
         build_required = cand['build_required']
         
+        is_library = not cand['html_is_complete_document'] and not cand['html_is_fragment'] and framework != 'nextjs'
+        if is_library:
+            print(f"[{project_id}] Library package detected (no HTML). Marking as library-skipped.")
+            p_state['local_build'] = 'success'
+            p_state['local_render'] = 'skipped'
+            p_state['final_status'] = 'library-skipped'
+            save_json(STATE_FILE, state)
+            continue
+            
+        # Override build_required if a package.json was created by reconstruction
+        pkg_json_path = os.path.join(cwd, 'package.json')
+        if os.path.exists(pkg_json_path):
+            with open(pkg_json_path, 'r') as f:
+                try:
+                    pkg_data = json.load(f)
+                    if 'scripts' in pkg_data and 'build' in pkg_data['scripts']:
+                        build_required = True
+                        pm = 'npm' # Default for reconstructed
+                except:
+                    pass
+        
         # --- 1. LOCAL BUILD STEP ---
         if build_required:
             print(f"[{project_id}] Running local build...")

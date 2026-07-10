@@ -1,26 +1,42 @@
 [
   {
-    "url": "http://127.0.0.1:50861/",
+    "url": "https://glasslab-liquid-glass-6-liquid-glas.vercel.app/",
     "status": 200,
     "headers": {
-      "content-length": "1681",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:40:05 GMT",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 05:07:18 GMT",
+      "etag": "W/\"a2e01c27194983fc84f14ba7d166e7cc\"",
+      "last-modified": "Fri, 10 Jul 2026 05:07:18 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::plcjf-1783660038447-1342dbd90d95"
     },
-    "content_type": "text/html"
+    "content_type": "text/html; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50861/script.js",
+    "url": "https://glasslab-liquid-glass-6-liquid-glas.vercel.app/script.js",
     "status": 200,
     "headers": {
-      "content-length": "1790",
-      "date": "Fri, 10 Jul 2026 04:40:05 GMT",
-      "content-type": "text/javascript",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"289163fc96293ee4a16c7b5b92d83a83\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 05:07:18 GMT",
+      "content-disposition": "inline; filename=\"script.js\"",
+      "content-type": "application/javascript; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:07:18 GMT",
+      "x-vercel-id": "iad1::qnlxq-1783660038582-f56aca22f2ed"
     },
-    "content_type": "text/javascript"
+    "content_type": "application/javascript; charset=utf-8"
   }
 ]

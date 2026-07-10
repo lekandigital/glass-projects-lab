@@ -1,39 +1,35 @@
 [
   {
-    "url": "http://127.0.0.1:50889/",
+    "url": "https://glasslab-apple-liquid-glass-ui-2025.vercel.app/",
     "status": 200,
     "headers": {
-      "content-length": "2663",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:40:16 GMT",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 05:08:01 GMT",
+      "etag": "W/\"9c90644b332aea96626feb21756f0b36\"",
+      "last-modified": "Fri, 10 Jul 2026 05:08:01 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::qsvww-1783660081558-46ce69e46ff9"
     },
-    "content_type": "text/html"
-  },
-  {
-    "url": "http://127.0.0.1:50889/style.css",
-    "status": 200,
-    "headers": {
-      "content-length": "3430",
-      "date": "Fri, 10 Jul 2026 04:40:16 GMT",
-      "content-type": "text/css",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
-    },
-    "content_type": "text/css"
+    "content_type": "text/html; charset=utf-8"
   },
   {
     "url": "https://images.unsplash.com/photo-1619983081593-e2ba5b543168?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NDk1NzAwNDV8&ixlib=rb-4.1.0&q=80&w=400",
     "status": 200,
     "headers": {
-      "age": "793125",
+      "age": "794790",
       "x-content-type-options": "nosniff",
       "alt-svc": "h3=\":443\";ma=86400,h3-29=\":443\";ma=86400,h3-27=\":443\";ma=86400",
       "x-cache": "HIT, HIT",
-      "date": "Fri, 10 Jul 2026 04:40:16 GMT",
+      "date": "Fri, 10 Jul 2026 05:08:01 GMT",
       "last-modified": "Wed, 01 Jul 2026 00:21:31 GMT",
-      "x-served-by": "cache-chi-klot8100149-CHI, cache-bos-kbos510043-BOS",
+      "x-served-by": "cache-chi-klot8100149-CHI, cache-bos-kbos510057-BOS",
       "content-type": "image/jpeg",
       "cache-control": "public, max-age=31536000",
       "timing-allow-origin": "*",
@@ -47,16 +43,36 @@
     "content_type": "image/jpeg"
   },
   {
+    "url": "https://glasslab-apple-liquid-glass-ui-2025.vercel.app/style.css",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"86b507d29615db7de0a0e7e1eb28c14d\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 05:08:01 GMT",
+      "content-disposition": "inline; filename=\"style.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:08:01 GMT",
+      "x-vercel-id": "iad1::rm24v-1783660081694-1c1fbaace7f7"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
     "url": "https://images.unsplash.com/photo-1551384963-cccb0b7ed94b?q=80&w=3247&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "status": 200,
     "headers": {
-      "age": "225061",
+      "age": "226726",
       "x-content-type-options": "nosniff",
       "alt-svc": "h3=\":443\";ma=86400,h3-29=\":443\";ma=86400,h3-27=\":443\";ma=86400",
       "x-cache": "HIT, HIT",
-      "date": "Fri, 10 Jul 2026 04:40:16 GMT",
+      "date": "Fri, 10 Jul 2026 05:08:01 GMT",
       "last-modified": "Tue, 07 Jul 2026 14:09:15 GMT",
-      "x-served-by": "cache-chi-klot8100112-CHI, cache-bos-kbos510043-BOS",
+      "x-served-by": "cache-chi-klot8100112-CHI, cache-bos-kbos510057-BOS",
       "vary": "Accept, User-Agent",
       "content-type": "image/avif",
       "cache-control": "public, max-age=31536000",

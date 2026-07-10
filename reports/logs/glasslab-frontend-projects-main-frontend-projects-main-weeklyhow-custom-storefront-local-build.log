@@ -2,11 +2,8 @@
 Running: npm install
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-weeklyhow-custom-storefront
 ----------------------------------------
-npm warn deprecated @npmcli/move-file@1.1.2: This functionality has been moved to @npmcli/fs
-npm warn deprecated rollup-plugin-inject@3.0.2: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-inject.
-npm warn deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
 
-added 1454 packages, and audited 1455 packages in 13s
+up to date, audited 1455 packages in 9s
 
 317 packages are looking for funding
   run `npm fund` for details
@@ -30,7 +27,7 @@ CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-
 
 
 🏗️  Building in production mode...
-📦 Worker built: 339.636ms
+📦 Worker built: 774.858ms
    dist/worker/index.js  0.20 MB
 
 Heads up: Shopify stores have a number of standard routes that aren’t set up yet.

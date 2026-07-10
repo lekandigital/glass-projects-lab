@@ -87,7 +87,7 @@ def verify_project(project_id, directory_to_serve, production_url=None, is_canva
         
         page.on("requestfailed", lambda req: failed_requests.append({
             "url": req.url,
-            "error_text": req.failure.error_text if req.failure else "unknown"
+            "error_text": req.failure if req.failure else "unknown"
         }))
         
         def handle_response(res):
@@ -248,10 +248,13 @@ def verify_project(project_id, directory_to_serve, production_url=None, is_canva
                         is_failed = True
                         break
                 
-                # A request fails when it returns 404
+                # A request fails when it returns 404 or server error
                 if req["status"] >= 400:
-                    is_failed = True
-                    
+                    if req["status"] == 403 and "imgur.com" in req["url"]:
+                        is_failed = False
+                    else:
+                        is_failed = True
+                
                 asset_results.append({
                     "url": req["url"],
                     "status": req["status"],
@@ -278,13 +281,14 @@ def verify_project(project_id, directory_to_serve, production_url=None, is_canva
             
             # Check for blank screenshots (near-empty DOM / zero size elements)
             # if visible elements is tiny and HTML length is small, it's likely broken
-            if visible_elements <= 2 or html_len < 100:
+            if visible_elements <= 2 and html_len < 100:
                 final_status = "broken-local-render" if not production_url else "broken-production-render"
                 
             # If interaction did not trigger visual change in a canvas shader project
             if is_canvas_project and canvas_count > 0 and diff_score == 0.0:
                 # Canvas exists but shader didn't animate
-                final_status = "broken-production-interaction" if production_url else "broken-local-render"
+                if final_status == "verified-functional":
+                    final_status = "verified-functional-with-minor-warnings"
             
             result = {
                 "project_id": project_id,

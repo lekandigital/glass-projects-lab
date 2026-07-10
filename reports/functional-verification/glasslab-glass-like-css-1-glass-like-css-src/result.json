@@ -1,6 +1,6 @@
 {
   "project_id": "glasslab-glass-like-css-1-glass-like-css-src",
-  "url": "http://127.0.0.1:50815",
+  "url": "https://glasslab-glass-like-css-1-glass-lik.vercel.app",
   "status_code": 200,
   "title": "Glass Like Css 1 Glass Like Css Src",
   "html_length": 338,
@@ -31,6 +31,6 @@
   "assets_failed_count": 0,
   "console_errors_count": 0,
   "page_errors_count": 0,
-  "interaction_diff_score": 572.4491734251109,
+  "interaction_diff_score": 572.449161645802,
   "final_status": "verified-functional"
 }

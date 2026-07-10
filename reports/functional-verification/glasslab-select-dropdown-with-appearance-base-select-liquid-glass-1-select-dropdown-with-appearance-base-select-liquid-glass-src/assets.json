@@ -1,32 +1,38 @@
 [
   {
-    "url": "http://127.0.0.1:50930/",
+    "url": "http://127.0.0.1:56140/",
     "status": 200,
     "content_type": "text/html",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50930/style.css",
+    "url": "http://127.0.0.1:56140/style.css",
     "status": 200,
     "content_type": "text/css",
     "failed": false
   },
   {
-    "url": "http://127.0.0.1:50930/script.js",
+    "url": "http://127.0.0.1:56140/script.js",
     "status": 200,
     "content_type": "text/javascript",
     "failed": false
   },
   {
-    "url": "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css",
+    "url": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
     "status": 200,
-    "content_type": "text/css; charset=utf-8",
+    "content_type": "application/javascript; charset=utf-8",
     "failed": false
   },
   {
     "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Google_Chrome_icon_%28February_2022%29.svg",
     "status": 200,
     "content_type": "image/svg+xml",
+    "failed": false
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
     "failed": false
   },
   {

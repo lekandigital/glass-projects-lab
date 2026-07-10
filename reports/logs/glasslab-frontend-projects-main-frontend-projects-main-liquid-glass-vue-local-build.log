@@ -22,7 +22,7 @@ npm warn   node_modules/vite-plugin-vue-devtools/node_modules/vite-plugin-inspec
 npm warn     vite-plugin-inspect@"0.8.9" from vite-plugin-vue-devtools@7.7.7
 npm warn     node_modules/vite-plugin-vue-devtools
 
-added 150 packages, and audited 151 packages in 2s
+added 1 package, and audited 151 packages in 1s
 
 44 packages are looking for funding
   run `npm fund` for details
@@ -119,7 +119,7 @@ Running: npm install --legacy-peer-deps
 CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-liquid-glass-vue
 ----------------------------------------
 
-removed 1 package, and audited 150 packages in 423ms
+removed 1 package, and audited 150 packages in 1s
 
 43 packages are looking for funding
   run `npm fund` for details
@@ -250,4 +250,4 @@ npm error
 npm error aliases: clean-install, ic, install-clean, isntall-clean
 npm error
 npm error Run "npm help ci" for more info
-npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T04_38_48_313Z-debug-0.log
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_23_850Z-debug-0.log

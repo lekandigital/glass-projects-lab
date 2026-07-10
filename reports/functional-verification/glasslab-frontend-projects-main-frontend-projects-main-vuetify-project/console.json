@@ -3,7 +3,7 @@
     "type": "warning",
     "text": "<link rel=preload> has an unsupported `type` value",
     "location": {
-      "url": "http://127.0.0.1:50489/",
+      "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/",
       "line": 5,
       "column": 0,
       "lineNumber": 5,
@@ -12,9 +12,9 @@
   },
   {
     "type": "warning",
-    "text": "The resource http://127.0.0.1:50489/assets/materialdesignicons-webfont-B7mPwVP_.ttf was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "text": "The resource https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/materialdesignicons-webfont-PXm3-2wK.woff was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
     "location": {
-      "url": "http://127.0.0.1:50489/",
+      "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/",
       "line": 0,
       "column": 0,
       "lineNumber": 0,
@@ -23,9 +23,9 @@
   },
   {
     "type": "warning",
-    "text": "The resource http://127.0.0.1:50489/assets/materialdesignicons-webfont-PXm3-2wK.woff was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "text": "The resource https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/materialdesignicons-webfont-Dp5v-WZN.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
     "location": {
-      "url": "http://127.0.0.1:50489/",
+      "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/",
       "line": 0,
       "column": 0,
       "lineNumber": 0,
@@ -34,9 +34,9 @@
   },
   {
     "type": "warning",
-    "text": "The resource http://127.0.0.1:50489/assets/materialdesignicons-webfont-Dp5v-WZN.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
+    "text": "The resource https://glasslab-frontend-projects-main-fro-beta.vercel.app/assets/materialdesignicons-webfont-B7mPwVP_.ttf was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally.",
     "location": {
-      "url": "http://127.0.0.1:50489/",
+      "url": "https://glasslab-frontend-projects-main-fro-beta.vercel.app/",
       "line": 0,
       "column": 0,
       "lineNumber": 0,

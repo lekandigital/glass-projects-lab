@@ -1,0 +1,3 @@
+/* Script block 1 */
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Liquid Glass in the Browser: Refraction with CSS and SVG","description":"Explore how to recreate Apple's stunning Liquid Glass effect using CSS, SVG Displacement Maps, and refraction calculations.","image":"https://kube.io/blog/liquid-glass-css-svg/og-image.png","author":{"@type":"Person","name":"kube","url":"https://kube.io"},"publisher":{"@type":"Organization","name":"kube.io","logo":{"@type":"ImageObject","url":"https://kube.io/logo.png"}},"datePublished":"2025-10-04","dateModified":"2025-10-04","mainEntityOfPage":{"@type":"WebPage","@id":"https://kube.io/blog/liquid-glass-css-svg"}}
+

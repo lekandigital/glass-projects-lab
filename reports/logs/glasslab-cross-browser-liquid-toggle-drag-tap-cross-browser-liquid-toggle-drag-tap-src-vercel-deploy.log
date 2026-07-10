@@ -1,0 +1,23 @@
+
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src --name glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Retrieving project…
+Deploying lekandigitals-projects/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src
+Uploading [--------------------] (0.0B/7.3KB)
+Uploading [====================] (7.3KB/7.3KB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-cross-browser-liquid-toggle-drag-tap-cross-browser-liquid-toggle-drag-tap-src/Fi3sBHLj5aGJEyG3UyrRWW5P8J4u [2s]
+Production: https://glasslab-cross-browser-liquid-toggle-drag-tap-cross-mu7gc8gy6.vercel.app [2s]
+https://glasslab-cross-browser-liquid-toggle-drag-tap-cross-mu7gc8gy6.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 11 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+[2K[1A[2K[GProduction: https://glasslab-cross-browser-liquid-toggle-drag-tap-cross-mu7gc8gy6.vercel.app [5s]
+Completing...
+Aliased: https://glasslab-cross-browser-liquid-toggl.vercel.app [5s]

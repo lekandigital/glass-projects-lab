@@ -1,39 +1,64 @@
 [
   {
-    "url": "http://127.0.0.1:50759/",
+    "url": "https://glasslab-liquid-glass-effect-liquid.vercel.app/",
     "status": 200,
     "headers": {
-      "content-length": "1080",
-      "content-type": "text/html",
-      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 05:04:24 GMT",
+      "etag": "W/\"6cde2ec409b560f9a3c6da9259726dc4\"",
+      "last-modified": "Fri, 10 Jul 2026 05:04:24 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::x55w6-1783659864766-07867355b3f7"
     },
-    "content_type": "text/html"
+    "content_type": "text/html; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50759/style.css",
+    "url": "https://glasslab-liquid-glass-effect-liquid.vercel.app/style.css",
     "status": 200,
     "headers": {
-      "content-length": "1338",
-      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
-      "content-type": "text/css",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"61b5e9e73e28fd64992643f55b2a972b\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 05:04:24 GMT",
+      "content-disposition": "inline; filename=\"style.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:04:24 GMT",
+      "x-vercel-id": "iad1::x55w6-1783659864879-3e5f0d6c8149"
     },
-    "content_type": "text/css"
+    "content_type": "text/css; charset=utf-8"
   },
   {
-    "url": "http://127.0.0.1:50759/script.js",
+    "url": "https://glasslab-liquid-glass-effect-liquid.vercel.app/script.js",
     "status": 200,
     "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "x-vercel-cache": "MISS",
+      "etag": "\"d5ef22081ac654a733915e7b123a4e48\"",
+      "age": "0",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
       "content-length": "279",
-      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
-      "content-type": "text/javascript",
-      "last-modified": "Fri, 10 Jul 2026 04:33:39 GMT",
-      "server": "SimpleHTTP/0.6 Python/3.14.5"
+      "date": "Fri, 10 Jul 2026 05:04:24 GMT",
+      "content-disposition": "inline; filename=\"script.js\"",
+      "content-type": "application/javascript; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 05:04:24 GMT",
+      "x-vercel-id": "iad1::8whj2-1783659864888-a60f5271a9db"
     },
-    "content_type": "text/javascript"
+    "content_type": "application/javascript; charset=utf-8"
   },
   {
     "url": "https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap",
@@ -41,12 +66,12 @@
     "headers": {
       "content-encoding": "gzip",
       "x-content-type-options": "nosniff",
-      "expires": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "expires": "Fri, 10 Jul 2026 05:04:25 GMT",
       "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
-      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "date": "Fri, 10 Jul 2026 05:04:25 GMT",
       "content-type": "text/css; charset=utf-8",
       "vary": "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site",
-      "last-modified": "Fri, 10 Jul 2026 04:39:29 GMT",
+      "last-modified": "Fri, 10 Jul 2026 05:04:25 GMT",
       "x-frame-options": "SAMEORIGIN",
       "strict-transport-security": "max-age=31536000",
       "link": "<https://fonts.gstatic.com>; rel=preconnect; crossorigin",
@@ -61,39 +86,42 @@
     "content_type": "text/css; charset=utf-8"
   },
   {
-    "url": "https://images.unsplash.com/photo-1683657535824-5b570c7a1749?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "url": "https://essykings.github.io/JavaScript/map.png",
     "status": 200,
     "headers": {
-      "age": "1902963",
-      "x-content-type-options": "nosniff",
-      "alt-svc": "h3=\":443\";ma=86400,h3-29=\":443\";ma=86400,h3-27=\":443\";ma=86400",
-      "x-cache": "HIT, HIT",
-      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
-      "last-modified": "Thu, 18 Jun 2026 04:03:27 GMT",
-      "x-served-by": "cache-chi-klot8100110-CHI, cache-bos-kbos510044-BOS",
-      "vary": "Accept, User-Agent",
-      "content-type": "image/avif",
-      "cache-control": "public, max-age=31536000",
-      "timing-allow-origin": "*",
-      "cross-origin-resource-policy": "cross-origin",
+      "x-fastly-request-id": "80322e9c1b6be93a2963dbf70a07f05375d2018c",
+      "etag": "\"69451b23-3b973\"",
+      "age": "12",
+      "x-github-request-id": "BF72:B9AD5:1FF3CE5:2264527:6A507D4C",
+      "expires": "Fri, 10 Jul 2026 05:14:13 GMT",
+      "x-proxy-cache": "MISS",
+      "x-cache": "HIT",
+      "date": "Fri, 10 Jul 2026 05:04:25 GMT",
+      "content-type": "image/png",
+      "last-modified": "Fri, 19 Dec 2025 09:30:11 GMT",
+      "x-cache-hits": "1",
+      "x-served-by": "cache-bos-kbos510037-BOS",
+      "vary": "Accept-Encoding",
+      "cache-control": "max-age=600",
+      "x-timer": "S1783659865.126088,VS0,VE1",
+      "via": "1.1 varnish",
       "accept-ranges": "bytes",
       "access-control-allow-origin": "*",
-      "content-length": "93824",
-      "server": "imgix",
-      "x-imgix-id": "10a422857a76a12b8698f3efd03c20a97f015e37"
+      "content-length": "244083",
+      "server": "GitHub.com"
     },
-    "content_type": "image/avif"
+    "content_type": "image/png"
   },
   {
     "url": "https://fonts.gstatic.com/s/orbitron/v35/yMJRMIlzdpvBhQQL_Qq7dy1biN15.woff2",
     "status": 200,
     "headers": {
-      "age": "473554",
+      "age": "26331",
       "report-to": "{\"group\":\"apps-themes\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://csp.withgoogle.com/csp/report-to/apps-themes\"}]}",
       "x-content-type-options": "nosniff",
-      "expires": "Sun, 04 Jul 2027 17:06:55 GMT",
+      "expires": "Fri, 09 Jul 2027 21:45:34 GMT",
       "alt-svc": "h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000",
-      "date": "Sat, 04 Jul 2026 17:06:55 GMT",
+      "date": "Thu, 09 Jul 2026 21:45:34 GMT",
       "last-modified": "Thu, 04 Sep 2025 17:04:38 GMT",
       "content-type": "font/woff2",
       "cache-control": "public, max-age=31536000",
@@ -110,34 +138,31 @@
     "content_type": "font/woff2"
   },
   {
-    "url": "https://essykings.github.io/JavaScript/map.png",
+    "url": "https://images.unsplash.com/photo-1683657535824-5b570c7a1749?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "status": 200,
     "headers": {
-      "x-fastly-request-id": "32cda5be893f763f142fd498c16ad81e9982120c",
-      "etag": "\"69451b23-3b973\"",
-      "age": "0",
-      "x-github-request-id": "CDB6:EFC15:22ACA21:261E3EB:6A507780",
-      "expires": "Fri, 10 Jul 2026 04:49:29 GMT",
-      "x-proxy-cache": "MISS",
-      "x-cache": "MISS",
-      "date": "Fri, 10 Jul 2026 04:39:29 GMT",
-      "content-type": "image/png",
-      "last-modified": "Fri, 19 Dec 2025 09:30:11 GMT",
-      "x-cache-hits": "0",
-      "x-served-by": "cache-bos-kbos510031-BOS",
-      "vary": "Accept-Encoding",
-      "cache-control": "max-age=600",
-      "x-timer": "S1783658370.938130,VS0,VE25",
-      "via": "1.1 varnish",
+      "age": "1904458",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "h3=\":443\";ma=86400,h3-29=\":443\";ma=86400,h3-27=\":443\";ma=86400",
+      "x-cache": "HIT, HIT",
+      "date": "Fri, 10 Jul 2026 05:04:25 GMT",
+      "last-modified": "Thu, 18 Jun 2026 04:03:27 GMT",
+      "x-served-by": "cache-chi-klot8100110-CHI, cache-bos-kbos510055-BOS",
+      "vary": "Accept, User-Agent",
+      "content-type": "image/avif",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-resource-policy": "cross-origin",
       "accept-ranges": "bytes",
       "access-control-allow-origin": "*",
-      "content-length": "244083",
-      "server": "GitHub.com"
+      "content-length": "93824",
+      "server": "imgix",
+      "x-imgix-id": "10a422857a76a12b8698f3efd03c20a97f015e37"
     },
-    "content_type": "image/png"
+    "content_type": "image/avif"
   },
   {
-    "url": "blob:http://127.0.0.1:50759/7a968e67-bf74-443e-892b-aaf85f88ef08",
+    "url": "blob:https://glasslab-liquid-glass-effect-liquid.vercel.app/dcf536cd-fc82-47b8-ba09-4f49c132e3ae",
     "status": 200,
     "headers": {
       "content-type": "image/png",

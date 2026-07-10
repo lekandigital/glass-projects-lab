@@ -1,13 +1,1 @@
-[
-  {
-    "type": "error",
-    "text": "Failed to load module script: Expected a JavaScript-or-Wasm module script but the server responded with a MIME type of \"application/octet-stream\". Strict MIME type checking is enforced for module scripts per HTML spec.",
-    "location": {
-      "url": "http://127.0.0.1:50199/src/main.jsx",
-      "line": 0,
-      "column": 0,
-      "lineNumber": 0,
-      "columnNumber": 0
-    }
-  }
-]
+[]
