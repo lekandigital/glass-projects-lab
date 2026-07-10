@@ -1,0 +1,106 @@
+[
+  {
+    "url": "http://127.0.0.1:55064/",
+    "status": 200,
+    "headers": {
+      "content-length": "577",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 05:04:38 GMT",
+      "last-modified": "Tue, 12 Sep 2023 12:51:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:55064/assets/profilebg.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "4572",
+      "date": "Fri, 10 Jul 2026 05:04:38 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 12 Sep 2023 12:51:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55064/stylesheet.css",
+    "status": 200,
+    "headers": {
+      "content-length": "4021",
+      "date": "Fri, 10 Jul 2026 05:04:38 GMT",
+      "content-type": "text/css",
+      "last-modified": "Tue, 12 Sep 2023 12:51:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:55064/assets/profile.png",
+    "status": 200,
+    "headers": {
+      "content-length": "815030",
+      "date": "Fri, 10 Jul 2026 05:04:38 GMT",
+      "content-type": "image/png",
+      "last-modified": "Tue, 12 Sep 2023 12:51:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/png"
+  },
+  {
+    "url": "http://127.0.0.1:55064/assets/logon.jpg",
+    "status": 200,
+    "headers": {
+      "content-length": "135139",
+      "date": "Fri, 10 Jul 2026 05:04:38 GMT",
+      "content-type": "image/jpeg",
+      "last-modified": "Tue, 12 Sep 2023 12:51:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/jpeg"
+  },
+  {
+    "url": "http://127.0.0.1:55064/assets/startup.mp3",
+    "status": 200,
+    "headers": {
+      "content-length": "77356",
+      "date": "Fri, 10 Jul 2026 05:04:38 GMT",
+      "content-type": "audio/mpeg",
+      "last-modified": "Tue, 12 Sep 2023 12:51:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "audio/mpeg"
+  },
+  {
+    "url": "http://c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2",
+    "status": 301,
+    "headers": {
+      "cache-control": "max-age=452794",
+      "location": "https://c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2",
+      "connection": "keep-alive",
+      "access-control-allow-methods": "GET,POST",
+      "expires": "Wed, 15 Jul 2026 10:51:12 GMT",
+      "access-control-allow-origin": "*",
+      "content-length": "0",
+      "date": "Fri, 10 Jul 2026 05:04:38 GMT"
+    },
+    "content_type": ""
+  },
+  {
+    "url": "https://c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2",
+    "status": 200,
+    "headers": {
+      "cache-control": "public, max-age=509959",
+      "etag": "\"588d483e9c7d51:0\"",
+      "access-control-allow-methods": "GET,POST",
+      "expires": "Thu, 16 Jul 2026 02:43:57 GMT",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "34052",
+      "date": "Fri, 10 Jul 2026 05:04:38 GMT",
+      "content-type": "font/woff2",
+      "last-modified": "Fri, 10 Jan 2020 19:09:43 GMT"
+    },
+    "content_type": "font/woff2"
+  }
+]

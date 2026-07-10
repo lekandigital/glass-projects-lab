@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://glasslab-codepen-hdshy-rnravzr.vercel.app/",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-codepen-hdshy-rnravzr.vercel.app/style.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJfecnFHGPc.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1xlFd2JQEk.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-codepen-hdshy-rnravzr.vercel.app/script.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://glasslab-slider-button-liquid-glass.vercel.app/",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-slider-button-liquid-glass.vercel.app/style.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-slider-button-liquid-glass.vercel.app/script.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  }
+]

@@ -1,0 +1,6 @@
+{
+  "project_id": "glasslab-glass-refraction-master-1-glass-refraction-master-examples-vanilla",
+  "url": "http://127.0.0.1:55059",
+  "final_status": "broken-local-render",
+  "error": "Page.wait_for_timeout: 'str' object has no attribute 'error_text'"
+}

@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-liquid-glass-components-1-liquid-glass-components-src",
+  "url": "http://127.0.0.1:56604",
+  "status_code": 200,
+  "title": "Liquid Glass Components 1 Liquid Glass Components Src",
+  "html_length": 1178,
+  "body_text_length": 0,
+  "visible_element_count": 2,
+  "canvas_count": 0,
+  "svg_count": 0,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", Roboto, Helvetica, Arial, \"Apple Color Emoji\", \"Segoe UI Emoji\"",
+    "backgroundImage": "none",
+    "margin": "0px",
+    "display": "flex"
+  },
+  "primary_style": {
+    "tagName": "DIV",
+    "id": "root",
+    "className": "",
+    "width": "0px",
+    "height": "0px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "0px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 1,
+  "page_errors_count": 1,
+  "interaction_diff_score": 0.0,
+  "final_status": "broken-local-render"
+}

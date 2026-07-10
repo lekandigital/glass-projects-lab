@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-apple-liquid-glass-1-apple-liquid-glass-src",
+  "url": "http://127.0.0.1:56784",
+  "status_code": 200,
+  "title": "Apple Liquid Glass 1 Apple Liquid Glass Src",
+  "html_length": 760,
+  "body_text_length": 5,
+  "visible_element_count": 8,
+  "canvas_count": 1,
+  "svg_count": 0,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "\"PP Neue Montreal Medium\"",
+    "backgroundImage": "url(\"https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\")",
+    "margin": "0px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "CANVAS",
+    "id": "",
+    "className": "",
+    "width": "1440px",
+    "height": "900px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "0px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 576.0642016334199,
+  "final_status": "verified-functional"
+}

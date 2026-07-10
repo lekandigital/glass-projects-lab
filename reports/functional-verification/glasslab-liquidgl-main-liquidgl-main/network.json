@@ -1,0 +1,2211 @@
+[
+  {
+    "url": "http://127.0.0.1:55090/",
+    "status": 200,
+    "headers": {
+      "content-length": "41827",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/scripts/liquidGL.js",
+    "status": 200,
+    "headers": {
+      "content-length": "67254",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:55090/scripts/html2canvas.min.js",
+    "status": 200,
+    "headers": {
+      "content-length": "198689",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquidGlass-Full-Promo25fps-OPT.mp4",
+    "status": 200,
+    "headers": {
+      "content-length": "10720586",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "video/mp4",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "video/mp4"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/loop-opt.mp4",
+    "status": 200,
+    "headers": {
+      "content-length": "1165455",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "video/mp4",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "video/mp4"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquidGlass-Full-Promo25fps-OPT.mp4",
+    "status": 200,
+    "headers": {
+      "content-length": "10720586",
+      "date": "Fri, 10 Jul 2026 05:04:44 GMT",
+      "content-type": "video/mp4",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "video/mp4"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "*",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"11af3-+hrqvOrREkFgfZJJ/yDIvLusIBI\"",
+      "age": "844387",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=%2F7r%2FIpd7w8ZedbAr9M008UwSH1DJ0ANMx1SBA%2F0kLkA5IKeIku3e3i1nNBKwI3B1d8fhAmVHCpWAaaYV5idlzxXP%2B%2Bow8HayA2qJ6zoWW%2B2vzO%2Bzp%2BFAvKlqNw393kRby7E%3D\"}]}",
+      "x-content-type-options": "nosniff",
+      "x-jsd-version-type": "version",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "x-cache": "HIT, HIT",
+      "date": "Fri, 10 Jul 2026 05:04:44 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "x-served-by": "cache-fra-eddf8230098-FRA, cache-mia-kfll1870067-MIA",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=31536000, s-maxage=31536000, immutable",
+      "timing-allow-origin": "*",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.01,\"max_age\":604800}",
+      "cross-origin-resource-policy": "cross-origin",
+      "cf-ray": "a18d0783fe07cf54-BOS",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "29150",
+      "server": "cloudflare",
+      "x-jsd-version": "3.13.0"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "*",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"1c4f-9ZeT9jYPs5EmYc7GynISX56f8MU\"",
+      "age": "2312034",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=bPoHGyL%2FDw9S4o13%2BNVjCReg%2BwK34YsUuWXrkFTGWpihjH%2BB%2Bodfyuvjzu1TnC0Gwng47mYzkcFys5uh8xGtSKyKNn7H8VwsowW24jlPLU5DY%2B8OLpLVLxdOYuq609ZZh0k%3D\"}]}",
+      "x-content-type-options": "nosniff",
+      "x-jsd-version-type": "version",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "x-cache": "HIT, HIT",
+      "date": "Fri, 10 Jul 2026 05:04:44 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "x-served-by": "cache-fra-eddf8230094-FRA, cache-chi-kigq8000114-CHI",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=31536000, s-maxage=31536000, immutable",
+      "timing-allow-origin": "*",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.01,\"max_age\":604800}",
+      "cross-origin-resource-policy": "cross-origin",
+      "cf-ray": "a18d07840e1acf54-BOS",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "3496",
+      "server": "cloudflare",
+      "x-jsd-version": "3.13.0"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "*",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"ac7d-7NMkL12seWuNIF1AhNh30GY+BA8\"",
+      "age": "170356",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ZyYAHI%2FVpOqRVxg%2FToGkJoRVMp3MQcu%2FxF8moOMh%2BS0v1yFgQSHWgTZZshbflLqd102FQ4my9lxD%2F%2FTE7Zh7%2BqawM7Wm9La77OT3fITasR0VCRG1V1fhNQ0%2FXayuvSbmr2I%3D\"}]}",
+      "x-content-type-options": "nosniff",
+      "x-jsd-version-type": "version",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "x-cache": "HIT, HIT",
+      "date": "Fri, 10 Jul 2026 05:04:44 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "x-served-by": "cache-fra-eddf8230120-FRA, cache-chi-klot8100155-CHI",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=31536000, s-maxage=31536000, immutable",
+      "timing-allow-origin": "*",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.01,\"max_age\":604800}",
+      "cross-origin-resource-policy": "cross-origin",
+      "cf-ray": "a18d07840e19cf54-BOS",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "18209",
+      "server": "cloudflare",
+      "x-jsd-version": "3.13.0"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "*",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"2d73-q6rhW/vuRefXBo9ldNaXk8tLoTA\"",
+      "age": "2498237",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=GV0X3gOj02vzJFLQ58Kua8DQ196NxQhJsABh27eFmuMc2Ci6z2qmrEAwFbmRx3JGdb8o0V0YGT8BIA0Q%2FZejuGSTUQP5QRexwwE6xEcTh5PNGMLOjLknXoXBz8jaJLebG4o%3D\"}]}",
+      "x-content-type-options": "nosniff",
+      "x-jsd-version-type": "version",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "x-cache": "HIT, HIT",
+      "date": "Fri, 10 Jul 2026 05:04:44 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "x-served-by": "cache-fra-etou8220024-FRA, cache-chi-kigq8000174-CHI",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=31536000, s-maxage=31536000, immutable",
+      "timing-allow-origin": "*",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.01,\"max_age\":604800}",
+      "cross-origin-resource-policy": "cross-origin",
+      "cf-ray": "a18d07840e1dcf54-BOS",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "3444",
+      "server": "cloudflare",
+      "x-jsd-version": "1.0.42"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://cdn.jsdelivr.net/npm/lil-gui@0.19.1/dist/lil-gui.umd.min.js",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "*",
+      "content-encoding": "br",
+      "cf-cache-status": "HIT",
+      "etag": "W/\"753f-00LDqsJZNBUOR8vAfyNm55+BM7g\"",
+      "age": "5019584",
+      "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=LOafZS%2FEDzIjr5HUOLm7nxe%2FIm97unDaZuI3xcs35OkF4%2FV1u609Vjhm7ULpQX6rQxQdnoDwiTHATNp3qFep3knm%2FZxIkdUkHctN9fXHr6H1HkhdGddOsB2SIl745RCrzXA%3D\"}]}",
+      "x-content-type-options": "nosniff",
+      "x-jsd-version-type": "version",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "x-cache": "HIT, HIT",
+      "date": "Fri, 10 Jul 2026 05:04:44 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "x-served-by": "cache-fra-etou8220114-FRA, cache-lga21922-LGA",
+      "vary": "Accept-Encoding",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=31536000, s-maxage=31536000, immutable",
+      "timing-allow-origin": "*",
+      "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.01,\"max_age\":604800}",
+      "cross-origin-resource-policy": "cross-origin",
+      "cf-ray": "a18d07840e1bcf54-BOS",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "8751",
+      "server": "cloudflare",
+      "x-jsd-version": "0.19.1"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "blob:http://127.0.0.1:55090/a6f42a3d-57df-4d24-b50c-bf0597f28a05",
+    "status": 200,
+    "headers": {
+      "content-type": "application/javascript",
+      "content-length": "513"
+    },
+    "content_type": "application/javascript"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/naughtyduk-logo.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "438036",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/play-icon.svg",
+    "status": 200,
+    "headers": {
+      "content-length": "908",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/svg+xml",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/svg+xml"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0001_Comp-183.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "281338",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  },
+  {
+    "url": "http://127.0.0.1:55090/assets/liquid-bkg-_0002_Comp-163.webp",
+    "status": 200,
+    "headers": {
+      "content-length": "340096",
+      "date": "Fri, 10 Jul 2026 05:04:43 GMT",
+      "content-type": "image/webp",
+      "last-modified": "Tue, 07 Jul 2026 20:14:14 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "image/webp"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "url": "https://glasslab-glass-model-1-glass-model.vercel.app/",
+    "status": 200,
+    "headers": {
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-length": "733",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 04:57:47 GMT",
+      "etag": "\"bedb4ae0c3d93b1e07418ca4e065190b\"",
+      "last-modified": "Fri, 10 Jul 2026 04:57:47 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::rwjln-1783659467265-4a5444239029"
+    },
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://glasslab-glass-model-1-glass-model.vercel.app/style.css",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "x-vercel-cache": "MISS",
+      "etag": "\"264fea3d1b08bd2d4e77e6f9d9da9eb3\"",
+      "age": "0",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "663",
+      "date": "Fri, 10 Jul 2026 04:57:47 GMT",
+      "content-disposition": "inline; filename=\"style.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:57:47 GMT",
+      "x-vercel-id": "iad1::7wmzn-1783659467386-62d03115e009"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
+    "url": "https://orecticdesign.com/wp-content/uploads/2025/09/mv-bg.jpeg",
+    "status": 200,
+    "headers": {
+      "x-nginx-cache": "HIT",
+      "etag": "\"7b5c6-63f8d13007680\"",
+      "x-content-type-options": "nosniff",
+      "accept-ranges": "bytes",
+      "content-length": "505286",
+      "date": "Fri, 10 Jul 2026 04:57:47 GMT",
+      "x-xss-protection": "1; mode=block",
+      "content-type": "image/webp",
+      "vary": "Accept",
+      "server": "nginx",
+      "last-modified": "Wed, 24 Sep 2025 14:43:22 GMT"
+    },
+    "content_type": "image/webp"
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-pure-css-ios-26-liquid-glass-effect-pure-css-ios-26-liquid-glass-effect-src",
+  "url": "https://glasslab-pure-css-ios-26-liquid-gla.vercel.app",
+  "status_code": 200,
+  "title": "Pure Css Ios 26 Liquid Glass Effect Pure Css Ios 26 Liquid Glass Effect Src",
+  "html_length": 33920,
+  "body_text_length": 0,
+  "visible_element_count": 5,
+  "canvas_count": 0,
+  "svg_count": 2,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "sans-serif",
+    "backgroundImage": "url(\"https://raw.githubusercontent.com/lucasromerodb/liquid-glass-effect-macos/refs/heads/main/assets/flowers.jpg\")",
+    "margin": "0px",
+    "display": "flex"
+  },
+  "primary_style": {
+    "tagName": "BUTTON",
+    "id": "",
+    "className": "glassBtn",
+    "width": "70px",
+    "height": "70px",
+    "position": "relative",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "9999px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 684.0576531360812,
+  "final_status": "verified-functional"
+}

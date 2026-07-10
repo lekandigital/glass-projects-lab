@@ -1,0 +1,23 @@
+
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src --name glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Retrieving project…
+Deploying lekandigitals-projects/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-apple-liquid-glass-ui-2025-apple-liquid-glass-ui-2025-src/C6NDSTXzmqJUcq9uzB84yy3PZYcN [871ms]
+Production: https://glasslab-apple-liquid-glass-ui-2025-apple-liquid-3pz058wgf.vercel.app [871ms]
+https://glasslab-apple-liquid-glass-ui-2025-apple-liquid-3pz058wgf.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 8 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+Building: Build Completed in /vercel/output [42ms]
+Building: Deploying outputs...
+[2K[1A[2K[GProduction: https://glasslab-apple-liquid-glass-ui-2025-apple-liquid-3pz058wgf.vercel.app [5s]
+Completing...
+Aliased: https://glasslab-apple-liquid-glass-ui-2025.vercel.app [5s]

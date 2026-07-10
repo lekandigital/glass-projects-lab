@@ -1,0 +1,66 @@
+
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-scroll-drag-configure-chromium-liquid-glass-scroll-drag-configure-chromium-src --name glasslab-liquid-glass-scroll-drag-configure-chromium-liquid-glass-scroll-drag-configure-chromiu
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-liquid-glass-scroll-drag-configure-chromium-liquid-glass-scroll-drag-configure-chromium-src
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Retrieving project…
+Deploying lekandigitals-projects/glasslab-liquid-glass-scroll-drag-configure-chromium-liquid-glass-scroll-drag-configure-chromium-src
+Uploading [--------------------] (0.0B/111.5KB)
+Uploading [=====---------------] (30.3KB/111.5KB)
+Uploading [===========---------] (62.3KB/111.5KB)
+Uploading [================----] (90.1KB/111.5KB)
+Uploading [====================] (111.5KB/111.5KB)
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-liquid-glass-scroll-drag-configure-chromium-liquid-glass-scroll-drag-configure-chromium-src/5QuPyJVRDEgQR9Wv2sfbHiw7HsGV [3s]
+Production: https://glasslab-liquid-glass-scroll-drag-configure-chromium-i1ftt6wqu.vercel.app [3s]
+https://glasslab-liquid-glass-scroll-drag-configure-chromium-i1ftt6wqu.vercel.appBuilding...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Previous build caches not available.
+Building: Downloading 17 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 55.0.0
+Building: Installing dependencies...
+Building: npm warn ERESOLVE overriding peer dependency
+Building: npm warn While resolving: @monogrid/gainmap-js@3.4.0
+Building: npm warn Found: three@0.150.1
+Building: npm warn node_modules/three
+Building: npm warn   three@"^0.150.0" from the root project
+Building: npm warn   9 more (@react-spring/three, @react-three/drei, ...)
+Building: npm warn
+Building: npm warn Could not resolve dependency:
+Building: npm warn peer three@">= 0.159.0" from @monogrid/gainmap-js@3.4.0
+Building: npm warn node_modules/@react-three/drei/node_modules/@monogrid/gainmap-js
+Building: npm warn   @monogrid/gainmap-js@"^3.0.6" from @react-three/drei@9.122.0
+Building: npm warn   node_modules/@react-three/drei
+Building: npm warn
+Building: npm warn Conflicting peer dependency: three@0.185.1
+Building: npm warn node_modules/three
+Building: npm warn   peer three@">= 0.159.0" from @monogrid/gainmap-js@3.4.0
+Building: npm warn   node_modules/@react-three/drei/node_modules/@monogrid/gainmap-js
+Building: npm warn     @monogrid/gainmap-js@"^3.0.6" from @react-three/drei@9.122.0
+Building: npm warn     node_modules/@react-three/drei
+Building: npm warn ERESOLVE overriding peer dependency
+Building: npm warn While resolving: three-mesh-bvh@0.7.8
+Building: npm warn Found: three@0.150.1
+Building: npm warn node_modules/three
+Building: npm warn   three@"^0.150.0" from the root project
+Building: npm warn   9 more (@react-spring/three, @react-three/drei, ...)
+Building: npm warn
+Building: npm warn Could not resolve dependency:
+Building: npm warn peer three@">= 0.151.0" from three-mesh-bvh@0.7.8
+Building: npm warn node_modules/@react-three/drei/node_modules/three-mesh-bvh
+Building: npm warn   three-mesh-bvh@"^0.7.8" from @react-three/drei@9.122.0
+Building: npm warn   node_modules/@react-three/drei
+Building: npm warn
+Building: npm warn Conflicting peer dependency: three@0.185.1
+Building: npm warn node_modules/three
+Building: npm warn   peer three@">= 0.151.0" from three-mesh-bvh@0.7.8
+Building: npm warn   node_modules/@react-three/drei/node_modules/three-mesh-bvh
+Building: npm warn     three-mesh-bvh@"^0.7.8" from @react-three/drei@9.122.0
+Building: npm warn     node_modules/@react-three/drei
+Building: npm warn deprecated three-mesh-bvh@0.7.8: Deprecated due to three.js version incompatibility. Please use v0.8.0, instead.
+[2K[1A[2K[GProduction: https://glasslab-liquid-glass-scroll-drag-configure-chromium-i1ftt6wqu.vercel.app [11s]
+Completing...
+Aliased: https://glasslab-liquid-glass-scroll-drag-c.vercel.app [11s]

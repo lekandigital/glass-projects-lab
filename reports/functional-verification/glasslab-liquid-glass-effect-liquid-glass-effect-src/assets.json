@@ -1,0 +1,50 @@
+[
+  {
+    "url": "https://glasslab-liquid-glass-effect-liquid.vercel.app/",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-liquid-glass-effect-liquid.vercel.app/style.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-liquid-glass-effect-liquid.vercel.app/script.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://essykings.github.io/JavaScript/map.png",
+    "status": 200,
+    "content_type": "image/png",
+    "failed": false
+  },
+  {
+    "url": "https://fonts.gstatic.com/s/orbitron/v35/yMJRMIlzdpvBhQQL_Qq7dy1biN15.woff2",
+    "status": 200,
+    "content_type": "font/woff2",
+    "failed": false
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1683657535824-5b570c7a1749?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "status": 200,
+    "content_type": "image/avif",
+    "failed": false
+  },
+  {
+    "url": "blob:https://glasslab-liquid-glass-effect-liquid.vercel.app/dcf536cd-fc82-47b8-ba09-4f49c132e3ae",
+    "status": 200,
+    "content_type": "image/png",
+    "failed": false
+  }
+]

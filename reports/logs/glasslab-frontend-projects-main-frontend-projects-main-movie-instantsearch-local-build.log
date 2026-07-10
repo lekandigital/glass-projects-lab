@@ -1,0 +1,589 @@
+
+Running: npm install
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch
+----------------------------------------
+npm warn deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm warn deprecated mkdirp@0.3.0: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)
+npm error code 1
+npm error path /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb
+npm error command failed
+npm error command sh -c node-gyp-build
+npm error CXX(target) Release/obj.target/lmdb/src/lmdb-js.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lmdb/libraries/liblmdb/midl.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lmdb/libraries/liblmdb/chacha8.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lz4/lib/lz4.o
+npm error   CXX(target) Release/obj.target/lmdb/src/writer.o
+npm error gyp info it worked if it ends with ok
+npm error gyp info using node-gyp@12.2.0
+npm error gyp info using node@25.9.0 | darwin | arm64
+npm error gyp info find Python using Python version 3.14.5 found at "/opt/homebrew/opt/python@3.14/bin/python3.14"
+npm error gyp info spawn /opt/homebrew/opt/python@3.14/bin/python3.14
+npm error gyp info spawn args [
+npm error gyp info spawn args '/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py',
+npm error gyp info spawn args 'binding.gyp',
+npm error gyp info spawn args '-f',
+npm error gyp info spawn args 'make',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb/build/config.gypi',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/addon.gypi',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/common.gypi',
+npm error gyp info spawn args '-Dlibrary=shared_library',
+npm error gyp info spawn args '-Dvisibility=default',
+npm error gyp info spawn args '-Dnode_root_dir=/Users/lekan/Library/Caches/node-gyp/25.9.0',
+npm error gyp info spawn args '-Dnode_gyp_dir=/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp',
+npm error gyp info spawn args '-Dnode_lib_file=/Users/lekan/Library/Caches/node-gyp/25.9.0/<(target_arch)/node.lib',
+npm error gyp info spawn args '-Dmodule_root_dir=/Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb',
+npm error gyp info spawn args '-Dnode_engine=v8',
+npm error gyp info spawn args '--depth=.',
+npm error gyp info spawn args '--no-parallel',
+npm error gyp info spawn args '--generator-output',
+npm error gyp info spawn args 'build',
+npm error gyp info spawn args '-Goutput_dir=.'
+npm error gyp info spawn args ]
+npm error gyp info spawn make
+npm error gyp info spawn args [ 'BUILDTYPE=Release', '-C', 'build' ]
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error In file included from ../../nan/nan.h:302:
+npm error ../../nan/nan_maybe_43_inl.h:210:15: warning: 'SetPrototype' is deprecated: V8 will stop providing access to hidden prototype (i.e. JSGlobalObject). Use SetPrototypeV2() instead. See http://crbug.com/333672197. [-Wdeprecated-declarations]
+npm error   210 |   return obj->SetPrototype(isolate->GetCurrentContext(), prototype);
+npm error       |               ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-object.h:459:3: note: 'SetPrototype' has been explicitly marked deprecated here
+npm error   459 |   V8_DEPRECATED(
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:1173:27: warning: 'WriteUtf8' is deprecated: Use WriteUtf8V2 instead. [-Wdeprecated-declarations]
+npm error  1173 |         length_ = string->WriteUtf8(v8::Isolate::GetCurrent(), str_,
+npm error       |                           ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-primitive.h:211:3: note: 'WriteUtf8' has been explicitly marked deprecated here
+npm error   211 |   V8_DEPRECATED("Use WriteUtf8V2 instead.")
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2418:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2418 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1211:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1211 | NODE_DEPRECATED("Use TryEncode(...) instead",
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2423:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2423 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1202:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1202 | NODE_DEPRECATED(
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error ../src/lmdb-js.cpp:14:1: warning: cast from 'void (*)(v8::Local<v8::Object>, v8::Local<v8::Value>, v8::Local<v8::Context>)' to 'node::addon_context_register_func' (aka 'void (*)(v8::Local<v8::Object>, v8::Local<v8::Value>, v8::Local<v8::Context>, void *)') converts to incompatible function type [-Wcast-function-type-mismatch]
+npm error    14 | NODE_MODULE_INIT(/* exports, module, context */) {
+npm error       | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1371:3: note: expanded from macro 'NODE_MODULE_INIT'
+npm error  1371 |   NODE_MODULE_CONTEXT_AWARE(NODE_GYP_MODULE_NAME,                     \
+npm error       |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error  1372 |                             NODE_MODULE_INITIALIZER)                  \
+npm error       |                             ~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1340:3: note: expanded from macro 'NODE_MODULE_CONTEXT_AWARE'
+npm error  1340 |   NODE_MODULE_CONTEXT_AWARE_X(modname, regfunc, NULL, 0)
+npm error       |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1322:7: note: expanded from macro 'NODE_MODULE_CONTEXT_AWARE_X'
+npm error  1322 |       (node::addon_context_register_func) (regfunc),                  \
+npm error       |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error 5 warnings generated.
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error In file included from ../../nan/nan.h:302:
+npm error ../../nan/nan_maybe_43_inl.h:210:15: warning: 'SetPrototype' is deprecated: V8 will stop providing access to hidden prototype (i.e. JSGlobalObject). Use SetPrototypeV2() instead. See http://crbug.com/333672197. [-Wdeprecated-declarations]
+npm error   210 |   return obj->SetPrototype(isolate->GetCurrentContext(), prototype);
+npm error       |               ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-object.h:459:3: note: 'SetPrototype' has been explicitly marked deprecated here
+npm error   459 |   V8_DEPRECATED(
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:1173:27: warning: 'WriteUtf8' is deprecated: Use WriteUtf8V2 instead. [-Wdeprecated-declarations]
+npm error  1173 |         length_ = string->WriteUtf8(v8::Isolate::GetCurrent(), str_,
+npm error       |                           ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-primitive.h:211:3: note: 'WriteUtf8' has been explicitly marked deprecated here
+npm error   211 |   V8_DEPRECATED("Use WriteUtf8V2 instead.")
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2418:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2418 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1211:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1211 | NODE_DEPRECATED("Use TryEncode(...) instead",
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2423:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2423 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1202:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1202 | NODE_DEPRECATED(
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error ../src/writer.cpp:433:36: error: no member named 'Holder' in 'v8::FunctionCallbackInfo<v8::Value>'
+npm error   433 |                 v8::Local<v8::Object>::Cast(info.Holder());
+npm error       |                                             ~~~~ ^
+npm error 4 warnings and 1 error generated.
+npm error make: *** [Release/obj.target/lmdb/src/writer.o] Error 1
+npm error gyp ERR! build error 
+npm error gyp ERR! stack Error: `make` failed with exit code: 2
+npm error gyp ERR! stack at ChildProcess.<anonymous> (/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/lib/build.js:219:23)
+npm error gyp ERR! System Darwin 25.5.0
+npm error gyp ERR! command "/opt/homebrew/Cellar/node/25.9.0_2/bin/node" "/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" "rebuild"
+npm error gyp ERR! cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb
+npm error gyp ERR! node -v v25.9.0
+npm error gyp ERR! node-gyp -v v12.2.0
+npm error gyp ERR! $npm_package_name lmdb
+npm error gyp ERR! $npm_package_version 2.2.4
+npm error gyp ERR! not ok
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_24_314Z-debug-0.log
+
+Running: rm -rf node_modules
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch
+----------------------------------------
+
+Running: npm install
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch
+----------------------------------------
+npm warn deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm warn deprecated mkdirp@0.3.0: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)
+npm error code 1
+npm error path /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb
+npm error command failed
+npm error command sh -c node-gyp-build
+npm error CXX(target) Release/obj.target/lmdb/src/lmdb-js.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lmdb/libraries/liblmdb/midl.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lmdb/libraries/liblmdb/chacha8.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lz4/lib/lz4.o
+npm error   CXX(target) Release/obj.target/lmdb/src/writer.o
+npm error gyp info it worked if it ends with ok
+npm error gyp info using node-gyp@12.2.0
+npm error gyp info using node@25.9.0 | darwin | arm64
+npm error gyp info find Python using Python version 3.14.5 found at "/opt/homebrew/opt/python@3.14/bin/python3.14"
+npm error gyp info spawn /opt/homebrew/opt/python@3.14/bin/python3.14
+npm error gyp info spawn args [
+npm error gyp info spawn args '/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py',
+npm error gyp info spawn args 'binding.gyp',
+npm error gyp info spawn args '-f',
+npm error gyp info spawn args 'make',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb/build/config.gypi',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/addon.gypi',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/common.gypi',
+npm error gyp info spawn args '-Dlibrary=shared_library',
+npm error gyp info spawn args '-Dvisibility=default',
+npm error gyp info spawn args '-Dnode_root_dir=/Users/lekan/Library/Caches/node-gyp/25.9.0',
+npm error gyp info spawn args '-Dnode_gyp_dir=/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp',
+npm error gyp info spawn args '-Dnode_lib_file=/Users/lekan/Library/Caches/node-gyp/25.9.0/<(target_arch)/node.lib',
+npm error gyp info spawn args '-Dmodule_root_dir=/Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb',
+npm error gyp info spawn args '-Dnode_engine=v8',
+npm error gyp info spawn args '--depth=.',
+npm error gyp info spawn args '--no-parallel',
+npm error gyp info spawn args '--generator-output',
+npm error gyp info spawn args 'build',
+npm error gyp info spawn args '-Goutput_dir=.'
+npm error gyp info spawn args ]
+npm error gyp info spawn make
+npm error gyp info spawn args [ 'BUILDTYPE=Release', '-C', 'build' ]
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error In file included from ../../nan/nan.h:302:
+npm error ../../nan/nan_maybe_43_inl.h:210:15: warning: 'SetPrototype' is deprecated: V8 will stop providing access to hidden prototype (i.e. JSGlobalObject). Use SetPrototypeV2() instead. See http://crbug.com/333672197. [-Wdeprecated-declarations]
+npm error   210 |   return obj->SetPrototype(isolate->GetCurrentContext(), prototype);
+npm error       |               ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-object.h:459:3: note: 'SetPrototype' has been explicitly marked deprecated here
+npm error   459 |   V8_DEPRECATED(
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:1173:27: warning: 'WriteUtf8' is deprecated: Use WriteUtf8V2 instead. [-Wdeprecated-declarations]
+npm error  1173 |         length_ = string->WriteUtf8(v8::Isolate::GetCurrent(), str_,
+npm error       |                           ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-primitive.h:211:3: note: 'WriteUtf8' has been explicitly marked deprecated here
+npm error   211 |   V8_DEPRECATED("Use WriteUtf8V2 instead.")
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2418:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2418 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1211:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1211 | NODE_DEPRECATED("Use TryEncode(...) instead",
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2423:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2423 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1202:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1202 | NODE_DEPRECATED(
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error ../src/lmdb-js.cpp:14:1: warning: cast from 'void (*)(v8::Local<v8::Object>, v8::Local<v8::Value>, v8::Local<v8::Context>)' to 'node::addon_context_register_func' (aka 'void (*)(v8::Local<v8::Object>, v8::Local<v8::Value>, v8::Local<v8::Context>, void *)') converts to incompatible function type [-Wcast-function-type-mismatch]
+npm error    14 | NODE_MODULE_INIT(/* exports, module, context */) {
+npm error       | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1371:3: note: expanded from macro 'NODE_MODULE_INIT'
+npm error  1371 |   NODE_MODULE_CONTEXT_AWARE(NODE_GYP_MODULE_NAME,                     \
+npm error       |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error  1372 |                             NODE_MODULE_INITIALIZER)                  \
+npm error       |                             ~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1340:3: note: expanded from macro 'NODE_MODULE_CONTEXT_AWARE'
+npm error  1340 |   NODE_MODULE_CONTEXT_AWARE_X(modname, regfunc, NULL, 0)
+npm error       |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1322:7: note: expanded from macro 'NODE_MODULE_CONTEXT_AWARE_X'
+npm error  1322 |       (node::addon_context_register_func) (regfunc),                  \
+npm error       |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error 5 warnings generated.
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error In file included from ../../nan/nan.h:302:
+npm error ../../nan/nan_maybe_43_inl.h:210:15: warning: 'SetPrototype' is deprecated: V8 will stop providing access to hidden prototype (i.e. JSGlobalObject). Use SetPrototypeV2() instead. See http://crbug.com/333672197. [-Wdeprecated-declarations]
+npm error   210 |   return obj->SetPrototype(isolate->GetCurrentContext(), prototype);
+npm error       |               ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-object.h:459:3: note: 'SetPrototype' has been explicitly marked deprecated here
+npm error   459 |   V8_DEPRECATED(
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:1173:27: warning: 'WriteUtf8' is deprecated: Use WriteUtf8V2 instead. [-Wdeprecated-declarations]
+npm error  1173 |         length_ = string->WriteUtf8(v8::Isolate::GetCurrent(), str_,
+npm error       |                           ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-primitive.h:211:3: note: 'WriteUtf8' has been explicitly marked deprecated here
+npm error   211 |   V8_DEPRECATED("Use WriteUtf8V2 instead.")
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2418:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2418 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1211:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1211 | NODE_DEPRECATED("Use TryEncode(...) instead",
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2423:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2423 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1202:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1202 | NODE_DEPRECATED(
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error ../src/writer.cpp:433:36: error: no member named 'Holder' in 'v8::FunctionCallbackInfo<v8::Value>'
+npm error   433 |                 v8::Local<v8::Object>::Cast(info.Holder());
+npm error       |                                             ~~~~ ^
+npm error 4 warnings and 1 error generated.
+npm error make: *** [Release/obj.target/lmdb/src/writer.o] Error 1
+npm error gyp ERR! build error 
+npm error gyp ERR! stack Error: `make` failed with exit code: 2
+npm error gyp ERR! stack at ChildProcess.<anonymous> (/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/lib/build.js:219:23)
+npm error gyp ERR! System Darwin 25.5.0
+npm error gyp ERR! command "/opt/homebrew/Cellar/node/25.9.0_2/bin/node" "/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" "rebuild"
+npm error gyp ERR! cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb
+npm error gyp ERR! node -v v25.9.0
+npm error gyp ERR! node-gyp -v v12.2.0
+npm error gyp ERR! $npm_package_name lmdb
+npm error gyp ERR! $npm_package_version 2.2.4
+npm error gyp ERR! not ok
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_30_513Z-debug-0.log
+
+Running: npm install --legacy-peer-deps
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch
+----------------------------------------
+npm warn deprecated stable@0.1.8: Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility
+npm warn deprecated mkdirp@0.3.0: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)
+npm error code 1
+npm error path /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb
+npm error command failed
+npm error command sh -c node-gyp-build
+npm error CXX(target) Release/obj.target/lmdb/src/lmdb-js.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lmdb/libraries/liblmdb/midl.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lmdb/libraries/liblmdb/chacha8.o
+npm error   CC(target) Release/obj.target/lmdb/dependencies/lz4/lib/lz4.o
+npm error   CXX(target) Release/obj.target/lmdb/src/writer.o
+npm error gyp info it worked if it ends with ok
+npm error gyp info using node-gyp@12.2.0
+npm error gyp info using node@25.9.0 | darwin | arm64
+npm error gyp info find Python using Python version 3.14.5 found at "/opt/homebrew/opt/python@3.14/bin/python3.14"
+npm error gyp info spawn /opt/homebrew/opt/python@3.14/bin/python3.14
+npm error gyp info spawn args [
+npm error gyp info spawn args '/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/gyp/gyp_main.py',
+npm error gyp info spawn args 'binding.gyp',
+npm error gyp info spawn args '-f',
+npm error gyp info spawn args 'make',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb/build/config.gypi',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/addon.gypi',
+npm error gyp info spawn args '-I',
+npm error gyp info spawn args '/Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/common.gypi',
+npm error gyp info spawn args '-Dlibrary=shared_library',
+npm error gyp info spawn args '-Dvisibility=default',
+npm error gyp info spawn args '-Dnode_root_dir=/Users/lekan/Library/Caches/node-gyp/25.9.0',
+npm error gyp info spawn args '-Dnode_gyp_dir=/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp',
+npm error gyp info spawn args '-Dnode_lib_file=/Users/lekan/Library/Caches/node-gyp/25.9.0/<(target_arch)/node.lib',
+npm error gyp info spawn args '-Dmodule_root_dir=/Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb',
+npm error gyp info spawn args '-Dnode_engine=v8',
+npm error gyp info spawn args '--depth=.',
+npm error gyp info spawn args '--no-parallel',
+npm error gyp info spawn args '--generator-output',
+npm error gyp info spawn args 'build',
+npm error gyp info spawn args '-Goutput_dir=.'
+npm error gyp info spawn args ]
+npm error gyp info spawn make
+npm error gyp info spawn args [ 'BUILDTYPE=Release', '-C', 'build' ]
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error In file included from ../../nan/nan.h:302:
+npm error ../../nan/nan_maybe_43_inl.h:210:15: warning: 'SetPrototype' is deprecated: V8 will stop providing access to hidden prototype (i.e. JSGlobalObject). Use SetPrototypeV2() instead. See http://crbug.com/333672197. [-Wdeprecated-declarations]
+npm error   210 |   return obj->SetPrototype(isolate->GetCurrentContext(), prototype);
+npm error       |               ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-object.h:459:3: note: 'SetPrototype' has been explicitly marked deprecated here
+npm error   459 |   V8_DEPRECATED(
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:1173:27: warning: 'WriteUtf8' is deprecated: Use WriteUtf8V2 instead. [-Wdeprecated-declarations]
+npm error  1173 |         length_ = string->WriteUtf8(v8::Isolate::GetCurrent(), str_,
+npm error       |                           ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-primitive.h:211:3: note: 'WriteUtf8' has been explicitly marked deprecated here
+npm error   211 |   V8_DEPRECATED("Use WriteUtf8V2 instead.")
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2418:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2418 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1211:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1211 | NODE_DEPRECATED("Use TryEncode(...) instead",
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error In file included from ../src/lmdb-js.cpp:1:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2423:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2423 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1202:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1202 | NODE_DEPRECATED(
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error ../src/lmdb-js.cpp:14:1: warning: cast from 'void (*)(v8::Local<v8::Object>, v8::Local<v8::Value>, v8::Local<v8::Context>)' to 'node::addon_context_register_func' (aka 'void (*)(v8::Local<v8::Object>, v8::Local<v8::Value>, v8::Local<v8::Context>, void *)') converts to incompatible function type [-Wcast-function-type-mismatch]
+npm error    14 | NODE_MODULE_INIT(/* exports, module, context */) {
+npm error       | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1371:3: note: expanded from macro 'NODE_MODULE_INIT'
+npm error  1371 |   NODE_MODULE_CONTEXT_AWARE(NODE_GYP_MODULE_NAME,                     \
+npm error       |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error  1372 |                             NODE_MODULE_INITIALIZER)                  \
+npm error       |                             ~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1340:3: note: expanded from macro 'NODE_MODULE_CONTEXT_AWARE'
+npm error  1340 |   NODE_MODULE_CONTEXT_AWARE_X(modname, regfunc, NULL, 0)
+npm error       |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1322:7: note: expanded from macro 'NODE_MODULE_CONTEXT_AWARE_X'
+npm error  1322 |       (node::addon_context_register_func) (regfunc),                  \
+npm error       |       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+npm error 5 warnings generated.
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error In file included from ../../nan/nan.h:302:
+npm error ../../nan/nan_maybe_43_inl.h:210:15: warning: 'SetPrototype' is deprecated: V8 will stop providing access to hidden prototype (i.e. JSGlobalObject). Use SetPrototypeV2() instead. See http://crbug.com/333672197. [-Wdeprecated-declarations]
+npm error   210 |   return obj->SetPrototype(isolate->GetCurrentContext(), prototype);
+npm error       |               ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-object.h:459:3: note: 'SetPrototype' has been explicitly marked deprecated here
+npm error   459 |   V8_DEPRECATED(
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:1173:27: warning: 'WriteUtf8' is deprecated: Use WriteUtf8V2 instead. [-Wdeprecated-declarations]
+npm error  1173 |         length_ = string->WriteUtf8(v8::Isolate::GetCurrent(), str_,
+npm error       |                           ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8-primitive.h:211:3: note: 'WriteUtf8' has been explicitly marked deprecated here
+npm error   211 |   V8_DEPRECATED("Use WriteUtf8V2 instead.")
+npm error       |   ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/v8config.h:621:35: note: expanded from macro 'V8_DEPRECATED'
+npm error   621 | # define V8_DEPRECATED(message) [[deprecated(message)]]
+npm error       |                                   ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2418:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2418 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1211:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1211 | NODE_DEPRECATED("Use TryEncode(...) instead",
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error In file included from ../src/writer.cpp:14:
+npm error In file included from ../src/lmdb-js.h:32:
+npm error ../../nan/nan.h:2423:18: warning: 'Encode' is deprecated: Use TryEncode(...) instead [-Wdeprecated-declarations]
+npm error  2423 |     return node::Encode(
+npm error       |                  ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:1202:1: note: 'Encode' has been explicitly marked deprecated here
+npm error  1202 | NODE_DEPRECATED(
+npm error       | ^
+npm error /Users/lekan/Library/Caches/node-gyp/25.9.0/include/node/node.h:116:20: note: expanded from macro 'NODE_DEPRECATED'
+npm error   116 |     __attribute__((deprecated(message))) declarator
+npm error       |                    ^
+npm error ../src/writer.cpp:433:36: error: no member named 'Holder' in 'v8::FunctionCallbackInfo<v8::Value>'
+npm error   433 |                 v8::Local<v8::Object>::Cast(info.Holder());
+npm error       |                                             ~~~~ ^
+npm error 4 warnings and 1 error generated.
+npm error make: *** [Release/obj.target/lmdb/src/writer.o] Error 1
+npm error gyp ERR! build error 
+npm error gyp ERR! stack Error: `make` failed with exit code: 2
+npm error gyp ERR! stack at ChildProcess.<anonymous> (/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/lib/build.js:219:23)
+npm error gyp ERR! System Darwin 25.5.0
+npm error gyp ERR! command "/opt/homebrew/Cellar/node/25.9.0_2/bin/node" "/opt/homebrew/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js" "rebuild"
+npm error gyp ERR! cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch/node_modules/lmdb
+npm error gyp ERR! node -v v25.9.0
+npm error gyp ERR! node-gyp -v v12.2.0
+npm error gyp ERR! $npm_package_name lmdb
+npm error gyp ERR! $npm_package_version 2.2.4
+npm error gyp ERR! not ok
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_37_109Z-debug-0.log
+
+Running: npm ci
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-movie-instantsearch
+----------------------------------------
+npm error code EUSAGE
+npm error
+npm error The `npm ci` command can only install with an existing package-lock.json or
+npm error npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+npm error later to generate a package-lock.json file, then try again.
+npm error
+npm error Clean install a project
+npm error
+npm error Usage:
+npm error npm ci
+npm error
+npm error Options:
+npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts]
+npm error [--allow-git <all|none|root>] [--no-audit] [--no-bin-links] [--no-fund]
+npm error [--dry-run]
+npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+npm error [--workspaces] [--include-workspace-root] [--install-links]
+npm error
+npm error   --install-strategy
+npm error     Sets the strategy for installing packages in node_modules.
+npm error
+npm error   --legacy-bundling
+npm error     Instead of hoisting package installs in `node_modules`, install packages
+npm error
+npm error   --global-style
+npm error     Only install direct dependencies in the top level `node_modules`,
+npm error
+npm error   --omit
+npm error     Dependency types to omit from the installation tree on disk.
+npm error
+npm error   --include
+npm error     Option that allows for defining which types of dependencies to install.
+npm error
+npm error   --strict-peer-deps
+npm error     If set to `true`, and `--legacy-peer-deps` is not set, then _any_
+npm error
+npm error   --foreground-scripts
+npm error     Run all build scripts (ie, `preinstall`, `install`, and
+npm error
+npm error   --ignore-scripts
+npm error     If true, npm does not run scripts specified in package.json files.
+npm error
+npm error   --allow-git
+npm error     Limits the ability for npm to fetch dependencies from git references.
+npm error
+npm error   --audit
+npm error     When "true" submit audit reports alongside the current npm command to the
+npm error
+npm error   --bin-links
+npm error     Tells npm to create symlinks (or `.cmd` shims on Windows) for package
+npm error
+npm error   --fund
+npm error     When "true" displays the message at the end of each `npm install`
+npm error
+npm error   --dry-run
+npm error     Indicates that you don't want npm to make any changes and that it should
+npm error
+npm error   -w|--workspace
+npm error     Enable running a command in the context of the configured workspaces of the
+npm error
+npm error   --workspaces
+npm error     Set to true to run the command in the context of **all** configured
+npm error
+npm error   --include-workspace-root
+npm error     Include the workspace root when workspaces are enabled for a command.
+npm error
+npm error   --install-links
+npm error     When set file: protocol dependencies will be packed and installed as
+npm error
+npm error
+npm error aliases: clean-install, ic, install-clean, isntall-clean
+npm error
+npm error Run "npm help ci" for more info
+npm error A complete log of this run can be found in: /Users/lekan/.npm/_logs/2026-07-10T05_05_43_557Z-debug-0.log

@@ -1,0 +1,170 @@
+[
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/",
+    "status": 200,
+    "headers": {
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "etag": "W/\"beab4eec25ddf3ce93898e518598b174\"",
+      "last-modified": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::hswnw-1783659516420-41ebd2bab839"
+    },
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/bg-picker.js",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"71ee77f1b2a3ae394af61be911a52936\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "content-disposition": "inline; filename=\"bg-picker.js\"",
+      "content-type": "application/javascript; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "x-vercel-id": "iad1::28kzj-1783659516537-bfddf5000174"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/index.css",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"358261cb634407355a319ac1bc6ce244\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "content-disposition": "inline; filename=\"index.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "x-vercel-id": "iad1::bgndm-1783659516537-863369855dbb"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/backgrounds/image3.jpg",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "x-vercel-cache": "MISS",
+      "etag": "\"9fc12d8d565502de6885f9e2d7e028ed\"",
+      "age": "0",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "1078548",
+      "date": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "content-disposition": "inline; filename=\"image3.jpg\"",
+      "content-type": "image/jpeg",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "x-vercel-id": "iad1::fj79k-1783659516666-261421ea2bb9"
+    },
+    "content_type": "image/jpeg"
+  },
+  {
+    "url": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop",
+    "status": 200,
+    "headers": {
+      "age": "1503041",
+      "x-content-type-options": "nosniff",
+      "alt-svc": "h3=\":443\";ma=86400,h3-29=\":443\";ma=86400,h3-27=\":443\";ma=86400",
+      "x-cache": "HIT, HIT",
+      "date": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "last-modified": "Mon, 22 Jun 2026 19:27:56 GMT",
+      "x-served-by": "cache-chi-klot8100144-CHI, cache-bos-kbos510056-BOS",
+      "vary": "Accept, User-Agent",
+      "content-type": "image/avif",
+      "cache-control": "public, max-age=31536000",
+      "timing-allow-origin": "*",
+      "cross-origin-resource-policy": "cross-origin",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "300449",
+      "server": "imgix",
+      "x-imgix-id": "93cb7f1f53a164af90903036ef9bcebdf0db39b1"
+    },
+    "content_type": "image/avif"
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/backgrounds/image2.jpg",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "x-vercel-cache": "MISS",
+      "etag": "\"2464269c4669c9ff05fb6947347f32a1\"",
+      "age": "0",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "1479853",
+      "date": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "content-disposition": "inline; filename=\"image2.jpg\"",
+      "content-type": "image/jpeg",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "x-vercel-id": "iad1::hswnw-1783659516666-84ef8d8316d3"
+    },
+    "content_type": "image/jpeg"
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/backgrounds/image1.jpg",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "x-vercel-cache": "MISS",
+      "etag": "\"8fd860d5f379f1412c0773d320726978\"",
+      "age": "0",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "537373",
+      "date": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "content-disposition": "inline; filename=\"image1.jpg\"",
+      "content-type": "image/jpeg",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "x-vercel-id": "iad1::pt7td-1783659516667-9a782e9215db"
+    },
+    "content_type": "image/jpeg"
+  },
+  {
+    "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app/backgrounds/image4.jpg",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "x-vercel-cache": "MISS",
+      "etag": "\"58f028438aa1f8ccd57757b589e49a7f\"",
+      "age": "0",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "716700",
+      "date": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "content-disposition": "inline; filename=\"image4.jpg\"",
+      "content-type": "image/jpeg",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:36 GMT",
+      "x-vercel-id": "iad1::n6pgd-1783659516675-3c1abea51be4"
+    },
+    "content_type": "image/jpeg"
+  }
+]

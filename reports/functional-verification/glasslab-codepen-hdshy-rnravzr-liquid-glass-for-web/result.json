@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-codepen-hdshy-rnravzr-liquid-glass-for-web",
+  "url": "https://glasslab-codepen-hdshy-rnravzr.vercel.app",
+  "status_code": 200,
+  "title": "Liquid Glass For Web",
+  "html_length": 258440,
+  "body_text_length": 593,
+  "visible_element_count": 8,
+  "canvas_count": 0,
+  "svg_count": 1,
+  "stylesheets_count": 2,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "Times",
+    "backgroundImage": "none",
+    "margin": "8px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "LINK",
+    "id": "",
+    "className": "",
+    "width": "auto",
+    "height": "auto",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "0px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 0.0,
+  "final_status": "verified-functional"
+}

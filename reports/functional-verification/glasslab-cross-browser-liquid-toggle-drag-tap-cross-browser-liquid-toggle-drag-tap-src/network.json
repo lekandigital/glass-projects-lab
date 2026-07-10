@@ -1,0 +1,220 @@
+[
+  {
+    "url": "https://glasslab-cross-browser-liquid-toggl.vercel.app/",
+    "status": 200,
+    "headers": {
+      "access-control-allow-origin": "*",
+      "age": "0",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-disposition": "inline",
+      "content-encoding": "br",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "etag": "W/\"8e80fcb9cbdcd3d18f7c92ddbee272b7\"",
+      "last-modified": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "server": "Vercel",
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "x-vercel-cache": "MISS",
+      "x-vercel-id": "iad1::l6j65-1783659484173-57777e5283bf"
+    },
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://glasslab-cross-browser-liquid-toggl.vercel.app/script.js",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"6f1f422e64018d858c83d9a665cdb903\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-disposition": "inline; filename=\"script.js\"",
+      "content-type": "application/javascript; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "x-vercel-id": "iad1::l6j65-1783659484307-e7fbd7de1146"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://glasslab-cross-browser-liquid-toggl.vercel.app/style.css",
+    "status": 200,
+    "headers": {
+      "strict-transport-security": "max-age=63072000; includeSubDomains; preload",
+      "cache-control": "public, max-age=0, must-revalidate",
+      "content-encoding": "br",
+      "x-vercel-cache": "MISS",
+      "etag": "W/\"4b2fd7af24cd50e09e5047be96d409c3\"",
+      "age": "0",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-disposition": "inline; filename=\"style.css\"",
+      "content-type": "text/css; charset=utf-8",
+      "server": "Vercel",
+      "last-modified": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "x-vercel-id": "iad1::5t2p2-1783659484307-5ac4d403e68f"
+    },
+    "content_type": "text/css; charset=utf-8"
+  },
+  {
+    "url": "https://esm.sh/gsap@3.13.0",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "X-ESM-Path, X-TypeScript-Types",
+      "cache-control": "public, max-age=31536000, immutable",
+      "content-encoding": "br",
+      "x-esm-path": "/gsap@3.13.0/es2022/gsap.mjs",
+      "cf-cache-status": "MISS",
+      "x-typescript-types": "https://esm.sh/gsap@3.13.0/types/index.d.ts",
+      "cf-ray": "a18cfdc1bb4443e6-EWR",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "vary": "User-Agent",
+      "server": "cloudflare",
+      "last-modified": "Fri, 10 Jul 2026 04:58:04 GMT"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://esm.sh/gsap@3.13.0/Draggable",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "X-ESM-Path",
+      "cache-control": "public, max-age=31536000, immutable",
+      "content-encoding": "br",
+      "x-esm-path": "/gsap@3.13.0/es2022/Draggable.mjs",
+      "cf-cache-status": "MISS",
+      "cf-ray": "a18cfdc1bb4643e6-EWR",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "vary": "User-Agent",
+      "server": "cloudflare",
+      "last-modified": "Fri, 10 Jul 2026 04:58:04 GMT"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://esm.sh/tweakpane@4.0.4",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "X-ESM-Path, X-TypeScript-Types",
+      "cache-control": "public, max-age=31536000, immutable",
+      "content-encoding": "br",
+      "x-esm-path": "/tweakpane@4.0.4/es2022/tweakpane.mjs",
+      "cf-cache-status": "MISS",
+      "x-typescript-types": "https://esm.sh/tweakpane@4.0.4/dist/types/index.d.ts",
+      "cf-ray": "a18cfdc1bb4543e6-EWR",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "vary": "User-Agent",
+      "server": "cloudflare",
+      "last-modified": "Fri, 10 Jul 2026 04:58:04 GMT"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://esm.sh/gsap@3.13.0/es2022/Draggable.mjs",
+    "status": 200,
+    "headers": {
+      "cache-control": "public, max-age=31536000, immutable",
+      "content-encoding": "br",
+      "cf-cache-status": "MISS",
+      "cf-ray": "a18cfdc20b7d43e6-EWR",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "last-modified": "Mon, 17 Nov 2025 23:49:37 GMT",
+      "server": "cloudflare",
+      "vary": "Accept-Encoding"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://esm.sh/gsap@3.13.0/es2022/gsap.mjs",
+    "status": 200,
+    "headers": {
+      "cache-control": "public, max-age=31536000, immutable",
+      "content-encoding": "br",
+      "cf-cache-status": "MISS",
+      "cf-ray": "a18cfdc20b7b43e6-EWR",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "last-modified": "Mon, 17 Nov 2025 23:03:23 GMT",
+      "server": "cloudflare",
+      "vary": "Accept-Encoding"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://unpkg.com/normalize.css",
+    "status": 302,
+    "headers": {
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "cache-control": "public, max-age=60, s-maxage=300",
+      "location": "/normalize.css@8.0.1/normalize.css",
+      "cross-origin-resource-policy": "cross-origin",
+      "x-content-type-options": "nosniff",
+      "cf-ray": "a18cfdc22dd11b53-EWR",
+      "access-control-allow-origin": "*",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "content-length": "49",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-type": "text/plain;charset=UTF-8",
+      "server": "cloudflare"
+    },
+    "content_type": "text/plain;charset=UTF-8"
+  },
+  {
+    "url": "https://esm.sh/tweakpane@4.0.4/es2022/tweakpane.mjs",
+    "status": 200,
+    "headers": {
+      "cache-control": "public, max-age=31536000, immutable",
+      "content-encoding": "br",
+      "cf-cache-status": "MISS",
+      "cf-ray": "a18cfdc20b7e43e6-EWR",
+      "access-control-allow-origin": "*",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-type": "application/javascript; charset=utf-8",
+      "last-modified": "Tue, 18 Nov 2025 06:40:49 GMT",
+      "server": "cloudflare",
+      "vary": "Accept-Encoding"
+    },
+    "content_type": "application/javascript; charset=utf-8"
+  },
+  {
+    "url": "https://unpkg.com/normalize.css@8.0.1/normalize.css",
+    "status": 200,
+    "headers": {
+      "access-control-expose-headers": "*",
+      "content-encoding": "gzip",
+      "cf-cache-status": "HIT",
+      "age": "650045",
+      "access-control-allow-methods": "GET, HEAD, OPTIONS",
+      "x-content-type-options": "nosniff",
+      "expires": "Sat, 10 Jul 2027 04:58:04 GMT",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "date": "Fri, 10 Jul 2026 04:58:04 GMT",
+      "content-type": "text/css",
+      "last-modified": "Wed, 15 Apr 2026 16:43:50 GMT",
+      "fly-request-id": "01KP90E5313TXK5DWY9Y6P1DKB-ewr",
+      "access-control-allow-headers": "*",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "vary": "accept-encoding",
+      "cache-control": "public, max-age=31536000",
+      "cross-origin-resource-policy": "cross-origin",
+      "via": "1.1 fly.io",
+      "cf-ray": "a18cfdc27e711b53-EWR",
+      "content-digest": "sha256=:WAgYcAck1C1/zEl5sBl5cfyhxtLgKGdpI3oKyJffVRI=:",
+      "access-control-allow-origin": "*",
+      "server": "cloudflare"
+    },
+    "content_type": "text/css"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "url": "http://127.0.0.1:57068/",
+    "status": 200,
+    "headers": {
+      "content-length": "1269",
+      "content-type": "text/html",
+      "date": "Fri, 10 Jul 2026 05:12:09 GMT",
+      "last-modified": "Fri, 10 Jul 2026 04:33:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html"
+  },
+  {
+    "url": "http://127.0.0.1:57068/style.css",
+    "status": 200,
+    "headers": {
+      "content-length": "2512",
+      "date": "Fri, 10 Jul 2026 05:12:09 GMT",
+      "content-type": "text/css",
+      "last-modified": "Fri, 10 Jul 2026 04:33:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/css"
+  },
+  {
+    "url": "http://127.0.0.1:57068/script.js",
+    "status": 200,
+    "headers": {
+      "content-length": "296",
+      "date": "Fri, 10 Jul 2026 05:12:09 GMT",
+      "content-type": "text/javascript",
+      "last-modified": "Fri, 10 Jul 2026 04:33:42 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/javascript"
+  },
+  {
+    "url": "https://cdn.pixabay.com/photo/2020/05/27/22/18/meadow-5229169_1280.jpg",
+    "status": 200,
+    "headers": {
+      "cf-cache-status": "HIT",
+      "etag": "\"d14c37dbdfc5b3f98588d457a91b471a\"",
+      "age": "2825131",
+      "x-amz-version-id": "OzI9FRnfgS_8g_phUiwzaJycLtGKHisU",
+      "expires": "Sat, 10 Jul 2027 05:12:09 GMT",
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "date": "Fri, 10 Jul 2026 05:12:09 GMT",
+      "content-type": "image/jpeg",
+      "last-modified": "Wed, 15 Jan 2025 01:26:18 GMT",
+      "vary": "accept-encoding",
+      "x-amz-id-2": "9S8SSIH5IytzTmOlHtciByv6dFMJwBqlDC32xXuHzCL90svejDtyQ8RioNKRdkAyogZ4IInhRuz7qAedcaeY+WAfJUOooWVq",
+      "x-amz-replication-status": "FAILED",
+      "cache-control": "public, max-age=31536000, s-maxage=31536000",
+      "cf-ray": "a18d1262b8bec208-BOS",
+      "x-amz-request-id": "S0TS44C62WWWWY88",
+      "accept-ranges": "bytes",
+      "access-control-allow-origin": "*",
+      "content-length": "292449",
+      "server": "cloudflare",
+      "x-amz-server-side-encryption": "AES256"
+    },
+    "content_type": "image/jpeg"
+  }
+]

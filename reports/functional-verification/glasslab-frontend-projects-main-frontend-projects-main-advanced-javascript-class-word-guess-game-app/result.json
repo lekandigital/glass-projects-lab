@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-frontend-projects-main-frontend-projects-main-advanced-javascript-class-word-guess-game-app",
+  "url": "http://127.0.0.1:52754",
+  "status_code": 200,
+  "title": "React App",
+  "html_length": 1934,
+  "body_text_length": 167,
+  "visible_element_count": 22,
+  "canvas_count": 0,
+  "svg_count": 0,
+  "stylesheets_count": 1,
+  "body_style": {
+    "backgroundColor": "rgb(17, 24, 39)",
+    "fontFamily": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Oxygen, Ubuntu, Cantarell, \"Fira Sans\", \"Droid Sans\", \"Helvetica Neue\", sans-serif",
+    "backgroundImage": "none",
+    "margin": "0px",
+    "display": "block"
+  },
+  "primary_style": {
+    "tagName": "BUTTON",
+    "id": "",
+    "className": "p-3 text-sm text-white bg-gray-800 rounded-lg hover:text-gray-300",
+    "width": "90.8281px",
+    "height": "44px",
+    "position": "static",
+    "filter": "none",
+    "backdropFilter": "none",
+    "borderRadius": "8px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 0.0,
+  "final_status": "verified-functional"
+}

@@ -1,0 +1,36 @@
+{
+  "project_id": "glasslab-liquid-glass-main-liquid-glass-main",
+  "url": "https://glasslab-liquid-glass-main-liquid-g.vercel.app",
+  "status_code": 200,
+  "title": "Liquid Glass For the Web",
+  "html_length": 52149,
+  "body_text_length": 389,
+  "visible_element_count": 80,
+  "canvas_count": 0,
+  "svg_count": 3,
+  "stylesheets_count": 2,
+  "body_style": {
+    "backgroundColor": "rgba(0, 0, 0, 0)",
+    "fontFamily": "-apple-system, \"system-ui\", \"SF Pro Display\", system-ui, sans-serif",
+    "backgroundImage": "url(\"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop\")",
+    "margin": "0px",
+    "display": "flex"
+  },
+  "primary_style": {
+    "tagName": "BUTTON",
+    "id": "panel-toggle",
+    "className": "panel-toggle",
+    "width": "40px",
+    "height": "40px",
+    "position": "fixed",
+    "filter": "none",
+    "backdropFilter": "blur(20px)",
+    "borderRadius": "12px"
+  },
+  "css_applied": true,
+  "assets_failed_count": 0,
+  "console_errors_count": 0,
+  "page_errors_count": 0,
+  "interaction_diff_score": 0.0,
+  "final_status": "verified-functional"
+}

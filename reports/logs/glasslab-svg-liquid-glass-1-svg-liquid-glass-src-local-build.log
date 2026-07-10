@@ -1,0 +1,78 @@
+
+Running: npm install
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-svg-liquid-glass-1-svg-liquid-glass-src
+----------------------------------------
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @monogrid/gainmap-js@3.4.0
+npm warn Found: three@0.150.1
+npm warn node_modules/three
+npm warn   three@"^0.150.0" from the root project
+npm warn   9 more (@react-spring/three, @react-three/drei, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer three@">= 0.159.0" from @monogrid/gainmap-js@3.4.0
+npm warn node_modules/@react-three/drei/node_modules/@monogrid/gainmap-js
+npm warn   @monogrid/gainmap-js@"^3.0.6" from @react-three/drei@9.122.0
+npm warn   node_modules/@react-three/drei
+npm warn
+npm warn Conflicting peer dependency: three@0.185.1
+npm warn node_modules/three
+npm warn   peer three@">= 0.159.0" from @monogrid/gainmap-js@3.4.0
+npm warn   node_modules/@react-three/drei/node_modules/@monogrid/gainmap-js
+npm warn     @monogrid/gainmap-js@"^3.0.6" from @react-three/drei@9.122.0
+npm warn     node_modules/@react-three/drei
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: three-mesh-bvh@0.7.8
+npm warn Found: three@0.150.1
+npm warn node_modules/three
+npm warn   three@"^0.150.0" from the root project
+npm warn   9 more (@react-spring/three, @react-three/drei, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer three@">= 0.151.0" from three-mesh-bvh@0.7.8
+npm warn node_modules/@react-three/drei/node_modules/three-mesh-bvh
+npm warn   three-mesh-bvh@"^0.7.8" from @react-three/drei@9.122.0
+npm warn   node_modules/@react-three/drei
+npm warn
+npm warn Conflicting peer dependency: three@0.185.1
+npm warn node_modules/three
+npm warn   peer three@">= 0.151.0" from three-mesh-bvh@0.7.8
+npm warn   node_modules/@react-three/drei/node_modules/three-mesh-bvh
+npm warn     three-mesh-bvh@"^0.7.8" from @react-three/drei@9.122.0
+npm warn     node_modules/@react-three/drei
+
+up to date, audited 139 packages in 508ms
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+2 vulnerabilities (1 moderate, 1 high)
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+Running: npm run build
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-svg-liquid-glass-1-svg-liquid-glass-src
+----------------------------------------
+
+> glasslab-svg-liquid-glass-1-svg-liquid-glass-src@1.0.0 build
+> vite build
+
+vite v4.5.14 building for production...
+transforming...
+[plugin:vite:esbuild] The JSX factory cannot be set when using React's "automatic" JSX transform
+1  |  /** @jsx h */
+   |           ^
+2  |  
+3  |  import { render, h } from "https://esm.sh/preact";
+
+"h" is imported from external module "https://esm.sh/preact" but never used in "src/main.jsx".
+✓ 16 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.42 kB │ gzip: 0.28 kB
+dist/assets/index-0ff70d89.css   0.39 kB │ gzip: 0.29 kB
+dist/assets/index-6a91cf24.js   10.94 kB │ gzip: 4.29 kB
+✓ built in 79ms

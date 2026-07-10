@@ -1,0 +1,20 @@
+[
+  {
+    "url": "https://glasslab-frontend-projects-main-fro.vercel.app/",
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro.vercel.app/assets/script.js",
+    "status": 200,
+    "content_type": "application/javascript; charset=utf-8",
+    "failed": false
+  },
+  {
+    "url": "https://glasslab-frontend-projects-main-fro.vercel.app/assets/style.css",
+    "status": 200,
+    "content_type": "text/css; charset=utf-8",
+    "failed": false
+  }
+]

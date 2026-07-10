@@ -1,0 +1,13 @@
+[
+  {
+    "url": "http://127.0.0.1:52481/",
+    "status": 200,
+    "headers": {
+      "content-length": "334",
+      "content-type": "text/html; charset=utf-8",
+      "date": "Fri, 10 Jul 2026 04:49:36 GMT",
+      "server": "SimpleHTTP/0.6 Python/3.14.5"
+    },
+    "content_type": "text/html; charset=utf-8"
+  }
+]

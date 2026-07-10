@@ -1,0 +1,19 @@
+
+Running: vercel deploy --prod --yes --cwd /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-css-if-function --name glasslab-frontend-projects-main-frontend-projects-main-css-if-function
+CWD: /Users/lekan/Dev/glass-projects-lab/deployments/glasslab-frontend-projects-main-frontend-projects-main-css-if-function
+----------------------------------------
+The "--name" option is deprecated (https://vercel.link/name-flag)
+Loading scopes…
+Searching for existing projects…
+Linked to lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-css-if-function (created .vercel and added it to .gitignore)
+Deploying lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-css-if-function
+Inspect: https://vercel.com/lekandigitals-projects/glasslab-frontend-projects-main-frontend-projects-main-css-if-function/3e82Fxcai43RZQNWfB73rgwwTAJV [1s]
+Production: https://glasslab-frontend-projects-main-frontend-projects-oocuecp0c.vercel.app [1s]
+https://glasslab-frontend-projects-main-frontend-projects-oocuecp0c.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+[2K[1A[2K[GProduction: https://glasslab-frontend-projects-main-frontend-projects-oocuecp0c.vercel.app [4s]
+Completing...
+Aliased: https://glasslab-frontend-projects-main-fro-nine.vercel.app [4s]
