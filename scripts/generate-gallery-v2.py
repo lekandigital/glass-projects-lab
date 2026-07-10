@@ -20,8 +20,9 @@ def generate_gallery():
         <style>
             body { font-family: system-ui, sans-serif; background: #0f172a; color: #f1f5f9; padding: 2rem; margin: 0; }
             h1 { text-align: center; color: #38bdf8; }
-            .filters { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
-            .filters select, .filters input { padding: 0.5rem; border-radius: 4px; border: 1px solid #334155; background: #1e293b; color: #f8fafc; }
+            .header-links { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; }
+            .header-links a { color: #cbd5e1; text-decoration: none; font-size: 0.9rem; }
+            .header-links a:hover { color: #38bdf8; text-decoration: underline; }
             .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 1.5rem; }
             .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.5rem; backdrop-filter: blur(10px); display: flex; flex-direction: column; }
             .card h3 { margin-top: 0; color: #e2e8f0; font-size: 1.2rem; }
@@ -35,9 +36,8 @@ def generate_gallery():
             .badge-pending { background: #854d0e; color: #fef08a; }
             .badge-metadata { background: #374151; color: #d1d5db; border: 1px solid #4b5563; }
             .badge-deleted { background: #7f1d1d; color: #fca5a5; }
-            .screenshot { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 1rem; background: #000; }
-            .actions { margin-top: auto; padding-top: 1rem; display: flex; gap: 1rem; border-top: 1px solid rgba(255,255,255,0.1); }
-            .btn { padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; text-align: center; font-weight: bold; font-size: 0.9rem; flex: 1; }
+            .actions { margin-top: auto; padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+            .btn { padding: 0.5rem 1rem; border-radius: 6px; text-decoration: none; text-align: center; font-weight: bold; font-size: 0.9rem; }
             .btn-primary { background: #0ea5e9; color: #fff; }
             .btn-primary:hover { background: #0284c7; text-decoration: none; }
             .btn-secondary { background: #334155; color: #fff; }
@@ -48,6 +48,17 @@ def generate_gallery():
     <body>
         <h1>Glass Projects Lab Gallery</h1>
         
+        <div class="header-links">
+            <a href="https://github.com/lekandigital/glass-projects-lab">GitHub Repository</a>
+            <a href="https://github.com/lekandigital/glass-projects-lab/blob/main/README.md">README</a>
+            <a href="https://github.com/lekandigital/glass-projects-lab/blob/main/docs/deployments.md">All Deployments</a>
+            <a href="https://github.com/lekandigital/glass-projects-lab/blob/main/docs/references.md">All References</a>
+            <a href="https://github.com/lekandigital/glass-projects-lab/blob/main/THIRD_PARTY_NOTICES.md">Third-Party Notices</a>
+            <a href="https://github.com/lekandigital/glass-projects-lab/blob/main/catalog/licenses.json">License Information</a>
+            <a href="https://github.com/lekandigital/glass-projects-lab/blob/main/docs/verification.md">Verification Methodology</a>
+            <a href="https://github.com/lekandigital/glass-projects-lab/blob/main/reports/remaining-failures.md">Known Failures</a>
+        </div>
+        
         <div class="grid">
     """
     
@@ -57,7 +68,8 @@ def generate_gallery():
         if 'verified' in status: badge_class = 'badge-verified'
         elif 'broken' in status or 'failed' in status: badge_class = 'badge-failed'
         
-        metadata_badge = '<span class="badge badge-metadata">Metadata Only</span>' if not p.get('source_in_public_repo') else ''
+        source_in_repo = p.get('source_in_public_repo')
+        metadata_badge = '<span class="badge badge-metadata">Metadata Only</span>' if not source_in_repo else ''
         deleted_badge = '<span class="badge badge-deleted">Deleted Source</span>' if p.get('original_url_status') == 'deleted' else ''
         
         demo_btn = ""
@@ -71,6 +83,10 @@ def generate_gallery():
         if p.get('original_url_status') == 'deleted':
             source_text = "Original Source (Deleted)"
             
+        repo_path = p.get("github_project_path", f"metadata-only/{p['project_id']}")
+        repo_link = f"https://github.com/lekandigital/glass-projects-lab/blob/main/{repo_path}/PROJECT.md"
+        repo_link_text = "View source and build instructions" if source_in_repo else "View metadata and provenance"
+        
         html += f"""
             <div class="card" data-framework="{p.get('framework')}" data-status="{status}" data-source="{p.get('source_type')}">
                 <div class="badges">
@@ -86,6 +102,7 @@ def generate_gallery():
                 
                 <div class="actions">
                     {demo_btn}
+                    <a href="{repo_link}" target="_blank" class="btn btn-secondary">{repo_link_text}</a>
                     <a href="{source_url}" target="_blank" class="btn btn-secondary">{source_text}</a>
                 </div>
             </div>
