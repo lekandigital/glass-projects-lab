@@ -27,18 +27,18 @@ This is the set returned by `vercel project list --json` in the current account 
 | Vercel project | Latest production URL | Notes |
 | --- | --- | --- |
 | `projects-glass-attempt-two` | `https://projects-glass-attempt-two-chi.vercel.app` | Legacy root gallery from the previous repo name. |
-| `liquid-glass-vue` | `https://liquid-glass-vue-eta.vercel.app` | The real Vite app behind `Frontend-Projects-main`. |
-| `frontend-projects-main` | `https://frontend-projects-main.vercel.app` | Collection root, not the deploy target you want for the demo. |
+| `liquid-glass-vue` | `https://glass-projects-lab-frontend-vue.vercel.app` | The real Vite app behind `Frontend-Projects-main`. |
+| `frontend-projects-main` | `https://glass-projects-lab-frontend-vue.vercel.app` | Collection root, not the deploy target you want for the demo. |
 | `glass-projects-lab-glass-refraction-nextjs` | `https://glass-projects-lab-glass-refraction.vercel.app` | Temporary Next shell used for the `glass-refraction-master next` demo. |
 | `glass-projects-lab-liquid-glass-example` | `https://glass-projects-lab-liquid-glass-exa.vercel.app` | React/Next example under `liquid-glass-react-master/liquid-glass-example`. |
 | `glass-button-css-only` | `https://glass-button-css-only-one.vercel.app` | Static button demo. |
-| `ios-liquid-glass` | `https://ios-liquid-glass-alpha.vercel.app` | Static iOS glass demo. |
-| `apple-liquid-glass-ui-2025` | `https://apple-liquid-glass-ui-2025.vercel.app` | Static Apple glass demo. |
-| `apple-liquid-glass-from-lucasromerodb-liquid-glass-effect-macos` | `https://apple-liquid-glass-from-lucasromero.vercel.app` | Static Apple glass demo. |
-| `apple-liquid-glass-experiments` | `https://apple-liquid-glass-experiments.vercel.app` | Static Apple glass demo. |
-| `glass-like-css` | `https://glass-like-css.vercel.app` | Static glass button demo. |
-| `cross-browser-liquid-toggle-drag-tap` | `https://cross-browser-liquid-toggle-drag-ta.vercel.app` | Static cross-browser toggle demo. |
-| `apple-liquid-glass` | `https://apple-liquid-glass-flax.vercel.app` | Static Apple glass demo. |
+| `ios-liquid-glass` | `https://glass-projects-lab-ios-liquid-glass.vercel.app` | Static iOS glass demo. |
+| `apple-liquid-glass-ui-2025` | `https://glass-projects-lab-apple-liquid-ui.vercel.app` | Static Apple glass demo. |
+| `apple-liquid-glass-from-lucasromerodb-liquid-glass-effect-macos` | `https://glass-projects-lab-lucas-romero-gla.vercel.app` | Static Apple glass demo. |
+| `apple-liquid-glass-experiments` | `https://glass-projects-lab-apple-glass-expe.vercel.app` | Static Apple glass demo. |
+| `glass-like-css` | `https://glass-projects-lab-glass-like-css.vercel.app` | Static glass button demo. |
+| `cross-browser-liquid-toggle-drag-tap` | `https://glass-projects-lab-cross-browser-to.vercel.app` | Static cross-browser toggle demo. |
+| `apple-liquid-glass` | `https://glass-projects-lab-apple-liquid-gla.vercel.app` | Static Apple glass demo. |
 
 ## Folder-to-project mapping from the repo
 

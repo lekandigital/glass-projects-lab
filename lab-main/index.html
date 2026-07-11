@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lab-main</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: radial-gradient(circle at top, #1f2a44 0%, #0f172a 52%, #020617 100%);
+      --panel: rgba(15, 23, 42, 0.66);
+      --line: rgba(255, 255, 255, 0.12);
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #7dd3fc;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(960px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: -0.04em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 58ch;
+    }
+
+    .links {
+      display: grid;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    a.card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 18px;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    a.card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(125, 211, 252, 0.45);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      color: var(--accent);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #f8fafc;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>lab-main</h1>
+      <p>Simple index for the selected front-end demos in this folder.</p>
+    </header>
+
+    <section class="links" aria-label="Selected front-end links">
+      <a class="card" href="front-end/glass-gel-slider.html">
+        <div class="label">front-end</div>
+        <strong>glass-gel-slider.html</strong>
+        <div class="link">Open the demo</div>
+      </a>
+      <a class="card" href="front-end/glass-magnifier.html">
+        <div class="label">front-end</div>
+        <strong>glass-magnifier.html</strong>
+        <div class="link">Open the demo</div>
+      </a>
+      <a class="card" href="front-end/glass-refraction.html">
+        <div class="label">front-end</div>
+        <strong>glass-refraction.html</strong>
+        <div class="link">Open the demo</div>
+      </a>
+    </section>
+  </main>
+</body>
+</html>
