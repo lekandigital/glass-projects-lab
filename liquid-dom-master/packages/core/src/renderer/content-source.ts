@@ -17,6 +17,7 @@ export type SceneHtmlEntry = {
   copiedDeviceHeight: number
   textureWidth: number
   textureHeight: number
+  copyFailed?: boolean
   blurTargetChain: AdaptiveBlurTargetChain | null
   transform: Matrix2D
   inverseTransform: Matrix2D | null

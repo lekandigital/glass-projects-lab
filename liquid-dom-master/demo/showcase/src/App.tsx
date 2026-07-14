@@ -1,4 +1,4 @@
-import { type ComponentType, type CSSProperties, useState } from 'react'
+import { type ComponentType, type CSSProperties, useState, useEffect } from 'react'
 import { Leva } from 'leva'
 import ControlCenterDemo from './demos/ControlCenterDemo'
 import IosNotificationDemo from './demos/IosNotificationDemo'
@@ -69,18 +69,34 @@ const showcases: Showcase[] = [
 
 const sourceBaseUrl = 'https://github.com/AndrewPrifer/liquid-dom/blob/master/'
 
-function isHtmlInCanvasEnabled() {
+type SupportStatus = 'supported' | 'no-webgpu' | 'no-html-in-canvas' | 'error'
+
+function getInitialSupportStatus(): SupportStatus {
   if (typeof document === 'undefined') {
-    return true
+    return 'supported'
+  }
+
+  if (!navigator.gpu) {
+    return 'no-webgpu'
   }
 
   const queuePrototype = (globalThis as { GPUQueue?: { prototype?: object } }).GPUQueue?.prototype
+  if (queuePrototype === undefined || !('copyElementImageToTexture' in queuePrototype)) {
+    return 'no-html-in-canvas'
+  }
 
-  return queuePrototype !== undefined && 'copyElementImageToTexture' in queuePrototype
+  return 'supported'
 }
 
 export default function App() {
-  const [htmlInCanvasEnabled] = useState(isHtmlInCanvasEnabled)
+  const [supportStatus, setSupportStatus] = useState<SupportStatus>(getInitialSupportStatus)
+
+  useEffect(() => {
+    const handleUnsupported = () => setSupportStatus('error')
+    window.addEventListener('liquid-dom-unsupported-error', handleUnsupported)
+    return () => window.removeEventListener('liquid-dom-unsupported-error', handleUnsupported)
+  }, [])
+
   const [selectedShowcaseId, setSelectedShowcaseId] = useState(showcases[0].id)
   const selectedShowcase =
     showcases.find((showcase) => showcase.id === selectedShowcaseId) ?? showcases[0]
@@ -97,15 +113,21 @@ export default function App() {
     <>
       <Leva hidden />
       <main className={styles.root}>
-        {!htmlInCanvasEnabled ? (
+        {supportStatus !== 'supported' ? (
           <section className={styles.unsupportedNote} aria-labelledby="unsupported-title">
             <h1 id="unsupported-title" className={styles.unsupportedTitle}>
-              HTML in Canvas is not enabled
+              {supportStatus === 'no-webgpu' && 'WebGPU is not supported'}
+              {supportStatus === 'no-html-in-canvas' && 'HTML in Canvas is not enabled'}
+              {supportStatus === 'error' && 'Renderer Initialization Failed'}
             </h1>
             <p className={styles.unsupportedCopy}>
-              Enable Chrome's HTML-in-Canvas flag, then reload this page.
+              {supportStatus === 'no-webgpu' && 'Your browser does not support WebGPU. A compatible browser is required.'}
+              {supportStatus === 'no-html-in-canvas' && "Enable Chrome's HTML-in-Canvas flag, then reload this page."}
+              {supportStatus === 'error' && "An error occurred while rendering. Ensure the HTML-in-Canvas flag is fully enabled."}
             </p>
-            <code className={styles.unsupportedFlag}>chrome://flags/#canvas-draw-element</code>
+            {supportStatus !== 'no-webgpu' && (
+              <code className={styles.unsupportedFlag}>chrome://flags/#canvas-draw-element</code>
+            )}
           </section>
         ) : (
           <>
