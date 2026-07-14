@@ -1,36 +1,17 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { LiquidGlass, type LiquidGlassHandle } from "liquid-glass-web-react";
 import { Section } from "../components";
-import { Swatches, type Backdrop } from "../rows";
 
 /* ------------------------------------------------------------------ *
  * The upstream demo's toggle group, ported as-is: same `.toggleWrap` /
- * `.toggle` markup, same spring, same drag-to-nearest-option, same
- * press response (strength and chroma deepen while the glass is held,
- * and ease back on release).
- *
- * The one addition is the backdrop picker: the original pill is a fixed
- * dark gradient, and a lens looks like a different component on a light
- * field than it does on a dark one. Since the pill is the only thing
- * inside the filter, swapping its fill swaps everything the lens has to
- * work with.
+ * `.toggle` markup, same pill, same spring, same drag-to-nearest-option,
+ * same press response (strength and chroma deepen while the glass is
+ * held, and ease back on release). Nothing here is a variation on it.
  * ------------------------------------------------------------------ */
 
 const OPTIONS = ["Hubs", "Spokes", "Reserves", "Assets", "Chains"];
 
-/** The upstream fill, kept as the default, plus flat alternatives. */
-const TOGGLE_BACKDROPS: Backdrop[] = [
-  { name: "Original", bg: "linear-gradient(120deg, #17171d, #101015)", ink: "#ffffff" },
-  { name: "Slate", bg: "#2b3440", ink: "#ffffff" },
-  { name: "Indigo", bg: "#3b35b8", ink: "#ffffff" },
-  { name: "Teal", bg: "#0f766e", ink: "#ffffff" },
-  { name: "Crimson", bg: "#a41b3f", ink: "#ffffff" },
-  { name: "Amber", bg: "#c2760c", ink: "#241200" },
-  { name: "Paper", bg: "#eceae5", ink: "#14161a" },
-];
-
 export function ToggleDemo() {
-  const [backdrop, setBackdrop] = useState(TOGGLE_BACKDROPS[0]);
   const [selected, setSelected] = useState(0);
   const lensRef = useRef<LiquidGlassHandle>(null);
   const groupRef = useRef<HTMLDivElement>(null);
@@ -218,19 +199,6 @@ export function ToggleDemo() {
         </>
       }
     >
-      <div className="backdropBar">
-        <span className="fieldLabel">Pill background</span>
-        <Swatches
-          value={backdrop}
-          onChange={setBackdrop}
-          options={TOGGLE_BACKDROPS}
-        />
-        <span className="stageNote">
-          {backdrop.name}
-          {backdrop.name === "Original" ? " — the upstream gradient" : " — flat fill"}
-        </span>
-      </div>
-
       <div className="toggleWrap">
         <LiquidGlass
           ref={lensRef}
@@ -251,11 +219,7 @@ export function ToggleDemo() {
           onPointerCancel={handlePointerEnd}
           onClickCapture={handleClickCapture}
         >
-          <div
-            className={`toggle${backdrop.name === "Original" ? "" : " tinted"}`}
-            ref={groupRef}
-            style={{ ["--toggle-bg" as string]: backdrop.bg, ["--toggle-ink" as string]: backdrop.ink }}
-          >
+          <div className="toggle" ref={groupRef}>
             {OPTIONS.map((label, i) => (
               <button key={label} aria-pressed={i === selected} onClick={() => setSelected(i)}>
                 {label}

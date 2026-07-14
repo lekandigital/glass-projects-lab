@@ -1,0 +1,6 @@
+{
+  "name": "Liquid glass",
+  "description": "A React application demonstrating various UI elements inspired by Apple iOS, featuring glassmorphism effects and a dynamic wallpaper, built with Tailwind CSS.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iOS UI Elements Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+    }
+    .main-background {
+      /* Updated wallpaper URL */
+      background-image: url('https://images.unsplash.com/photo-1531315630201-bb15abeb1653?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-attachment: fixed; /* Crucial for viewport-relative positioning */
+      background-position: center 50%; /* Initial position, JS will modify Y */
+    }
+    .apply-lg-dist-filter {
+      filter: url(#lg-dist);
+    }
+
+    /* Custom Slider Styles */
+    input[type="range"].custom-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px; /* Track height */
+      background: rgba(255, 255, 255, 0.3); /* Semi-transparent track */
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+    }
+    input[type="range"].custom-slider:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    input[type="range"].custom-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px; /* Thumb width */
+      height: 20px; /* Thumb height */
+      background: white; /* Solid white thumb */
+      border-radius: 50%;
+      cursor: pointer;
+      margin-top: -6px; /* Adjust thumb position vertically */
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease-in-out;
+    }
+    input[type="range"].custom-slider::-webkit-slider-thumb:active {
+        transform: scale(1.1);
+    }
+
+    input[type="range"].custom-slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      cursor: pointer;
+      border: none; 
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease-in-out;
+    }
+    input[type="range"].custom-slider::-moz-range-thumb:active {
+        transform: scale(1.1);
+    }
+
+    input[type="range"].custom-slider::-moz-range-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+     input[type="range"].custom-slider:hover::-moz-range-track {
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Utility to hide scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+  <svg style="display: none;">
+    <filter id="lg-dist" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="92" result="noise" />
+      <feGaussianBlur in="noise" stdDeviation="2" result="blurred" />
+      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="70" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+  </svg>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

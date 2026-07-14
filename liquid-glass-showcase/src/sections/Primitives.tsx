@@ -290,7 +290,7 @@ export function Primitives() {
     >
       <div className="backdropBar">
         <span className="fieldLabel">Row backdrop — flat, no gradient</span>
-        <Swatches value={backdrop} onChange={setBackdrop} />
+        <Swatches value={backdrop} onChange={setBackdrop} options={BACKDROPS} />
         <span className="stageNote">
           {backdrop.name}. Watch the specular rim: on a light field it reads as shadow, on a dark
           one as light. Same lens, same numbers.

@@ -26,17 +26,101 @@ export function backdropVars(backdrop: Backdrop): CSSProperties {
   return { ["--flat" as string]: backdrop.bg, ["--flat-ink" as string]: backdrop.ink };
 }
 
-export function Swatches({
+/**
+ * The demo's page background, recoloured. Upstream paints a ruled grid under two
+ * soft radial glows — one indigo, one teal, on near-black. "Original" is that,
+ * to the value; the rest lift the base and push the glows so the colour actually
+ * reads, and "White" flips the whole thing to paper with dark rules.
+ *
+ * `base` is the flat ground, `rule` the grid lines, `glow1` / `glow2` the two
+ * radials. `bg` is only what the picker's swatch shows.
+ */
+export interface GridTint extends Backdrop {
+  base: string;
+  rule: string;
+  glow1: string;
+  glow2: string;
+}
+
+export const GRID_TINTS: GridTint[] = [
+  {
+    name: "Original",
+    bg: "linear-gradient(120deg, #5b4ec9, #1f7a6e)",
+    ink: "#ffffff",
+    base: "#08080b",
+    rule: "rgba(255, 255, 255, 0.03)",
+    glow1: "rgba(91, 78, 201, 0.22)",
+    glow2: "rgba(31, 122, 110, 0.16)",
+  },
+  {
+    name: "White",
+    bg: "#ffffff",
+    ink: "#14161a",
+    base: "#ffffff",
+    rule: "rgba(16, 18, 24, 0.07)",
+    glow1: "rgba(91, 78, 201, 0.16)",
+    glow2: "rgba(31, 122, 110, 0.12)",
+  },
+  {
+    name: "Indigo",
+    bg: "#5b4ec9",
+    ink: "#ffffff",
+    base: "#14152b",
+    rule: "rgba(255, 255, 255, 0.07)",
+    glow1: "rgba(112, 98, 240, 0.5)",
+    glow2: "rgba(59, 53, 184, 0.32)",
+  },
+  {
+    name: "Teal",
+    bg: "#1f7a6e",
+    ink: "#ffffff",
+    base: "#0c2422",
+    rule: "rgba(255, 255, 255, 0.07)",
+    glow1: "rgba(45, 212, 191, 0.42)",
+    glow2: "rgba(31, 122, 110, 0.34)",
+  },
+  {
+    name: "Crimson",
+    bg: "#a41b3f",
+    ink: "#ffffff",
+    base: "#2a0d17",
+    rule: "rgba(255, 255, 255, 0.07)",
+    glow1: "rgba(255, 69, 120, 0.4)",
+    glow2: "rgba(164, 27, 63, 0.36)",
+  },
+  {
+    name: "Amber",
+    bg: "#c2760c",
+    ink: "#241200",
+    base: "#2a1c07",
+    rule: "rgba(255, 255, 255, 0.07)",
+    glow1: "rgba(255, 190, 60, 0.4)",
+    glow2: "rgba(194, 118, 12, 0.34)",
+  },
+];
+
+export function gridVars(tint: GridTint): CSSProperties {
+  return {
+    ["--grid-base" as string]: tint.base,
+    ["--grid-rule" as string]: tint.rule,
+    ["--grid-glow-1" as string]: tint.glow1,
+    ["--grid-glow-2" as string]: tint.glow2,
+  };
+}
+
+export function Swatches<T extends Backdrop>({
   value,
   onChange,
-  options = BACKDROPS,
+  options,
+  label = "Row backdrop",
 }: {
-  value: Backdrop;
-  onChange: (b: Backdrop) => void;
-  options?: Backdrop[];
+  value: T;
+  onChange: (b: T) => void;
+  options: T[];
+  label?: string;
 }) {
   return (
-    <div className="swatches" role="radiogroup" aria-label="Row backdrop">
+    <div className="swatches" role="radiogroup" aria-label={label}>
       {options.map((backdrop) => (
         <button
           key={backdrop.name}
@@ -106,12 +190,14 @@ export function DockRow({
   icons = ICONS,
   onHover,
   onLeave,
+  onSelect,
   backdrop,
   innerRef,
 }: {
   icons?: typeof ICONS;
   onHover?: (i: number) => void;
   onLeave?: () => void;
+  onSelect?: (i: number) => void;
   backdrop: Backdrop;
   innerRef?: React.Ref<HTMLDivElement>;
 }) {
@@ -124,6 +210,7 @@ export function DockRow({
           className="dockIcon"
           style={{ background: icon.bg, color: icon.ink }}
           onPointerEnter={() => onHover?.(i)}
+          onClick={() => onSelect?.(i)}
         >
           {icon.glyph}
         </button>

@@ -548,6 +548,18 @@ main {
 .stageContent {
   position: relative;
 }
+.barLens {
+  display: block;
+}
+/* The bar on its own, with no substrate behind it. */
+.barOnly {
+  display: grid;
+  place-items: center;
+  padding: 34px 20px;
+}
+.barOnly .toggleWrap {
+  padding: 0;
+}
 .stageOverlay {
   position: absolute;
   inset: 0;
@@ -601,8 +613,29 @@ main {
   text-decoration: underline;
 }
 
-.subGrid {
+.subChart {
   height: 460px;
+}
+
+/* The library demo's own page background, straight out of its `.page` rule: a
+   55px ruled grid over two big radial glows. Nothing here darkens on top of the
+   ground — the base *is* the flat colour the picker names, and the only layers
+   over it are the rules and the two glows, so "White" really is white. */
+.gridBg {
+  --glow-1: 90rem 50rem;
+  --glow-2: 70rem 40rem;
+  background-color: var(--grid-base);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 55px, var(--grid-rule) 55px 56px),
+    repeating-linear-gradient(90deg, transparent 0 55px, var(--grid-rule) 55px 56px),
+    radial-gradient(var(--glow-1) at 80% -20%, var(--grid-glow-1), transparent 60%),
+    radial-gradient(var(--glow-2) at -10% 30%, var(--grid-glow-2), transparent 60%);
+}
+/* A gallery card is a fraction of the page's width, so the page-scale glows
+   would flatten into a single wash on it. Shrink them to keep the same falloff. */
+.presetBed.gridBg {
+  --glow-1: 26rem 16rem;
+  --glow-2: 20rem 12rem;
 }
 
 /* The flat field a UI bar sits on. The bar is transparent, so this is what the
@@ -1515,9 +1548,9 @@ input[type="range"]::-moz-range-thumb {
 
 /* ------------------------------------------------------------------ *
  * The upstream toggle — .toggleWrap / .toggle lifted verbatim from the
- * library's own demo, so this reads exactly as it does there. The only
- * change: the pill's fill comes from --toggle-bg (defaulting to the
- * original gradient) so the backdrop picker can swap it.
+ * library's own demo, so section 07 reads exactly as it does there. The
+ * playground's copies wear `.bare`: same bar, frosted and translucent,
+ * so the lens has the substrate itself to refract.
  * ------------------------------------------------------------------ */
 
 .toggleWrap {
@@ -1531,7 +1564,7 @@ input[type="range"]::-moz-range-thumb {
   padding: 6px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.09);
-  background: var(--toggle-bg, linear-gradient(120deg, #17171d, #101015));
+  background: linear-gradient(120deg, #17171d, #101015);
 }
 .toggle button {
   appearance: none;
@@ -1549,8 +1582,10 @@ input[type="range"]::-moz-range-thumb {
   color: #fff;
 }
 
-/* Transparent variant: no pill fill at all, so the lens refracts the flat
-   field behind the bar rather than a gradient of its own. */
+/* Frosted variant, worn by the bar on the playground stage and in the preset
+   gallery: no pill fill of its own, so the lens refracts the substrate straight
+   through the bar. Over a photo or a video `.stageOverlay` also gives it the
+   blur that makes it read as frosted glass rather than a floating outline. */
 .toggle.bare {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.18);
@@ -1560,17 +1595,6 @@ input[type="range"]::-moz-range-thumb {
   opacity: 0.62;
 }
 .toggle.bare button[aria-pressed="true"] {
-  opacity: 1;
-}
-
-/* Only a non-original fill re-inks the labels; the default pill above is
-   exactly the upstream one, down to the dim grey. */
-.toggle.tinted button {
-  color: var(--toggle-ink);
-  opacity: 0.62;
-}
-.toggle.tinted button[aria-pressed="true"] {
-  color: var(--toggle-ink);
   opacity: 1;
 }
 
