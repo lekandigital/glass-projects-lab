@@ -28,6 +28,8 @@ Use this file as the replay guide when moving the catalog to a new Vercel accoun
 | `liquid-glass-react-master/liquid-glass-example` | Next.js | `/Users/lekan/Dev/glass-projects-lab/liquid-glass-react-master/liquid-glass-example` | Vercel blocked `next@15.3.3` as vulnerable. Bumped to `next@16.2.10`, then deploy worked. Live alias: `https://glass-projects-lab-liquid-glass-exa.vercel.app/` |
 | `glass-refraction-master/examples/vanilla` | Static HTML/CSS/JS | `/Users/lekan/Dev/glass-projects-lab/glass-refraction-master/examples/vanilla` | This is a static page. The stylesheet link must point to `../../src/css/glass.css`. No generated CSS file was needed. |
 | `glass-refraction-master/examples/nextjs` | Next.js | Temporary demo folder used during deploy | The catalog points at `https://glass-projects-lab-glass-refraction.vercel.app/`. To reproduce from a fresh account, recreate a small Next app shell with the example `page.tsx` and shared glass components, then deploy that folder. |
+| `liquid-glass-web-react` | Vite | `/Users/lekan/Dev/glass-projects-lab/liquid-glass-web-react` | Added `vercel.json` to build the `demo/` folder (`vite build demo`). Live alias: `https://glass-projects-lab-liquid-glass-web-react.vercel.app/` |
+| `liquid-glass-showcase` (custom demo) | Vite | `/Users/lekan/Dev/glass-projects-lab/liquid-glass-showcase` | Custom full-API showcase for `liquid-glass-web-react`. Vercel project `glass-projects-lab-custom-demo`. Two gotchas: (1) locally Vite aliases the import to the sibling library's `src/`, but on Vercel only this folder is uploaded, so the alias falls away and the build resolves the published `liquid-glass-web-react@0.1.1` from `node_modules` — keep that dependency or the deploy breaks; (2) Vercel truncates a project's public `*.vercel.app` domain at 35 chars and puts longer aliases behind SSO, so the project name has to stay short. Live alias: `https://glass-projects-lab-custom-demo.vercel.app/` |
 | `glassmorphism-wpf-master` | Undeployable | N/A | Windows WPF project. Keep the catalog row greyed out with the `undeployable net` badge. |
 
 ## Other static catalog entries
@@ -61,6 +63,10 @@ vercel deploy --prod --yes
 
 # Liquid Glass React example
 cd /Users/lekan/Dev/glass-projects-lab/liquid-glass-react-master/liquid-glass-example
+vercel deploy --prod --yes
+
+# Liquid Glass Web React demo
+cd /Users/lekan/Dev/glass-projects-lab/liquid-glass-web-react
 vercel deploy --prod --yes
 ```
 

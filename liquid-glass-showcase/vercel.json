@@ -1,0 +1,5 @@
+{
+  "name": "glass-projects-lab-liquid-glass-showcase",
+  "buildCommand": "vite build",
+  "outputDirectory": "dist"
+}

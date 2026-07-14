@@ -1,0 +1,1726 @@
+/* ------------------------------------------------------------------ *
+ * Tokens
+ *
+ * The palette is deliberately achromatic. A lens is judged on geometry
+ * (does the grid bend cleanly?), on color fringing (is that red/blue
+ * split at the rim real?) and on specular light (is the highlight
+ * white?). A tinted backdrop hides all three — chromatic aberration in
+ * particular is invisible against a background that is already colored.
+ * So: neutral beds, neutral chrome, and color used only for controls.
+ * ------------------------------------------------------------------ */
+
+:root {
+  --radius: 18px;
+  --font: ui-sans-serif, -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0a0b0d;
+  --panel: rgba(255, 255, 255, 0.035);
+  --panel-solid: #101114;
+  --panel-hi: rgba(255, 255, 255, 0.07);
+  --line: rgba(255, 255, 255, 0.1);
+  --line-soft: rgba(255, 255, 255, 0.055);
+  --text: #eceef1;
+  --muted: rgba(236, 238, 241, 0.58);
+  --faint: rgba(236, 238, 241, 0.36);
+  --accent: #6ea8fe;
+  --accent-2: #e0a63c;
+  --lens-rim: rgba(255, 255, 255, 0.24);
+  --lens-shadow: rgba(0, 0, 0, 0.6);
+  --code-bg: rgba(255, 255, 255, 0.04);
+
+  /* Test beds: the surfaces the glass sits on. */
+  --bed-bg: #0b0c0f;
+  --bed-line: rgba(255, 255, 255, 0.2);
+  --bed-line-2: rgba(255, 255, 255, 0.09);
+  --bed-ink: #f4f6f8;
+  --bed-ink-soft: rgba(244, 246, 248, 0.66);
+  --bed-tile: #1a1c21;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f1f1ef;
+  --panel: rgba(255, 255, 255, 0.78);
+  --panel-solid: #ffffff;
+  --panel-hi: rgba(16, 18, 24, 0.05);
+  --line: rgba(16, 18, 24, 0.13);
+  --line-soft: rgba(16, 18, 24, 0.07);
+  --text: #14161a;
+  --muted: rgba(20, 22, 26, 0.62);
+  --faint: rgba(20, 22, 26, 0.42);
+  --accent: #2563c9;
+  --accent-2: #a06611;
+  --lens-rim: rgba(255, 255, 255, 0.8);
+  --lens-shadow: rgba(15, 18, 30, 0.22);
+  --code-bg: rgba(16, 18, 24, 0.045);
+
+  --bed-bg: #fbfbfa;
+  --bed-line: rgba(16, 18, 24, 0.22);
+  --bed-line-2: rgba(16, 18, 24, 0.09);
+  --bed-ink: #0f1114;
+  --bed-ink-soft: rgba(15, 17, 20, 0.62);
+  --bed-tile: #e6e6e4;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+/* A faint neutral vignette. No hue: nothing behind the glass should be
+   tinting the fringe you are trying to read. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(70vw 55vh at 50% -10%, rgba(255, 255, 255, 0.07), transparent 70%),
+    radial-gradient(60vw 50vh at 80% 100%, rgba(255, 255, 255, 0.04), transparent 70%);
+  pointer-events: none;
+}
+[data-theme="light"] body::before {
+  background:
+    radial-gradient(70vw 55vh at 50% -10%, rgba(255, 255, 255, 0.9), transparent 70%),
+    radial-gradient(60vw 50vh at 80% 100%, rgba(16, 18, 24, 0.05), transparent 70%);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+main {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px 120px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Reusable test surfaces
+ *
+ * .bed        — neutral ground
+ * .bed-grid   — fine engineering grid, the cheapest way to see the
+ *               distortion field
+ * .bed-chart  — grid + concentric rings + radial spokes: a lens chart.
+ *               Curvature, splay and depth are all legible on it.
+ * .bed-check  — checkerboard: hard luminance edges, so chromatic
+ *               aberration shows up as literal red/cyan fringes.
+ * ------------------------------------------------------------------ */
+
+.bed {
+  position: relative;
+  background-color: var(--bed-bg);
+  color: var(--bed-ink);
+  overflow: hidden;
+}
+
+.bed-grid::before,
+.bed-chart::before,
+.bed-check::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  pointer-events: none;
+}
+
+.bed-grid::before {
+  background-image:
+    linear-gradient(var(--bed-line-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bed-line-2) 1px, transparent 1px),
+    linear-gradient(var(--bed-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bed-line) 1px, transparent 1px);
+  background-size: 12px 12px, 12px 12px, 60px 60px, 60px 60px;
+}
+
+.bed-chart::before {
+  background-image:
+    /* radial spokes */
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      var(--bed-line-2) 0deg 1.2deg,
+      transparent 1.2deg 15deg
+    ),
+    /* concentric rings */
+      repeating-radial-gradient(
+        circle at 50% 50%,
+        transparent 0 44px,
+        var(--bed-line) 44px 45px
+      ),
+    /* fine grid */
+      linear-gradient(var(--bed-line-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bed-line-2) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 20px 20px, 20px 20px;
+}
+
+.bed-check::before {
+  background-image:
+    linear-gradient(45deg, var(--bed-tile) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--bed-tile) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--bed-tile) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--bed-tile) 75%);
+  background-size: 34px 34px;
+  background-position: 0 0, 0 17px, 17px -17px, -17px 0;
+}
+
+/* ------------------------------------------------------------------ *
+ * Topbar
+ * ------------------------------------------------------------------ */
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 28px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(14px) saturate(120%);
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+.brand:hover {
+  text-decoration: none;
+}
+
+.brandDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: linear-gradient(150deg, #fff, rgba(255, 255, 255, 0.15) 55%, transparent);
+  box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.25);
+}
+[data-theme="light"] .brandDot {
+  background: linear-gradient(150deg, #fff, #c9cacd);
+}
+
+.navLinks {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.navLinks a {
+  padding: 6px 11px;
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.navLinks a:hover {
+  background: var(--panel-hi);
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Theme switch */
+.themeSwitch {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.switchTrack {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 62px;
+  height: 32px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel-hi);
+}
+
+.switchIcon {
+  font-size: 13px;
+  line-height: 1;
+  color: var(--faint);
+  transition: color 0.3s ease;
+}
+[data-theme="light"] .switchIcon.sun,
+[data-theme="dark"] .switchIcon.moon {
+  color: var(--text);
+}
+
+.switchKnob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--text);
+  box-shadow: 0 2px 8px var(--lens-shadow);
+  transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+[data-theme="dark"] .switchKnob {
+  transform: translateX(30px);
+}
+
+/* ------------------------------------------------------------------ *
+ * Hero
+ * ------------------------------------------------------------------ */
+
+.hero {
+  padding: 76px 0 40px;
+}
+
+.heroInner {
+  position: relative;
+  padding: 44px 40px 52px;
+  border-radius: 32px;
+  border: 1px solid var(--line);
+  background-color: var(--panel-solid);
+  overflow: hidden;
+}
+/* The hero is itself a test surface — the floating lens has a grid to bend. */
+.heroInner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--line-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-soft) 1px, transparent 1px),
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 16px 16px, 16px 16px, 80px 80px, 80px 80px;
+  mask-image: radial-gradient(120% 120% at 70% 40%, #000 30%, transparent 100%);
+}
+
+.heroInner > * {
+  position: relative;
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel-hi);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.chipNote {
+  font-size: 12px;
+  color: var(--faint);
+  font-family: var(--mono);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot.chrome {
+  background: #4285f4;
+}
+.dot.safari {
+  background: #0fb5ee;
+}
+.dot.firefox {
+  background: #ff7139;
+}
+
+.hero h1 {
+  margin: 0 0 20px;
+  font-size: clamp(34px, 5.4vw, 62px);
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+  font-weight: 620;
+}
+.hero h1 span {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(19px, 2.4vw, 30px);
+  font-weight: 460;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+}
+
+.heroLede {
+  max-width: 640px;
+  margin: 0 0 30px;
+  font-size: 16.5px;
+  line-height: 1.62;
+  color: var(--muted);
+}
+.heroLede code {
+  color: var(--text);
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+
+.heroCta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.install {
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--code-bg);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.ghost {
+  padding: 11px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel-hi);
+  color: var(--text);
+  font: inherit;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.ghost:hover {
+  background: var(--panel);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.heroHint {
+  margin: 28px 0 0;
+  font-size: 13px;
+  color: var(--faint);
+  font-family: var(--mono);
+}
+
+/* Grip: an invisible puck sitting exactly on the lens. */
+.gripWrap {
+  position: relative;
+}
+.grip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: grab;
+  touch-action: none;
+  z-index: 3;
+}
+.grip.dragging {
+  cursor: grabbing;
+}
+
+/* ------------------------------------------------------------------ *
+ * Sections
+ * ------------------------------------------------------------------ */
+
+.section {
+  padding: 74px 0 10px;
+}
+
+.sectionHead {
+  max-width: 720px;
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section h2 {
+  margin: 0 0 12px;
+  font-size: clamp(26px, 3.4vw, 38px);
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.lede {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.lede code {
+  color: var(--text);
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Playground
+ * ------------------------------------------------------------------ */
+
+.playGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 22px;
+  align-items: start;
+}
+
+.stageBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.stageNote {
+  font-size: 12.5px;
+  color: var(--faint);
+}
+
+.stage {
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel-solid);
+  overflow: hidden;
+}
+
+.stageGlass {
+  display: block;
+}
+
+/* A UI bar laid over the substrate, both inside the filter. The bar itself is
+   transparent, so the lens crosses bar and background in one pass. */
+.stageContent {
+  position: relative;
+}
+.stageOverlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none; /* the lens above still takes the drag */
+}
+.stageOverlay > * {
+  pointer-events: auto;
+}
+.stageOverlay .toggleWrap {
+  padding: 0;
+}
+/* Over a photo or video the bar needs a floor to read against. */
+.stageOverlay .toggle,
+.stageOverlay .tabBar,
+.stageOverlay .dock {
+  backdrop-filter: blur(2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Substrates */
+.sub {
+  display: block;
+  width: 100%;
+  height: 460px;
+  object-fit: cover;
+}
+
+/* Type: high-contrast, no tint. Text is the hardest thing for a lens to
+   distort convincingly, so it gets a clean sheet. */
+.subType {
+  height: 460px;
+  padding: 46px 52px;
+  overflow: hidden;
+}
+.subType h3 {
+  margin: 0 0 16px;
+  font-size: 27px;
+  letter-spacing: -0.02em;
+}
+.subType p {
+  margin: 0 0 14px;
+  font-size: 17px;
+  line-height: 1.62;
+  max-width: 62ch;
+  color: var(--bed-ink-soft);
+}
+.subType a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.subGrid {
+  height: 460px;
+}
+
+/* The flat field a UI bar sits on. The bar is transparent, so this is what the
+   lens actually refracts — and what the swatches recolour. */
+.flatBed {
+  display: grid;
+  place-items: center;
+  padding: 30px 24px;
+  border-radius: 20px;
+  background: var(--flat);
+  color: var(--flat-ink);
+}
+
+.subCanvas {
+  width: 100%;
+  height: 460px;
+  background: var(--bed-bg);
+}
+
+/* A neutral UI. The only saturated things on it are the traffic lights —
+   which conveniently make good little chromatic-aberration probes. */
+.subApp {
+  height: 460px;
+  padding: 0;
+}
+.appBar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.appDot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.appDot.r {
+  background: #ff5f57;
+}
+.appDot.y {
+  background: #febc2e;
+}
+.appDot.g {
+  background: #28c840;
+}
+.appTitle {
+  margin-left: 10px;
+  font-size: 12.5px;
+  color: var(--bed-ink-soft);
+  font-family: var(--mono);
+}
+.appBody {
+  position: relative;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  height: calc(100% - 44px);
+}
+.appNav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 12px;
+  border-right: 1px solid var(--line);
+}
+.appNav button {
+  text-align: left;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--bed-ink-soft);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+.appNav button:hover {
+  background: var(--panel-hi);
+}
+.appNav button.on {
+  background: var(--bed-tile);
+  color: var(--bed-ink);
+}
+.appMain {
+  padding: 26px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.appStat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.appStat span {
+  font-size: 13px;
+  color: var(--bed-ink-soft);
+}
+.appStat strong {
+  font-size: 38px;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.appBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 190px;
+}
+.appBars i {
+  flex: 1;
+  border-radius: 5px 5px 2px 2px;
+  background: linear-gradient(180deg, var(--bed-ink), var(--bed-tile));
+  opacity: 0.9;
+}
+
+/* Readout strip */
+.readout {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+.readoutItem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  font-size: 12px;
+}
+.readoutItem span {
+  color: var(--faint);
+  font-family: var(--mono);
+}
+.readoutItem code {
+  color: var(--text);
+}
+.mapChip {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  image-rendering: pixelated;
+}
+
+/* Controls column */
+.controlCol {
+  position: sticky;
+  top: 78px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+}
+
+.presetGroup {
+  margin-bottom: 14px;
+}
+.presetGroup h4 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 600;
+}
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.preset {
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel-hi);
+  color: var(--text);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.preset:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+/* Whichever preset the stage is currently wearing. */
+.preset.on {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
+}
+.preset.on:hover {
+  color: var(--bg);
+}
+
+/* Presets that reproduce a lens used elsewhere on the page. */
+.preset.demo {
+  background: transparent;
+  border-style: dashed;
+  color: var(--muted);
+}
+.preset.demo:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.controlGroup {
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid var(--line-soft);
+}
+.controlGroup:first-of-type {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+.controlGroup h4 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 600;
+}
+
+.range {
+  display: block;
+  margin-bottom: 11px;
+}
+.rangeTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.rangeLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  color: var(--text);
+}
+.range output {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.cost {
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+.cost.map {
+  background: color-mix(in srgb, var(--accent-2) 20%, transparent);
+  color: var(--accent-2);
+}
+.cost.filter {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--accent);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 99px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0 var(--fill, 50%),
+    var(--panel-hi) var(--fill, 50%) 100%
+  );
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--text);
+  border: 2px solid var(--bg);
+  box-shadow: 0 1px 6px var(--lens-shadow);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  background: var(--text);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.check input {
+  accent-color: var(--accent);
+}
+
+.field {
+  margin: 14px 0;
+}
+.fieldLabel {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+.radiusRow {
+  margin-bottom: 8px;
+}
+
+/* Segmented control (the plain CSS one, used in the chrome) */
+.segmented {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--panel-hi);
+  flex-wrap: wrap;
+}
+.segmented button {
+  padding: 6px 11px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.segmented button:hover {
+  color: var(--text);
+}
+.segmented button.on {
+  background: var(--text);
+  color: var(--bg);
+}
+
+/* Code blocks */
+.codeWrap {
+  position: relative;
+  margin-top: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--code-bg);
+  overflow: hidden;
+}
+.codeWrap pre {
+  margin: 0;
+  padding: 16px 18px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text);
+}
+.copyBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 9px;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  background: var(--panel-solid);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  cursor: pointer;
+}
+.copyBtn:hover {
+  color: var(--text);
+}
+
+/* Preset gallery — all of them, side by side */
+.presetRowHead {
+  margin: 46px 0 18px;
+  max-width: 720px;
+}
+.presetRowHead h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.galleryGroup {
+  margin: 26px 0 12px;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  font-weight: 600;
+}
+
+.presetRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+}
+
+.presetCard {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  overflow: hidden;
+}
+.presetBed {
+  height: 210px;
+}
+/* Demo lenses sit on the real thing — a tab row, a dock, a line of text —
+   on the flat backdrop the swatches pick. */
+.rowBed {
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: var(--flat);
+  color: var(--flat-ink);
+}
+.rowBed .toggleWrap {
+  padding: 0;
+}
+.presetPhoto {
+  width: 100%;
+  object-fit: cover;
+}
+.textBed p {
+  margin: 0;
+  max-width: 22ch;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.55;
+  color: inherit;
+}
+/* A tab row or a dock is wider than a gallery column — give them two. */
+.presetCard.live {
+  grid-column: span 2;
+}
+.presetCard.live .presetBed {
+  height: 230px;
+}
+@media (max-width: 700px) {
+  .presetCard.live {
+    grid-column: span 1;
+  }
+}
+.presetCard figcaption {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 15px 15px;
+  border-top: 1px solid var(--line-soft);
+  flex: 1;
+}
+.presetCard .primNote {
+  font-size: 12.5px;
+}
+
+.loadBtn {
+  flex: none;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel-hi);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  cursor: pointer;
+}
+.loadBtn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ------------------------------------------------------------------ *
+ * Map inspector
+ * ------------------------------------------------------------------ */
+
+.mapRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.mapCard {
+  margin: 0;
+  padding: 14px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.mapCard canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 1px solid var(--line-soft);
+  image-rendering: pixelated;
+}
+.mapCard canvas.checker {
+  background-image:
+    linear-gradient(45deg, var(--panel-hi) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--panel-hi) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--panel-hi) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--panel-hi) 75%);
+  background-size: 14px 14px;
+  background-position: 0 0, 0 7px, 7px -7px, -7px 0;
+}
+.mapCard figcaption {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mapCard strong {
+  font-size: 13px;
+  font-family: var(--mono);
+  font-weight: 500;
+}
+.mapCard span {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.mapActions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* ------------------------------------------------------------------ *
+ * Shapes
+ * ------------------------------------------------------------------ */
+
+.shapeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.shapeCard {
+  margin: 0;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.shapeBed {
+  height: 230px;
+  display: grid;
+  place-items: center;
+}
+.shapeBedText {
+  position: relative;
+  font-family: var(--mono);
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--bed-ink);
+  text-indent: 0.3em;
+}
+
+.shapeCard figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 13px 16px 15px;
+  border-top: 1px solid var(--line-soft);
+}
+.shapeCard strong {
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.shapeCard code {
+  font-size: 11.5px;
+  color: var(--faint);
+}
+
+/* ------------------------------------------------------------------ *
+ * Motion
+ * ------------------------------------------------------------------ */
+
+.motionGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 22px;
+  align-items: start;
+}
+
+.orbitBed {
+  height: 420px;
+  display: grid;
+  place-items: center;
+  padding: 60px;
+}
+.orbitBed p {
+  position: relative;
+  max-width: 46ch;
+  margin: 0;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--bed-ink);
+  background: color-mix(in srgb, var(--bed-bg) 72%, transparent);
+  padding: 14px 18px;
+  border-radius: 12px;
+}
+
+.motionSide {
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.meters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 16px 0;
+}
+.meter {
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel-hi);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.meter span {
+  font-size: 11px;
+  color: var(--faint);
+  font-family: var(--mono);
+}
+.meter strong {
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.meter em {
+  font-style: normal;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.meter.good strong {
+  color: #3fa96b;
+}
+.meter.bad strong {
+  color: #d8564f;
+}
+
+/* ------------------------------------------------------------------ *
+ * Engine
+ * ------------------------------------------------------------------ */
+
+.engineGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 22px;
+  align-items: start;
+}
+
+.engineStage {
+  cursor: grab;
+  touch-action: none;
+}
+.engineStage:active {
+  cursor: grabbing;
+}
+
+.engineBed {
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px;
+  text-align: center;
+}
+.engineBed h3 {
+  position: relative;
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--bed-ink);
+}
+.engineBed p {
+  position: relative;
+  margin: 0;
+  font-size: 14px;
+  color: var(--bed-ink-soft);
+}
+
+.engineGone {
+  height: 380px;
+  display: grid;
+  place-items: center;
+  padding: 40px;
+}
+.engineGone p {
+  max-width: 46ch;
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.engineSide {
+  padding: 18px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.engineSide .ghost {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Primitives
+ * ------------------------------------------------------------------ */
+
+.primGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.primCard {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 30px 26px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.primCard.wide {
+  grid-column: 1 / -1;
+}
+
+.primNote {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.primNote strong {
+  color: var(--text);
+}
+.primNote code {
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 5px;
+  color: var(--text);
+}
+
+/* Flat backdrop picker */
+.backdropBar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.backdropBar .fieldLabel {
+  margin: 0;
+}
+.swatches {
+  display: flex;
+  gap: 6px;
+}
+.swatch {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.swatch:hover {
+  transform: translateY(-1px);
+}
+.swatch.on {
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+}
+
+/* tab bar under the segmented lens. The bar itself is transparent: the flat
+   field it sits on (.rowBed / .flatBed) is what the swatches colour, and what
+   the lens refracts. */
+.tabBar {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--flat-ink, var(--bed-ink));
+}
+.tabBar button {
+  position: relative;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.72;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.tabBar button[aria-pressed="true"] {
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* dock — flat saturated tiles on a flat tray. No gradients anywhere: every
+   highlight inside the lens is then unambiguously the specular pass, and the
+   hard color boundaries make the chromatic fringe obvious as the glass crosses
+   from one tile to the next. */
+.dock {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 18px;
+  border-radius: 24px;
+  background: transparent;
+}
+.dockIcon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+.dockIcon:hover {
+  transform: translateY(-2px);
+}
+
+/* reading glass */
+.readBed {
+  padding: 44px 46px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+}
+.readBed p {
+  position: relative;
+  margin: 0;
+  max-width: 70ch;
+  font-size: 18px;
+  line-height: 1.66;
+  color: var(--bed-ink);
+}
+.readBed a,
+.readBed strong {
+  color: inherit;
+}
+
+/* nested lenses */
+.nestBed img {
+  display: block;
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 14px;
+  filter: saturate(1.15) contrast(1.05);
+}
+
+/* ------------------------------------------------------------------ *
+ * The upstream toggle — .toggleWrap / .toggle lifted verbatim from the
+ * library's own demo, so this reads exactly as it does there. The only
+ * change: the pill's fill comes from --toggle-bg (defaulting to the
+ * original gradient) so the backdrop picker can swap it.
+ * ------------------------------------------------------------------ */
+
+.toggleWrap {
+  display: flex;
+  justify-content: center;
+  padding: 26px 0 6px;
+}
+.toggle {
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: var(--toggle-bg, linear-gradient(120deg, #17171d, #101015));
+}
+.toggle button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: #8d8d97; /* upstream --fg-dim */
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 10px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 160ms ease, opacity 160ms ease;
+}
+.toggle button[aria-pressed="true"] {
+  color: #fff;
+}
+
+/* Transparent variant: no pill fill at all, so the lens refracts the flat
+   field behind the bar rather than a gradient of its own. */
+.toggle.bare {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+.toggle.bare button {
+  color: var(--flat-ink, var(--bed-ink));
+  opacity: 0.62;
+}
+.toggle.bare button[aria-pressed="true"] {
+  opacity: 1;
+}
+
+/* Only a non-original fill re-inks the labels; the default pill above is
+   exactly the upstream one, down to the dim grey. */
+.toggle.tinted button {
+  color: var(--toggle-ink);
+  opacity: 0.62;
+}
+.toggle.tinted button[aria-pressed="true"] {
+  color: var(--toggle-ink);
+  opacity: 1;
+}
+
+@media (max-width: 560px) {
+  .toggle {
+    gap: 2px;
+    padding: 5px;
+  }
+  .toggle button {
+    padding: 9px 11px;
+    font-size: 0.78rem;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Reference
+ * ------------------------------------------------------------------ */
+
+.refGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 22px;
+  align-items: start;
+}
+
+.tableWrap {
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+th {
+  text-align: left;
+  padding: 13px 16px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--line-soft);
+  vertical-align: top;
+}
+tr:last-child td {
+  border-bottom: 0;
+}
+td code {
+  white-space: nowrap;
+}
+
+.refSide {
+  padding: 20px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+.refSide h4 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.refSide h4:not(:first-child) {
+  margin-top: 26px;
+}
+
+.exportList,
+.warnList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.exportList li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.exportList code {
+  font-size: 12.5px;
+  color: var(--accent);
+}
+.exportList span,
+.warnList li {
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.warnList li {
+  padding-left: 12px;
+  border-left: 2px solid var(--line);
+}
+.warnList strong {
+  color: var(--text);
+}
+
+/* ------------------------------------------------------------------ *
+ * Footer
+ * ------------------------------------------------------------------ */
+
+.footer {
+  margin-top: 90px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+.footer p {
+  margin: 0 0 6px;
+}
+
+/* ------------------------------------------------------------------ *
+ * Narrow screens
+ * ------------------------------------------------------------------ */
+
+@media (max-width: 1000px) {
+  .playGrid,
+  .motionGrid,
+  .engineGrid,
+  .refGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .controlCol {
+    position: static;
+    max-height: none;
+  }
+  .primGrid {
+    grid-template-columns: 1fr;
+  }
+  .navLinks {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
+}
