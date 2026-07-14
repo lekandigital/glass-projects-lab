@@ -36,14 +36,57 @@ export type { FlattenedContainer } from './interaction'
 /** Typed GPU buffer used for glass content atlas entries. */
 type ContentDataBuffer = GpuStructArrayBuffer<GpuStructDefinition<typeof ContentDataLayout>>
 
+type GPUCopyElementImageSource = {
+  source: Element
+}
+
+type GPUCopyElementImageDestination = {
+  destination: {
+    texture: GPUTexture
+  }
+  width: number
+  height: number
+}
+
 /** Chrome's experimental queue extension for copying DOM elements to textures. */
 type GPUQueueWithElementCopy = GPUQueue & {
   copyElementImageToTexture: (
-    source: Element,
-    width: number,
-    height: number,
-    destination: { texture: GPUTexture; origin?: { x: number; y: number; z?: number } },
+    source: GPUCopyElementImageSource,
+    destination: GPUCopyElementImageDestination,
   ) => void
+}
+
+type ElementCopyResult = 'copied' | 'retry' | 'failed'
+
+export function copyElementImageToTextureSafe(
+  queue: GPUQueue,
+  element: Element,
+  width: number,
+  height: number,
+  texture: GPUTexture,
+): ElementCopyResult {
+  try {
+    ;(queue as GPUQueueWithElementCopy).copyElementImageToTexture(
+      { source: element },
+      {
+        destination: { texture },
+        width,
+        height,
+      },
+    )
+    return 'copied'
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'InvalidStateError') {
+      return 'retry'
+    }
+
+    console.error(error)
+    if (error instanceof TypeError) {
+      window.dispatchEvent(new Event('liquid-dom-unsupported-error'))
+    }
+
+    return 'failed'
+  }
 }
 
 /** Paint event payload emitted by canvas layout subtree updates. */
@@ -842,26 +885,31 @@ export class DomContentSync {
     let copiedAll = true
     let copiedAny = false
     for (const entry of this.sceneHtmlEntries.values()) {
+      if (entry.copyFailed) {
+        continue
+      }
+
       if (!entry.texture) {
         copiedAll = false
         continue
       }
 
-      try {
-        ;(this.device.queue as GPUQueueWithElementCopy).copyElementImageToTexture(
-          entry.html.host,
-          entry.deviceWidth,
-          entry.deviceHeight,
-          { texture: entry.texture },
-        )
+      const result = copyElementImageToTextureSafe(
+        this.device.queue,
+        entry.html.host,
+        entry.deviceWidth,
+        entry.deviceHeight,
+        entry.texture,
+      )
+
+      if (result === 'copied') {
         entry.copiedDeviceWidth = entry.deviceWidth
         entry.copiedDeviceHeight = entry.deviceHeight
         copiedAny = true
-      } catch (error) {
+      } else if (result === 'retry') {
         copiedAll = false
-        if (!(error instanceof DOMException && error.name === 'InvalidStateError')) {
-          console.error(error)
-        }
+      } else if (result === 'failed') {
+        entry.copyFailed = true
       }
     }
 
@@ -939,26 +987,31 @@ export class DomContentSync {
     let copiedAll = true
     let copiedAny = false
     for (const entry of this.glassContentOrder) {
+      if (entry.copyFailed) {
+        continue
+      }
+
       if (!entry.sourceTexture) {
         copiedAll = false
         continue
       }
 
-      try {
-        ;(this.device.queue as GPUQueueWithElementCopy).copyElementImageToTexture(
-          entry.html.host,
-          entry.deviceWidth,
-          entry.deviceHeight,
-          { texture: entry.sourceTexture },
-        )
+      const result = copyElementImageToTextureSafe(
+        this.device.queue,
+        entry.html.host,
+        entry.deviceWidth,
+        entry.deviceHeight,
+        entry.sourceTexture,
+      )
+
+      if (result === 'copied') {
         entry.copiedDeviceWidth = entry.deviceWidth
         entry.copiedDeviceHeight = entry.deviceHeight
         copiedAny = true
-      } catch (error) {
+      } else if (result === 'retry') {
         copiedAll = false
-        if (!(error instanceof DOMException && error.name === 'InvalidStateError')) {
-          console.error(error)
-        }
+      } else if (result === 'failed') {
+        entry.copyFailed = true
       }
     }
 

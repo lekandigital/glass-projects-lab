@@ -50,7 +50,10 @@ pnpm -r build
 pnpm --filter @liquid-dom/layout test
 pnpm --filter @liquid-dom/core test
 pnpm --filter @liquid-dom/react test
+pnpm dev:showcase
 ```
+
+To run the showcase locally, WebGPU must be available. Additionally, Chrome's experimental HTML-in-Canvas API must be enabled via the `chrome://flags/#canvas-draw-element` flag. Make sure to fully restart Chrome after changing this flag.
 
 Use the package READMEs for package-level build and test commands.
 

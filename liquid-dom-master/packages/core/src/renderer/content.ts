@@ -17,6 +17,7 @@ export type GlassContentEntry = {
   deviceHeight: number
   copiedDeviceWidth: number
   copiedDeviceHeight: number
+  copyFailed?: boolean
   sourceTexture: GPUTexture | null
   sourceTextureWidth: number
   sourceTextureHeight: number
