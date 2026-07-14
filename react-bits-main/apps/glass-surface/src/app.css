@@ -1,0 +1,236 @@
+/* GlassSurface reads the pixels behind it via backdrop-filter, so light-dark() in its own
+   stylesheet resolves against this. The page commits to dark, which is what the upstream
+   demo does too. */
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root,
+.root {
+  height: 100%;
+  margin: 0;
+  background: #060010;
+  color: #fff;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.switcher {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgb(0 0 0 / 45%);
+  border: 1px solid rgb(255 255 255 / 18%);
+  backdrop-filter: blur(8px);
+}
+
+.switcher button {
+  padding: 8px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.switcher button.on {
+  background: #fff;
+  color: #111;
+}
+
+/* Ported verbatim from react-bits' src/css/category.css so the scroll example lays out
+   exactly as the upstream preview does. */
+.demo-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #dcd7e6;
+}
+
+/* ── scroll example ────────────────────────────────────────────────────── */
+
+/* Mirrors the upstream Flex: absolute, full-width, column, gap 4rem (Chakra gap={16}). */
+.scroll__flow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+}
+
+.scroll__hint {
+  position: absolute;
+  top: 3em;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  font-size: 2.6rem;
+  font-weight: 900;
+  white-space: nowrap;
+  color: #2f293a;
+  z-index: 0;
+}
+
+.spacer {
+  height: 240px;
+  width: 100%;
+  flex: none;
+}
+
+.card {
+  position: relative;
+  margin: 0;
+  flex: none;
+}
+
+.card img {
+  width: 500px;
+  max-width: 90vw;
+  border-radius: 20px;
+  object-fit: cover;
+  filter: grayscale(100%);
+  display: block;
+}
+
+.card figcaption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 300px;
+  text-align: center;
+  line-height: 1;
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff;
+  mix-blend-mode: overlay;
+  z-index: 5;
+}
+
+/* ── landing example ───────────────────────────────────────────────────── */
+
+.landing {
+  position: absolute;
+  inset: 0;
+}
+
+.landing__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.landing__nav {
+  position: absolute;
+  top: 2em;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+/* Ported verbatim from react-bits' src/css/misc.css. */
+.custom-glass-surface {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: inherit;
+}
+
+.custom-glass-surface .glass-surface__content {
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.landing__links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.landing__burger {
+  display: none;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .landing__links {
+    display: none;
+  }
+  .landing__burger {
+    display: flex;
+  }
+}
+
+.landing__hero {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.landing__hero h1 {
+  margin: 16px 0 0;
+  max-width: 18ch;
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  line-height: 1.2;
+  letter-spacing: -2px;
+  text-shadow: 0 0 16px rgb(0 0 0 / 50%);
+}
+
+.landing__cta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.landing__cta .solid {
+  padding: 12px 40px;
+  border: 0;
+  border-radius: 50px;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.2s ease;
+}
+
+.landing__cta .solid:hover {
+  transform: translateY(-1px);
+}

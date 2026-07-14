@@ -1,26 +1,23 @@
 {
-  "name": "react-bits-fluid-glass",
+  "name": "react-bits-glass-surface-showcase",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run check:vendor && vite build",
+    "build": "npm run check:vendor && tsc --noEmit && vite build",
     "preview": "vite preview",
-    "check:vendor": "node scripts/check-vendor.mjs"
+    "check:vendor": "node scripts/check-vendor.mjs",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@react-three/drei": "^10.7.4",
-    "@react-three/fiber": "^9.3.0",
-    "maath": "^0.10.8",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "three": "^0.180.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/three": "^0.180.0",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.7.3",
     "vite": "^5.4.11"

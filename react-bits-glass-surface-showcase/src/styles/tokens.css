@@ -1,0 +1,84 @@
+/* Neutral surfaces everywhere. Colour is reserved for controls and cost badges — the
+   glass is what you're meant to be judging, and a tinted chrome would compete with the
+   chromatic aberration. */
+
+:root {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, monospace;
+
+  --step--1: clamp(0.75rem, 0.72rem + 0.15vw, 0.82rem);
+  --step-0: clamp(0.875rem, 0.85rem + 0.15vw, 0.94rem);
+  --step-1: clamp(1.05rem, 0.98rem + 0.35vw, 1.25rem);
+  --step-2: clamp(1.35rem, 1.2rem + 0.75vw, 1.9rem);
+  --step-3: clamp(1.9rem, 1.5rem + 2vw, 3.2rem);
+
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 16px;
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 72px;
+
+  --noise-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='128' height='128' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+
+  --accent: #5227ff; /* FluidGlass's own hardcoded clear colour. */
+  --ok: #12855f;
+  --warn: #a35a00;
+  --hot: #b52c4a;
+  --info: #1f5fa8;
+}
+
+:root,
+:root[data-theme='light'] {
+  --bg: #f4f4f5;
+  --bg-sunken: #e8e8ec;
+  --surface: #ffffff;
+  --surface-2: #fafafb;
+  --border: #d9d9e0;
+  --border-strong: #b9b9c4;
+  --text: #16161a;
+  --text-dim: #5c5c68;
+  --text-faint: #8a8a96;
+  --code-bg: #16161a;
+  --code-text: #e6e6ea;
+  --shadow: 0 1px 2px rgb(0 0 0 / 6%), 0 8px 24px -12px rgb(0 0 0 / 18%);
+
+  --badge-remount-bg: #fdeaee;
+  --badge-remount-fg: #8f1f38;
+  --badge-recompile-bg: #fdf1e3;
+  --badge-recompile-fg: #7d4400;
+  --badge-uniform-bg: #e6f4ee;
+  --badge-uniform-fg: #0d6349;
+  --badge-perframe-bg: #e8effa;
+  --badge-perframe-fg: #1a4a80;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0d0d10;
+  --bg-sunken: #08080a;
+  --surface: #161619;
+  --surface-2: #1c1c20;
+  --border: #2b2b31;
+  --border-strong: #3d3d45;
+  --text: #ededf0;
+  --text-dim: #a0a0ac;
+  --text-faint: #70707c;
+  --code-bg: #08080a;
+  --code-text: #d7d7dd;
+  --shadow: 0 1px 2px rgb(0 0 0 / 40%), 0 12px 32px -16px rgb(0 0 0 / 70%);
+
+  --badge-remount-bg: #3a1621;
+  --badge-remount-fg: #ff9db2;
+  --badge-recompile-bg: #382512;
+  --badge-recompile-fg: #ffc078;
+  --badge-uniform-bg: #10382b;
+  --badge-uniform-fg: #6fe0b6;
+  --badge-perframe-bg: #17293f;
+  --badge-perframe-fg: #8dbdf5;
+}

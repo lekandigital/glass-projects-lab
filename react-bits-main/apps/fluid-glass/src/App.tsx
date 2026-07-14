@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FluidGlass from '@react-bits/Components/FluidGlass/FluidGlass';
+import FluidGlass from '@lib/FluidGlass';
 
 type Mode = 'lens' | 'bar' | 'cube';
 

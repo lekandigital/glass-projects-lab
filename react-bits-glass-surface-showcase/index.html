@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GlassSurface — exhaustive demo</title>
+    <meta
+      name="description"
+      content="Every prop, the generated displacement map, the filter graph, and the browser gate of the react-bits GlassSurface component, in one page."
+    />
+    <script>
+      // Applied before first paint so the page never flashes the wrong theme. GlassSurface's
+      // own CSS uses light-dark(), so color-scheme has to be right before it mounts.
+      (() => {
+        const stored = localStorage.getItem('gs-theme');
+        const theme = stored ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
