@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,body {
+    height: 100%;
+}
+body {
+    container: ratio / size;
+    background: black;
+    color: white;
+    font-size: 5rem;
+    padding: 16px;
+}
+
+div {
+    margin: 0 auto;
+    width: min(960px, 100%);
+}
+
+img {
+    width: 100%;
+}
+
+h1 {
+    text-wrap: balance;
+    text-align: center;
+}
+
+svg {
+    position: fixed;
+    top: -10000px;
+}
+#lens-map {
+    width: 0;
+}
+
+@property --angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+#lens {
+    --angle: 0deg;
+    --x: calc(50% + 40% * cos(var(--angle)));
+    --y: calc(50% + 40% * sin(var(--angle)));
+    position: fixed;
+    left: var(--x);
+    top: var(--y);
+    width: 200px;
+    aspect-ratio: 1 / 1;
+    transform: translate(-50%, -50%);
+    cursor: none;
+    animation: 10s linear infinite move;
+    backdrop-filter: url(#drop);
+    border-radius: 50%;
+    box-shadow: inset 0 0 20px #3F51B5;
+    mix-blend-mode: exclusion;
+}
+
+@keyframes move {
+    0% {
+        --angle: 0deg;
+    }
+    100% {
+        --angle: 359deg;
+    }
+}
+
+@container ratio (aspect-ratio < 1) {
+  div {
+    flex-direction: column;
+  }
+}

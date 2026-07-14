@@ -1,4 +1,5 @@
 {
+  "name": "glass-projects-lab-blending",
   "buildCommand": "pnpm --filter blending... build",
   "outputDirectory": "dist"
 }

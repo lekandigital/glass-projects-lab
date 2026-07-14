@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>LiquidGlassAiAttempt</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!-- SVG Filter Definitions -->
+<svg class="svg-filters" xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        <!-- Filter for the Menu Panel (Subtle Edge Pinch) -->
+        <filter id="edge-refraction">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="edge_blur" />
+            <feDisplacementMap in="SourceGraphic" in2="edge_blur" scale="8" xChannelSelector="A" yChannelSelector="A" />
+        </filter>
+
+        <!-- Filter for the Buttons (Strong Liquid Distortion) -->
+        <filter id="liquid-lens-distortion">
+            <feTurbulence type="fractalNoise" baseFrequency="0.01 0.03" numOctaves="1" result="warp" />
+            <feDisplacementMap xChannelSelector="R" yChannelSelector="G" scale="50" in="SourceGraphic" in2="warp" />
+        </filter>
+    </defs>
+</svg>
+
+<!-- The trigger button -->
+<div id="menu-trigger" class="liquid-lens">Show Controls</div>
+
+<!-- The main menu panel -->
+<div id="glass-menu" class="edge-lens">
+    <div class="menu-handle"></div>
+    <div class="menu-controls">
+        <div class="menu-button liquid-lens">Activate</div>
+        <div class="menu-button liquid-lens">Settings</div>
+        <div class="menu-button liquid-lens">Profile</div>
+    </div>
+    <div class="slider-group">
+        <label for="brightness-slider">Brightness: <span id="brightness-value">50</span></label>
+        <input type="range" id="brightness-slider" min="0" max="100" value="50">
+    </div>
+    <div class="slider-group">
+         <label for="volume-slider">Volume: <span id="volume-value">75</span></label>
+        <input type="range" id="volume-slider" min="0" max="100" value="75">
+    </div>
+</div>
+
+<!-- Background content -->
+<div class="content-container">
+    <h1>Layered Glass Effects</h1>
+    <p>This version implements a two-tiered glass system. The main menu panel acts as a base layer of glass with a very subtle refraction that primarily distorts its rounded edges. The buttons and slider thumbs on top are thicker "lenses" with a much stronger, more pronounced liquid distortion effect. This creates a clear visual hierarchy and a realistic sense of depth.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam scelerisque, urna eget accumsan aliquet, tortor ex tincidunt lorem, vitae tempor nunc nisl eu turpis. Phasellus vitae tellus sed libero commodo feugiat. Integer ut quam et eros bibendum consequat. Sed vel enim sit amet nulla rhoncus pulvinar. Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Cras ultricies ligula sed magna dictum porta.</p>
+    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Curabitur aliquet quam id dui posuere blandit. Nulla quis lorem ut libero malesuada feugiat. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Donec sollicitudin molestie malesuada. Pellentesque in ipsum id orci porta dapibus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
+    <p>Nulla porttitor accumsan tincidunt. Vivamus suscipit tortor eget felis porttitor volutpat. Proin eget tortor risus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Pellentesque in ipsum id orci porta dapibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras ultricies ligula sed magna dictum porta. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p>
+</div>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
