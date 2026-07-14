@@ -1,0 +1,15 @@
+{
+  "name": "web-glass-effect-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.18.0",
+  "scripts": {
+    "dev:demo": "pnpm -r --parallel --filter @creatorem/web-glass-effect --filter @creatorem/next-demo dev",
+    "storybook": "pnpm --filter @creatorem/web-glass-effect storybook",
+    "test": "pnpm --filter @creatorem/web-glass-effect test",
+    "test:watch": "pnpm --filter @creatorem/web-glass-effect test:watch",
+    "build": "pnpm -r --filter @creatorem/web-glass-effect --filter @creatorem/next-demo build",
+    "typecheck": "pnpm -r --filter @creatorem/web-glass-effect --filter @creatorem/next-demo typecheck",
+    "verify": "pnpm typecheck && pnpm test && pnpm build"
+  }
+}
