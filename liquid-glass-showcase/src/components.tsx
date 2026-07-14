@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useTheme } from "./theme";
+import { gridVars, type GridTint } from "./rows";
 
 /* ------------------------------------------------------------------ *
  * Section chrome
@@ -35,14 +36,15 @@ export function Section({
  * interactive under the glass — text selects, links click, video plays.
  * ------------------------------------------------------------------ */
 
-export const SUBSTRATES = ["photo", "type", "interface", "grid", "video", "canvas"] as const;
+export const SUBSTRATES = ["photo", "type", "interface", "chart", "grid", "video", "canvas"] as const;
 export type Substrate = (typeof SUBSTRATES)[number];
 
 export const SUBSTRATE_NOTE: Record<Substrate, string> = {
   photo: "A plain <img>. The real-world case — and the only colored one.",
   type: "Real text — try selecting it through the lens.",
   interface: "A live UI. The buttons under the glass still click.",
-  grid: "A lens chart: rings, spokes, grid. Read curvature, splay and depth straight off it.",
+  chart: "A lens chart: rings, spokes, grid. Read curvature, splay and depth straight off it.",
+  grid: "The demo's own page background — a ruled grid under two soft glows. Pick the glow color.",
   video: "An autoplaying <video>. Works in Chrome/Firefox; Safari can't route video through SVG filters.",
   canvas: "A <canvas> repainting every frame, refracted live.",
 };
@@ -52,16 +54,33 @@ const TOGGLE_OPTIONS = ["Hubs", "Spokes", "Reserves", "Assets", "Chains"];
 
 /**
  * `.toggleWrap` exactly as the library's demo writes it — the bar and nothing
- * else. `bare` drops the pill's own gradient so it sits transparent on whatever
- * field is behind it; without it, this is the upstream pill untouched.
+ * else. `bare` drops the pill's own gradient so it sits frosted and translucent
+ * on whatever field is behind it; without it, this is the upstream pill
+ * untouched.
  */
-export function ToggleWrapBar({ bare = false }: { bare?: boolean }) {
-  const [selected, setSelected] = useState(0);
+export function ToggleWrapBar({
+  bare = false,
+  selected,
+  onSelect,
+  innerRef,
+}: {
+  bare?: boolean;
+  /** Controlled selection. Left off, the bar keeps its own. */
+  selected?: number;
+  onSelect?: (i: number) => void;
+  innerRef?: React.Ref<HTMLDivElement>;
+}) {
+  const [own, setOwn] = useState(0);
+  const current = selected ?? own;
   return (
     <div className="toggleWrap">
-      <div className={`toggle${bare ? " bare" : ""}`}>
+      <div className={`toggle${bare ? " bare" : ""}`} ref={innerRef}>
         {TOGGLE_OPTIONS.map((label, i) => (
-          <button key={label} aria-pressed={i === selected} onClick={() => setSelected(i)}>
+          <button
+            key={label}
+            aria-pressed={i === current}
+            onClick={() => (onSelect ? onSelect(i) : setOwn(i))}
+          >
             {label}
           </button>
         ))}
@@ -70,7 +89,23 @@ export function ToggleWrapBar({ bare = false }: { bare?: boolean }) {
   );
 }
 
-export function SubstrateView({ kind }: { kind: Substrate }) {
+/**
+ * The library demo's page background, lifted from its `.page` rule: a 55px ruled
+ * grid over two big radial glows. The rules and the near-black base are fixed —
+ * they are what the lens is being read against — and only the glows take the
+ * picked color.
+ */
+export function GridBackdrop({
+  tint,
+  className = "sub",
+}: {
+  tint: GridTint;
+  className?: string;
+}) {
+  return <div className={`${className} gridBg`} style={gridVars(tint)} />;
+}
+
+export function SubstrateView({ kind, gridTint }: { kind: Substrate; gridTint: GridTint }) {
   if (kind === "photo") {
     return <img className="sub subPhoto" src="https://picsum.photos/id/1015/1400/900" alt="" />;
   }
@@ -95,8 +130,11 @@ export function SubstrateView({ kind }: { kind: Substrate }) {
   if (kind === "interface") {
     return <FakeApp />;
   }
+  if (kind === "chart") {
+    return <div className="sub subChart bed bed-chart" />;
+  }
   if (kind === "grid") {
-    return <div className="sub subGrid bed bed-chart" />;
+    return <GridBackdrop tint={gridTint} />;
   }
   if (kind === "video") {
     return (

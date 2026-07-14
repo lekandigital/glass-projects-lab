@@ -2,6 +2,7 @@ import { useState } from "react";
 import { DEFAULT_OPTIONS, LiquidGlass } from "liquid-glass-web-react";
 import {
   CodeBlock,
+  GridBackdrop,
   Range,
   Section,
   Segmented,
@@ -11,7 +12,17 @@ import {
   ToggleWrapBar,
   type Substrate,
 } from "../components";
-import { BACKDROPS, backdropVars, DockRow, Swatches, TabRow, type Backdrop } from "../rows";
+import {
+  BACKDROPS,
+  backdropVars,
+  DockRow,
+  GRID_TINTS,
+  Swatches,
+  TabRow,
+  type Backdrop,
+  type GridTint,
+} from "../rows";
+import { BarLens, type BarKind } from "../BarLens";
 import {
   GROUP_LABEL,
   PRESET_GROUP_LABEL,
@@ -39,6 +50,13 @@ const SHADOWS = {
 };
 type ShadowKey = keyof typeof SHADOWS;
 
+/** BarLens takes a plain box-shadow string; map the picker onto one. */
+function barShadow(key: ShadowKey): string {
+  if (key === "none") return "none";
+  if (key === "default") return "0 0 0 1px var(--lens-rim), 0 8px 22px var(--lens-shadow)";
+  return SHADOWS[key] as string;
+}
+
 /**
  * Every preset, all at once. Clicking them one at a time in the panel tells you
  * what each does; seeing them side by side over the same chart is the only way
@@ -50,6 +68,8 @@ type ShadowKey = keyof typeof SHADOWS;
  * looks on a chart, demo lenses on the surface they were shaped for — but any
  * of the others forces *all* the cards onto one background, which is how you
  * see the same preset overlap a grid, a photo and a UI bar side by side.
+ * "grid" is the library demo's own page background, in whichever glow color the
+ * stage is currently wearing.
  */
 const GALLERY_BEDS = ["each preset's own", "chart", "grid", "checker", "photo"] as const;
 type GalleryBed = (typeof GALLERY_BEDS)[number];
@@ -75,17 +95,46 @@ function resolveBed(preset: Preset, gallery: GalleryBed): ResolvedBed {
 function PresetCard({
   preset,
   backdrop,
+  gridTint,
   galleryBed,
   onLoad,
 }: {
   preset: Preset;
   backdrop: Backdrop;
+  gridTint: GridTint;
   galleryBed: GalleryBed;
   onLoad: () => void;
 }) {
   const p: GlassParams = { ...DEFAULT_OPTIONS, ...preset.params };
   const bed = resolveBed(preset, galleryBed);
   const wide = WIDE_BEDS.includes(bed);
+  const barKind: BarKind | null =
+    bed === "toggle" ? "toggleWrap" : bed === "tabBar" ? "tabBar" : bed === "dock" ? "dock" : null;
+
+  // A lens that belongs to a bar rides that bar: pinned to its centre line,
+  // springing between items. Everything else is a free, draggable lens.
+  if (barKind) {
+    return (
+      <figure className="presetCard live">
+        <div className="presetBed rowBed" style={backdropVars(backdrop)}>
+          <BarLens
+            kind={barKind}
+            options={p}
+            backdrop={backdrop}
+            glideOnHover={barKind === "dock"}
+          />
+        </div>
+        <figcaption>
+          <p className="primNote">
+            <strong>{preset.name}.</strong> {preset.note}
+          </p>
+          <button type="button" className="loadBtn" onClick={onLoad}>
+            load ↑
+          </button>
+        </figcaption>
+      </figure>
+    );
+  }
 
   // On a bar bed the lens is shown at true size — a scaled-down selection
   // indicator would misrepresent the one thing you're trying to judge. On the
@@ -107,7 +156,7 @@ function PresetCard({
       >
         {/* The bed has to live *inside* the lens: the filter only ever sees
             its own children. */}
-        <PresetBed bed={bed} backdrop={backdrop} />
+        <PresetBed bed={bed} backdrop={backdrop} gridTint={gridTint} />
       </LiquidGlass>
       <figcaption>
         <p className="primNote">
@@ -121,7 +170,15 @@ function PresetCard({
   );
 }
 
-function PresetBed({ bed, backdrop }: { bed: ResolvedBed; backdrop: Backdrop }) {
+function PresetBed({
+  bed,
+  backdrop,
+  gridTint,
+}: {
+  bed: ResolvedBed;
+  backdrop: Backdrop;
+  gridTint: GridTint;
+}) {
   // The bars themselves are transparent — the flat field behind them is what
   // the swatches colour, and it's what the lens actually has to refract.
   if (bed === "toggle") {
@@ -157,7 +214,7 @@ function PresetBed({ bed, backdrop }: { bed: ResolvedBed; backdrop: Backdrop }) 
   if (bed === "photo") {
     return <img className="presetBed presetPhoto" src="https://picsum.photos/id/1015/900/560" alt="" />;
   }
-  if (bed === "grid") return <div className="presetBed bed bed-grid" />;
+  if (bed === "grid") return <GridBackdrop tint={gridTint} className="presetBed" />;
   if (bed === "checker") return <div className="presetBed bed bed-check" />;
   return <div className="presetBed bed bed-chart" />;
 }
@@ -177,6 +234,7 @@ export function Playground({
   const [draggable, setDraggable] = useState(true);
   const [shadowKey, setShadowKey] = useState<ShadowKey>("default");
   const [backdrop, setBackdrop] = useState(BACKDROPS[0]);
+  const [gridTint, setGridTint] = useState(GRID_TINTS[0]);
   const [galleryBed, setGalleryBed] = useState<GalleryBed>("each preset's own");
   const [autoRadius, setAutoRadius] = useState(params.radius === "auto");
   const [radiusPx, setRadiusPx] = useState(typeof params.radius === "number" ? params.radius : 40);
@@ -232,36 +290,53 @@ export function Playground({
         <div className="stageCol">
           <div className="stageBar">
             <Segmented options={SUBSTRATES} value={substrate} onChange={setSubstrate} />
+            {/* The grid is the only substrate with a colour to pick: its glows. */}
+            {substrate === "grid" && (
+              <Swatches
+                value={gridTint}
+                onChange={setGridTint}
+                options={GRID_TINTS}
+                label="Grid glow color"
+              />
+            )}
             <span className="stageNote">{SUBSTRATE_NOTE[substrate]}</span>
           </div>
 
           <div className="stage">
-            <LiquidGlass
-              key={substrate}
-              {...params}
-              x={pos.x}
-              y={pos.y}
-              draggable={draggable}
-              shadow={SHADOWS[shadowKey]}
-              onMove={(x, y) => setPos({ x, y })}
-              onMapGenerated={setMapUrl}
-              className="stageGlass"
-            >
-              {/* Both the substrate and the bar live inside the filtered
-                  element, so the lens bends the bar and the background under
-                  it in one pass — which is the whole question when you put
-                  glass on real chrome. */}
-              <div className="stageContent">
-                <SubstrateView kind={substrate} />
-                {overlay !== "none" && (
-                  <div className="stageOverlay">
-                    {overlay === "toggleWrap" && <ToggleWrapBar bare />}
-                    {overlay === "tabBar" && <TabRow selected={0} backdrop={backdrop} />}
-                    {overlay === "dock" && <DockRow backdrop={backdrop} />}
-                  </div>
-                )}
-              </div>
-            </LiquidGlass>
+            {overlay === "none" ? (
+              <LiquidGlass
+                key={substrate}
+                {...params}
+                x={pos.x}
+                y={pos.y}
+                draggable={draggable}
+                shadow={SHADOWS[shadowKey]}
+                onMove={(x, y) => setPos({ x, y })}
+                onMapGenerated={setMapUrl}
+                className="stageGlass"
+              >
+                <SubstrateView kind={substrate} gridTint={gridTint} />
+              </LiquidGlass>
+            ) : (
+              /* A bar preset: the lens becomes the bar's selection indicator.
+                 Its y is pinned to the bar, its x springs to the item you click
+                 or drag it nearest to — the upstream toggle's behaviour, on all
+                 three bars. Every slider still drives it. */
+              <BarLens
+                key={`${substrate}-${overlay}`}
+                kind={overlay}
+                options={params}
+                backdrop={backdrop}
+                glideOnHover={overlay === "dock"}
+                shadow={barShadow(shadowKey)}
+                background={<SubstrateView kind={substrate} gridTint={gridTint} />}
+                // The grid keeps its own ground in both themes, so it has to
+                // tell the bar what colour to ink itself.
+                vars={
+                  substrate === "grid" ? { ["--flat-ink" as string]: gridTint.ink } : undefined
+                }
+              />
+            )}
           </div>
 
           <div className="readout">
@@ -409,9 +484,22 @@ export function Playground({
           <span className="fieldLabel">Background</span>
           <Segmented options={GALLERY_BEDS} value={galleryBed} onChange={setGalleryBed} />
         </div>
+        {galleryBed === "grid" && (
+          <div className="backdropBar">
+            <span className="fieldLabel">Grid glow</span>
+            {/* The same tint the stage is wearing — one picker, both places. */}
+            <Swatches
+              value={gridTint}
+              onChange={setGridTint}
+              options={GRID_TINTS}
+              label="Grid glow color"
+            />
+            <span className="stageNote">{gridTint.name} — also drives the stage above</span>
+          </div>
+        )}
         <div className="backdropBar">
           <span className="fieldLabel">Flat fill</span>
-          <Swatches value={backdrop} onChange={setBackdrop} />
+          <Swatches value={backdrop} onChange={setBackdrop} options={BACKDROPS} />
           <span className="stageNote">{backdrop.name} — used by the tabBar, dock and text beds</span>
         </div>
       </div>
@@ -429,6 +517,7 @@ export function Playground({
                 key={preset.name}
                 preset={preset}
                 backdrop={backdrop}
+                gridTint={gridTint}
                 galleryBed={galleryBed}
                 onLoad={() => {
                   applyPreset(preset);
