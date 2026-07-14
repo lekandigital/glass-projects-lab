@@ -3,3 +3,6 @@
 node_modules/
 .next/
 web-glass-effect/apps/next-demo/out/
+glass-refraction-master/examples/nextjs/out/
+next-env.d.ts
+*.tsbuildinfo
