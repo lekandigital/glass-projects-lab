@@ -1,7 +1,0 @@
-{
-  "framework": null,
-  "installCommand": "pnpm install",
-  "buildCommand": "pnpm build",
-  "outputDirectory": "apps/next-demo/out",
-  "cleanUrls": true
-}
