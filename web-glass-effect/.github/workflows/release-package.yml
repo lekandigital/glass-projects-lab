@@ -1,0 +1,88 @@
+name: Release Package
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'packages/web-glass-effect/**'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/release-package.yml'
+
+concurrency:
+  group: release-package
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Use Node LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check npm sync status
+        id: version-check
+        run: |
+          PACKAGE_NAME=$(node -p "require('./packages/web-glass-effect/package.json').name")
+          LOCAL_VERSION=$(node -p "require('./packages/web-glass-effect/package.json').version")
+          NPM_VERSION=$(npm view "$PACKAGE_NAME" version 2>/dev/null || true)
+
+          echo "package_name=$PACKAGE_NAME" >> "$GITHUB_OUTPUT"
+          echo "local_version=$LOCAL_VERSION" >> "$GITHUB_OUTPUT"
+          echo "npm_version=$NPM_VERSION" >> "$GITHUB_OUTPUT"
+
+          if [ -z "$NPM_VERSION" ]; then
+            echo "needs_publish=true" >> "$GITHUB_OUTPUT"
+            echo "$PACKAGE_NAME is not published yet. Will publish $LOCAL_VERSION."
+          elif [ "$LOCAL_VERSION" = "$NPM_VERSION" ]; then
+            echo "needs_publish=false" >> "$GITHUB_OUTPUT"
+            echo "$PACKAGE_NAME@$LOCAL_VERSION is already published on npm."
+          else
+            VERSION_STATE=$(node -e "
+              const local = process.argv[1];
+              const remote = process.argv[2];
+              const parse = (v) => v.split('-')[0].split('.').map((n) => Number(n));
+              const [l1, l2, l3] = parse(local);
+              const [r1, r2, r3] = parse(remote);
+              const isNewer =
+                l1 > r1 || (l1 === r1 && (l2 > r2 || (l2 === r2 && l3 > r3)));
+              process.stdout.write(isNewer ? 'newer' : 'older');
+            " "$LOCAL_VERSION" "$NPM_VERSION")
+
+            if [ "$VERSION_STATE" = "newer" ]; then
+              echo "needs_publish=true" >> "$GITHUB_OUTPUT"
+              echo "Will publish $PACKAGE_NAME@$LOCAL_VERSION (npm currently: $NPM_VERSION)."
+            else
+              echo "needs_publish=false" >> "$GITHUB_OUTPUT"
+              echo "Skipping publish: local version ($LOCAL_VERSION) is older than npm ($NPM_VERSION)."
+            fi
+          fi
+
+      - name: Verify package
+        if: steps.version-check.outputs.needs_publish == 'true'
+        run: pnpm --filter @creatorem/web-glass-effect test && pnpm --filter @creatorem/web-glass-effect build
+
+      - name: Publish to npm
+        if: steps.version-check.outputs.needs_publish == 'true'
+        working-directory: ./packages/web-glass-effect
+        run: pnpm run publish:ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
