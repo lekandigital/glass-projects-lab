@@ -2,3 +2,4 @@
 .vercel
 node_modules/
 .next/
+web-glass-effect/apps/next-demo/out/
