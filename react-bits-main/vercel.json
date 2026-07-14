@@ -1,0 +1,6 @@
+{
+  "installCommand": "npm install --prefix apps/fluid-glass --no-audit --no-fund",
+  "buildCommand": "npm run build --prefix apps/fluid-glass",
+  "outputDirectory": "apps/fluid-glass/dist",
+  "framework": null
+}

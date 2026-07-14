@@ -1,0 +1,21 @@
+{
+	"$schema": "https://ui.shadcn.com/schema/registry-item.json",
+	"name": "CurvedInput-TS-CSS",
+	"title": "CurvedInput",
+	"description": "Arc-bent input bar with text, caret and submit button all following the curve.",
+	"type": "registry:component",
+	"files": [
+		{
+			"type": "registry:component",
+			"path": "CurvedInput/CurvedInput.css",
+			"content": ""
+		},
+		{
+			"type": "registry:component",
+			"path": "CurvedInput/CurvedInput.tsx",
+			"content": ""
+		}
+	],
+	"registryDependencies": [],
+	"dependencies": []
+}
