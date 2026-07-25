@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import GlassSurface from '@lib/GlassSurface';
-import { CodeBlock, CostBadge, Section } from '../components/ui';
+import { BackdropVideo, CodeBlock, CostBadge, Section } from '../components/ui';
 import {
   CONTROLS,
   DEMO_CONFIGS,
@@ -64,6 +64,7 @@ ${entries.join('\n')}
           {/* GlassSurface doesn't spread unknown props onto its root, so the hook for tests
               has to go through className — the one escape hatch it does offer. */}
           <div className={`stage play__stage bd bd--${backdrop}`} data-testid="pg-stage">
+            {backdrop === 'video' && <BackdropVideo />}
             <GlassSurface {...state} className="pg__surface">
               <span className="pg__label">GlassSurface</span>
             </GlassSurface>

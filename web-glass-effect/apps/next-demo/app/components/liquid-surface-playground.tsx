@@ -2,6 +2,7 @@
 
 import { LiquidGlass } from '@creatorem/web-glass-effect';
 import { motion, useSpring, useTransform } from 'motion/react';
+import { SharedMediaLayer, type SharedBackdrop } from './shared-media';
 
 function Label({ children, className }: { children: React.ReactNode; className?: string }) {
     return <span className={className}>{children}</span>;
@@ -35,7 +36,7 @@ function SimpleSlider({
     );
 }
 
-export default function LiquidSurfacePlayground() {
+export default function LiquidSurfacePlayground({ backdrop = 'default' }: { backdrop?: SharedBackdrop }) {
     // Create motion values directly with spring transitions
     const glassThickness = useSpring(80, { stiffness: 300, damping: 30 });
     const bezelWidth = useSpring(15, { stiffness: 300, damping: 30 });
@@ -74,7 +75,7 @@ export default function LiquidSurfacePlayground() {
                 {/* Glass Preview Area */}
                 <div className="relative flex min-h-[600px] flex-1 items-center justify-center overflow-hidden p-8">
                     {/* Image Grid Background */}
-                    {IMAGE_GRID}
+                    {backdrop === 'default' ? IMAGE_GRID : <SharedMediaLayer backdrop={backdrop} />}
 
                     {/* <motion.div
                         className="bg-white/20 p-12 shadow-2xl backdrop-blur-sm"

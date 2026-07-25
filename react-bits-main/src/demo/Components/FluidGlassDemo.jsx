@@ -19,6 +19,7 @@ import { ComponentPropsProvider } from '../../components/context/ComponentPropsC
 
 const DEFAULT_PROPS = {
   mode: 'lens',
+  backdrop: 'default',
   scale: 0.25,
   ior: 1.15,
   thickness: 2,
@@ -31,12 +32,17 @@ const DEFAULT_PROPS = {
 const FluidGlassDemo = () => {
   const [key, forceRerender] = useForceRerender();
   const { props, updateProp, resetProps, hasChanges } = useComponentProps(DEFAULT_PROPS);
-  const { mode, scale, ior, thickness, transmission, roughness, chromaticAberration, anisotropy } = props;
+  const { mode, backdrop, scale, ior, thickness, transmission, roughness, chromaticAberration, anisotropy } = props;
 
   const modeOptions = [
     { value: 'lens', label: 'Lens' },
     { value: 'bar', label: 'Bar' },
     { value: 'cube', label: 'Cube' }
+  ];
+  const backdropOptions = [
+    { value: 'default', label: 'Default Scene' },
+    { value: 'photograph', label: 'Photograph' },
+    { value: 'video', label: 'Video' }
   ];
 
   const handleModeChange = newMode => {
@@ -91,6 +97,12 @@ const FluidGlassDemo = () => {
         description: "Display mode of the fluid glass effect. Options: 'lens', 'bar', 'cube'"
       },
       {
+        name: 'backdrop',
+        type: "'default' | 'photograph' | 'video'",
+        default: "'default'",
+        description: 'Source scene rendered behind the glass. Photograph and video match the web-glass showcase media.'
+      },
+      {
         name: 'lensProps',
         type: 'object',
         default: '{}',
@@ -120,6 +132,7 @@ const FluidGlassDemo = () => {
             <FluidGlass
               key={key}
               mode={mode}
+              backdrop={backdrop}
               lensProps={mode === 'lens' ? getModeProps() : {}}
               barProps={mode === 'bar' ? getModeProps() : {}}
               cubeProps={mode === 'cube' ? getModeProps() : {}}
@@ -128,6 +141,13 @@ const FluidGlassDemo = () => {
 
           <Customize>
             <PreviewSelect title="Mode:" options={modeOptions} value={mode} onChange={handleModeChange} width={120} />
+            <PreviewSelect
+              title="Backdrop:"
+              options={backdropOptions}
+              value={backdrop}
+              onChange={val => updateProp('backdrop', val)}
+              width={160}
+            />
 
             <PreviewSlider
               title="Scale:"

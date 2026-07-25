@@ -6,6 +6,9 @@ import LiquidEther from '@lib/LiquidEther';
 import './app.css';
 
 type Example = 'scroll' | 'landingPage';
+type BackdropMode = 'default' | 'photograph' | 'video';
+
+const SHARED_VIDEO_URL = 'https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4';
 
 // Ported from src/demo/Components/GlassSurfaceDemo.jsx — same values, so this page shows
 // the component exactly as react-bits' own docs page does, just full-bleed.
@@ -41,6 +44,7 @@ const CARDS = [
 
 export default function App() {
   const [example, setExample] = useState<Example>('scroll');
+  const [backdrop, setBackdrop] = useState<BackdropMode>('default');
   const scrollRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
 
@@ -101,12 +105,23 @@ export default function App() {
             {e === 'scroll' ? 'Scroll' : 'Landing Page'}
           </button>
         ))}
+        <span className="switcher__sep" aria-hidden />
+        {([
+          ['default', 'Default'],
+          ['photograph', 'Photograph'],
+          ['video', 'Video']
+        ] as Array<[BackdropMode, string]>).map(([key, label]) => (
+          <button key={key} className={backdrop === key ? 'on' : ''} onClick={() => setBackdrop(key)}>
+            {label}
+          </button>
+        ))}
       </nav>
 
       {/* .demo-container mirrors react-bits' own preview wrapper (flex-centred, overflow
           hidden), so the sticky pane and the absolute flow lay out exactly as they do
           upstream — same class names, same constants. */}
-      <div className="demo-container" ref={scrollRef}>
+      <div className={`demo-container demo-container--${backdrop}`} ref={scrollRef}>
+        {example === 'scroll' && backdrop === 'video' && <BackdropVideo />}
         {example === 'scroll' ? (
           <>
             <GlassSurface
@@ -131,7 +146,7 @@ export default function App() {
         ) : (
           <div className="landing">
             <div className="landing__bg">
-              <LiquidEther isBounce />
+              {backdrop === 'default' ? <LiquidEther isBounce /> : <BackdropMedia backdrop={backdrop} />}
             </div>
 
             <div className="landing__nav">
@@ -167,4 +182,13 @@ export default function App() {
       </div>
     </div>
   );
+}
+
+function BackdropMedia({ backdrop }: { backdrop: Exclude<BackdropMode, 'default'> }) {
+  if (backdrop === 'video') return <BackdropVideo />;
+  return <div className="backdrop-photo" aria-hidden />;
+}
+
+function BackdropVideo() {
+  return <video className="backdrop-video" src={SHARED_VIDEO_URL} autoPlay muted loop playsInline aria-hidden />;
 }

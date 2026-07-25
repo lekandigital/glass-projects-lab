@@ -479,7 +479,8 @@ export const BACKDROPS: Backdrop[] = [
   { key: 'checker', label: 'Checker', note: 'Hard edges. The reference for reading displacement — straight lines bend visibly.' },
   { key: 'grid', label: 'Grid', note: 'Thin lines. Shows the rim gradient better than anything else.' },
   { key: 'noise', label: 'Noise', note: 'High frequency, no structure. Exposes the output blur from displace.' },
-  { key: 'photo', label: 'Photo', note: 'A realistic read, and the only backdrop where saturation is judgeable.' },
+  { key: 'photo', label: 'Photograph', note: 'The same photograph used by the web-glass showcase.' },
+  { key: 'video', label: 'Video', note: 'The same autoplaying video used by the web-glass showcase.' },
   { key: 'text', label: 'Text', note: 'Fine detail at legibility scale. The honest test of whether the effect is usable over content.' },
   { key: 'flat', label: 'Flat', note: 'A control. Nothing to displace, so only the frost and the rim survive.' }
 ];

@@ -15,7 +15,16 @@ import {
 } from '@react-three/drei';
 import { easing } from 'maath';
 
-export default function FluidGlass({ mode = 'lens', lensProps = {}, barProps = {}, cubeProps = {} }) {
+const SHARED_PHOTO_URL = 'https://picsum.photos/id/1043/1200/900';
+const SHARED_VIDEO_URL = 'https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4';
+
+export default function FluidGlass({
+  mode = 'lens',
+  backdrop = 'default',
+  lensProps = {},
+  barProps = {},
+  cubeProps = {}
+}) {
   const Wrapper = mode === 'bar' ? Bar : mode === 'cube' ? Cube : Lens;
   const rawOverrides = mode === 'bar' ? barProps : mode === 'cube' ? cubeProps : lensProps;
 
@@ -33,16 +42,73 @@ export default function FluidGlass({ mode = 'lens', lensProps = {}, barProps = {
       <ScrollControls damping={0.2} pages={3} distance={0.4}>
         {mode === 'bar' && <NavItems items={navItems} />}
         <Wrapper modeProps={modeProps}>
-          <Scroll>
-            <Typography />
-            <Images />
-          </Scroll>
+          {backdrop === 'default' ? (
+            <Scroll>
+              <Typography />
+              <Images />
+            </Scroll>
+          ) : (
+            <SharedMediaScene backdrop={backdrop} />
+          )}
           <Scroll html />
           <Preload />
         </Wrapper>
       </ScrollControls>
     </Canvas>
   );
+}
+
+function SharedMediaScene({ backdrop }) {
+  const tex = useSharedMediaTexture(backdrop);
+  const { viewport } = useThree();
+
+  if (!tex) return null;
+
+  return (
+    <mesh scale={[viewport.width, viewport.height, 1]}>
+      <planeGeometry />
+      <meshBasicMaterial map={tex} toneMapped={false} />
+    </mesh>
+  );
+}
+
+function useSharedMediaTexture(backdrop) {
+  const [texture, setTexture] = useState(null);
+
+  useEffect(() => {
+    let video = null;
+    let tex;
+
+    if (backdrop === 'video') {
+      video = document.createElement('video');
+      video.src = SHARED_VIDEO_URL;
+      video.crossOrigin = 'anonymous';
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      void video.play().catch(() => undefined);
+      tex = new THREE.VideoTexture(video);
+    } else {
+      tex = new THREE.TextureLoader().load(SHARED_PHOTO_URL);
+    }
+
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.wrapS = THREE.ClampToEdgeWrapping;
+    tex.wrapT = THREE.ClampToEdgeWrapping;
+    setTexture(tex);
+
+    return () => {
+      if (video) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+      }
+      tex.dispose();
+    };
+  }, [backdrop]);
+
+  return texture;
 }
 
 const ModeWrapper = memo(function ModeWrapper({

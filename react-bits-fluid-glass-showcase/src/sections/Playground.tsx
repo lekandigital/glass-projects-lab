@@ -67,6 +67,7 @@ export default function Playground({ backdrop }: { backdrop: string }) {
   const [live, setLive] = useState(false);
 
   const mode = state.mode as Mode;
+  const mediaBackdrop = backdrop === 'photo' ? 'photograph' : backdrop === 'video' ? 'video' : 'default';
   const set = (k: string, v: number | string | boolean) => {
     setState(s => ({ ...s, [k]: v }));
     setTouched(t => new Set(t).add(k));
@@ -148,6 +149,7 @@ ${body}${nav}
             <FluidGlass
               key={mode}
               mode={mode}
+              backdrop={mediaBackdrop}
               lensProps={mode === 'lens' ? modeProps : {}}
               barProps={mode === 'bar' ? modeProps : {}}
               cubeProps={mode === 'cube' ? modeProps : {}}
@@ -157,9 +159,9 @@ ${body}${nav}
           <div className="note">
             <span>⚠</span>
             <span>
-              The backdrop picker doesn't reach this canvas, and that's the finding, not a bug:{' '}
-              <code>ModeWrapper</code> calls <code>gl.setClearColor(0x5227ff, 1)</code> on <em>every frame</em>, so the
-              background is unthemeable from outside. Sections 2 and 5 rebuild the pipeline by hand and do respect it.
+              Checker, grid, noise and flat are still DOM/test backdrops; the official component owns a WebGL scene, so
+              those patterns cannot be sampled directly. Photograph and Video use the local <code>backdrop</code> prop
+              added here, which feeds the same media into the render target FluidGlass refracts.
             </span>
           </div>
 

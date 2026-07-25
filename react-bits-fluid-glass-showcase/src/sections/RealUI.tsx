@@ -66,12 +66,10 @@ export default function RealUI() {
       <div className="note">
         <span>⚠</span>
         <span>
-          <strong>You cannot put your own content behind it.</strong> FluidGlass takes no <code>children</code>: the
-          scene it refracts is a hardcoded "React Bits" wordmark over five hardcoded <code>/assets/demo/*.webp</code>{' '}
-          images, and the background is a hardcoded <code>#5227ff</code>. So the hero above refracts react-bits'
-          artwork, not this page — and no prop can change that. To ship it over your own UI you have to fork the
-          component and thread a <code>children</code> prop into the <code>createPortal</code> call. That is the single
-          biggest thing the README doesn't tell you.
+          <strong>The default scene is still owned by the component.</strong> Out of the box FluidGlass takes no{' '}
+          <code>children</code>: it refracts a "React Bits" wordmark over five <code>/assets/demo/*.webp</code> images.
+          This lab fork adds Photograph and Video media modes for exact comparison with web-glass; arbitrary app UI
+          would still need a <code>children</code> prop threaded into the <code>createPortal</code> call.
         </span>
       </div>
     </Section>

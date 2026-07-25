@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import GlassSurface from '@lib/GlassSurface';
-import { CostBadge, Section } from '../components/ui';
+import { BackdropVideo, CostBadge, Section } from '../components/ui';
 import { DEMO_CONFIGS, GLASS_SURFACE_DEFAULTS, type Cost, type SurfaceProps } from '../lib/config';
 import { generateDisplacementMap } from '../lib/displacement';
 import { mountVanillaGlass, type VanillaHandle } from '../lib/vanilla';
@@ -171,6 +171,7 @@ export default function Performance({ backdrop }: { backdrop: string }) {
       <div className="play">
         <div>
           <div className={`stage bd bd--${backdrop}`} style={{ padding: 20, minHeight: 300 }}>
+            {backdrop === 'video' && <BackdropVideo />}
             <span className="stage__tag">
               animating {path.label} · {COUNT} surfaces
             </span>

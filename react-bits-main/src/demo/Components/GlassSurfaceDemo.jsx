@@ -33,8 +33,12 @@ const DEFAULT_PROPS = {
   blueOffset: 20
 };
 
+const SHARED_PHOTO_URL = 'https://picsum.photos/id/1043/1200/900';
+const SHARED_VIDEO_URL = 'https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4';
+
 const GlassSurfaceDemo = () => {
   const [selectedExample, setSelectedExample] = useState('scroll');
+  const [backdrop, setBackdrop] = useState('default');
   const scrollContainerRef = useRef(null);
   const lenisRef = useRef(null);
 
@@ -57,6 +61,11 @@ const GlassSurfaceDemo = () => {
   const exampleOptions = [
     { value: 'scroll', label: 'Scroll' },
     { value: 'landingPage', label: 'Landing Page' }
+  ];
+  const backdropOptions = [
+    { value: 'default', label: 'Default' },
+    { value: 'photograph', label: 'Photograph' },
+    { value: 'video', label: 'Video' }
   ];
 
   const commonGlassProps = {
@@ -267,9 +276,16 @@ const GlassSurfaceDemo = () => {
             h={500}
             p={0}
             css={{
-              overflow: 'hidden'
+              overflow: 'hidden',
+              backgroundImage:
+                selectedExample === 'scroll' && backdrop === 'photograph'
+                  ? `linear-gradient(rgba(220, 215, 230, 0.28), rgba(220, 215, 230, 0.28)), url("${SHARED_PHOTO_URL}")`
+                  : undefined,
+              backgroundSize: selectedExample === 'scroll' && backdrop === 'photograph' ? 'cover' : undefined,
+              backgroundPosition: selectedExample === 'scroll' && backdrop === 'photograph' ? 'center' : undefined
             }}
           >
+            {selectedExample === 'scroll' && backdrop === 'video' && <SharedBackdropVideo />}
             {selectedExample === 'scroll' && (
               <>
                 <GlassSurface
@@ -345,7 +361,7 @@ const GlassSurfaceDemo = () => {
             {selectedExample === 'landingPage' && (
               <>
                 <Box w="100%" h="100%" position="absolute" top={0} left={0} zIndex={0}>
-                  <LiquidEther isBounce />
+                  {backdrop === 'default' ? <LiquidEther isBounce /> : <SharedBackdropLayer backdrop={backdrop} />}
                 </Box>
 
                 <Box position="absolute" top="2em" left={0} width="100%" height="60px" zIndex={0} pointerEvents="none">
@@ -435,6 +451,13 @@ const GlassSurfaceDemo = () => {
               options={exampleOptions}
               value={selectedExample}
               onChange={setSelectedExample}
+              width={160}
+            />
+            <PreviewSelect
+              title="Backdrop"
+              options={backdropOptions}
+              value={backdrop}
+              onChange={setBackdrop}
               width={160}
             />
 
@@ -560,5 +583,38 @@ const GlassSurfaceDemo = () => {
     </ComponentPropsProvider>
   );
 };
+
+function SharedBackdropLayer({ backdrop }) {
+  if (backdrop === 'video') return <SharedBackdropVideo />;
+  return (
+    <Box
+      position="absolute"
+      inset={0}
+      aria-hidden
+      bgImage={`url("${SHARED_PHOTO_URL}")`}
+      bgSize="cover"
+      bgPosition="center"
+    />
+  );
+}
+
+function SharedBackdropVideo() {
+  return (
+    <Box
+      as="video"
+      position="absolute"
+      inset={0}
+      width="100%"
+      height="100%"
+      objectFit="cover"
+      src={SHARED_VIDEO_URL}
+      autoPlay
+      muted
+      loop
+      playsInline
+      aria-hidden
+    />
+  );
+}
 
 export default GlassSurfaceDemo;

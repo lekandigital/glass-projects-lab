@@ -1,6 +1,6 @@
 import { LiquidGlass, LiquidSlider, LiquidSwitch } from "@creatorem/web-glass-effect";
 import { useMotionValue, useSpring } from "motion/react";
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import { GLASS_EFFECTS } from "../config";
 import { Section } from "../ui";
 
@@ -265,6 +265,87 @@ function ControlsDemo() {
   );
 }
 
+function Field({
+  id,
+  label,
+  children,
+  tight = false,
+}: {
+  id: string;
+  label: string;
+  children: ReactNode;
+  tight?: boolean;
+}) {
+  return (
+    <div className="space-y-2">
+      <label htmlFor={id} className="text-sm font-medium text-white/85">
+        {label}
+      </label>
+      <div className={`relative ${tight ? "rounded-xl" : "rounded-2xl"}`}>
+        {children}
+        <LiquidGlass
+          className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] bg-transparent"
+          glassThickness={110}
+          bezelWidth={tight ? 10 : 20}
+          refractiveIndex={1.8}
+          blur={0.4}
+        />
+      </div>
+    </div>
+  );
+}
+
+function FormFieldsDemo() {
+  return (
+    <div className="relative min-h-[360px] overflow-hidden rounded-lg bg-black p-6">
+      <AnimatedGrid />
+      <form className="relative z-10 mx-auto max-w-md space-y-6">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <Field id="firstName" label="First Name">
+            <input
+              id="firstName"
+              type="text"
+              placeholder="John"
+              className="relative z-10 h-10 w-full rounded-[inherit] border border-white/20 bg-transparent px-3 text-sm text-white/80 placeholder:text-white/55"
+            />
+          </Field>
+          <Field id="lastName" label="Last Name" tight>
+            <input
+              id="lastName"
+              type="text"
+              placeholder="Doe"
+              className="relative z-10 h-10 w-full rounded-[inherit] border border-white/20 bg-transparent px-3 text-sm text-white/80 placeholder:text-white/55"
+            />
+          </Field>
+        </div>
+
+        <Field id="message" label="Message">
+          <textarea
+            id="message"
+            rows={4}
+            placeholder="Tell us about yourself..."
+            className="relative z-10 w-full rounded-[inherit] border border-white/20 bg-transparent px-3 py-2 text-sm text-white/80 placeholder:text-white/55"
+          />
+        </Field>
+
+        <button
+          type="submit"
+          className="relative w-full rounded-[18px] border border-amber-400/30 bg-amber-500/20 py-2 text-sm font-medium text-amber-300 hover:bg-amber-500/30"
+        >
+          <span className="relative z-10">Submit Form</span>
+          <LiquidGlass
+            className="pointer-events-none absolute inset-0 z-0 rounded-[inherit] bg-transparent"
+            glassThickness={110}
+            bezelWidth={10}
+            refractiveIndex={1.8}
+            blur={0.4}
+          />
+        </button>
+      </form>
+    </div>
+  );
+}
+
 export function RealUI() {
   return (
     <Section
@@ -284,6 +365,14 @@ export function RealUI() {
     >
       <div className="panel" style={{ padding: 16 }}>
         <ITunesDemo />
+      </div>
+
+      <div className="panel" style={{ marginTop: 20 }}>
+        <div className="card-head">
+          <h4>Reference form demo</h4>
+          <span className="badge neutral">LiquidGlass form controls</span>
+        </div>
+        <FormFieldsDemo />
       </div>
 
       <div className="panel" style={{ marginTop: 20 }}>

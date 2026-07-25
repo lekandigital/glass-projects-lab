@@ -1,5 +1,5 @@
 import GlassSurface from '@lib/GlassSurface';
-import { Section } from '../components/ui';
+import { BackdropVideo, Section } from '../components/ui';
 import { DEMO_CONFIGS, GALLERY_KEYS, GLASS_SURFACE_DEFAULTS, type SurfaceProps } from '../lib/config';
 
 /**
@@ -34,6 +34,7 @@ export default function Gallery({ backdrop }: { backdrop: string }) {
                 className={`stage bd bd--${backdrop}`}
                 style={{ height: 200, borderRadius: '16px 16px 0 0', display: 'grid', placeItems: 'center' }}
               >
+                {backdrop === 'video' && <BackdropVideo />}
                 <GlassSurface {...props} className="pg__surface">
                   <span className="pg__label">{c.label}</span>
                 </GlassSurface>

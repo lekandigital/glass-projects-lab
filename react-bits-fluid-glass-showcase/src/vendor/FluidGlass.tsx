@@ -16,6 +16,10 @@ import {
 import { easing } from 'maath';
 
 type Mode = 'lens' | 'bar' | 'cube';
+type BackdropMode = 'default' | 'photograph' | 'video';
+
+const SHARED_PHOTO_URL = 'https://picsum.photos/id/1043/1200/900';
+const SHARED_VIDEO_URL = 'https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4';
 
 interface NavItem {
   label: string;
@@ -26,12 +30,19 @@ type ModeProps = Record<string, unknown>;
 
 interface FluidGlassProps {
   mode?: Mode;
+  backdrop?: BackdropMode;
   lensProps?: ModeProps;
   barProps?: ModeProps;
   cubeProps?: ModeProps;
 }
 
-export default function FluidGlass({ mode = 'lens', lensProps = {}, barProps = {}, cubeProps = {} }: FluidGlassProps) {
+export default function FluidGlass({
+  mode = 'lens',
+  backdrop = 'default',
+  lensProps = {},
+  barProps = {},
+  cubeProps = {}
+}: FluidGlassProps) {
   const Wrapper = mode === 'bar' ? Bar : mode === 'cube' ? Cube : Lens;
   const rawOverrides = mode === 'bar' ? barProps : mode === 'cube' ? cubeProps : lensProps;
 
@@ -49,16 +60,73 @@ export default function FluidGlass({ mode = 'lens', lensProps = {}, barProps = {
       <ScrollControls damping={0.2} pages={3} distance={0.4}>
         {mode === 'bar' && <NavItems items={navItems as NavItem[]} />}
         <Wrapper modeProps={modeProps}>
-          <Scroll>
-            <Typography />
-            <Images />
-          </Scroll>
+          {backdrop === 'default' ? (
+            <Scroll>
+              <Typography />
+              <Images />
+            </Scroll>
+          ) : (
+            <SharedMediaScene backdrop={backdrop} />
+          )}
           <Scroll html />
           <Preload />
         </Wrapper>
       </ScrollControls>
     </Canvas>
   );
+}
+
+function SharedMediaScene({ backdrop }: { backdrop: Exclude<BackdropMode, 'default'> }) {
+  const tex = useSharedMediaTexture(backdrop);
+  const { viewport } = useThree();
+
+  if (!tex) return null;
+
+  return (
+    <mesh scale={[viewport.width, viewport.height, 1]}>
+      <planeGeometry />
+      <meshBasicMaterial map={tex} toneMapped={false} />
+    </mesh>
+  );
+}
+
+function useSharedMediaTexture(backdrop: Exclude<BackdropMode, 'default'>) {
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
+
+  useEffect(() => {
+    let video: HTMLVideoElement | null = null;
+    let tex: THREE.Texture;
+
+    if (backdrop === 'video') {
+      video = document.createElement('video');
+      video.src = SHARED_VIDEO_URL;
+      video.crossOrigin = 'anonymous';
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      void video.play().catch(() => undefined);
+      tex = new THREE.VideoTexture(video);
+    } else {
+      tex = new THREE.TextureLoader().load(SHARED_PHOTO_URL);
+    }
+
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.wrapS = THREE.ClampToEdgeWrapping;
+    tex.wrapT = THREE.ClampToEdgeWrapping;
+    setTexture(tex);
+
+    return () => {
+      if (video) {
+        video.pause();
+        video.removeAttribute('src');
+        video.load();
+      }
+      tex.dispose();
+    };
+  }, [backdrop]);
+
+  return texture;
 }
 
 type MeshProps = ThreeElements['mesh'];

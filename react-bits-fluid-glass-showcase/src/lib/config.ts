@@ -376,6 +376,7 @@ export const BACKDROPS: Backdrop[] = [
   { key: 'checker', label: 'Checker', note: 'Hard edges. The reference for judging distortion and aberration.' },
   { key: 'grid', label: 'Grid', note: 'Straight lines. Shows exactly how the lens bends geometry.' },
   { key: 'noise', label: 'Noise', note: 'High frequency, no structure. Exposes blur from roughness/anisotropy.' },
-  { key: 'photo', label: 'Photo', note: 'The upstream demo imagery, for a realistic read.' },
+  { key: 'photo', label: 'Photograph', note: 'The same photograph used by the web-glass showcase.' },
+  { key: 'video', label: 'Video', note: 'The same autoplaying video used by the web-glass showcase.' },
   { key: 'flat', label: 'Flat', note: 'A control. Nothing to refract, so only the rim survives.' }
 ];

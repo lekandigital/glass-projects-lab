@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { Cost } from '../lib/config';
 
+export const SHARED_VIDEO_URL = 'https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4';
+
 export function CostBadge({ cost }: { cost: Cost }) {
   const text: Record<Cost, string> = {
     map: 'regenerates map',
@@ -153,5 +155,11 @@ export function Stage({
         </button>
       )}
     </div>
+  );
+}
+
+export function BackdropVideo() {
+  return (
+    <video className="bd__video" src={SHARED_VIDEO_URL} autoPlay muted loop playsInline aria-hidden />
   );
 }

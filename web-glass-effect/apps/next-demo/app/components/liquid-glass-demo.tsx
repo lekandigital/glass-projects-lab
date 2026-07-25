@@ -4,6 +4,7 @@ import { LiquidGlass } from '@creatorem/web-glass-effect';
 import { ArrowDown, ArrowUp, Search, ZoomIn, ZoomOut } from 'lucide-react';
 import { useMotionValue, useSpring } from 'motion/react';
 import { useRef } from 'react';
+import { SharedMediaLayer, type SharedBackdrop } from './shared-media';
 
 const GLASS_EFFECTS = {
     NAV_BLUR_DEFAULT: 0,
@@ -50,7 +51,13 @@ function IconButton(props: React.ComponentProps<'button'>) {
     );
 }
 
-export default function LiquidGlassDemo({ className }: { className?: string }) {
+export default function LiquidGlassDemo({
+    className,
+    backdrop = 'default',
+}: {
+    className?: string;
+    backdrop?: SharedBackdrop;
+}) {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const isSearchFocused = useMotionValue(false);
 
@@ -130,6 +137,7 @@ export default function LiquidGlassDemo({ className }: { className?: string }) {
 
     return (
         <div className={cn('relative h-[500px] w-full overflow-hidden rounded-lg bg-neutral-50', className)}>
+            <SharedMediaLayer backdrop={backdrop} />
             <div className="absolute top-4 right-4 z-20 flex flex-col gap-3">
                 <LiquidGlass
                     className="flex h-[52px] w-[52px] cursor-pointer items-center justify-center rounded-[26px] bg-white/20 hover:bg-white/35"
@@ -161,18 +169,22 @@ export default function LiquidGlassDemo({ className }: { className?: string }) {
             </div>
 
             <div ref={scrollContainerRef} className="no-scrollbar h-full w-full overflow-auto">
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {imageIds.map((id) => (
-                        <div key={id} className="relative overflow-hidden rounded-lg shadow-lg">
-                            <img
-                                src={`https://picsum.photos/id/${id}/400/600`}
-                                alt={`Portfolio image ${id}`}
-                                className="h-auto w-full object-cover"
-                                loading="lazy"
-                            />
-                        </div>
-                    ))}
-                </div>
+                {backdrop === 'default' ? (
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {imageIds.map((id) => (
+                            <div key={id} className="relative overflow-hidden rounded-lg shadow-lg">
+                                <img
+                                    src={`https://picsum.photos/id/${id}/400/600`}
+                                    alt={`Portfolio image ${id}`}
+                                    className="h-auto w-full object-cover"
+                                    loading="lazy"
+                                />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="min-h-full" />
+                )}
             </div>
 
             <div className="absolute right-4 bottom-4 left-4 z-10">
@@ -235,4 +247,3 @@ export default function LiquidGlassDemo({ className }: { className?: string }) {
         </div>
     );
 }
-

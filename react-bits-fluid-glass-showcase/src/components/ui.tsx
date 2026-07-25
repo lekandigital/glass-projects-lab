@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import type { Cost } from '../lib/config';
+import { SHARED_VIDEO_URL } from '../lib/backdrop';
 
 export function CostBadge({ cost }: { cost: Cost }) {
   const text: Record<Cost, string> = {
@@ -129,6 +130,7 @@ export function Stage({
       style={{ height, pointerEvents: active ? 'auto' : 'none' }}
       data-active={active}
     >
+      {className.includes('bd--video') && <BackdropVideo />}
       {tag && <span className="stage__tag">{tag}</span>}
       {visible ? children : null}
       {!active && onActivate && (
@@ -142,5 +144,11 @@ export function Stage({
         </button>
       )}
     </div>
+  );
+}
+
+export function BackdropVideo() {
+  return (
+    <video className="bd__video" src={SHARED_VIDEO_URL} autoPlay muted loop playsInline aria-hidden />
   );
 }

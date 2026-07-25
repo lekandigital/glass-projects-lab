@@ -1,14 +1,30 @@
 import * as THREE from 'three';
 
+export const SHARED_PHOTO_URL = 'https://picsum.photos/id/1043/1200/900';
+export const SHARED_VIDEO_URL = 'https://res.cloudinary.com/demo/video/upload/sea_turtle.mp4';
+
 /**
- * The backdrop the hand-built pipeline (sections 2 and 5) refracts. FluidGlass itself
- * can't take one — it renders a fixed "React Bits" wordmark over five fixed images —
- * so these exist to make the *effect* judgeable: high-frequency and achromatic, because
- * a colourful backdrop makes it impossible to tell chromatic aberration from the source.
+ * The backdrop the hand-built pipeline (sections 2 and 5) refracts. These make the
+ * effect judgeable: high-frequency and achromatic by default, with shared photo/video
+ * modes to match the web-glass showcase.
  */
 export function makeBackdropTexture(kind: string, dark: boolean): THREE.Texture {
   if (kind === 'photo') {
-    const t = new THREE.TextureLoader().load('/assets/demo/cs2.webp');
+    const t = new THREE.TextureLoader().load(SHARED_PHOTO_URL);
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }
+  if (kind === 'video') {
+    const video = document.createElement('video');
+    video.src = SHARED_VIDEO_URL;
+    video.crossOrigin = 'anonymous';
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.preload = 'auto';
+    void video.play().catch(() => undefined);
+
+    const t = new THREE.VideoTexture(video);
     t.colorSpace = THREE.SRGBColorSpace;
     return t;
   }

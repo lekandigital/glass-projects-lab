@@ -330,9 +330,29 @@ kbd {
 }
 
 .bd--photo {
-  background-image: url('/assets/demo/cs2.webp');
+  background-image: url('https://picsum.photos/id/1043/1200/900');
   background-size: cover;
   background-position: center;
+}
+
+.bd--video {
+  background-image: none;
+  background-color: #111;
+}
+
+.bd__video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.bd > :not(.bd__video) {
+  position: relative;
+  z-index: 1;
 }
 
 .bd--flat {

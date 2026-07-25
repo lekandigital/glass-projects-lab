@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { CodeBlock, Section } from '../components/ui';
+import { BackdropVideo, CodeBlock, Section } from '../components/ui';
 import { DEMO_CONFIGS, GLASS_SURFACE_DEFAULTS, type SurfaceProps } from '../lib/config';
 import { mountVanillaGlass, type VanillaHandle } from '../lib/vanilla';
 
@@ -74,6 +74,7 @@ export default function Vanilla({ backdrop }: { backdrop: string }) {
             style={{ height: 360, display: 'grid', placeItems: 'center' }}
             data-testid="vanilla-stage"
           >
+            {backdrop === 'video' && <BackdropVideo />}
             <span className="stage__tag">no react · dom + svg only</span>
             <div ref={host} className="vhost" />
             {!mounted && <span className="pg__label">disposed — node removed, observer disconnected</span>}

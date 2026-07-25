@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import GlassSurface from '@lib/GlassSurface';
-import { CodeBlock, CostBadge, Section } from '../components/ui';
+import { BackdropVideo, CodeBlock, CostBadge, Section } from '../components/ui';
 import { GLASS_SURFACE_DEFAULTS, INTERNALS, PLAYGROUND_INITIAL, type SurfaceProps } from '../lib/config';
 import { channelScales, decodeMap, edgeSize, generateDisplacementMap, splitChannels } from '../lib/displacement';
 
@@ -63,6 +63,7 @@ export default function Internals({ backdrop }: { backdrop: string }) {
       <div className="two">
         <div className="card">
           <div className={`stage bd bd--${backdrop}`} style={{ height: 260, borderRadius: '16px 16px 0 0', display: 'grid', placeItems: 'center' }}>
+            {backdrop === 'video' && <BackdropVideo />}
             <span className="stage__tag">the surface</span>
             <GlassSurface {...p} className="pg__surface">
               <span className="pg__label">GlassSurface</span>
