@@ -1104,3 +1104,17 @@ td:nth-child(1) code {
   border-color: var(--badge-remount-fg);
   color: var(--text);
 }
+
+/* Draggable surface inside a stage — the web-glass showcase's .draggable */
+.draggable {
+  position: relative;
+  z-index: 2;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.draggable:active {
+  cursor: grabbing;
+}

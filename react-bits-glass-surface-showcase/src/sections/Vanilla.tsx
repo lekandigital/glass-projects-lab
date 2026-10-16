@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BackdropVideo, CodeBlock, Section } from '../components/ui';
 import { DEMO_CONFIGS, GLASS_SURFACE_DEFAULTS, type SurfaceProps } from '../lib/config';
 import { mountVanillaGlass, type VanillaHandle } from '../lib/vanilla';
+import { Draggable } from '../components/Draggable';
 
 const BASE = {
   ...GLASS_SURFACE_DEFAULTS,
@@ -76,7 +77,9 @@ export default function Vanilla({ backdrop }: { backdrop: string }) {
           >
             {backdrop === 'video' && <BackdropVideo />}
             <span className="stage__tag">no react · dom + svg only</span>
-            <div ref={host} className="vhost" />
+            <Draggable testId="vanilla-drag">
+              <div ref={host} className="vhost" />
+            </Draggable>
             {!mounted && <span className="pg__label">disposed — node removed, observer disconnected</span>}
           </div>
 

@@ -10,6 +10,7 @@ import {
   type Cost,
   type SurfaceProps
 } from '../lib/config';
+import { Draggable } from '../components/Draggable';
 
 const GROUPS: Array<{ cost: Cost; title: string; note: string }> = [
   { cost: 'map', title: 'Regenerates the map', note: 'Rebuilds the SVG string and swaps the feImage href.' },
@@ -52,7 +53,7 @@ ${entries.join('\n')}
       title="Playground"
       lede={
         <>
-          All seventeen visual props, live. They're grouped by the path they take through the component, which is the
+          All seventeen visual props, live. <strong>Drag the glass</strong> anywhere over the backdrop. They're grouped by the path they take through the component, which is the
           distinction that actually matters: red props rebuild an SVG image from scratch and force the browser to decode
           it, blue props poke a single attribute on a filter that's already running, and green props never touch the
           filter at all. Section 4 measures what that costs.
@@ -65,9 +66,12 @@ ${entries.join('\n')}
               has to go through className — the one escape hatch it does offer. */}
           <div className={`stage play__stage bd bd--${backdrop}`} data-testid="pg-stage">
             {backdrop === 'video' && <BackdropVideo />}
-            <GlassSurface {...state} className="pg__surface">
-              <span className="pg__label">GlassSurface</span>
-            </GlassSurface>
+            <span className="stage__tag">drag me</span>
+            <Draggable testId="pg-drag">
+              <GlassSurface {...state} className="pg__surface">
+                <span className="pg__label">GlassSurface</span>
+              </GlassSurface>
+            </Draggable>
           </div>
 
           <CodeBlock code={code} />

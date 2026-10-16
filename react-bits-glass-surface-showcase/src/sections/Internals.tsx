@@ -3,6 +3,7 @@ import GlassSurface from '@lib/GlassSurface';
 import { BackdropVideo, CodeBlock, CostBadge, Section } from '../components/ui';
 import { GLASS_SURFACE_DEFAULTS, INTERNALS, PLAYGROUND_INITIAL, type SurfaceProps } from '../lib/config';
 import { channelScales, decodeMap, edgeSize, generateDisplacementMap, splitChannels } from '../lib/displacement';
+import { Draggable } from '../components/Draggable';
 
 const W = 320;
 const H = 140;
@@ -65,9 +66,11 @@ export default function Internals({ backdrop }: { backdrop: string }) {
           <div className={`stage bd bd--${backdrop}`} style={{ height: 260, borderRadius: '16px 16px 0 0', display: 'grid', placeItems: 'center' }}>
             {backdrop === 'video' && <BackdropVideo />}
             <span className="stage__tag">the surface</span>
-            <GlassSurface {...p} className="pg__surface">
-              <span className="pg__label">GlassSurface</span>
-            </GlassSurface>
+            <Draggable>
+              <GlassSurface {...p} className="pg__surface">
+                <span className="pg__label">GlassSurface</span>
+              </GlassSurface>
+            </Draggable>
           </div>
           <div className="gcard__body">
             <div className="gcard__title">
