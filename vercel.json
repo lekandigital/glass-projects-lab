@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "node scripts/vercel-posthog.mjs",
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/x9/static/:path(.*)", "destination": "https://us-assets.i.posthog.com/static/:path" },
+    { "source": "/x9/array/:path(.*)", "destination": "https://us-assets.i.posthog.com/array/:path" },
+    { "source": "/x9/:path(.*)", "destination": "https://us.i.posthog.com/:path" }
+  ]
+}
