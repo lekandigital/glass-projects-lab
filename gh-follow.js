@@ -1,7 +1,8 @@
 // "Follow on GitHub" tab, docked to the right edge of every glass-projects-lab page.
-// The root catalog tags its own pages with it at build time (scripts/tag-pages.mjs) and
-// every sub-project loads it from https://glass-projects-lab.vercel.app/gh-follow.js
-// (scripts/tag-subprojects.py), so editing this file and pushing main updates it everywhere.
+// The root catalog tags its own pages with it at build time (scripts/tag-pages.mjs) and every
+// sub-project loads https://cdn.jsdelivr.net/gh/lekandigital/glass-projects-lab@main/gh-follow.js
+// (scripts/tag-subprojects.py), so editing this file and pushing main updates it everywhere;
+// purge jsDelivr after the push (command in tag-subprojects.py) to skip its 12 h branch cache.
 //
 // Behaviour: the tab is always visible and is itself a one-click link to the profile. Once
 // per session, after real engagement (12 s with an interaction, 30 s without, or the mouse

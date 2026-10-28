@@ -6,8 +6,8 @@ mostly static uploads (vercel.json + public/), one prebuilt Next.js output (.ver
 one Next.js pages-router source (PostHog in pages/_document). Rebuilding them from this repo
 would drop PostHog, so instead this downloads the live upload, adds FOLLOW_TAG to every HTML
 page (or the _document <Head>) and, with --deploy, ships it back to production with the Vercel
-CLI. Pages that already carry the tag are left alone, and a project with nothing to tag is not
-redeployed, so re-running is safe.
+CLI. A tag pointing at an older FOLLOW_SRC is repointed, pages already on FOLLOW_SRC are left
+alone, and a project with nothing to change is not redeployed, so re-running is safe.
 
 usage: python3 scripts/tag-subprojects.py [--deploy] [--work DIR] [NAME ...]
        no NAME = every glass-projects-lab-* project with a production deployment, plus EXTRA.
@@ -15,8 +15,14 @@ usage: python3 scripts/tag-subprojects.py [--deploy] [--work DIR] [NAME ...]
 import base64, hashlib, json, os, re, shutil, subprocess, sys, time, urllib.error, urllib.parse, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
-FOLLOW_SRC = 'https://glass-projects-lab.vercel.app/gh-follow.js'
+# Served from the public repo by jsDelivr, not from glass-projects-lab.vercel.app: when Vercel's
+# DDoS mitigation challenges that host, a browser can solve the challenge for a page but not for a
+# cross-site <script> (each *.vercel.app is its own site, so the challenge cookie isn't sent), and
+# the tab would vanish from every sub-project. After changing gh-follow.js, push main and purge:
+#   curl https://purge.jsdelivr.net/gh/lekandigital/glass-projects-lab@main/gh-follow.js
+FOLLOW_SRC = 'https://cdn.jsdelivr.net/gh/lekandigital/glass-projects-lab@main/gh-follow.js'
 FOLLOW_TAG = f'<script src="{FOLLOW_SRC}" defer></script>'
+OLD_SRC = re.compile(r'https?://[^"\']*?/gh-follow\.js')
 DOCUMENT = re.compile(r'(^|/)pages/_document\.[jt]sx?$')
 EXTRA = ['liquid-glass-web-react']  # serves glass-projects-lab-liquid-glass-web-react.vercel.app
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +55,8 @@ def taggable(path):
 
 
 def inject(path, html):
-    if 'gh-follow.js' in html: return None
+    if FOLLOW_SRC in html: return None
+    if 'gh-follow.js' in html: return OLD_SRC.sub(FOLLOW_SRC, html)
     if DOCUMENT.search(path):
         m = re.search(r'<Head[^>]*>', html)
         return m and html[:m.end()] + f'\n        <script src="{FOLLOW_SRC}" defer />' + html[m.end():]
