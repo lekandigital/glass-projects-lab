@@ -18,7 +18,8 @@ from concurrent.futures import ThreadPoolExecutor
 # Served from the public repo by jsDelivr, not from glass-projects-lab.vercel.app: when Vercel's
 # DDoS mitigation challenges that host, a browser can solve the challenge for a page but not for a
 # cross-site <script> (each *.vercel.app is its own site, so the challenge cookie isn't sent), and
-# the tab would vanish from every sub-project. After changing gh-follow.js, push main and purge:
+# the tab would vanish from every sub-project. After changing gh-follow.js, push main, wait a
+# minute (a purge sent right after the push can re-cache the old commit), then purge:
 #   curl https://purge.jsdelivr.net/gh/lekandigital/glass-projects-lab@main/gh-follow.js
 FOLLOW_SRC = 'https://cdn.jsdelivr.net/gh/lekandigital/glass-projects-lab@main/gh-follow.js'
 FOLLOW_TAG = f'<script src="{FOLLOW_SRC}" defer></script>'
