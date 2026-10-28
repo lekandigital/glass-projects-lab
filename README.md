@@ -1,5 +1,9 @@
 # glass-projects-lab
 
+[![Follow @lekandigital on GitHub](https://img.shields.io/badge/Follow-%40lekandigital-181717?logo=github&logoColor=white)](https://github.com/lekandigital)
+
+Like the lab? [Follow @lekandigital](https://github.com/lekandigital) to catch new glass experiments as they land.
+
 Live gallery: https://glass-projects-lab.vercel.app
 GitHub repository: https://github.com/lekandigital/glass-projects-lab
 

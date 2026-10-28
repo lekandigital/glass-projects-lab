@@ -19,6 +19,15 @@ Use this file as the replay guide when moving the catalog to a new Vercel accoun
 - For folders that contain a real framework app, deploy the framework subfolder, not the collection root.
 - Keep `glassmorphism-wpf-master` marked as undeployable. It is not a Vercel target.
 
+## Follow-on-GitHub tab (`gh-follow.js`)
+
+Every page of the lab, root catalog and sub-projects alike, carries a "Follow on GitHub" tab docked to the right edge (`gh-follow.js` in the repo root). It's always visible and links straight to https://github.com/lekandigital. Once per session, after real engagement, it opens into a card with a short pitch, then folds back into the tab.
+
+- **Root catalog:** `scripts/tag-pages.mjs` (the Vercel `buildCommand`) adds it to every HTML page at deploy time, next to PostHog.
+- **Sub-projects** load it cross-origin from `https://glass-projects-lab.vercel.app/gh-follow.js`. **To change the widget, edit `gh-follow.js` and push `main`.** No sub-project needs redeploying.
+- The tag went into the sub-projects with `python3 scripts/tag-subprojects.py --deploy`. That script downloads each project's live upload (static `public/`, the prebuilt refraction Next app, and liquid-glass-example's `pages/_document`), adds the tag, and redeploys it. The live uploads are the only copies that carry PostHog, so **a sub-project redeployed from source with the commands below loses both PostHog and the tab**. After a source redeploy, re-run PostHog's `reinject.py` (in `~/Dev/vercel-posthog-rollout`), then `python3 scripts/tag-subprojects.py --deploy <project>`.
+- PostHog events: `gh_follow_click` (`from`: `tab` / `card`), `gh_follow_card_shown` (`trigger`: `engaged` / `exit-intent`), `gh_follow_card_closed` (`reason`), `gh_star_click`.
+
 ## Current deployment map
 
 | Project | Type / preset | Deploy folder | Notes |

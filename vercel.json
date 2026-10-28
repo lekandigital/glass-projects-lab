@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "",
-  "buildCommand": "node scripts/vercel-posthog.mjs",
+  "buildCommand": "node scripts/tag-pages.mjs",
   "outputDirectory": ".",
   "rewrites": [
     { "source": "/x9/static/:path(.*)", "destination": "https://us-assets.i.posthog.com/static/:path" },
